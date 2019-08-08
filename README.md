@@ -11,10 +11,10 @@
 ######
 ######
 
-#### Now the function is available for use! Try it out! o 
+#### Now the function is available for use! Try it out! 
 
 ######
 
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/CryptoBalance.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Balance.png)
 
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
