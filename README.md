@@ -10,4 +10,4 @@
 
 
 #### Now the function is available for use! Try it out! 
-#### =CRYPTOBALANCE("your_ticker","your_address", refresh_cell) 
+###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
