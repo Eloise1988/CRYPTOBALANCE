@@ -1,6 +1,7 @@
 # CRYPTOBALANCE
 
-## Get your cryptocurrencies balances in your Google Sheets. With more than + 150 cryptoccurencies available.
+## Get your cryptocurrencies balances in your Google Sheets. 
+## With more than + 150 cryptoccurencies available.
 
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE()
 ###### 2. Go to Tools › Script editor
