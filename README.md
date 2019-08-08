@@ -9,4 +9,5 @@
 ###### 5. Back to your Google sheet, refresh the page, a CRYPTOBALANCE menu will appear next to Help with the refresh and contact information.
 
 
-#### Now the function is available for use! Try out =CRYPTOBALANCE("your_ticker","your_address", refresh_cell) f
+#### Now the function is available for use! Try it out! 
+#### =CRYPTOBALANCE("your_ticker","your_address", refresh_cell) 
