@@ -11,7 +11,7 @@
 ######
 ######
 
-#### Now the function is available for use! Try it out! 
+#### Now the function is available for use! Try it out! o 
 
 ######
 
