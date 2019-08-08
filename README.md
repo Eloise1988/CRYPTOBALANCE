@@ -14,5 +14,5 @@
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 
 
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/CryptoBalance.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/CryptoBalance.png)
 
