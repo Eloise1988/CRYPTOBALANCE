@@ -16,7 +16,8 @@ function ShowHowToRefresh() {
 function ShowContactInfo() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Contact Info",
-            'Support email: ac@charmantadvisory.com',
+            'Support email: ac@charmantadvisory.com\n\
+             Telegram Chat: https://t.me/CRYPTOBALANCES',
             ui.ButtonSet.OK)
 }
 
