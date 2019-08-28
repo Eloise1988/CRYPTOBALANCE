@@ -39,7 +39,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
-    return parseFloat(content);
+    return content;
   }
 
   catch(err){
