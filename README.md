@@ -3,7 +3,11 @@
 ## Get your cryptocurrency balance in your Google Sheets. 
 ## With more than + 150 cryptocurrencies available.
 
-###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE()
+# CRYPTOLENDING
+
+## Returns cryptocurrencies lending rates on different lending plateforms. 
+
+###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE() or CRYPTOLENDING()
 ###### 2. Go to Tools › Script editor
 ###### 3. Copy the content of [CRYPTOBALANCE.js](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOBALANCE.js) and paste it in the script editor (replace any existing content)
 ###### 4. Save the script with File › Save, name it CRYPTOBALANCE, then close the script editor
@@ -11,10 +15,18 @@
 ######
 ######
 
-#### Now the function is available for use! Try it out! 
+#### Now the functions are available for use! Try it out! 
 
 ######
 
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Balance.png)
 
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
+
+######
+
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
+
+###### =CRYPTOLENDING("LENDING PLATEFORM","TICKER","SIDE", refresh_cell) 
+###### EXAMPLE
+###### =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
