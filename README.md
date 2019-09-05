@@ -15,7 +15,7 @@
 ######
 # CRYPTOLENDING
 
-## Returns cryptocurrencies lending rates on different lending plateforms. 
+## Get the cryptocurrency lending rate from multiple lending plateforms. 
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
 
 ###### =CRYPTOLENDING("LENDING PLATEFORM","TICKER","SIDE", refresh_cell) 
