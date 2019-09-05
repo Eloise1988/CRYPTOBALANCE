@@ -21,7 +21,8 @@ function ShowContactInfo() {
             ui.ButtonSet.OK)
 }
 
-/**
+
+/**CRYPTOBALANCE
  * Returns cryptocurrencies balances for the top 150 cryptocurrencies.
  *
  * @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
@@ -44,6 +45,35 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
 
   catch(err){
       return "Error getting data";
+  }
+
+}
+/**CRYPTOLENDING
+ * Returns cryptocurrencies lending rates on different lending plateforms.
+ *
+ * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DXDY.
+ * @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges.
+ * @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate.
+ * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
+ * @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.
+ */
+
+function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
+  try{
+    //
+
+    ticker=ticker.toUpperCase();
+    exchange=exchange.toUpperCase();
+    side=side.toUpperCase();
+    url="http://charmantadvisory.com:5000/api/APR/"+exchange+"/"+ticker+"/"+side;
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+
+    return content;
+  }
+
+  catch(err){
+    return "Currently available exchanges: NUO, COMPOUND, DXDY. Check fo avalable coins on exchanges if you get error. Contact: https://t.me/TheCryptoCurious for further support.";
   }
 
 }
