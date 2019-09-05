@@ -19,8 +19,7 @@
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
 
 ###### =CRYPTOLENDING("LENDING PLATEFORM","TICKER","SIDE", refresh_cell) 
-###### EXAMPLE
-###### =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
+###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
 
 
 
