@@ -99,7 +99,7 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     ticker=ticker.toUpperCase();
     exchange=exchange.toUpperCase();
     side=side.toUpperCase();
-    url="http://charmantadvisory.com:5000/api/APR/"+exchange+"/"+ticker+"/"+side;
+    url="http://charmantadvisory.com/api/APR/"+exchange+"/"+ticker+"/"+side;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
