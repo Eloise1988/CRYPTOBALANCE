@@ -34,7 +34,7 @@ function ShowContactInfo() {
 function ShowAvailableExchanges() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Lending plateforms",
-            'COMPOUND\n\DXDY\n\NUO',
+            'COMPOUND\n\DYDX\n\NUO',
             ui.ButtonSet.OK)
 }
 function ShowHowAvailableTokens() {
@@ -85,7 +85,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
 /**CRYPTOLENDING
  * Returns cryptocurrencies lending rates on different lending plateforms.
  *
- * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DXDY.
+ * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DYDX.
  * @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges.
  * @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate.
  * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
@@ -107,7 +107,7 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
   }
 
   catch(err){
-    return "Currently available exchanges: NUO, COMPOUND, DXDY. Check fo avalable coins on exchanges if you get error. Contact: https://t.me/TheCryptoCurious for further support.";
+    return "Currently available exchanges: NUO, COMPOUND, DYDX. Check fo avalable coins on exchanges if you get error. Contact: https://t.me/TheCryptoCurious for further support.";
   }
 
 }
