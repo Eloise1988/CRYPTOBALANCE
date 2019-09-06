@@ -15,10 +15,10 @@
 
 # CRYPTOLENDING
 
-## Get the cryptocurrency lending rate from multiple lending plateforms. 
+## Get the cryptocurrency lending rate from multiple lending platforms. 
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
 
-###### =CRYPTOLENDING("LENDING PLATEFORM","TICKER","SIDE", refresh_cell) 
+###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
 ###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
 
 
