@@ -49,7 +49,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
 
 }
 /**CRYPTOLENDING
- * Returns cryptocurrencies lending rates on different lending plateforms.
+ * Returns cryptocurrencies lending rates on different lending platforms.
  *
  * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DXDY.
  * @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges.
