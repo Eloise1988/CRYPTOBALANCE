@@ -5,6 +5,17 @@ function onOpen() {
       .addSeparator()
   .addItem('Contact Info', 'ShowContactInfo')
       .addToUi();
+  ui.createMenu('CRYPTOLENDING')
+      .addItem('Available Lending PLateforms', 'ShowAvailableExchanges')
+      .addSeparator()
+      .addItem('Available Token Name', 'ShowHowAvailableTokens')
+      .addSeparator()
+      .addItem('Lending Side', 'ShowSides')
+      .addSeparator()
+      .addItem('Show Example', 'ShowExample')
+      .addSeparator()
+      .addItem('Contact Info', 'ShowContactInfo')
+      .addToUi();
 }
 
 function ShowHowToRefresh() {
@@ -17,10 +28,33 @@ function ShowContactInfo() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Contact Info",
             'Support email: ac@charmantadvisory.com\n\
-             Telegram Chat: https://t.me/CRYPTOBALANCES',
+             Telegram Chat: https://t.me/TheCryptoCurious',
             ui.ButtonSet.OK)
 }
-
+function ShowAvailableExchanges() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("Lending plateforms",
+            'COMPOUND\n\DXDY\n\NUO',
+            ui.ButtonSet.OK)
+}
+function ShowHowAvailableTokens() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("Available Token Name",
+           'Please check the available cryptocurrencies on the lending plateform and enter their ticker. Like for Ethereum, enter ETH',
+            ui.ButtonSet.OK)
+}
+function ShowSides() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("ShowSides",
+           'APR_BORROW\n\APR_LEND',
+            ui.ButtonSet.OK)
+}
+function ShowExample() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("ShowExample",
+           '=CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")\n\ Gets the borrowing rate on compound for Ethereum.',
+            ui.ButtonSet.OK)
+}
 
 /**CRYPTOBALANCE
  * Returns cryptocurrencies balances for the top 150 cryptocurrencies.
@@ -49,7 +83,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
 
 }
 /**CRYPTOLENDING
- * Returns cryptocurrencies lending rates on different lending platforms.
+ * Returns cryptocurrencies lending rates on different lending plateforms.
  *
  * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DXDY.
  * @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges.
@@ -65,11 +99,11 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     ticker=ticker.toUpperCase();
     exchange=exchange.toUpperCase();
     side=side.toUpperCase();
-    url="http://charmantadvisory.com/api/APR/"+exchange+"/"+ticker+"/"+side;
+    url="http://charmantadvisory.com:5000/api/APR/"+exchange+"/"+ticker+"/"+side;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
-    return content;
+    return parseFloat(content);
   }
 
   catch(err){
