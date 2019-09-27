@@ -27,10 +27,10 @@
 # SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE() or CRYPTOLENDING()
 ###### 2. Go to Tools › Script editor
-###### 3. Copy the content of [CRYPTOBALANCE.js](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOBALANCE.js) and paste it in the script editor (replace any existing content). 
-###### 3.bis If you wish to have the CRYPTOFINANCE App from [cryptofinance.ai](https://cryptofinance.ai/) integrated with these 2 functions, copy the content from [CRYPTOBALANCE_CryptoFinance.js](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOBALANCE_withCryptoFinanceIntegrated.js).
-###### 4. Save the script with File › Save, name it CRYPTOBALANCE, then close the script editor
-###### 5. Back to your Google sheet, refresh the page, a CRYPTOBALANCE and CRYPTOBLENDING menu will appear next to Help with Refresh and Contact info.
+###### 3. Copy the content of [CRYPTOTOOLS](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOTOOLS) and paste it in the script editor (replace any existing content). 
+###### 3.bis If you wish to have the CRYPTOFINANCE App from [cryptofinance.ai](https://cryptofinance.ai/) integrated with these functions, copy the content from [CRYPTOTOOLS_CryptoFinance.js](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOBALANCE_withCryptoFinanceIntegrated.js).
+###### 4. Save the script with File › Save, name it CRYPTOTOOLS, then close the script editor
+###### 5. Back to your Google sheet, refresh the page, a CRYPTOBALANCE, CRYPTOSTAKING, CRYPTOREWADS & CRYPTOBLENDING menu will appear next to Help with Refresh and Contact info.
 
 
 
