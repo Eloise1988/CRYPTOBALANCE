@@ -27,13 +27,15 @@
 
 ## CRYPTOSTAKING
 
-### Returns the amount STAKED on PoS cryptocurrencies, like EOS(EOS), TEZOS(XTZ), COSMOS(ATOM), NANO(NANO).
-### Support for other major altcoins is coming later in 2019.
+### Returns the amount STAKED on PoS cryptocurrencies
+###### EOS(EOS)  TEZOS(XTZ)  COSMOS(ATOM)  NANO(NANO)
+###### Support for other major altcoins is coming later in 2019.
 
 ## CRYPTOREWARDS
 
-### Returns REWARDS on the staked cryptocurrencies like TEZOS(XTZ), COSMOS(ATOM).
-### Support for other major PoS altcoins is coming later in 2019.
+### Returns REWARDS on the staked cryptocurrencies
+###### TEZOS(XTZ)  COSMOS(ATOM)
+###### Support for other major PoS altcoins is coming later in 2019.
 
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXPLORER.png)
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE.png)
