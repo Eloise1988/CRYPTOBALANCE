@@ -1,3 +1,4 @@
+# CRYPTOCURRENCY TOOLS YOU CAN USE IN GOOGLE SHEETS
 # CRYPTOBALANCE
 
 ## Get your cryptocurrency balance in your Google Sheets. 
