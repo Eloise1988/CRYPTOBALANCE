@@ -45,7 +45,7 @@
 
 ##  
 ###### =CRYPTOSTAKING("TICKER","ADDRESS", refresh_cell) 
-###### EXAMPLE    =CRYPTOREWARDS("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
+###### EXAMPLE    =CRYPTOSTAKING("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
 ##  
 
 ###### =CRYPTOREWARDS("TICKER","ADDRESS", refresh_cell) 
