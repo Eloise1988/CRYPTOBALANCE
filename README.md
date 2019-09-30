@@ -27,27 +27,28 @@
 
 ## CRYPTOSTAKING
 
-### Get the cryptocurrency lending rate from multiple lending platforms. 
+### Returns the amount STAKED on PoS cryptocurrencies, like EOS(EOS), TEZOS(XTZ), COSMOS(ATOM), NANO(NANO).
 ### Support for other major altcoins is coming later in 2019.
 
+## CRYPTOREWARDS
 
+### Returns REWARDS on the staked cryptocurrencies like TEZOS(XTZ), COSMOS(ATOM).
+### Support for other major PoS altcoins is coming later in 2019.
+
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXPLORER.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE2.png)
 
 ###### =CRYPTOSTAKING("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOREWARDS("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
 
-## CRYPTOREWARDS
-
-### Get the cryptocurrency lending rate from multiple lending platforms. 
-### Support for other major altcoins is coming later in 2019.
-
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/TEZOS_EXPLORER.png)
 
 ###### =CRYPTOREWARDS("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOREWARDS("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
 
 
 ## SETUP
-###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE() or CRYPTOLENDING()
+###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS()
 ###### 2. Go to Tools › Script editor
 ###### 3. Copy the content of [CRYPTOTOOLS](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOTOOLS) and paste it in the script editor (replace any existing content). 
 ###### 3.bis If you wish to have the CRYPTOFINANCE App from [cryptofinance.ai](https://cryptofinance.ai/) integrated with these functions, copy the content from [CRYPTOTOOLS_CryptoFinance.js](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOBALANCE_withCryptoFinanceIntegrated.js).
