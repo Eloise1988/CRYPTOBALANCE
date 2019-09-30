@@ -1,4 +1,4 @@
-# CRYPTOCURRENCY TOOLS YOU IN GOOGLE SHEETS
+# CRYPTOCURRENCY TOOLS USED IN GOOGLE SHEETS
 ## CRYPTOBALANCE
 
 ### Get your cryptocurrency balance in your Google Sheets. 
@@ -10,19 +10,40 @@
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Balance.png)
 
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
-
+###### EXAMPLE    =CRYPTOBALANCE("USDT","0xf977814e90da44bfa03b6295a0616a897441acec", $A$1)
 
 
 
 ## CRYPTOLENDING
 
 ### Get the cryptocurrency lending rate from multiple lending platforms. 
+### MAKERDAO - COMPOUND - DYDX - NUO - NEXO - CELSIUS 
+### For the following cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
 
 ###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
 ###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
 
 
+## CRYPTOSTAKING
+
+### Get the cryptocurrency lending rate from multiple lending platforms. 
+### Support for other major altcoins is coming later in 2019.
+
+
+
+###### =CRYPTOSTAKING("TICKER","ADDRESS", refresh_cell) 
+###### EXAMPLE    =CRYPTOREWARDS("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
+
+## CRYPTOREWARDS
+
+### Get the cryptocurrency lending rate from multiple lending platforms. 
+### Support for other major altcoins is coming later in 2019.
+
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/TEZOS_EXPLORER.png)
+
+###### =CRYPTOREWARDS("TICKER","ADDRESS", refresh_cell) 
+###### EXAMPLE    =CRYPTOREWARDS("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
 
 
 ## SETUP
