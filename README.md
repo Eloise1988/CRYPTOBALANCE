@@ -14,17 +14,6 @@
 
 
 ##  
-## CRYPTOLENDING
-
-### Get the cryptocurrency lending rate from multiple lending platforms. 
-###### MAKERDAO - COMPOUND - DYDX - NUO - NEXO - CELSIUS 
-###### For the following cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
-
-###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
-###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
-##   
-
 ## CRYPTOSTAKING
 
 ### Returns the amount STAKED on PoS cryptocurrencies
@@ -51,6 +40,17 @@
 ###### =CRYPTOREWARDS("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOREWARDS("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
 ##  
+
+## CRYPTOLENDING
+
+### Get the cryptocurrency lending rate from multiple lending platforms. 
+###### MAKERDAO - COMPOUND - DYDX - NUO - NEXO - CELSIUS 
+###### For the following cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
+
+###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
+###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
+##   
 
 ## SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS()
