@@ -20,8 +20,22 @@ function onOpen() {
       .addSeparator()
       .addItem('Documentation', 'ShowDoc')
       .addToUi();
-  ui.createMenu('CRYPTOBALANCE')
+   ui.createMenu('CRYPTOBALANCE')
       .addItem('Refresh Balances', 'ShowHowToRefresh')
+      .addSeparator()
+      .addItem('Contact Info', 'ShowContactInfo')
+      .addToUi();
+  ui.createMenu('CRYPTOSTAKING')
+      .addItem('Parameters', 'ShowHowCRYPTOSTAKING')
+      .addSeparator()
+      .addItem('Example', 'CRYPTOSTAKING_EXAMPLE')
+      .addSeparator()
+      .addItem('Contact Info', 'ShowContactInfo')
+      .addToUi();
+  ui.createMenu('CRYPTOREWARDS')
+      .addItem('Parameters', 'ShowHowCRYPTOREWARDS')
+      .addSeparator()
+      .addItem('Example', 'CRYPTOREWARDS_EXAMPLE')
       .addSeparator()
       .addItem('Contact Info', 'ShowContactInfo')
       .addToUi();
@@ -35,10 +49,13 @@ function onOpen() {
       .addItem('Show Example', 'ShowExample')
       .addSeparator()
       .addItem('Contact Info', 'ShowContactInfo')
-      .addToUi();  
+      .addToUi();
 }
-
-
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------                       CRYPTOFINANCE.AI                    ------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
 /**
  * @OnlyCurrentDoc
  */
@@ -256,13 +273,21 @@ function CRYPTOFINANCE(market, attribute, option, refresh_cell) {
   
 }
 
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------                      CHARMANTADVISORY.COM                 ------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
 /**
- * 
- * CRYPTOBALANCE()
- * CRYPTOLENDING()
- * 
- * Copyright 2019 by charmantadvisory.com
- */
+/* -----------------------------------------------------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------------------------------------------------------------
+ *------------------------------                        CRYPTOBALANCE()               ----------------------------------------------------* 
+ * ------------------------------                       CRYPTOSTAKING()               ----------------------------------------------------* 
+ *------------------------------                        CRYPTOREWARDS()               ----------------------------------------------------* 
+ * ------------------------------                       CRYPTOLENDING()               ----------------------------------------------------* 
+ * ---------------------------------------------------------------------------------------------------------------------------------------*
+ * ------------------------------          Copyright 2019 by charmantadvisory.com     ----------------------------------------------------*
+ *----------------------------------------------------------------------------------------------------------------------------------------*/
 
 function ShowHowToRefresh() {
   var ui = SpreadsheetApp.getUi()
@@ -270,6 +295,31 @@ function ShowHowToRefresh() {
            'In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\nExample:\n=BALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP","$A$1")',
             ui.ButtonSet.OK)
 }
+function CRYPTOSTAKING_EXAMPLE() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("ShowExample",
+           '=CRYPTOSTAKING("EOS","okbtothemoon")\n\ Gets the EOS staked on the sub-mentionned address',
+            ui.ButtonSet.OK)
+}
+function ShowHowCRYPTOSTAKING() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("Parameters",
+           'Returns the amount STAKED on PoS cryptocurrencies.\n\@param {"CURRENCY TICKER FOR STAKING"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.\n\@param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\@return The current amount of cryptocurrency on the searched public address.',
+            ui.ButtonSet.OK)
+}
+function ShowHowCRYPTOREWARDS() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("Parameters",
+           'Returns cryptocurrencies REWARDS on PoS cryptocurrencies.\n\ @param {"CURRENCY TICKER FOR REWARDS"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.\n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\ @return The current amount of cryptocurrency on the searched public address.',
+             ui.ButtonSet.OK)
+}
+function CRYPTOREWARDS_EXAMPLE() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("Example",
+           '=CRYPTOREWARDS("ATOM","cosmos1r0y7s2vrgk3nw3nkp5tyy8zxjkz7nw9vrvmxun")\n\ Gets the ATOM rewards for staking on the sub-mentionned address',
+            ui.ButtonSet.OK)
+}
+
 function ShowContactInfo() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Contact Info",
@@ -280,7 +330,7 @@ function ShowContactInfo() {
 function ShowAvailableExchanges() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Lending plateforms",
-            'COMPOUND\n\DYDX\n\NUO',
+            'COMPOUND\n\DXDY\n\NUO',
             ui.ButtonSet.OK)
 }
 function ShowHowAvailableTokens() {
@@ -301,6 +351,13 @@ function ShowExample() {
            '=CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")\n\ Gets the borrowing rate on compound for Ethereum.',
             ui.ButtonSet.OK)
 }
+
+
+/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/**---------------------------------------     GOOGLE FORMULAS ->      [CRYPTOBALANCE  CRYPTOSTAKING  CRYPTOREWARDS  CRYPTOLENDING ]--------------------------- */
+/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 /**CRYPTOBALANCE
  * Returns cryptocurrencies balances for the top 150 cryptocurrencies.
@@ -324,14 +381,14 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
   }
 
   catch(err){
-      return "Error getting data";
+      return "Coin Not Available / Error getting data. Contact: https://t.me/TheCryptoCurious for further support.";
   }
 
 }
 /**CRYPTOLENDING
  * Returns cryptocurrencies lending rates on different lending plateforms.
  *
- * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DYDX.
+ * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DXDY.
  * @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges.
  * @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate.
  * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
@@ -348,12 +405,67 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     url="http://charmantadvisory.com/api/APR/"+exchange+"/"+ticker+"/"+side;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
-
-    return parseFloat(content);
+    if (content!='None') {
+      content=parseFloat(content);
+    }
+    
+    return content;
   }
 
   catch(err){
-    return "Currently available exchanges: NUO, COMPOUND, DYDX. Check fo avalable coins on exchanges if you get error. Contact: https://t.me/TheCryptoCurious for further support.";
+    return "Currently available exchanges: NUO, COMPOUND, DXDY. Check fo avalable coins on exchanges if you get error. Contact: https://t.me/TheCryptoCurious for further support.";
+  }
+
+}
+/**CRYPTOREWARDS
+ * Returns cryptocurrencies REWARDS on PoS cryptocurrencies.
+ *
+ * @param {"CURRENCY TICKER FOR REWARDS"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
+ * @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.
+ * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
+ * @return The current amount of cryptocurrency on the searched public address.
+ */
+
+function CRYPTOREWARDS(ticker,address, refresh_cell){
+  try{
+    //
+
+    ticker=ticker.toUpperCase();
+    url="http://charmantadvisory.com/api/REWARDS/"+ticker+"/"+address;
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+
+    return content;
+  }
+
+  catch(err){
+    return "Error getting data. Contact: https://t.me/TheCryptoCurious for further support.";
+  }
+
+}
+/**CRYPTOSTAKING
+ * Returns the amount STAKED on PoS cryptocurrencies.
+ *
+ * @param {"CURRENCY TICKER FOR STAKING"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
+ * @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
+ * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
+ * @return The current amount of cryptocurrency on the searched public address.
+ */
+
+function CRYPTOSTAKING(ticker,address, refresh_cell){
+  try{
+    //
+
+    ticker=ticker.toUpperCase();
+    url="http://charmantadvisory.com/api/STAKING/"+ticker+"/"+address;
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+
+    return content;
+  }
+
+  catch(err){
+    return "Error getting data. Contact: https://t.me/TheCryptoCurious for further support.";
   }
 
 }
