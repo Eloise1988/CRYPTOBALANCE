@@ -372,7 +372,8 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
-    url="http://charmantadvisory.com/apiblock/"+ticker+"/"+address;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -387,7 +388,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
 /**CRYPTOLENDING
  * Returns cryptocurrencies lending rates on different lending plateforms.
  *
- * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DXDY.
+ * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges from https://interest.coinmarketcap.com/
  * @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges.
  * @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate.
  * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
@@ -401,7 +402,8 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     ticker=ticker.toUpperCase();
     exchange=exchange.toUpperCase();
     side=side.toUpperCase();
-    url="http://charmantadvisory.com/api/APR/"+exchange+"/"+ticker+"/"+side;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -430,7 +432,8 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
-    url="http://charmantadvisory.com/api/REWARDS/"+ticker+"/"+address;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -456,7 +459,8 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
-    url="http://charmantadvisory.com/api/STAKING/"+ticker+"/"+address;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
