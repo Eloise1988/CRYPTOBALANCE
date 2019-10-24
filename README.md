@@ -49,6 +49,7 @@
 ### Get the cryptocurrency lending rate from multiple lending platforms. 
 ###### MAKERDAO - COMPOUND - DYDX - NUO - NEXO - CELSIUS 
 ###### For the following cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC
+###### Update October 2019 - All rates from https://interest.coinmarketcap.com/
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
 
 ###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
