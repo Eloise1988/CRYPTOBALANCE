@@ -123,7 +123,8 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
-    url="http://charmantadvisory.com/apiblock/"+ticker+"/"+address;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -152,7 +153,8 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     ticker=ticker.toUpperCase();
     exchange=exchange.toUpperCase();
     side=side.toUpperCase();
-    url="http://charmantadvisory.com/api/APR/"+exchange+"/"+ticker+"/"+side;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -181,7 +183,8 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
-    url="http://charmantadvisory.com/api/REWARDS/"+ticker+"/"+address;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -207,7 +210,8 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
-    url="http://charmantadvisory.com/api/STAKING/"+ticker+"/"+address;
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
