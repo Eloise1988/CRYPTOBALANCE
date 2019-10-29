@@ -42,7 +42,7 @@ function onOpen() {
 function ShowHowToRefresh() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Refresh Balances",
-           'In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\nExample:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
+           'In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\nExample:\n=CRYPTBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
             ui.ButtonSet.OK)
 }
 function CRYPTOSTAKING_EXAMPLE() {
