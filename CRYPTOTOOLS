@@ -42,7 +42,7 @@ function onOpen() {
 function ShowHowToRefresh() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Refresh Balances",
-           'In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\nExample:\n=BALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP","$A$1")',
+           'In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\nExample:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
             ui.ButtonSet.OK)
 }
 function CRYPTOSTAKING_EXAMPLE() {
@@ -124,6 +124,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
 
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
@@ -154,6 +155,7 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     exchange=exchange.toUpperCase();
     side=side.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
@@ -184,6 +186,7 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
 
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
@@ -211,6 +214,7 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
 
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
@@ -223,3 +227,4 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
   }
 
 }
+    
