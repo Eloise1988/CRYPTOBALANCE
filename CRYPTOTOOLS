@@ -42,7 +42,7 @@ function onOpen() {
 function ShowHowToRefresh() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Refresh Balances",
-           'In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\nExample:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
+           'In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\nExample:\n=CRYPTBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
             ui.ButtonSet.OK)
 }
 function CRYPTOSTAKING_EXAMPLE() {
@@ -124,9 +124,10 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
 
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    
+
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    GSUUID= GSUUID.replace(/%2B/gi, 'HELLO');
-    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID;
+    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -134,7 +135,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
   }
 
   catch(err){
-      return "Coin Not Available / Error getting data. Contact: https://t.me/TheCryptoCurious for further support.";
+      return "Try to load again and/or check address";
   }
 
 }
@@ -157,8 +158,7 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     side=side.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    GSUUID= GSUUID.replace(/%2B/gi, 'HELLO');
-    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID;
+    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -189,8 +189,7 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    GSUUID= GSUUID.replace(/%2B/gi, 'HELLO');
-    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID;
+    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -198,7 +197,7 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
   }
 
   catch(err){
-    return "Error getting data. Contact: https://t.me/TheCryptoCurious for further support.";
+    return "Try to load again and/or check address";
   }
 
 }
@@ -218,8 +217,7 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    GSUUID= GSUUID.replace(/%2B/gi, 'HELLO');
-    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID;
+    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -227,7 +225,34 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
   }
 
   catch(err){
-    return "Error getting data. Contact: https://t.me/TheCryptoCurious for further support.";
+    return "Try to load again and/or check address";
+  }
+
+}
+/**CRYPTOPRICE
+ * Returns the price of cryptocurrencies.
+ *
+ * @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
+ * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
+ * @return The current price of cryptocurrency, price updates on an hourly basis.
+ */
+
+function CRYPTOPRICE(ticker, refresh_cell){
+  try{
+    //
+
+    ticker=ticker.toUpperCase();
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+GSUUID+"CRYPTOBALANCETEMPLATEprice";
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+
+    return content;
+  }
+
+  catch(err){
+    return "Try to load again";
   }
 
 }
