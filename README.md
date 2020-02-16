@@ -14,6 +14,21 @@
 
 
 ##  
+## CRYPTOPRICE
+
+### Get cryptocurrency prices in your Google Sheets, refreshed on an hourly basis. 
+##### With more than + 2500 cryptocurrency prices available. Get your SetToken prices too..
+
+
+######
+
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Balance.png)
+
+###### =CRYPTOPRICE("TICKER", refresh_cell) 
+###### EXAMPLE    =CRYPTOPRICE("BTC", $A$1)
+
+
+## 
 ## CRYPTOSTAKING
 
 ### Returns the amount STAKED on PoS cryptocurrencies
@@ -51,8 +66,8 @@
 ## CRYPTOLENDING
 
 ### Get the cryptocurrency lending rate from multiple lending platforms. 
-###### MAKERDAO - COMPOUND - DYDX - NUO - NEXO - CELSIUS 
-###### For the following cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC
+###### Example of available exchanges: MAKERDAO - COMPOUND - DYDX - NUO - NEXO - CELSIUS - AAVE - FULCRUM
+###### Example of available cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC - SAI - USDT - SNX etc...
 ###### Update October 2019 - All rates from https://interest.coinmarketcap.com/
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
 
@@ -61,11 +76,11 @@
 ##   
 
 ## SETUP
-###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS()
+###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOPRICE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS()
 ###### 2. Go to Tools › Script editor
 ###### 3. Copy the content of [CRYPTOTOOLS](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOTOOLS) and paste it in the script editor (replace any existing content). 
 ###### 4. Save the script with File › Save, name it CRYPTOTOOLS, then close the script editor
-###### 5. Back to your Google sheet, refresh the page, a CRYPTOBALANCE, CRYPTOSTAKING, CRYPTOREWADS & CRYPTOBLENDING menu will appear next to Help with Refresh and Contact info.
+###### 5. Back to your Google sheet, refresh the page, a CRYPTOTOOLS menu will appear next to Help with more information about the , CRYPTOBALANCE, CRYPTOPRICE, CRYPTOSTAKING, CRYPTOREWADS & CRYPTOBLENDING functions.
 
 
 
