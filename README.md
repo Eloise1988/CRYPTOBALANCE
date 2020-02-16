@@ -22,7 +22,7 @@
 
 ######
 
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Balance.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/cryptoprice.png)
 
 ###### =CRYPTOPRICE("TICKER", refresh_cell) 
 ###### EXAMPLE    =CRYPTOPRICE("BTC", $A$1)
