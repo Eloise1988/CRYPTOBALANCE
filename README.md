@@ -32,6 +32,10 @@
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE.png)
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE2.png)
 ##  
+###### =CRYPTOPRICE("TICKER", refresh_cell) 
+###### EXAMPLE    =CRYPTOBALANCE("BTC",$A$1)
+## 
+##  
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOBALANCE("XTZ","tz1MtsStCawfc8cHUnUKhTJV2QxrH9Z7aM7W",$A$1)
 ##  
@@ -60,7 +64,6 @@
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS()
 ###### 2. Go to Tools › Script editor
 ###### 3. Copy the content of [CRYPTOTOOLS](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOTOOLS) and paste it in the script editor (replace any existing content). 
-###### 3.bis If you wish to have the CRYPTOFINANCE App from [cryptofinance.ai](https://cryptofinance.ai/) integrated with these functions, copy the content from [CRYPTOTOOLS_CryptoFinanceAI](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOTOOLS_CryptoFinanceAI).
 ###### 4. Save the script with File › Save, name it CRYPTOTOOLS, then close the script editor
 ###### 5. Back to your Google sheet, refresh the page, a CRYPTOBALANCE, CRYPTOSTAKING, CRYPTOREWADS & CRYPTOBLENDING menu will appear next to Help with Refresh and Contact info.
 
