@@ -17,7 +17,7 @@
 ## CRYPTOPRICE
 
 ### Get cryptocurrency prices in your Google Sheets, refreshed on an hourly basis. 
-##### With more than + 2500 cryptocurrency prices available. Get your SetToken prices too..
+##### With more than + 2500 cryptocurrency prices available. Get your SetToken prices too, refreshed every 5minutes.
 
 
 ######
