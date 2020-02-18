@@ -208,7 +208,7 @@ function CRYPTOPRICE(ticker, refresh_cell){
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+GSUUID+"CRYPTOBALANCETEMPLATEprice";
+    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
