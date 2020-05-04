@@ -91,7 +91,7 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
     
 
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
+    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -122,7 +122,7 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     side=side.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
+    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -153,7 +153,7 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
+    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -181,7 +181,7 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
+    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -208,7 +208,7 @@ function CRYPTOPRICE(ticker, refresh_cell){
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+GSUUID+"CRYPTOBALANCETEMPLATE";
+    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+GSUUID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
