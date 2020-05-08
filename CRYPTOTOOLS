@@ -1,3 +1,15 @@
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------------------------------------------------------------
+ *------------------------------                        CRYPTOBALANCE()               ----------------------------------------------------* 
+ * ------------------------------                       CRYPTOSTAKING()               ----------------------------------------------------* 
+ *------------------------------                        CRYPTOREWARDS()               ----------------------------------------------------* 
+ * ------------------------------                       CRYPTOLENDING()               ----------------------------------------------------* 
+ * ---------------------------------------------------------------------------------------------------------------------------------------*
+ * ------------------------------          Copyright 2020 by charmantadvisory.com     ----------------------------------------------------*
+ *----------------------------------------------------------------------------------------------------------------------------------------*/
+
 /**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 /**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 /**---------------------------------                       GOOGLE SHEET FORMULA USERINTERFACE WITH EXPLANATION                           ---------------------- */
@@ -19,6 +31,8 @@ function onOpen() {
       .addItem('CRYPTOLENDING', 'ShowHowCRYPTOLENDING')
       .addSeparator()
       .addSeparator()
+      .addItem('PREMIUM KeyID', 'ShowKeyID')
+      .addSeparator()
       .addItem('Contact Info', 'ShowContactInfo')
       .addToUi();
  
@@ -28,7 +42,7 @@ function onOpen() {
 function ShowHowToRefresh() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Get your wallet Balances",
-           ' Returns cryptocurrencies balances for the top 150 cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
+           ' Returns cryptocurrencies balances for over 400+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
             ui.ButtonSet.OK)
 }
 function ShowHowCRYPTOSTAKING() {
@@ -45,7 +59,7 @@ function ShowHowCRYPTOREWARDS() {
 }
 function ShowHowCRYPTOPRICE() {
   var ui = SpreadsheetApp.getUi()
-  ui.alert("Get cryptocurrency prices",
+  ui.alert("Get cryptocurrency prices in USD ($)",
            'Returns the price of cryptocurrencies.\n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example BTC. \n\@param {"EMPTY CELL REFERENCE"} refresh_cell. Reference an empty cell and change its content to force refresh the balances. \n\ @return Price of cryptocurrency refreshed on an hourly basis.\n\ \n\ Get the BTC price \n\=CRYPTOPRICE("BTC")',
              ui.ButtonSet.OK)
 }
@@ -54,7 +68,40 @@ function ShowHowCRYPTOLENDING() {
   ui.alert("Get cryptocurrency lending rates on decentralized and semi-centralized exchanges",
            'Returns cryptocurrencies lending rates on different lending plateforms.\n\ \n\ @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Examples of exchanges: NUO, COMPOUND, DXDY, FULCRUM, AAVE .... \n\ @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges. \n\ @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate. \n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.\n\ \n\ Get the borrowing rate on compound for Ethereum. \n\ =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")',
              ui.ButtonSet.OK)
-}
+} 
+function ShowKeyID() {
+  
+  var userProperties = PropertiesService.getUserProperties();
+  var key_id = userProperties.getProperty("KEYID")
+  var ui = SpreadsheetApp.getUi();
+  
+  if (key_id) {
+    var result = ui.prompt('Set your KeyID to increase API limit',
+                           'Your Key ID '+ key_id +' is already set.\n\nYour API calls are sent to the charmantadvisory.com Proxy API.\nYou can reset your current KeyID:',
+                           ui.ButtonSet.OK_CANCEL);
+  }
+  else {
+    var result = ui.prompt('Set your KeyID to increase API limit',
+                           'This service offers you access to your cryptocurrency balances, staking and reward amounts, lending rates as well as cryptocurrency prices .\n\nYou can add this KeyID to all of your Google Sheets that use CRYPTOTOOLS. \nFor more info go to http://charmantadvisory.com/KeyID\n\nOnce subscribed, please enter your KeyID below:',
+                           ui.ButtonSet.OK_CANCEL);  
+  }
+  var button = result.getSelectedButton();
+  var user_keyid = result.getResponseText().replace(/\s+/g, '');
+  if (button == ui.Button.OK) {
+    
+    if (user_keyid && user_keyid.length == 36) {
+      userProperties.setProperty("KEYID", user_keyid);
+      ui.alert('Thanks for adding your new KeyID',
+               'You should now have access to higher API limits.\nFor any support, please contact ac@charmantadvisory.com'
+               ,ui.ButtonSet.OK);
+    }
+    else if (user_keyid) {
+      ui.alert('KeyID not valid',
+               'The KeyID you entered appears to be not valid.\nIf you believe this is an error, please contact ac@charmantadvisory.com.'
+               ,ui.ButtonSet.OK);
+    }
+  }
+};
 function ShowContactInfo() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Contact Info",
@@ -82,16 +129,22 @@ function ShowContactInfo() {
  * @return The current amount of cryptocurrency on the searched public address.
  */
 
+  
 function CRYPTOBALANCE(ticker,address, refresh_cell){
+  
+  
   try{
     //
 
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    
-
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+GSUUID;
+    var userProperties = PropertiesService.getUserProperties();
+
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    
+    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -120,9 +173,13 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     ticker=ticker.toUpperCase();
     exchange=exchange.toUpperCase();
     side=side.toUpperCase();
+    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+GSUUID;
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -133,7 +190,7 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
   }
 
   catch(err){
-    return "Currently available exchanges: NUO, COMPOUND, DXDY. Check fo avalable coins on exchanges if you get error. Contact: https://t.me/TheCryptoCurious for further support.";
+    return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
   }
 
 }
@@ -151,9 +208,13 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
+    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+GSUUID;
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -179,9 +240,13 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
+    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+GSUUID;
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
@@ -206,9 +271,13 @@ function CRYPTOPRICE(ticker, refresh_cell){
     //
 
     ticker=ticker.toUpperCase();
+    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+GSUUID;
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
