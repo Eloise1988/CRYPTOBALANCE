@@ -1,5 +1,4 @@
 
-
 /* -----------------------------------------------------------------------------------------------------------------------------------
  * -----------------------------------------------------------------------------------------------------------------------------------
  *------------------------------                        CRYPTOBALANCE()               ----------------------------------------------------* 
@@ -75,13 +74,15 @@ function ShowKeyID() {
   var key_id = userProperties.getProperty("KEYID")
   var ui = SpreadsheetApp.getUi();
   
+  
+  
   if (key_id) {
     var result = ui.prompt('Set your KeyID to increase API limit',
-                           'Your Key ID '+ key_id +' is already set.\n\nYour API calls are sent to the charmantadvisory.com Proxy API.\nYou can reset your current KeyID:',
+                           'Your Key ID '+ key_id +' is already set.\n\n Visit charmantadvisory.com in order to validate your KeyID. \n:',
                            ui.ButtonSet.OK_CANCEL);
   }
   else {
-    var result = ui.prompt('Set your KeyID to increase API limit',
+    var result = ui.prompt('Generate your KeyID to increase API limit',
                            'This service offers you access to your cryptocurrency balances, staking and reward amounts, lending rates as well as cryptocurrency prices .\n\nYou can add this KeyID to all of your Google Sheets that use CRYPTOTOOLS. \nFor more info go to http://charmantadvisory.com/KeyID\n\nOnce subscribed, please enter your KeyID below:',
                            ui.ButtonSet.OK_CANCEL);  
   }
@@ -91,8 +92,8 @@ function ShowKeyID() {
     
     if (user_keyid && user_keyid.length == 36) {
       userProperties.setProperty("KEYID", user_keyid);
-      ui.alert('Thanks for adding your new KeyID',
-               'You should now have access to higher API limits.\nFor any support, please contact ac@charmantadvisory.com'
+      ui.alert('Thanks for generating a new KeyID',
+               'Once you subscribed on charmantadvisory.com/KeyID with the following KeyID, you will have access to higher API limits.\nFor support, please contact ac@charmantadvisory.com'
                ,ui.ButtonSet.OK);
     }
     else if (user_keyid) {
@@ -114,27 +115,26 @@ function ShowContactInfo() {
 
 
 
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/**---------------------------------------     GOOGLE FORMULAS ->      [CRYPTOBALANCE  CRYPTOSTAKING  CRYPTOREWARDS  CRYPTOLENDING ]--------------------------- */
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
 /**CRYPTOBALANCE
- * Returns cryptocurrencies balances for the top 150 cryptocurrencies.
+ * Returns cryptocurrency balances into Google spreadsheets. The result is a ONE-dimensional array.
+ * By default, data gets transformed into a number so it looks more like a normal price data import. 
+ * For example:
  *
- * @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
- * @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
- * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
- * @return The current amount of cryptocurrency on the searched public address.
- */
-
+ *   =CRYPTOBALANCE("BTC", "14ByqnCtawEV1VdQbLqxYWPdey1JbfpwRy","$A$1")
+ *
+ * @param {cryptocurrency}  the cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
+ * @param {address}         the wallet address associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
+ * @param {parseOptions}    an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return a one-dimensional array the balance of cryptocurrency
+ **/
   
-function CRYPTOBALANCE(ticker,address, refresh_cell){
+function CRYPTOBALANCE(ticker,address){
   
   
   try{
-    //
+    
 
     ticker=ticker.toUpperCase();
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
@@ -147,7 +147,11 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
     url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
-
+    if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+    
     return content;
   }
 
@@ -156,20 +160,26 @@ function CRYPTOBALANCE(ticker,address, refresh_cell){
   }
 
 }
+
 /**CRYPTOLENDING
- * Returns cryptocurrencies lending rates on different lending plateforms.
+ * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a decimal number. 
+ * For example:
  *
- * @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Currently available exchanges: NUO, COMPOUND, DXDY.
- * @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges.
- * @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate.
- * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
- * @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.
- */
+ * =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")
+ *
+ * @param {exchange}               the exchange on which you want to retrieve the lending rate
+ * @param {cryptocurrency}         the cryptocurrency ticker you want the lending/borrowing rate from
+ * @param {APR_BORROW or APR_LEND} either APR_BORROW for the borrowing rate or APR_LEND for the lending rate
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current lending rate in decimal form,  of cryptocurrency on a specified exchange
+ **/
 
-function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
+function CRYPTOLENDING(exchange,ticker,side){
   try{
-    //
-
+    
     ticker=ticker.toUpperCase();
     exchange=exchange.toUpperCase();
     side=side.toUpperCase();
@@ -183,7 +193,11 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
-      content=parseFloat(content);
+      if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+      
     }
     
     return content;
@@ -192,18 +206,24 @@ function CRYPTOLENDING(exchange,ticker,side,refresh_cell){
   catch(err){
     return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
   }
-
 }
-/**CRYPTOREWARDS
- * Returns cryptocurrencies REWARDS on PoS cryptocurrencies.
- *
- * @param {"CURRENCY TICKER FOR REWARDS"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
- * @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.
- * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
- * @return The current amount of cryptocurrency on the searched public address.
- */
 
-function CRYPTOREWARDS(ticker,address, refresh_cell){
+/**CRYPTOREWARDS
+ * Returns cryptocurrency REWARDS on PoS cryptocurrencies into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a value amount. 
+ * For example:
+ *
+ * =CRYPTOREWARDS("ATOM","cosmos1r0y7s2vrgk3nw3nkp5tyy8zxjkz7nw9vrvmxun",$A$1)
+ *
+ * @param {cryptocurrency}         the cryptocurrency ticker you want the rewards from
+ * @param {address}                the wallet address associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current cryptocurrency rewards from PoS
+ **/
+
+function CRYPTOREWARDS(ticker,address){
   try{
     //
 
@@ -226,16 +246,24 @@ function CRYPTOREWARDS(ticker,address, refresh_cell){
   }
 
 }
-/**CRYPTOSTAKING
- * Returns the amount STAKED on PoS cryptocurrencies.
- *
- * @param {"CURRENCY TICKER FOR STAKING"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
- * @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
- * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
- * @return The current amount of cryptocurrency on the searched public address.
- */
 
-function CRYPTOSTAKING(ticker,address, refresh_cell){
+
+/**CRYPTOSTAKING
+ * Returns the amount STAKED on PoS cryptocurrencies into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a value amount. 
+ * For example:
+ *
+ * =CRYPTOSTAKING("EOS","okbtothemoon",$A$1)
+ *
+ * @param {cryptocurrency}         the cryptocurrency ticker you want the amounts of staking from
+ * @param {address}                the wallet address associated to the cryptocurrency. Please pay attention, DO NOT TO ENTER your private wallet address.
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current amount staked on a cryptocurrency 
+ **/
+
+function CRYPTOSTAKING(ticker,address){
   try{
     //
 
@@ -249,7 +277,11 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
     url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
-
+    if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+    
     return content;
   }
 
@@ -258,18 +290,25 @@ function CRYPTOSTAKING(ticker,address, refresh_cell){
   }
 
 }
+
+
 /**CRYPTOPRICE
- * Returns the price of cryptocurrencies.
+ * Returns the price of cryptocurrencies into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a number. 
+ * For example:
  *
- * @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
- * @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.
- * @return The current price of cryptocurrency, price updates on an hourly basis.
- */
+ * =CRYPTOPRICE("EOS", $A$1)
+ *
+ * @param {cryptocurrency}         the cryptocurrency ticker you want the amounts of staking from
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current PRICE on a cryptocurrency 
+ **/
 
-function CRYPTOPRICE(ticker, refresh_cell){
+function CRYPTOPRICE(ticker){
   try{
-    //
-
+    
     ticker=ticker.toUpperCase();
     
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
@@ -280,13 +319,19 @@ function CRYPTOPRICE(ticker, refresh_cell){
     url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+KEYID;
     var res = UrlFetchApp.fetch(url);
     var content = res.getContentText();
-
+    if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+    
     return content;
   }
 
   catch(err){
     return "Try to load again";
   }
-
 }
-    
+
+
+
+
