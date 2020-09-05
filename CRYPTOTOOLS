@@ -1,4 +1,7 @@
 
+
+
+
 /* -----------------------------------------------------------------------------------------------------------------------------------
  * -----------------------------------------------------------------------------------------------------------------------------------
  *------------------------------                        CRYPTOBALANCE()               ----------------------------------------------------* 
@@ -332,6 +335,44 @@ function CRYPTOPRICE(ticker){
   }
 }
 
+/**CRYPTOSUMETH
+ * Returns the total ETH amount on an ERC20 address into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a number. 
+ * For example:
+ *
+ * =CRYPTOSUMETH("0xd47297cdcf36eed17305d6a5471c6cd482c7e91c", $A$1)
+ *
+ * @param {address}                the erc20 wallet address you want the sum from
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current total amount of ETH on an ERC20 address 
+ **/
 
+function CRYPTOSUMETH(address){
+  try{
+    
+    
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/TOTALETHBALANCE/"+address+"/"+KEYID;
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+    
+    return content;
+  }
+
+  catch(err){
+    return "Try to load again";
+  }
+}
 
 
