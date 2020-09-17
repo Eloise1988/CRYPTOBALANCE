@@ -375,4 +375,49 @@ function CRYPTOSUMETH(address){
   }
 }
 
+/**CRYPTOFARMING
+ * Returns cryptocurrency farming yields on different lending pools from projects.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTOFARMING("SUSHI","SUSHI-ETH","M")
+ *
+ * @param {project}               the name of the project  ex:CURVE
+ * @param {cryptocurrency pair}    the cryptocurrency pair you want the farming  from
+ * @param {D, W, M or Y}           D (daily), W (weekly), M (monthly), Y (yearly) farming yield
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current farming yield in decimal form,  of pair on a specified project
+ **/
 
+function CRYPTOFARMING(project,ticker,period){
+  try{
+    
+    ticker=ticker.toUpperCase();
+    project=project.toUpperCase();
+    period=period.toUpperCase();
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/YIELDFARMING/"+project+"/"+ticker+"/"+period+"/"+KEYID;
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    if (content!='None') {
+      if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+      
+    }
+    
+    return content;
+  }
+
+  catch(err){
+    return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
+  }
+}
