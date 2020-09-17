@@ -130,3 +130,23 @@ Function CRYPTOLENDING(exchange As String, ticker As String, side As String)
  End If
 
 End Function
+Function CRYPTOFARMING(project As String, ticker As String, period As String)
+
+ Dim httpObject As Object
+ Set httpObject = CreateObject("Microsoft.XMLHTTP")
+ 
+ 
+ sURL = "http://api.charmantadvisory.com/YIELDFARMING/" & UCase(project) & "/" + UCase(ticker) & "/" + UCase(period) & "/ExcelMSFT"
+
+ sRequest = sURL
+ httpObject.Open "GET", sRequest, False
+ httpObject.send
+ sGetResult = httpObject.responseText
+ 
+ If IsNumeric(sGetResult) Then
+    CRYPTOFARMING = CDbl(sGetResult)
+ Else
+    CRYPTOFARMING = "Error,reload or contact https://t.me/TheCryptoCurious or ac@charmantadvisory.com"
+ End If
+
+End Function
