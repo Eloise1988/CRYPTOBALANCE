@@ -421,3 +421,55 @@ function CRYPTOFARMING(project,ticker,period){
     return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
   }
 }
+
+
+/**CRYPTOTVL
+ * Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked.The result is a ONE-dimensional array.
+ *
+ * List of DEXes
+ * Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
+ * Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
+ * MCDEX Augur Robo-Advisor for Yield ACO Opium Network Connext 1
+ *
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTOTVL("MAKER")
+ *
+ * @param {DEX}                    the name of the DEX  ex:AAVE
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current TVL ($) in decimal form,  on specified DEX
+ **/
+
+function CRYPTOTVL(exchange){
+  try{
+    
+    
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/TVL/"+exchange+"/"+KEYID;
+    Logger.log(url)
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    if (content!='None') {
+      if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+      
+    }
+    
+    return content;
+  }
+
+  catch(err){
+    return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
+  }
+}
+
