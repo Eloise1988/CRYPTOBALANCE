@@ -133,7 +133,7 @@ function ShowContactInfo() {
  * @return a one-dimensional array the balance of cryptocurrency
  **/
   
-function CRYPTOBALANCE(ticker,address){
+async function CRYPTOBALANCE(ticker,address){
   
   
   try{
@@ -148,7 +148,7 @@ function CRYPTOBALANCE(ticker,address){
 
     
     url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+KEYID;
-    var res = UrlFetchApp.fetch(url);
+    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
@@ -159,7 +159,7 @@ function CRYPTOBALANCE(ticker,address){
   }
 
   catch(err){
-      return "Try to load again and/or check address";
+      return CRYPTOBALANCE(ticker,address);
   }
 
 }
@@ -180,7 +180,7 @@ function CRYPTOBALANCE(ticker,address){
  * @return the current lending rate in decimal form,  of cryptocurrency on a specified exchange
  **/
 
-function CRYPTOLENDING(exchange,ticker,side){
+async function CRYPTOLENDING(exchange,ticker,side){
   try{
     
     ticker=ticker.toUpperCase();
@@ -193,7 +193,7 @@ function CRYPTOLENDING(exchange,ticker,side){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+KEYID;
-    var res = UrlFetchApp.fetch(url);
+    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -207,7 +207,7 @@ function CRYPTOLENDING(exchange,ticker,side){
   }
 
   catch(err){
-    return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
+    return CRYPTOLENDING(exchange,ticker,side);
   }
 }
 
@@ -226,7 +226,7 @@ function CRYPTOLENDING(exchange,ticker,side){
  * @return the current cryptocurrency rewards from PoS
  **/
 
-function CRYPTOREWARDS(ticker,address){
+async function CRYPTOREWARDS(ticker,address){
   try{
     //
 
@@ -238,14 +238,14 @@ function CRYPTOREWARDS(ticker,address){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+KEYID;
-    var res = UrlFetchApp.fetch(url);
+    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
 
     return content;
   }
 
   catch(err){
-    return "Try to load again and/or check address";
+    return CRYPTOREWARDS(ticker,address);
   }
 
 }
@@ -266,7 +266,7 @@ function CRYPTOREWARDS(ticker,address){
  * @return the current amount staked on a cryptocurrency 
  **/
 
-function CRYPTOSTAKING(ticker,address){
+async function CRYPTOSTAKING(ticker,address){
   try{
     //
 
@@ -278,7 +278,7 @@ function CRYPTOSTAKING(ticker,address){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+KEYID;
-    var res = UrlFetchApp.fetch(url);
+    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
@@ -289,51 +289,12 @@ function CRYPTOSTAKING(ticker,address){
   }
 
   catch(err){
-    return "Try to load again and/or check address";
+    return CRYPTOSTAKING(ticker,address);
   }
 
 }
 
 
-/**CRYPTOPRICE
- * Returns the price of cryptocurrencies into Google spreadsheets.The result is a ONE-dimensional array.
- * By default, data gets transformed into a number. 
- * For example:
- *
- * =CRYPTOPRICE("EOS", $A$1)
- *
- * @param {cryptocurrency}         the cryptocurrency ticker you want the amounts of staking from
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current PRICE on a cryptocurrency 
- **/
-
-function CRYPTOPRICE(ticker){
-  try{
-    
-    ticker=ticker.toUpperCase();
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    
-    url="http://api.charmantadvisory.com/CRYPTOPRICE/"+ticker+"/"+KEYID;
-    var res = UrlFetchApp.fetch(url);
-    var content = res.getContentText();
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-      }
-    
-    return content;
-  }
-
-  catch(err){
-    return "Try to load again";
-  }
-}
 
 /**CRYPTOSUMETH
  * Returns the total ETH amount on an ERC20 address into Google spreadsheets.The result is a ONE-dimensional array.
@@ -349,7 +310,7 @@ function CRYPTOPRICE(ticker){
  * @return the current total amount of ETH on an ERC20 address 
  **/
 
-function CRYPTOSUMETH(address){
+async function CRYPTOSUMETH(address){
   try{
     
     
@@ -360,7 +321,7 @@ function CRYPTOSUMETH(address){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/TOTALETHBALANCE/"+address+"/"+KEYID;
-    var res = UrlFetchApp.fetch(url);
+    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
@@ -371,7 +332,7 @@ function CRYPTOSUMETH(address){
   }
 
   catch(err){
-    return "Try to load again";
+    return CRYPTOSUMETH(address);
   }
 }
 
@@ -391,7 +352,7 @@ function CRYPTOSUMETH(address){
  * @return the current farming yield in decimal form,  of pair on a specified project
  **/
 
-function CRYPTOFARMING(project,ticker,period){
+async function CRYPTOFARMING(project,ticker,period){
   try{
     
     ticker=ticker.toUpperCase();
@@ -404,7 +365,7 @@ function CRYPTOFARMING(project,ticker,period){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/YIELDFARMING/"+project+"/"+ticker+"/"+period+"/"+KEYID;
-    var res = UrlFetchApp.fetch(url);
+    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -418,7 +379,7 @@ function CRYPTOFARMING(project,ticker,period){
   }
 
   catch(err){
-    return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
+    return CRYPTOFARMING(project,ticker,period);
   }
 }
 
@@ -443,7 +404,7 @@ function CRYPTOFARMING(project,ticker,period){
  * @return the current TVL ($) in decimal form,  on specified DEX
  **/
 
-function CRYPTOTVL(exchange){
+async function CRYPTOTVL(exchange){
   try{
     
     
@@ -455,7 +416,7 @@ function CRYPTOTVL(exchange){
     
     url="http://api.charmantadvisory.com/TVL/"+exchange+"/"+KEYID;
     Logger.log(url)
-    var res = UrlFetchApp.fetch(url);
+    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -469,7 +430,6 @@ function CRYPTOTVL(exchange){
   }
 
   catch(err){
-    return "Error, Contact: https://t.me/TheCryptoCurious for further support.";
+    return CRYPTOTVL(exchange);
   }
 }
-
