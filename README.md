@@ -12,22 +12,6 @@
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOBALANCE("USDT","0xf977814e90da44bfa03b6295a0616a897441acec", $A$1)
 
-
-##  
-## CRYPTOPRICE
-
-### Get cryptocurrency prices in your Google Sheets, refreshed on an hourly basis. 
-##### With more than + 2500 cryptocurrency prices available. Get your SetToken prices too, refreshed every 5minutes.
-
-
-######
-
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/cryptoprice.png)
-
-###### =CRYPTOPRICE("TICKER", refresh_cell) 
-###### EXAMPLE    =CRYPTOPRICE("BTC", $A$1)
-
-
 ## 
 ## CRYPTOSTAKING
 
@@ -46,9 +30,6 @@
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXPLORER.png)
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE.png)
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE2.png)
-##  
-###### =CRYPTOPRICE("TICKER", refresh_cell) 
-###### EXAMPLE    =CRYPTOBALANCE("BTC",$A$1)
 ## 
 ##  
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
