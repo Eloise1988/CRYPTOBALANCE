@@ -433,3 +433,101 @@ async function CRYPTOTVL(exchange){
     return CRYPTOTVL(exchange);
   }
 }
+/**CRYPTODEXVOLUME
+ * Returns DEXes' (decentralized exchanges) 24H Volume.The result is a ONE-dimensional array.
+ *
+ * List of DEXes
+ * Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
+ * Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
+ * MCDEX Augur Robo-Advisor for Yield ACO Opium Network Connext 1
+ *
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTODEXVOLUME("LEND")
+ *
+ * @param {DEX}                    the name of the DEX  ex:AAVE or ticker LEND
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the 24h DEX Volume in decimal form,  on specified DEX
+ **/
+
+async function CRYPTODEXVOLUME(exchange){
+  try{
+    
+    
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/DEXVOLUME/"+exchange+"/"+KEYID;
+    Logger.log(url)
+    var res = await UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    if (content!='None') {
+      if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+      
+    }
+    
+    return content;
+  }
+
+  catch(err){
+    return CRYPTODEXVOLUME(exchange);
+  }
+}
+/**CRYPTODEXFEE
+ * Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.The result is a ONE-dimensional array.
+ *
+ * List of DEXes
+ * Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
+ * Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
+ * MCDEX Augur Robo-Advisor for Yield ACO Opium Network Connext 1
+ *
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTODEXFEE("MAKER")
+ *
+ * @param {DEX}                    the name of the DEX  ex:Maker or ticker:MKR
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current takers' fee in decimal form,  on specified DEX
+ **/
+
+async function CRYPTODEXFEE(exchange){
+  try{
+    
+    
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/DEXFEE/"+exchange+"/"+KEYID;
+    Logger.log(url)
+    var res = await UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    if (content!='None') {
+      if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+      }
+      
+    }
+    
+    return content;
+  }
+
+  catch(err){
+    return CRYPTODEXFEE(exchange);
+  }
+}
