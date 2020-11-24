@@ -87,8 +87,8 @@
 ###### EXAMPLE    =CRYPTODEXFEE("MAKER")
 ##  
 
-## SETUP
-###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOPRICE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS()
+## CRYPTO TOOLS SETUP
+###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOPRICE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS() etc ..
 ###### 2. Go to Tools › Script editor
 ###### 3. Copy the content of [CRYPTOTOOLS](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOTOOLS) and paste it in the script editor (replace any existing content). 
 ###### 4. Save the script with File › Save, name it CRYPTOTOOLS, then close the script editor
@@ -98,6 +98,4 @@
 
 
 #### Now the functions are available for use! Try it out! 
-
-## GOOGLE SHEET EXAMPLE
 [Link to Google Sheets!](https://docs.google.com/spreadsheets/d/11RyWEPetyB-l-WLYHZGy1Nx-PXZ3ZmY2Ej64UyZ8Ha0/edit?usp=sharing)
