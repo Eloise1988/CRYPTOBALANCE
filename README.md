@@ -57,6 +57,7 @@
 ##   
 
 ## DEX
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/DEX_VOL.png)
 ###### List of DEXes
 ###### Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
 ###### Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
@@ -64,7 +65,6 @@
 ###### Tickers can be used too : UNI, MKR, LEND, SNX, REN, GNO etc..
 ##  
 ### DEX 24H VOLUMES
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/DEX_VOL.png)
 ###### Returns DEXes' (decentralized exchanges) 24H Volume.
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUME.gif)
 ###### =CRYPTODEXVOLUME("DEX ticker/name") 
