@@ -57,7 +57,6 @@
 ##   
 
 ## DEX
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/DEX_VOL.png)
 ###### List of DEXes
 ###### Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
 ###### Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
