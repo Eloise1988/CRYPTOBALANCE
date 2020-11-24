@@ -56,6 +56,22 @@
 ###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
 ##   
 
+## DEX
+
+### DEX 24H VOLUMES
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/DEX_VOL.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUME.gif)
+### DEX Total Locked Values $ (TVL)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TVL.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTVL.gif)
+### DEX Liquidity Provider Taker's rate
+
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXFEE.gif)
+
+###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
+###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
+##  
+
 ## SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOPRICE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS()
 ###### 2. Go to Tools › Script editor
@@ -67,3 +83,6 @@
 
 
 #### Now the functions are available for use! Try it out! 
+
+## GOOGLE SHEET EXAMPLE
+[Link to Google Sheets!](https://docs.google.com/spreadsheets/d/11RyWEPetyB-l-WLYHZGy1Nx-PXZ3ZmY2Ej64UyZ8Ha0/edit?usp=sharing)
