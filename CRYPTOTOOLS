@@ -415,7 +415,7 @@ async function CRYPTOTVL(exchange){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/TVL/"+exchange+"/"+KEYID;
-    Logger.log(url)
+    
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -464,7 +464,7 @@ async function CRYPTODEXVOLUME(exchange){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/DEXVOLUME/"+exchange+"/"+KEYID;
-    Logger.log(url)
+    
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -513,7 +513,7 @@ async function CRYPTODEXFEE(exchange){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/DEXFEE/"+exchange+"/"+KEYID;
-    Logger.log(url)
+    
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
