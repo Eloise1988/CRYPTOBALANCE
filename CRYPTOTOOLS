@@ -531,3 +531,41 @@ async function CRYPTODEXFEE(exchange){
     return CRYPTODEXFEE(exchange);
   }
 }
+/**UNISWAP
+ * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ *
+ * By default, data gets transformed into a table 
+ * For example:
+ *
+ * =UNISWAP(5,10000,10000,100)
+ *
+ * @param {days}                    the number of Days since the pair is active
+ * @param {volume}                  the minimum Volume ($)
+ * @param {liquidity}               the minimum Liquidity ($)
+ * @param {tx_count}                the number of Transactions existant since creation
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ **/
+
+async function UNISWAP(days,volume,liquidity,tx_count){
+  try{
+    
+    
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+
+    
+    return ImportJSON(url);
+  }
+
+  catch(err){
+    return UNISWAP(days,volume,liquidity,tx_count);
+  }
+}
