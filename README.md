@@ -86,6 +86,14 @@
 ###### EXAMPLE    =CRYPTODEXFEE("MAKER")
 ##  
 
+### New tradable pairs on UNISWAP
+###### Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/UNISWAP.png)
+
+###### =UNISWAP(days,volume,liquidity,tx_count)
+###### EXAMPLE    =UNISWAP(5,10000,10000,100)
+##  
+
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOPRICE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS() etc ..
 ###### 2. Go to Tools › Script editor
