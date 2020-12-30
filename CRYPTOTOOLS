@@ -1,16 +1,36 @@
+/*====================================================================================================================================*
+  CryptoTools Google Sheet Feed by Eloise1988
+  ====================================================================================================================================
+  Version:      1.0
+  Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
+  Copyright:    (c) 2021 by Eloise1988
+                
+  License:      MIT License
+               
+  ------------------------------------------------------------------------------------------------------------------------------------
+  A library for importing ones balances, staking, rewards, lending & farming rates, dex volume & fees, uniswap new pairs into Google spreadsheets. Functions include:
+
+     CRYPTOBALANCE           For use by end users to retrieve blockchain balances
+     CRYPTOSTAKING           For use by end users to retrieve cryptocurrency staking amounts
+     CRYPTOREWARSD           For use by end users to retrieve cryptocurrency reward amounts from staking
+     CRYPTOLENDING           For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
+     CRYPTOFARMING           For use by end users to retrieve cryptocurrency farming ROI
+     CRYPTOSUMETH            For use by end users to retrieve one's total $ amount on ERC20 address
+     CRYPTODEXVOLUME         For use by end users to retrieve DEX volumes $
+     CRYPTODEXFEE            For use by end users to retrieve DEX transaction fees
+     CRYPTOTVL               For use by end users to retrieve Total Value Locked in Defi projects
+     UNISWAP                 For use by end users to retrieve all new pairs on Uniswap
+
+  
+  For bug reports see https://github.com/Eloise1988/COINGECKO/issues
+
+  ------------------------------------------------------------------------------------------------------------------------------------
+  Changelog:
+  
+  1.0.0  Initial release
+ *====================================================================================================================================*/
 
 
-
-
-/* -----------------------------------------------------------------------------------------------------------------------------------
- * -----------------------------------------------------------------------------------------------------------------------------------
- *------------------------------                        CRYPTOBALANCE()               ----------------------------------------------------* 
- * ------------------------------                       CRYPTOSTAKING()               ----------------------------------------------------* 
- *------------------------------                        CRYPTOREWARDS()               ----------------------------------------------------* 
- * ------------------------------                       CRYPTOLENDING()               ----------------------------------------------------* 
- * ---------------------------------------------------------------------------------------------------------------------------------------*
- * ------------------------------          Copyright 2020 by charmantadvisory.com     ----------------------------------------------------*
- *----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 /**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
