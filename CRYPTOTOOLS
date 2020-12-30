@@ -135,6 +135,14 @@ function ShowContactInfo() {
   
 async function CRYPTOBALANCE(ticker,address){
   
+  id_cache=ticker+address+"balance"
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
   
   try{
     
@@ -154,7 +162,7 @@ async function CRYPTOBALANCE(ticker,address){
       {
         content=parseFloat(content);
       }
-    
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -181,6 +189,16 @@ async function CRYPTOBALANCE(ticker,address){
  **/
 
 async function CRYPTOLENDING(exchange,ticker,side){
+  id_cache=ticker+exchange+side+"lending"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
   try{
     
     ticker=ticker.toUpperCase();
@@ -202,7 +220,7 @@ async function CRYPTOLENDING(exchange,ticker,side){
       }
       
     }
-    
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -227,6 +245,17 @@ async function CRYPTOLENDING(exchange,ticker,side){
  **/
 
 async function CRYPTOREWARDS(ticker,address){
+  id_cache=ticker+address+"rewards"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
+  
   try{
     //
 
@@ -240,7 +269,7 @@ async function CRYPTOREWARDS(ticker,address){
     url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+KEYID;
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
-
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -267,8 +296,17 @@ async function CRYPTOREWARDS(ticker,address){
  **/
 
 async function CRYPTOSTAKING(ticker,address){
+  id_cache=ticker+address+"staking"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
   try{
-    //
 
     ticker=ticker.toUpperCase();
     
@@ -285,6 +323,7 @@ async function CRYPTOSTAKING(ticker,address){
         content=parseFloat(content);
       }
     
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -311,6 +350,17 @@ async function CRYPTOSTAKING(ticker,address){
  **/
 
 async function CRYPTOSUMETH(address){
+  id_cache=address+"cryptosumeth"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
+  
   try{
     
     
@@ -327,7 +377,7 @@ async function CRYPTOSUMETH(address){
       {
         content=parseFloat(content);
       }
-    
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -353,6 +403,16 @@ async function CRYPTOSUMETH(address){
  **/
 
 async function CRYPTOFARMING(project,ticker,period){
+  id_cache=ticker+project+period+"farming"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
   try{
     
     ticker=ticker.toUpperCase();
@@ -374,7 +434,7 @@ async function CRYPTOFARMING(project,ticker,period){
       }
       
     }
-    
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -405,6 +465,15 @@ async function CRYPTOFARMING(project,ticker,period){
  **/
 
 async function CRYPTOTVL(exchange){
+  id_cache=exchange+"tvl"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
   try{
     
     
@@ -415,7 +484,7 @@ async function CRYPTOTVL(exchange){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/TVL/"+exchange+"/"+KEYID;
-    
+   
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
@@ -425,7 +494,7 @@ async function CRYPTOTVL(exchange){
       }
       
     }
-    
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -454,9 +523,17 @@ async function CRYPTOTVL(exchange){
  **/
 
 async function CRYPTODEXVOLUME(exchange){
+  id_cache=exchange+"dexvolume"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
   try{
-    
-    
     
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
@@ -471,10 +548,9 @@ async function CRYPTODEXVOLUME(exchange){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-      }
-      
+      }      
     }
-    
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -503,9 +579,17 @@ async function CRYPTODEXVOLUME(exchange){
  **/
 
 async function CRYPTODEXFEE(exchange){
+  id_cache=exchange+"dexfee"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
   try{
-    
-    
     
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
@@ -521,9 +605,8 @@ async function CRYPTODEXFEE(exchange){
       {
         content=parseFloat(content);
       }
-      
     }
-    
+    cache.put(id_cache, content)
     return content;
   }
 
@@ -550,6 +633,7 @@ async function CRYPTODEXFEE(exchange){
  **/
 
 async function UNISWAP(days,volume,liquidity,tx_count){
+  
   try{
     
     
