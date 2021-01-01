@@ -19,13 +19,14 @@ End Sub
 
 Public Function CRYPTOBALANCE(ticker As String, address As String)
 
+ Application.Calculation = xlCalculationManual
  Dim httpObject As Object
  Set httpObject = CreateObject("Microsoft.XMLHTTP")
  
  
- sURL = "http://api.charmantadvisory.com/BALANCE/" & UCase(ticker) & "/" + address & "/ExcelMSFT"
+ sUrl = "http://api.charmantadvisory.com/BALANCE/" & UCase(ticker) & "/" + address & "/ExcelMSFT"
 
- sRequest = sURL
+ sRequest = sUrl
  httpObject.Open "GET", sRequest, False
  httpObject.send
  sGetResult = httpObject.responseText
@@ -37,42 +38,21 @@ Public Function CRYPTOBALANCE(ticker As String, address As String)
     CRYPTOBALANCE = "Error,reload or contact https://t.me/TheCryptoCurious or ac@charmantadvisory.com"
  End If
 
-
-
-End Function
-
-Function CRYPTOPRICE(ticker As String)
-
- Dim httpObject As Object
- Set httpObject = CreateObject("Microsoft.XMLHTTP")
- 
- 
- sURL = "http://api.charmantadvisory.com/CRYPTOPRICE/" & UCase(ticker) & "/ExcelMSFT"
-
- sRequest = sURL
- httpObject.Open "GET", sRequest, False
- httpObject.send
- sGetResult = httpObject.responseText
- 
- 
- If IsNumeric(sGetResult) Then
-    CRYPTOPRICE = CDbl(sGetResult)
- Else
-    CRYPTOPRICE = "Error,reload or contact https://t.me/TheCryptoCurious or ac@charmantadvisory.com"
- End If
-
-
+Application.Calculation = xlCalculationAutomatic
 
 End Function
+
+
 Function CRYPTOSTAKING(ticker As String, address As String)
-
+ 
+ Application.Calculation = xlCalculationManual
  Dim httpObject As Object
  Set httpObject = CreateObject("Microsoft.XMLHTTP")
  
  
- sURL = "http://api.charmantadvisory.com/STAKING/" & UCase(ticker) & "/" + address & "/ExcelMSFT"
+ sUrl = "http://api.charmantadvisory.com/STAKING/" & UCase(ticker) & "/" + address & "/ExcelMSFT"
 
- sRequest = sURL
+ sRequest = sUrl
  httpObject.Open "GET", sRequest, False
  httpObject.send
  sGetResult = httpObject.responseText
@@ -82,20 +62,21 @@ Function CRYPTOSTAKING(ticker As String, address As String)
  Else
     CRYPTOSTAKING = "Error,reload or contact https://t.me/TheCryptoCurious or ac@charmantadvisory.com"
  End If
-
+ Application.Calculation = xlCalculationAutomatic
 
 
 
 End Function
 Function CRYPTOREWARDS(ticker As String, address As String)
 
+ Application.Calculation = xlCalculationManual
  Dim httpObject As Object
  Set httpObject = CreateObject("Microsoft.XMLHTTP")
  
  
- sURL = "http://api.charmantadvisory.com/REWARDS/" & UCase(ticker) & "/" + address & "/ExcelMSFT"
+ sUrl = "http://api.charmantadvisory.com/REWARDS/" & UCase(ticker) & "/" + address & "/ExcelMSFT"
 
- sRequest = sURL
+ sRequest = sUrl
  httpObject.Open "GET", sRequest, False
  httpObject.send
  sGetResult = httpObject.responseText
@@ -105,20 +86,20 @@ Function CRYPTOREWARDS(ticker As String, address As String)
  Else
     CRYPTOREWARDS = "Error,reload or contact https://t.me/TheCryptoCurious or ac@charmantadvisory.com"
  End If
-
+ Application.Calculation = xlCalculationAutomatic
 
 
 
 End Function
 Function CRYPTOLENDING(exchange As String, ticker As String, side As String)
 
+ Application.Calculation = xlCalculationManual
  Dim httpObject As Object
  Set httpObject = CreateObject("Microsoft.XMLHTTP")
  
- 
- sURL = "http://api.charmantadvisory.com/LENDING/" & UCase(exchange) & "/" + UCase(ticker) & "/" + UCase(side) & "/ExcelMSFT"
+ sUrl = "http://api.charmantadvisory.com/LENDING/" & UCase(exchange) & "/" + UCase(ticker) & "/" + UCase(side) & "/ExcelMSFT"
 
- sRequest = sURL
+ sRequest = sUrl
  httpObject.Open "GET", sRequest, False
  httpObject.send
  sGetResult = httpObject.responseText
@@ -128,25 +109,13 @@ Function CRYPTOLENDING(exchange As String, ticker As String, side As String)
  Else
     CRYPTOLENDING = "Error,reload or contact https://t.me/TheCryptoCurious or ac@charmantadvisory.com"
  End If
+ Application.Calculation = xlCalculationAutomatic
+
 
 End Function
-Function CRYPTOFARMING(project As String, ticker As String, period As String)
 
- Dim httpObject As Object
- Set httpObject = CreateObject("Microsoft.XMLHTTP")
- 
- 
- sURL = "http://api.charmantadvisory.com/YIELDFARMING/" & UCase(project) & "/" + UCase(ticker) & "/" + UCase(period) & "/ExcelMSFT"
 
- sRequest = sURL
- httpObject.Open "GET", sRequest, False
- httpObject.send
- sGetResult = httpObject.responseText
- 
- If IsNumeric(sGetResult) Then
-    CRYPTOFARMING = CDbl(sGetResult)
- Else
-    CRYPTOFARMING = "Error,reload or contact https://t.me/TheCryptoCurious or ac@charmantadvisory.com"
- End If
 
-End Function
+
+
+
