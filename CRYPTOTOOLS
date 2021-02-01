@@ -181,8 +181,9 @@ async function CRYPTOBALANCE(ticker,address){
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }
-    cache.put(id_cache, content)
+    
     return content;
   }
 
@@ -237,10 +238,11 @@ async function CRYPTOLENDING(exchange,ticker,side){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }
       
     }
-    cache.put(id_cache, content)
+    
     return content;
   }
 
@@ -341,9 +343,10 @@ async function CRYPTOSTAKING(ticker,address){
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }
     
-    cache.put(id_cache, content)
+    
     return content;
   }
 
@@ -396,8 +399,9 @@ async function CRYPTOSUMETH(address){
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }
-    cache.put(id_cache, content)
+    
     return content;
   }
 
@@ -451,10 +455,11 @@ async function CRYPTOFARMING(project,ticker,period){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }
       
     }
-    cache.put(id_cache, content)
+    
     return content;
   }
 
@@ -511,10 +516,11 @@ async function CRYPTOTVL(exchange){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }
       
     }
-    cache.put(id_cache, content)
+    
     return content;
   }
 
@@ -568,9 +574,10 @@ async function CRYPTODEXVOLUME(exchange){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }      
     }
-    cache.put(id_cache, content)
+    
     return content;
   }
 
@@ -624,9 +631,9 @@ async function CRYPTODEXFEE(exchange){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
+        cache.put(id_cache, content)
       }
     }
-    cache.put(id_cache, content)
     return content;
   }
 
@@ -673,3 +680,4 @@ async function UNISWAP(days,volume,liquidity,tx_count){
     return UNISWAP(days,volume,liquidity,tx_count);
   }
 }
+
