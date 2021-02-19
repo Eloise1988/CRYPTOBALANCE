@@ -170,7 +170,7 @@ async function CRYPTOBALANCE(ticker,address){
   try{
     
 
-    ticker=ticker.toUpperCase();
+    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
@@ -723,57 +723,4 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
     return SUSHISWAP(days,volume,liquidity,tx_count);
   }}
 
-  /**CRYPTOBALANCEbyERC20Contract
- * Returns cryptocurrency balances by contract address into Google spreadsheets. ONLY for ERC Tokens. The result is a ONE-dimensional array.
- * By default, data gets transformed into a number so it looks more like a normal price data import. 
- * For example:
- *
- *   =CRYPTOBALANCEbyERC20Contract("0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2", "0x23584efb5e14cd1bb169fcf4f6f7ea55769eb424","$A$1")
- *
- * @param {contract_address}  the token contract address, for example "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2" for MAKER.
- * @param {holder_address}         the wallet address associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
- * @param {parseOptions}    an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a one-dimensional array the balance of cryptocurrency
- **/
   
-async function CRYPTOBALANCEbyERC20Contract(contract_address,holder_address){
-  
-  id_cache=contract_address+holder_address+"balancebycontract"
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-    
-
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-
-    
-    url="http://api.charmantadvisory.com/BALANCEBYCONTRACT/"+contract_address+"/"+holder_address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
-    var content = res.getContentText();
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content)
-      }
-    
-    return content;
-  }
-
-  catch(err){
-      return CRYPTOBALANCEbyERC20Contract(contract_address,holder_address);
-  }
-
-}
