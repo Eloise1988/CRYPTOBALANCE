@@ -11,7 +11,6 @@
   A library for importing ones balances, staking, rewards, lending & farming rates, dex volume & fees, uniswap new pairs into Google spreadsheets. Functions include:
 
      CRYPTOBALANCE                For use by end users to retrieve blockchain balances
-     CRYPTOBALANCEbyERC20Contract For use by end users to retrieve blockchain balances by contract address instead of ticker
      CRYPTOSTAKING                For use by end users to retrieve cryptocurrency staking amounts
      CRYPTOREWARSD                For use by end users to retrieve cryptocurrency reward amounts from staking
      CRYPTOLENDING                For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
