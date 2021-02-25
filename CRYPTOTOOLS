@@ -21,8 +21,7 @@
      CRYPTOTVL                    For use by end users to retrieve Total Value Locked in Defi projects
      UNISWAP                      For use by end users to retrieve all new pairs on Uniswap
      SUSHISWAP                    For use by end users to retrieve all new pairs on Sushiswap
-     PANCAKESWAP                    For use by end users to retrieve all new pairs on Pancakeswap
-     
+     PANCAKESWAP                  For use by end users to retrieve all new pairs on Pancakeswap
 
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
@@ -662,7 +661,7 @@ async function CRYPTODEXFEE(exchange){
  * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
 
-async function UNISWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000000,liquidity_lte=1000000000000000,tx_count_lte=1000000000000000){
+async function UNISWAP(days,volume,liquidity,tx_count){
   
   try{
     
@@ -673,24 +672,16 @@ async function UNISWAP(days,volume,liquidity,tx_count,volume_lte=100000000000000
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    if (volume_lte=='') {
-      volume_lte=1000000000000000
-    }
-    if (liquidity_lte=='') {
-      liquidity_lte=1000000000000000
-    }
-    if (tx_count_lte=='') {
-      tx_count_lte=1000000000000000
-    }
     
-    url="http://api.charmantadvisory.com/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+volume_lte+"/"+liquidity_lte+"/"+tx_count_lte+"/"+KEYID;
+    
+    url="http://api.charmantadvisory.com/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
     
     return ImportJSON(url);
   }
 
   catch(err){
-    return UNISWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000000,liquidity_lte=1000000000000000,tx_count_lte=1000000000000000);
+    return UNISWAP(days,volume,liquidity,tx_count);
   }
   
 }
@@ -712,7 +703,7 @@ async function UNISWAP(days,volume,liquidity,tx_count,volume_lte=100000000000000
  * @return a table with all new tradable pairs on Sushiswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
 
-async function SUSHISWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000000,liquidity_lte=1000000000000000,tx_count_lte=1000000000000000){
+async function SUSHISWAP(days,volume,liquidity,tx_count){
   
   try{
     
@@ -723,24 +714,16 @@ async function SUSHISWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    if (volume_lte=='') {
-      volume_lte=1000000000000000
-    }
-    if (liquidity_lte=='') {
-      liquidity_lte=1000000000000000
-    }
-    if (tx_count_lte=='') {
-      tx_count_lte=1000000000000000
-    }
     
-    url="http://api.charmantadvisory.com/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+volume_lte+"/"+liquidity_lte+"/"+tx_count_lte+"/"+KEYID;
+    
+    url="http://api.charmantadvisory.com/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
     
     return ImportJSON(url);
   }
 
   catch(err){
-    return SUSHISWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000000,liquidity_lte=1000000000000000,tx_count_lte=1000000000000000);
+    return SUSHISWAP(days,volume,liquidity,tx_count);
   }}
 /**PANCAKESWAP
  * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
@@ -760,7 +743,7 @@ async function SUSHISWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000
  * @return a table with all new tradable pairs on Sushiswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
 
-async function PANCAKESWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000000,liquidity_lte=1000000000000000,tx_count_lte=1000000000000000){
+async function PANCAKESWAP(days,volume,liquidity,tx_count){
   
   try{
     
@@ -771,23 +754,15 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count,volume_lte=10000000000
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    if (volume_lte=='') {
-      volume_lte=1000000000000000
-    }
-    if (liquidity_lte=='') {
-      liquidity_lte=1000000000000000
-    }
-    if (tx_count_lte=='') {
-      tx_count_lte=1000000000000000
-    }
     
-    url="http://api.charmantadvisory.com/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+volume_lte+"/"+liquidity_lte+"/"+tx_count_lte+"/"+KEYID;
+    
+    url="http://api.charmantadvisory.com/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
     
     return ImportJSON(url);
   }
 
   catch(err){
-    return PANCAKESWAP(days,volume,liquidity,tx_count,volume_lte=1000000000000000,liquidity_lte=1000000000000000,tx_count_lte=1000000000000000);
+    return PANCAKESWAP(days,volume,liquidity,tx_count);
   }}
   
