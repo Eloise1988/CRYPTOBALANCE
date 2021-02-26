@@ -22,6 +22,7 @@
      UNISWAP                      For use by end users to retrieve all new pairs on Uniswap
      SUSHISWAP                    For use by end users to retrieve all new pairs on Sushiswap
      PANCAKESWAP                  For use by end users to retrieve all new pairs on Pancakeswap
+     CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
 
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
@@ -765,4 +766,60 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
   catch(err){
     return PANCAKESWAP(days,volume,liquidity,tx_count);
   }}
+  /**CRYPTODEXPRICE
+ * Returns DEXes' (decentralized exchanges) prices per pair of tokens.The result is a ONE-dimensional array.
+ *
+ * List of available DEXes
+ * 1INCH
+ *
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTODEXPRICE("ETH","BAL","1INCH")
+ *
+ * @param {Token1}                 1st ticker or its contract address
+ * @param {Token2}                 2st ticker or its contract address
+ * @param {Exchange}               ticker of dex exchange on which you are looking for rate
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current price rate of your cryptocurrency pair,  on specified DEX
+ **/
+
+async function CRYPTODEXPRICE(token1,token2,exchange="1INCH"){
+  id_cache=token1+token2+exchange+"dexprice"
+  
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
+  try{
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/DEXPRICE/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+
+    
+    var parsedJSON = JSON.parse(content);
+    var rate=parseFloat(parsedJSON[exchange.toUpperCase()][token1.toUpperCase()]/parsedJSON[exchange.toUpperCase()][token2.toUpperCase()])
+    cache.put(id_cache, rate)
+    return rate;
+  }
+
+  catch(err){
+    return CRYPTODEXPRICE(token1,token2,exchange="1INCH");
+  }
+}
+
+
   
