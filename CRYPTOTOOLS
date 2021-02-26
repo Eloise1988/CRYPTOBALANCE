@@ -797,27 +797,37 @@ async function CRYPTODEXPRICE(token1,token2,exchange="1INCH"){
     return Number(cached);
   }
   
+  
   try{
     
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
-    url="http://api.charmantadvisory.com/DEXPRICE/"+KEYID;
+    cachedDEX = cache.get("DEXPrices");
+    if (cachedDEX == null) {
+      var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+      GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+      var userProperties = PropertiesService.getUserProperties();
+      var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
-    var res = await UrlFetchApp.fetch(url);
-    var content = res.getContentText();
+      url="http://api.charmantadvisory.com/DEXPRICE/"+KEYID;
+      var res = await UrlFetchApp.fetch(url);
+      var content = res.getContentText();
+      var cachedDEX = JSON.parse(content);
+      cache.put("DEXPrices", rate);
+  }
 
-    
-    var parsedJSON = JSON.parse(content);
-    var rate=parseFloat(parsedJSON[exchange.toUpperCase()][token1.toUpperCase()]/parsedJSON[exchange.toUpperCase()][token2.toUpperCase()])
-    cache.put(id_cache, rate)
+    if (token1.length<20) {
+      token1=token1.toUpperCase();
+    }
+     if (token2.length<20) {
+      token2=token2.toUpperCase();
+    }
+    var rate=parseFloat(cachedDEX[exchange.toUpperCase()][token1]/cachedDEX[exchange.toUpperCase()][token2])
+    cache.put(id_cache, rate);
     return rate;
   }
 
   catch(err){
-    return CRYPTODEXPRICE(token1,token2,exchange="1INCH");
+    return "error";
   }
 }
 
