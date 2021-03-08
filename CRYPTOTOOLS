@@ -23,6 +23,7 @@
      SUSHISWAP                    For use by end users to retrieve all new pairs on Sushiswap
      PANCAKESWAP                  For use by end users to retrieve all new pairs on Pancakeswap
      CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
+     CRYPTOFUTURES                For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
 
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
@@ -821,8 +822,18 @@ async function CRYPTODEXPRICE(token1,token2,exchange="1INCH"){
      if (token2.length<20) {
       token2=token2.toUpperCase();
     }
-    var rate=parseFloat(cachedDEX[exchange.toUpperCase()][token1]/cachedDEX[exchange.toUpperCase()][token2])
-    cache.put(id_cache, rate);
+    if (exchange.toUpperCase()=='1INCH') {
+      var rate=parseFloat(cachedDEX[exchange.toUpperCase()][token1]/cachedDEX[exchange.toUpperCase()][token2])
+      cache.put(id_cache, rate);}
+    else{
+      if(cachedDEX[exchange.toUpperCase()].hasOwnProperty(token1+token2)){
+        var rate=parseFloat(cachedDEX[exchange.toUpperCase()][token1+token2]);
+        cache.put(id_cache, rate);}
+      else{
+        var rate="";
+        cache.put(id_cache, rate);
+      }
+    }
     return rate;
   }
 
@@ -830,6 +841,42 @@ async function CRYPTODEXPRICE(token1,token2,exchange="1INCH"){
     return "error";
   }
 }
+/**CRYPTOFUTURES
+ * Returns BTC or ETH Futures Prices, basis, volume, open interest
+ *
+ * By default, data gets transformed into a table 
+ * For example:
+ *
+ * =CRYPTOFUTURES("BTC")
+ *
+ * @param {ticker}                 BTC and ETH, for more markets contact https://t.me/TheCryptoCurious
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return a table with all Id,	Exchange,	Price,	24h	Index Price,	Basis,	Spread,	Expiry,	Open Interest,	24h Volume	 for BTC and ETH futures
+ **/
 
+async function CRYPTOFUTURES(ticker){
+  
+  try{
+    
+    
+    ticker=ticker.toUpperCase();
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    
+    
+    url="http://api.charmantadvisory.com/"+ticker+"FUTURES/"+KEYID;
+
+    
+    return ImportJSON(url);
+  }
+
+  catch(err){
+    return CRYPTOFUTURES(ticker);
+  }}
 
   
