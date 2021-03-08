@@ -787,7 +787,7 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
  * @return the current price rate of your cryptocurrency pair,  on specified DEX
  **/
 
-async function CRYPTODEXPRICE(token1,token2,exchange="1INCH"){
+async function CRYPTODEXPRICE(token1,token2,exchange="UNI"){
   id_cache=token1+token2+exchange+"dexprice"
   
   var cache = CacheService.getScriptCache();
