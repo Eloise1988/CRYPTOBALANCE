@@ -3,7 +3,7 @@
 ### If your coin is not in the list you can call the balance using its contract address
 #### For example balance for Uniswap (ERC 20) =CRYPTOBALANCE("0x1f9840a85d5af5bf1d1762f925bdaddc4201f984","holder's public address")
 
-#### For example balance for Pancakeswap (BEP20), insert b before contract address to signal it's bep20 contract address =CRYPTOBALANCE("b0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","holder's public address")
+#### For example balance for Pancakeswap (BEP20), insert b before contract address to signal it's bep20 a contract address =CRYPTOBALANCE("b0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","holder's public address")
 
 ## TICKER	NAME
 ##### $BASED	$based
