@@ -1,6 +1,6 @@
 ## LIST OF ALL COINS (NOT INCLUDING ERC20 AND BEP20 )
 
-### =CRYPTOBALANCE("ticker", "holder's public address")
+#### =CRYPTOBALANCE("ticker", "holder's public address")
 
 ## TICKER	NAME
 ##### 42	    42-COIN
