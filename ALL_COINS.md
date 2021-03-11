@@ -2,15 +2,15 @@
 
 
 
-# TICKER	NAME
-# 42	    42-COIN
-# 1337	  ELITE
-# 2GIVE	  2GIVE
-# ADA	    CARDANO
-# ADC	    AUDIOCOIN
-# AEG	    AEGEUS
-# AIAS	  AIAS
-# AION	  AION
+## TICKER	NAME
+##### 42	    42-COIN
+##### 1337	  ELITE
+##### 2GIVE	  2GIVE
+##### ADA	    CARDANO
+##### ADC	    AUDIOCOIN
+##### AEG	    AEGEUS
+##### AIAS	  AIAS
+##### AION	  AION
 ALGO	  ALGORAND
 ALN	    ALN
 ARCO	  AQUARIUSCOIN
