@@ -1,502 +1,500 @@
 ## TICKER	NAME
-##### ETH	ETHEREUM
-##### USDT	TETHER
-##### LEO	UNUS SED LEO
-##### LINK	CHAINLINK
-##### MKR	MAKER
-##### CRO	CRYPTO.COM CHAIN
-##### USDC	USD COIN
-##### EGT	EGRETIA
-##### BAT	BASIC ATTENTION TOKEN
-##### OMG	OMISEGO
-##### TUSD	TRUEUSD
-##### HT	HUOBI TOKEN
-##### HEDG	HEDGETRADE
-##### HOT	HOLO
-##### PAX	PAXOS STANDARD TOKEN
-##### REP	AUGUR
-##### NPXS	PUNDI X
-##### THR	THORECOIN
-##### AOA	AURORA
-##### ZRX	0X
-##### QBIT	QUBITICA
-##### QNT	QUANT
-##### KCS	KUCOIN-SHARES
-##### BTM	BYTOM
-##### INB	INSIGHT-CHAIN
-##### LAMB	LAMBDA
-##### ZIL	ZILLIQA
-##### EKT	EDUCARE
-##### XIN	MIXIN
-##### IOST	IOST
-##### WTC	WALTONCHAIN
-##### AE	AETERNITY
-##### DAI	DAI
-##### SAI	SAI
-##### MCO	MCO
-##### ENJ	ENJIN COIN
-##### VEST	VESTCHAIN
-##### NET	NEXT
-##### CCCX	CLIPPER-COIN
-##### SNT	STATUS
-##### ELF	ELF
-##### JCT	JAPAN-CONTENT-TOKEN
-##### SOLVE	HEALTHCARE ADMINISTRATION
-##### MXM	MAXIMINE-COIN
-##### DENT	DENT
-##### GNT	GOLEM
-##### SAN	SANTIMENT NETWORK TOKEN
-##### R	REVAIN
-##### ORBS	ORBS
-##### MANA	DECENTRALAND
-##### ODE	ODEM
-##### WAXP	WAX
-##### FSN	FUSION
-##### ECOREAL	ECOREAL ESTATE
-##### QASH	QASH
-##### DGD	DIGIXDAO
-##### LA	LATOKEN
-##### ENG	ENIGMA
-##### LOOM	LOOM NETWORK
-##### EURS	STASIS EURS
-##### LRC	LOOPRING
-##### PPT	POPULOUS
-##### BNT	BANCOR
-##### BCZERO	BUGGYRA-COIN-ZERO
-##### CELR	CELER NETWORK
-##### KNC	KYBER NETWORK
-##### IOTX	IOTEX
-##### POWR	POWER LEDGER
-##### BIX	BIBOX TOKEN
-##### QKC	QUARKCHAIN
-##### DGTX	DIGITEX FUTURES
-##### BRD	BREAD
-##### ABT	ARCBLOCK
-##### POLY	POLYMATH
-##### ANT	ARAGON
-##### VERI	VERITASEUM
-##### RLC	IEXEC RLC
-##### CTXC	CORTEX
-##### FUN	FUNFAIR
-##### CVC	CIVIC
-##### PAY	TENX
-##### DRGN	DRAGONCHAIN
-##### AGI	SINGULARITYNET
-##### GUSD	GEMINI DOLLAR
-##### CENNZ	CENTRALITY
-##### LKY	LINKEY
-##### MLN	MELON
-##### BLZ	BLUZELLE
-##### LBA	CRED
-##### KIN	KIN
-##### UGAS	ULTRAINGAS
-##### CND	CINDICATOR
-##### DAC	DAVINCI COIN
-##### MFT	MAINFRAME
-##### TEL	TELCOIN
-##### TCT	TOKENCLUB
-##### ROX	ROBOTINA
-##### MITH	MITHRIL
-##### C20	CRYPTO20
-##### GBC	GOLD BITS COIN
-##### MTL	METAL
-##### UTK	UTRUST
-##### MEDX	MEDIBLOC
-##### MDA	MOEDA LOYALTY POINTS
-##### BFT	BNKTOTHEFUTURE
-##### WABI	TAEL
-##### TOP	TOP
-##### REQ	REQUEST NETWORK
-##### NKN	NKN
-##### REN	REN
-##### NMR	NUMERAIRE
-##### CUSDC	COUMPOUND USDC
-##### CSAI	COUMPOUND SAI
-##### TOKO	TOKO
-##### OCEAN	OCEAN PROTOCOL
-##### RHOC	RCHAIN
-##### SNX	SYNTHETIX
-##### SUSD	SYNTH SUSD
-##### RPL	ROCKET POOL
-##### KICK	KICK TOKEN
-##### MIN	MINDOL
-##### CDAI	COUMPOUND DAI
-##### ETHRSIAPY	ETHRSIAPY
-##### SETH	SYNTH SETH
-##### CHAI	CHAI MONEY
-##### IDAI	FULCRUM DAI ITOKEN
-##### ERD	TOKEN ELROND
-##### DLETH2X	FULCRUM PERPETUAL LONG ETH-DAI
-##### CDAIUSDC	CDAIUSDC
-##### ETHMOONX	ETHMOONX
-##### BBB	BULLBEARBITCOIN SET
-##### TLS	TRUSTLESSSTATE SET
-##### GREED	FEAR & GREED SENTIMENT SET
-##### ETHUSDADL4	ETHUSD ADL 4H SET
-##### INTETH	INTETH
-##### DLETH3X	FULCRUM PERPETUAL LONG ETH-DAI 3X V2
-##### ICHIEMA	312H ICHIMOKU HA EMA BREAKOUT SET
-##### INTBTC	THE INTELLIGENT BTC TRADING SET
-##### BBE	BULLBEARETHEREUM SET
-##### ETHMACOAPY	ETHMACOAPY
-##### ETHBTC26EMACO	ETHBTC26EMACO
-##### ETHBTCRSI7030	ETHBTCRSI7030
-##### ETHRSI6040	ETHRSI6040
-##### ETH12EMACO	ETH12EMACO
-##### ETH26EMACO	ETH26EMACO
-##### ETHMINVOL	ETHMINVOL
-##### ETH20SMACO	ETH20SMACO
-##### IETH20SMACO	IETH20SMACO
-##### IETH50SMACO	IETH50SMACO
-##### BTCMINVOL	BTCMINVOL
-##### ETH50SMACO	ETH50SMACO
-##### ETHLOVOL	ETHLOVOL
-##### BTCLOVOL	BTCLOVOL
-##### ETHHIVOL	ETHHIVOL
-##### BTCHIVOL	BTCHIVOL
-##### BTCETH5050	BTCETH5050
-##### BTCETH7525	BTCETH7525
-##### ETHBTC7525	ETHBTC7525
-##### ETA	ETA
-##### BTCMOONX	BTCMOONX
-##### ETH10K	ETH10K
-##### BTCUSDCRSI	BTCUSDCRSI
-##### ETHUSDCTA	ETHUSDCTA
-##### LONG	LONG
-##### FLEXETH	FLEXETH
-##### TON	TON
-##### BTCUSDCTA	BTCUSDCTA
-##### FLEXBTC	FLEXBTC
-##### FLEXETHBTC	FLEXETHBTC
-##### ETHSS	ETHSS
-##### ETHEMAAPY	ETHEMAAPY
-##### BTCMOON	BTCMOON
-##### EVOL	EVOL
-##### YDAI	YDAI
-##### YUSDT	YUSDT
-##### YUSDC	YUSDC
-##### YTUSD	YTUSD
-##### MFBT	MOFLUX - BOOMTOWN
-##### YDAI+YUSDC+YUSDT+YTUSD	CURVE.FI YDAI/YUSDC/YUSDT/YTUSD
-##### LINKETHRSI	LINK/ETH RSI RATIO TRADING
-##### AUSDT	AAVE INTEREST BEARING USDT
-##### ETHPA	ETHPA
-##### INTRATIO-1	INTRATIO-1
-##### LINKRSICO	LINKRSICO
-##### ETHMOONX-1	ETHMOONX-1
-##### INTETH-1	INTETH-1
-##### BBE-1	BBE-1
-##### FLEXETH-1	FLEXETH-1
-##### FLEXBTC-1	FLEXBTC-1
-##### GREED2	GREED2
-##### ETAS	ETAS
-##### ETHMOONX2	ETHMOONX2
-##### SGW	SGW
-##### MFSN	MFSN
-##### LINKETHPA	LINKETHPA
-##### BBB-2	BBB-2
-##### ETA-1	ETA-1
-##### INTBTC-1	INTBTC-1
-##### BYTE	BYTE
-##### BYTE-1	BYTE-1
-##### MFBT-1	MFBT-1
-##### ETHTA	ETHTA
-##### WBTCCUSDCRSI	WBTCCUSDCRSI
-##### MFCK	MFCK
-##### BRRR	BRRR
-##### BTCTA	BTCTA
-##### ETAS-1	ETAS-1
-##### BLOAP	BLOAP
-##### LELOAP	LELOAP
-##### ELOAP	ELOAP
-##### EBLOAP	EBLOAP
-##### ETHDAIS	ETHDAIS
-##### FART-1	FART-1
-##### ZCN	0CHAIN
-##### BLT	BLOOM
-##### JAX	JAXCOIN
-##### 100W	100W
-##### COINBTC	COINBTC
-##### LINKPT	LINKPT
-##### BOCBP	BOCBP
-##### LEGA	LEGA
-##### STORJ	STORJ
-##### SHIP	SHIPCHAIN SHIP
-##### 100WRATIO	100WRATIO
-##### BUSD	BINANCE USD
-##### ASETH	ASETH
-##### EHY	EHY
-##### BHY	BHY
-##### QSP	QUANTSTAMP
-##### GTO	GIFTO
-##### SALT	SALT
-##### EVO	EVOLUTION
-##### DGX	DIGIX GOLD TOKEN
-##### ONOT	ONOT
-##### RCN	RIPIOCREDITNETWORK
-##### WINGS	WINGS
-##### WAX	WAX TOKEN
-##### BVS	BVS
-##### EVS	EVS
-##### PAXG	PAXOS GOLD
-##### CHADLINK	CHADLINK
-##### MATIC	MATIC TOKEN
-##### WBTC	WRAPPED BTC
-##### ETHMO	ETHMO
-##### ORME	ORMEUS
-##### 100WETH	100WETH
-##### ETHBTCPA	ETHBTCPA
-##### ETHEMAAPY-1	ETHEMAAPY-1
-##### ETHRSIAPY-1	ETHRSIAPY-1
-##### ETHMACOAPY-1	ETHMACOAPY-1
-##### SXAG	SYNTH SXAG
-##### BLL	BLL
-##### GATOR	GATOR
-##### ELL-1	ELL-1
-##### CUSDT	COMPOUND USDT
-##### MAVC	MAVC
-##### BTCFUND	BTCFUND
-##### COMP	COMPOUND TOKEN
-##### BTCRSIAPY	BTCRSIAPY
-##### ETHSB	ETHSB
-##### SXAU	SYNTH SXAU
-##### SADA	SYNTH SADA
-##### SCHF	SYNTH SCHF
-##### SXTZ	SYNTH SXTZ
-##### SLINK	SYNTH SLINK
-##### TCAPBTCUSDC	TCAPBTCUSDC
-##### TCAPETHDAI	TCAPETHDAI
-##### CTS	CTS
-##### MQSS	MQSS
-##### NEXO	TOKEN NEXO
-##### HEX	HEX
-##### LEND	ETHLEND AAVE
-##### RSR	RESERVE
-##### AWC	ATOMIC WALLET TOKEN
-##### BAL	BLANCER
-##### ETHPT	ETHPT
-##### UBT	UNIBRIGHT
-##### OMC	ORMECASH
-##### SDEFI	SYNTHETIX SDEFI
-##### ADAI	AAVE INTEREST BEARING DAI
-##### AUSDC	AAVE INTEREST BEARING USDC
-##### AMPL	AMPLEFORTH
-##### RLP	RLOOP
-##### JRT	JARVIS REWARD TOKEN
-##### TCPDAIUSDC	TCPDAIUSDC
-##### BTCMO	BTCMO
-##### GRID	GRID
-##### CHI	CHI GASTOKEN BY 1INCH
-##### NXM	NEXUS MUTUAL
-##### MTA	META
-##### AKRO	AKROPOLIS
-##### DOS	DOS NETWORK
-##### TRB	TELLOR TRIBUTES
-##### DXD	DXDAO
-##### BZRX	BZX PROTOCOL TOKEN
-##### AUC	AUCTUS
-##### XIO	XIO NETWORK
-##### KEEP	KEEP TOKEN
-##### DOUGH	DOUGH
-##### PNK	PINAKION
-##### CAT	BITCLAVE-CONSUMERACTIVITYTOKEN
-##### TRAC	TRACE TOKEN
-##### MQFIP	MQFIP
-##### PNT	PNETWORK TOKEN
-##### YFI	YEARN.FINANCE
-##### MCB	MCDEX TOKEN
-##### KEY	SELFKEY
-##### VIB	VIB
-##### FLUX	FLUX COIN
-##### DAM	DATAMINE
-##### DCM1	DCM1
-##### ALEPH	ALEPH.IM V2
-##### COL	COL
-##### VBZRX	BZX VESTING TOKEN
-##### EWT	EWT
-##### BWT	BWT
-##### BTCALPHA	BTCALPHA
-##### YAM	YAM
-##### CUSD	CUSD CURRENCY
-##### CETH	COMPOUND ETHER
-##### PHNX	PHOENIXDAO
-##### $BASED	$BASED
-##### ANKR	ANKR NETWORK
-##### CRVPLAIN3ANDSUSD	CURVE.FI DAI/USDC/USDT/SUSD
-##### NOIA	NOIA NETWORK
-##### CRV	CURVE DAO TOKEN
-##### OXT	ORCHID
-##### YAMV2	YAMV2
-##### DIA	DIA TOKEN
-##### YCURVE	CURVE.FI YDAI/YUSDC/YUSDT/YTUSD
-##### SWAP	TRUSTSWAP TOKEN
-##### REPV2	REPUTATION
-##### UDOO	UDOO
-##### SUSHI	SUSHITOKEN
-##### STAKE	XDAI
-##### ALINK	YEARN AAVE INTEREST BEARING LINK
-##### YUSD	YYDAI+YUSDC+YUSDT+YTUSD
-##### WETH	WRAPPED ETHER
-##### AYFI	AAVE INTEREST BEARING YFI
-##### HEGIC	HEGIC
-##### UNI	UNISWAP
-##### ADEL	AKROPOLIS DELPHI
-##### AST	AIRSWAP TOKEN
-##### YYDAI+YUSDC+YUSDT+YTUSD	YYDAI+YUSDC+YUSDT+YTUSD
-##### YVAULT-LP-YCURVE	YYDAI+YUSDC+YUSDT+YTUSD
-##### HUSD	HUSD
-##### OUSD	ORIGIN DOLLARS
-##### DPI	DEFIPULSE INDEX
-##### WBTCAPY	ETH WBTC YIELD FARM
-##### CORE	CVAULT.FINANCE
-##### AAVE	AAVE
-##### JAMM	FLYNNJAMM
-##### SXP	SWIPE
-##### DEXT	DEXTOOLS
-##### ECO	ECO TOKEN
-##### EECO	WRAPECO
-##### EORME	WRAPORME
-##### NEAR	NEAR PROTOCOL
-##### ORN	ORION PROTOCAL
-##### DODO	DODO BIRD
-##### FIN	DEFINER
-##### YBUSD	IEARN BUSD
-##### RAMP	RAMP DEFI
-##### DHT	DHEDGE DAO TOKEN
-##### 3CRV	CURVE.FI DAI/USDC/USDT
-##### WNXM	WRAPPED NXM
-##### AMP	AMP
-##### NTRUMP	NO DONALD TRUMP
-##### YTRUMP	YES DONALD TRUMP
-##### IBTC	SYNTH IBTC
-##### RDAI	REDEEMABLE DAI
-##### RGT	RARI GOVERNANCE TOKEN
-##### WAIF	WAIFU
-##### KP3R	KEEP3RV1
-##### $ROPE	$ROPE
-##### KARMA	KARMA
-##### EWTB	ENERGY WEB TOKEN BRIDGED
-##### PERL	PERLIN
-##### GNO	GNOSIS
-##### SEEN	SEEN.HAUS
-##### SRM	SERUM
-##### FTT	FARMATRUST TOKEN
-##### CEL	CELSIUS
-##### PICKLE	PICKLE FINANCE
-##### SYN	SYNLEV
-##### CAP	CAP
-##### SFI	SPICE
-##### MPH	88MPH.APP
-##### YLAND	YEARN LAND
-##### AC	ACOCONUT
-##### YFL	YFLINK
-##### MUSE	MUSE
-##### BENTO	BENTO BOX
-##### OCTO	OCTO.FI
-##### ALBT	ALLIANCEBLOCK TOKEN
-##### NU	NUCYPHER
-##### APY	APY GOVERNANCE TOKEN
-##### ESD	EMPTY SET DOLLAR
-##### FARM	FARM REWARD TOKEN
-##### DOTX	DEFI OF THRONES
-##### BADGER	BADGER
-##### ITS	ITERATIONSYNDICATE
-##### BASE	BASE PROTOCOL
-##### SHARE	SEIGNIORAGE SHARES
-##### NEAL	COINNEAL
-##### MT	MT TOKEN
-##### UOS	ULTRA TOKEN
-##### AWETH	0AAVE INTEREST BEARING WETH
-##### SAKE	SAKE TOKEN
-##### GOF	GOLFF.FINANCE
-##### BAS	BAS TOKEN
-##### UNII	UNII TOKEN
-##### WOZX	EFFORCE IEO
-##### COVER	COVER PROTOCOL
-##### BONDLY	BONDLY TOKEN
-##### ZIN	ZIN FINANCE
-##### CRPT	CRYPTERIUM
-##### LTO	LTO NETWORK
-##### PRQ	PARSIQ
-##### BAC	BASIS CASH
-##### BTC3L	AMUM BTC3L
-##### KEX	KIRA NETWORK
-##### ST	SIMPLE TOKEN
-##### AXS	AXIE INFINITY SHARD
-##### SLP	SMALL LOVE POTION
-##### GRT	GRAPH TOKEN
-##### DIP	DECENTRALIZED INSURANCE PROTOCOL
-##### 1INCH	1INCH TOKEN
-##### TORN	TORN TOKEN
-##### DFD	DEFIDOLLAR DAO
-##### IDEX	IDEX TOKEN
-##### MNE	MINEREUM
-##### UMA	UMA VOTING TOKEN
-##### AXN	AXION
-##### RDN	RAIDEN
-##### YLD	YIELD
-##### NSURE	NSURE NETWORK TOKEN
-##### YF-DAI	YFDAI.FINANCE
-##### AUDIO	AUDIUS
-##### RARI	RARIBLE
-##### GHST	AAVEGOTCHI GHST TOKEN
-##### CREAM	CREAM
-##### API3	API3
-##### MEME	MEME
-##### RFOX	RFOX
-##### INJ	INJECTIVE TOKE
-##### CHSB	SWISSBORG
-##### OPT	OPUS
-##### CLIQ	CLIQ
-##### STETH	STETH
-##### IPM	TIMERS
-##### POLS	POLKASTARTER
-##### XRT	ROBONICS
-##### FTM	FANTOM
-##### MAHA	MAHADAO
-##### MASQ	MASQ
-##### YOP	YOP
-##### SAND	SAND
-##### REEF	REEF
-##### IETH	SYNTH IETH
-##### ARNXM	ARMOR NXM
-##### RUNE	THORCHAIN ETH.RUNE
-##### DIS	TOSDIS
-##### FLOT	FIRE LOTTO
-##### ONX	ONX.FINANCE
-##### UWL	UNIWHALES.IO
-##### ZERO	ZERO.EXCHANGE TOKEN
-##### TBB	TRADE BUTLER BOT
-##### PHA	PHALA
-##### CUDOS	CUDOS TOKEN
-##### UTU	UTU
-##### ARMOR	ARMOR
-##### ALPHA	ALPHA TOKEN
-##### PERP	PERPETUAL
-##### TRADE	UNITRADE
-##### LAYER	UNILAYER
-##### YPIE	PIEDAO YEARN ECOSYSTEM PIE
-##### SDT	STAKE DAO TOKEN
-##### STRONG	STRONG
-##### $TRDL	STRUDEL FINANCE
-##### ERDX	E-RADIX
-##### CAKE	PANCAKESWAP
-##### DSD	DYNAMIC SET DOLLAR
-##### SPANK	SPANKCHAIN
-##### RENBTC	RENBTC
-##### BAO	BAO TOKEN
-##### EDT	EDT
-##### POE	PO.ET
-##### VEN	VECHAIN
-##### XHDX	XHDX
-##### FUSE	FUSE
-##### CVP	CONCENTRATED VOTING POWER
-##### OCN	OCOIN
-##### FRM	FERRUM NETWORK TOKEN
-##### AETH	AAVE INTEREST BEARING ETH
-##### AMA	AMACOIN
-##### CHZ	CHILLIZ
-##### WBNB	WRAPPED BNB
-##### AUTO	AUTOV2
-##### BNB_BEP20	BNB BEP20
-##### NEAR_STAKING	NEAR PROTOCOL
+##### $BASED	$based
+##### $ROPE	$rope
+##### $TRDL	Strudel finance
+##### 100W	100w
+##### 100WETH	100weth
+##### 100WRATIO	100wratio
+##### 1INCH	1inch token
+##### 3CRV	Curve.fi dai/usdc/usdt
+##### AAVE	Aave
+##### ABT	Arcblock
+##### AC	Acoconut
+##### ADAI	Aave interest bearing dai
+##### ADEL	Akropolis delphi
+##### AE	Aeternity
+##### AETH	Aave interest bearing eth
+##### AGI	Singularitynet
+##### AKRO	Akropolis
+##### ALBT	Allianceblock token
+##### ALEPH	Aleph.im v2
+##### ALINK	Yearn aave interest bearing link
+##### ALPHA	Alpha token
+##### AMA	Amacoin
+##### AMP	Amp
+##### AMPL	Ampleforth
+##### ANKR	Ankr network
+##### ANT	Aragon
+##### AOA	Aurora
+##### API3	Api3
+##### APY	Apy governance token
+##### ARMOR	Armor
+##### ARNXM	Armor nxm
+##### ASETH	Aseth
+##### AST	Airswap token
+##### AUC	Auctus
+##### AUDIO	Audius
+##### AUSDC	Aave interest bearing usdc
+##### AUSDT	Aave interest bearing usdt
+##### AUTO	Autov2
+##### AWC	Atomic wallet token
+##### AWETH	0aave interest bearing weth
+##### AXN	Axion
+##### AXS	Axie infinity shard
+##### AYFI	Aave interest bearing yfi
+##### BAC	Basis cash
+##### BADGER	Badger
+##### BAL	Blancer
+##### BAO	Bao token
+##### BAS	Bas token
+##### BASE	Base protocol
+##### BAT	Basic attention token
+##### BBB	Bullbearbitcoin set
+##### BBB-2	Bbb-2
+##### BBE	Bullbearethereum set
+##### BBE-1	Bbe-1
+##### BCZERO	Buggyra-coin-zero
+##### BENTO	Bento box
+##### BFT	Bnktothefuture
+##### BHY	Bhy
+##### BIX	Bibox token
+##### BLL	Bll
+##### BLOAP	Bloap
+##### BLT	Bloom
+##### BLZ	Bluzelle
+##### BNB_BEP20	Bnb bep20
+##### BNT	Bancor
+##### BOCBP	Bocbp
+##### BONDLY	Bondly token
+##### BRD	Bread
+##### BRRR	Brrr
+##### BTC3L	Amum btc3l
+##### BTCALPHA	Btcalpha
+##### BTCETH5050	Btceth5050
+##### BTCETH7525	Btceth7525
+##### BTCFUND	Btcfund
+##### BTCHIVOL	Btchivol
+##### BTCLOVOL	Btclovol
+##### BTCMINVOL	Btcminvol
+##### BTCMO	Btcmo
+##### BTCMOON	Btcmoon
+##### BTCMOONX	Btcmoonx
+##### BTCRSIAPY	Btcrsiapy
+##### BTCTA	Btcta
+##### BTCUSDCRSI	Btcusdcrsi
+##### BTCUSDCTA	Btcusdcta
+##### BTM	Bytom
+##### BUSD	Binance usd
+##### BVS	Bvs
+##### BWT	Bwt
+##### BYTE	Byte
+##### BYTE-1	Byte-1
+##### BZRX	Bzx protocol token
+##### C20	Crypto20
+##### CAKE	Pancakeswap
+##### CAP	Cap
+##### CAT	Bitclave-consumeractivitytoken
+##### CCCX	Clipper-coin
+##### CDAI	Coumpound dai
+##### CDAIUSDC	Cdaiusdc
+##### CEL	Celsius
+##### CELR	Celer network
+##### CENNZ	Centrality
+##### CETH	Compound ether
+##### CHADLINK	Chadlink
+##### CHAI	Chai money
+##### CHI	Chi gastoken by 1inch
+##### CHSB	Swissborg
+##### CHZ	Chilliz
+##### CLIQ	Cliq
+##### CND	Cindicator
+##### COINBTC	Coinbtc
+##### COL	Col
+##### COMP	Compound token
+##### CORE	Cvault.finance
+##### COVER	Cover protocol
+##### CREAM	Cream
+##### CRO	Crypto.com chain
+##### CRPT	Crypterium
+##### CRV	Curve dao token
+##### CRVPLAIN3ANDSUSD	Curve.fi dai/usdc/usdt/susd
+##### CSAI	Coumpound sai
+##### CTS	Cts
+##### CTXC	Cortex
+##### CUDOS	Cudos token
+##### CUSD	Cusd currency
+##### CUSDC	Coumpound usdc
+##### CUSDT	Compound usdt
+##### CVC	Civic
+##### CVP	Concentrated voting power
+##### DAC	Davinci coin
+##### DAI	Dai
+##### DAM	Datamine
+##### DCM1	Dcm1
+##### DENT	Dent
+##### DEXT	Dextools
+##### DFD	Defidollar dao
+##### DGD	Digixdao
+##### DGTX	Digitex futures
+##### DGX	Digix gold token
+##### DHT	Dhedge dao token
+##### DIA	Dia token
+##### DIP	Decentralized insurance protocol
+##### DIS	Tosdis
+##### DLETH2X	Fulcrum perpetual long eth-dai
+##### DLETH3X	Fulcrum perpetual long eth-dai 3x v2
+##### DODO	Dodo bird
+##### DOS	Dos network
+##### DOTX	Defi of thrones
+##### DOUGH	Dough
+##### DPI	Defipulse index
+##### DRGN	Dragonchain
+##### DSD	Dynamic set dollar
+##### DXD	Dxdao
+##### EBLOAP	Ebloap
+##### ECO	Eco token
+##### ECOREAL	Ecoreal estate
+##### EDT	Edt
+##### EECO	Wrapeco
+##### EGT	Egretia
+##### EHY	Ehy
+##### EKT	Educare
+##### ELF	Elf
+##### ELL-1	Ell-1
+##### ELOAP	Eloap
+##### ENG	Enigma
+##### ENJ	Enjin coin
+##### EORME	Wraporme
+##### ERD	Token elrond
+##### ERDX	E-radix
+##### ESD	Empty set dollar
+##### ETA	Eta
+##### ETA-1	Eta-1
+##### ETAS	Etas
+##### ETAS-1	Etas-1
+##### ETH	Ethereum
+##### ETH10K	Eth10k
+##### ETH12EMACO	Eth12emaco
+##### ETH20SMACO	Eth20smaco
+##### ETH26EMACO	Eth26emaco
+##### ETH50SMACO	Eth50smaco
+##### ETHBTC26EMACO	Ethbtc26emaco
+##### ETHBTC7525	Ethbtc7525
+##### ETHBTCPA	Ethbtcpa
+##### ETHBTCRSI7030	Ethbtcrsi7030
+##### ETHDAIS	Ethdais
+##### ETHEMAAPY	Ethemaapy
+##### ETHEMAAPY-1	Ethemaapy-1
+##### ETHHIVOL	Ethhivol
+##### ETHLOVOL	Ethlovol
+##### ETHMACOAPY	Ethmacoapy
+##### ETHMACOAPY-1	Ethmacoapy-1
+##### ETHMINVOL	Ethminvol
+##### ETHMO	Ethmo
+##### ETHMOONX	Ethmoonx
+##### ETHMOONX-1	Ethmoonx-1
+##### ETHMOONX2	Ethmoonx2
+##### ETHPA	Ethpa
+##### ETHPT	Ethpt
+##### ETHRSI6040	Ethrsi6040
+##### ETHRSIAPY	Ethrsiapy
+##### ETHRSIAPY-1	Ethrsiapy-1
+##### ETHSB	Ethsb
+##### ETHSS	Ethss
+##### ETHTA	Ethta
+##### ETHUSDADL4	Ethusd adl 4h set
+##### ETHUSDCTA	Ethusdcta
+##### EURS	Stasis eurs
+##### EVO	Evolution
+##### EVOL	Evol
+##### EVS	Evs
+##### EWT	Ewt
+##### EWTB	Energy web token bridged
+##### FARM	Farm reward token
+##### FART-1	Fart-1
+##### FIN	Definer
+##### FLEXBTC	Flexbtc
+##### FLEXBTC-1	Flexbtc-1
+##### FLEXETH	Flexeth
+##### FLEXETH-1	Flexeth-1
+##### FLEXETHBTC	Flexethbtc
+##### FLOT	Fire lotto
+##### FLUX	Flux coin
+##### FRM	Ferrum network token
+##### FSN	Fusion
+##### FTM	Fantom
+##### FTT	Farmatrust token
+##### FUN	Funfair
+##### FUSE	Fuse
+##### GATOR	Gator
+##### GBC	Gold bits coin
+##### GHST	Aavegotchi ghst token
+##### GNO	Gnosis
+##### GNT	Golem
+##### GOF	Golff.finance
+##### GREED	Fear & greed sentiment set
+##### GREED2	Greed2
+##### GRID	Grid
+##### GRT	Graph token
+##### GTO	Gifto
+##### GUSD	Gemini dollar
+##### HEDG	Hedgetrade
+##### HEGIC	Hegic
+##### HEX	Hex
+##### HOT	Holo
+##### HT	Huobi token
+##### HUSD	Husd
+##### IBTC	Synth ibtc
+##### ICHIEMA	312h ichimoku ha ema breakout set
+##### IDAI	Fulcrum dai itoken
+##### IDEX	Idex token
+##### IETH	Synth ieth
+##### IETH20SMACO	Ieth20smaco
+##### IETH50SMACO	Ieth50smaco
+##### INB	Insight-chain
+##### INJ	Injective toke
+##### INTBTC	The intelligent btc trading set
+##### INTBTC-1	Intbtc-1
+##### INTETH	Inteth
+##### INTETH-1	Inteth-1
+##### INTRATIO-1	Intratio-1
+##### IOST	Iost
+##### IOTX	Iotex
+##### IPM	Timers
+##### ITS	Iterationsyndicate
+##### JAMM	Flynnjamm
+##### JAX	Jaxcoin
+##### JCT	Japan-content-token
+##### JRT	Jarvis reward token
+##### KARMA	Karma
+##### KCS	Kucoin-shares
+##### KEEP	Keep token
+##### KEX	Kira network
+##### KEY	Selfkey
+##### KICK	Kick token
+##### KIN	Kin
+##### KNC	Kyber network
+##### KP3R	Keep3rv1
+##### LA	Latoken
+##### LAMB	Lambda
+##### LAYER	Unilayer
+##### LBA	Cred
+##### LEGA	Lega
+##### LELOAP	Leloap
+##### LEND	Ethlend aave
+##### LEO	Unus sed leo
+##### LINK	Chainlink
+##### LINKETHPA	Linkethpa
+##### LINKETHRSI	Link/eth rsi ratio trading
+##### LINKPT	Linkpt
+##### LINKRSICO	Linkrsico
+##### LKY	Linkey
+##### LONG	Long
+##### LOOM	Loom network
+##### LRC	Loopring
+##### LTO	Lto network
+##### MAHA	Mahadao
+##### MANA	Decentraland
+##### MASQ	Masq
+##### MATIC	Matic token
+##### MAVC	Mavc
+##### MCB	Mcdex token
+##### MCO	Mco
+##### MDA	Moeda loyalty points
+##### MEDX	Medibloc
+##### MEME	Meme
+##### MFBT	Moflux - boomtown
+##### MFBT-1	Mfbt-1
+##### MFCK	Mfck
+##### MFSN	Mfsn
+##### MFT	Mainframe
+##### MIN	Mindol
+##### MITH	Mithril
+##### MKR	Maker
+##### MLN	Melon
+##### MNE	Minereum
+##### MPH	88mph.app
+##### MQFIP	Mqfip
+##### MQSS	Mqss
+##### MT	Mt token
+##### MTA	Meta
+##### MTL	Metal
+##### MUSE	Muse
+##### MXM	Maximine-coin
+##### NEAL	Coinneal
+##### NET	Next
+##### NEXO	Token nexo
+##### NKN	Nkn
+##### NMR	Numeraire
+##### NOIA	Noia network
+##### NPXS	Pundi x
+##### NSURE	Nsure network token
+##### NTRUMP	No donald trump
+##### NU	Nucypher
+##### NXM	Nexus mutual
+##### OCEAN	Ocean protocol
+##### OCN	Ocoin
+##### OCTO	Octo.fi
+##### ODE	Odem
+##### OMC	Ormecash
+##### OMG	Omisego
+##### ONOT	Onot
+##### ONX	Onx.finance
+##### OPT	Opus
+##### ORBS	Orbs
+##### ORME	Ormeus
+##### ORN	Orion protocal
+##### OUSD	Origin dollars
+##### OXT	Orchid
+##### PAX	Paxos standard token
+##### PAXG	Paxos gold
+##### PAY	Tenx
+##### PERL	Perlin
+##### PERP	Perpetual
+##### PHA	Phala
+##### PHNX	Phoenixdao
+##### PICKLE	Pickle finance
+##### PNK	Pinakion
+##### PNT	Pnetwork token
+##### POE	Po.et
+##### POLS	Polkastarter
+##### POLY	Polymath
+##### POWR	Power ledger
+##### PPT	Populous
+##### PRQ	Parsiq
+##### QASH	Qash
+##### QBIT	Qubitica
+##### QKC	Quarkchain
+##### QNT	Quant
+##### QSP	Quantstamp
+##### R	Revain
+##### RAMP	Ramp defi
+##### RARI	Rarible
+##### RCN	Ripiocreditnetwork
+##### RDAI	Redeemable dai
+##### RDN	Raiden
+##### REEF	Reef
+##### REN	Ren
+##### RENBTC	Renbtc
+##### REP	Augur
+##### REPV2	Reputation
+##### REQ	Request network
+##### RFOX	Rfox
+##### RGT	Rari governance token
+##### RHOC	Rchain
+##### RLC	Iexec rlc
+##### RLP	Rloop
+##### ROX	Robotina
+##### RPL	Rocket pool
+##### RSR	Reserve
+##### RUNE	Thorchain eth.rune
+##### SADA	Synth sada
+##### SAI	Sai
+##### SAKE	Sake token
+##### SALT	Salt
+##### SAN	Santiment network token
+##### SAND	Sand
+##### SCHF	Synth schf
+##### SDEFI	Synthetix sdefi
+##### SDT	Stake dao token
+##### SEEN	seen.haus
+##### SETH	Synth seth
+##### SFI	Spice
+##### SGW	Sgw
+##### SHARE	Seigniorage shares
+##### SHIP	Shipchain ship
+##### SLINK	Synth slink
+##### SLP	Small love potion
+##### SNT	Status
+##### SNX	Synthetix
+##### SOLVE	Healthcare administration
+##### SPANK	Spankchain
+##### SRM	Serum
+##### ST	Simple token
+##### STAKE	Xdai
+##### STETH	Steth
+##### STORJ	Storj
+##### STRONG	Strong
+##### SUSD	Synth susd
+##### SUSHI	Sushitoken
+##### SWAP	Trustswap token
+##### SXAG	Synth sxag
+##### SXAU	Synth sxau
+##### SXP	Swipe
+##### SXTZ	Synth sxtz
+##### SYN	Synlev
+##### TBB	Trade butler bot
+##### TCAPBTCUSDC	Tcapbtcusdc
+##### TCAPETHDAI	Tcapethdai
+##### TCPDAIUSDC	Tcpdaiusdc
+##### TCT	Tokenclub
+##### TEL	Telcoin
+##### THR	Thorecoin
+##### TLS	Trustlessstate set
+##### TOKO	Toko
+##### TON	Ton
+##### TOP	Top
+##### TORN	Torn token
+##### TRAC	Trace token
+##### TRADE	Unitrade
+##### TRB	Tellor tributes
+##### TUSD	Trueusd
+##### UBT	Unibright
+##### UDOO	Udoo
+##### UGAS	Ultraingas
+##### UMA	Uma voting token
+##### UNI	Uniswap
+##### UNII	Unii token
+##### UOS	Ultra token
+##### USDC	Usd coin
+##### USDT	Tether
+##### UTK	Utrust
+##### UTU	Utu
+##### UWL	Uniwhales.io
+##### VBZRX	Bzx vesting token
+##### VEN	Vechain
+##### VERI	Veritaseum
+##### VEST	Vestchain
+##### VIB	Vib
+##### WABI	Tael
+##### WAIF	Waifu
+##### WAX	Wax token
+##### WAXP	Wax
+##### WBNB	Wrapped bnb
+##### WBTC	Wrapped btc
+##### WBTCAPY	Eth wbtc yield farm
+##### WBTCCUSDCRSI	Wbtccusdcrsi
+##### WETH	Wrapped ether
+##### WINGS	Wings
+##### WNXM	Wrapped nxm
+##### WOZX	Efforce ieo
+##### WTC	Waltonchain
+##### XHDX	Xhdx
+##### XIN	Mixin
+##### XIO	Xio network
+##### XRT	Robonics
+##### YAM	Yam
+##### YAMV2	Yamv2
+##### YBUSD	Iearn busd
+##### YCURVE	Curve.fi ydai/yusdc/yusdt/ytusd
+##### YDAI	Ydai
+##### YDAI+YUSDC+YUSDT+YTUSD	Curve.fi ydai/yusdc/yusdt/ytusd
+##### YF-DAI	Yfdai.finance
+##### YFI	Yearn.finance
+##### YFL	Yflink
+##### YLAND	Yearn land
+##### YLD	Yield
+##### YOP	Yop
+##### YPIE	Piedao yearn ecosystem pie
+##### YTRUMP	Yes donald trump
+##### YTUSD	Ytusd
+##### YUSD	Yydai+yusdc+yusdt+ytusd
+##### YUSDC	Yusdc
+##### YUSDT	Yusdt
+##### YVAULT-LP-YCURVE	Yydai+yusdc+yusdt+ytusd
+##### YYDAI+YUSDC+YUSDT+YTUSD	Yydai+yusdc+yusdt+ytusd
+##### ZCN	0chain
+##### ZERO	Zero.exchange token
+##### ZIL	Zilliqa
+##### ZIN	Zin finance
+##### ZRX	0x
