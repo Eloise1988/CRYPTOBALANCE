@@ -1,5 +1,5 @@
 # CRYPTOCURRENCY TOOLS USED IN GOOGLE SHEETS
-## [SWAGGER](https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.1)
+## [API Documentation](https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.1)
 
 ## CRYPTOBALANCE
 
