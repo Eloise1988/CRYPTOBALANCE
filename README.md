@@ -72,6 +72,14 @@
 ###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
 ## 
 
+##  
+### CRYPTOCURRENCY PRICES ON DEX
+###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI are available for the moment.
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/DEXPRICES.png)
+###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
+###### EXAMPLE    =CRYPTODEXPRICE("ETH","BAL","1INCH")
+## 
+
 ### DEX Total Locked Values $ (TVL)
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TVL.png)
 ###### Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked ($)
