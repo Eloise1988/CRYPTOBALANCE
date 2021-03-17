@@ -1,6 +1,6 @@
 # CRYPTOCURRENCY TOOLS USED IN GOOGLE SHEETS
-## [API Documentation](https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.1)
-
+### [API Documentation](https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.1)
+### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/ALL_COINS.md)
 ## CRYPTOBALANCE
 
 ### Get your cryptocurrency balance in your Google Sheets. 
