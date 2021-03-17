@@ -92,13 +92,9 @@ function ShowContactInfo() {
             'Support email: ac@charmantadvisory.com\n\
              Telegram Chat: https://t.me/TheCryptoCurious\n\
              Github: https://github.com/Eloise1988\n\
-             API Doc: https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.0.0',
+             API Doc: https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools',
             ui.ButtonSet.OK)
 }
-
-
-
-
 
 /**CRYPTOBALANCE
  * Returns cryptocurrency balances into Google spreadsheets. The result is a ONE-dimensional array.
@@ -116,7 +112,7 @@ function ShowContactInfo() {
  **/
   
 async function CRYPTOBALANCE(ticker,address){
-  
+  Utilities.sleep(Math.random() * 100)
   id_cache=ticker+address+"balance"
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
@@ -173,7 +169,7 @@ async function CRYPTOBALANCE(ticker,address){
 
 async function CRYPTOLENDING(exchange,ticker,side){
   id_cache=ticker+exchange+side+"lending"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -230,7 +226,7 @@ async function CRYPTOLENDING(exchange,ticker,side){
 
 async function CRYPTOREWARDS(ticker,address){
   id_cache=ticker+address+"rewards"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -281,7 +277,7 @@ async function CRYPTOREWARDS(ticker,address){
 
 async function CRYPTOSTAKING(ticker,address){
   id_cache=ticker+address+"staking"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -336,7 +332,7 @@ async function CRYPTOSTAKING(ticker,address){
 
 async function CRYPTOSUMETH(address){
   id_cache=address+"cryptosumeth"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -390,7 +386,7 @@ async function CRYPTOSUMETH(address){
 
 async function CRYPTOFARMING(project,ticker,period){
   id_cache=ticker+project+period+"farming"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -453,7 +449,7 @@ async function CRYPTOFARMING(project,ticker,period){
 
 async function CRYPTOTVL(exchange){
   id_cache=exchange+"tvl"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -512,7 +508,7 @@ async function CRYPTOTVL(exchange){
 
 async function CRYPTODEXVOLUME(exchange){
   id_cache=exchange+"dexvolume"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -569,7 +565,7 @@ async function CRYPTODEXVOLUME(exchange){
 
 async function CRYPTODEXFEE(exchange){
   id_cache=exchange+"dexfee"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -622,7 +618,7 @@ async function CRYPTODEXFEE(exchange){
  **/
 
 async function UNISWAP(days,volume,liquidity,tx_count){
-  
+  Utilities.sleep(Math.random() * 100)
   try{
     
     
@@ -664,7 +660,7 @@ async function UNISWAP(days,volume,liquidity,tx_count){
  **/
 
 async function SUSHISWAP(days,volume,liquidity,tx_count){
-  
+  Utilities.sleep(Math.random() * 100)
   try{
     
     
@@ -704,7 +700,7 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
  **/
 
 async function PANCAKESWAP(days,volume,liquidity,tx_count){
-  
+  Utilities.sleep(Math.random() * 100)
   try{
     
     
@@ -747,7 +743,7 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
 
 async function CRYPTODEXPRICE(token1,token2,exchange="UNI"){
   id_cache=token1+token2+exchange+"dexprice"
-  
+  Utilities.sleep(Math.random() * 100)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
@@ -815,7 +811,7 @@ async function CRYPTODEXPRICE(token1,token2,exchange="UNI"){
  **/
 
 async function CRYPTOFUTURES(ticker){
-  
+  Utilities.sleep(Math.random() * 100)
   try{
     
     
