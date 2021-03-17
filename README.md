@@ -4,7 +4,6 @@
 ## CRYPTOBALANCE
 
 ### Get your cryptocurrency balance in your Google Sheets. 
-##### With more than + 1000 cryptocurrencies available.
 ### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/ALL_COINS.md)
 
 
