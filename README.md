@@ -1,4 +1,6 @@
 # CRYPTOCURRENCY TOOLS USED IN GOOGLE SHEETS
+## [SWAGGER](https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.1)
+
 ## CRYPTOBALANCE
 
 ### Get your cryptocurrency balance in your Google Sheets. 
@@ -100,6 +102,7 @@
 ###### 3. Copy the content of [CRYPTOTOOLS](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/CRYPTOTOOLS) and paste it in the script editor (replace any existing content). 
 ###### 4. Save the script with File › Save, name it CRYPTOTOOLS, then close the script editor
 ###### 5. Back to your Google sheet, refresh the page, a CRYPTOTOOLS menu will appear next to Help with more information about the , CRYPTOBALANCE, CRYPTOSTAKING, CRYPTOREWADS & CRYPTOLENDING, UNISWAP, DEXPRICES functions.
+
 
 
 
