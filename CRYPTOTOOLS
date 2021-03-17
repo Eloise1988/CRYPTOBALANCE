@@ -48,16 +48,12 @@ function onOpen() {
   ui.createMenu('CRYPTOTOOLS')
       .addItem('CRYPTOBALANCE', 'ShowHowToRefresh')
       .addSeparator()
-      .addItem('CRYPTOPRICE', 'ShowHowCRYPTOPRICE')
-      .addSeparator()
       .addItem('CRYPTOSTAKING', 'ShowHowCRYPTOSTAKING')
       .addSeparator()    
       .addItem('CRYPTOREWARDS', 'ShowHowCRYPTOREWARDS')
       .addSeparator()
       .addItem('CRYPTOLENDING', 'ShowHowCRYPTOLENDING')
       .addSeparator()
-      .addSeparator()
-      .addItem('PREMIUM KeyID', 'ShowKeyID')
       .addSeparator()
       .addItem('Contact Info', 'ShowContactInfo')
       .addToUi();
@@ -83,58 +79,20 @@ function ShowHowCRYPTOREWARDS() {
            'Returns cryptocurrencies REWARDS on PoS cryptocurrencies.\n\ \n\ @param {"CURRENCY TICKER FOR REWARDS"} The cryptocurrency TICKER/SYMBOL data to fetch.\n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\ @return The current amount of cryptocurrency on the searched public address.\n\ \n\ Get the ATOM rewards for staking on the following address \n\=CRYPTOREWARDS("ATOM","cosmos1r0y7s2vrgk3nw3nkp5tyy8zxjkz7nw9vrvmxun")',
              ui.ButtonSet.OK)
 }
-function ShowHowCRYPTOPRICE() {
-  var ui = SpreadsheetApp.getUi()
-  ui.alert("Get cryptocurrency prices in USD ($)",
-           'Returns the price of cryptocurrencies.\n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example BTC. \n\@param {"EMPTY CELL REFERENCE"} refresh_cell. Reference an empty cell and change its content to force refresh the balances. \n\ @return Price of cryptocurrency refreshed on an hourly basis.\n\ \n\ Get the BTC price \n\=CRYPTOPRICE("BTC")',
-             ui.ButtonSet.OK)
-}
+
 function ShowHowCRYPTOLENDING() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Get cryptocurrency lending rates on decentralized and semi-centralized exchanges",
            'Returns cryptocurrencies lending rates on different lending plateforms.\n\ \n\ @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Examples of exchanges: NUO, COMPOUND, DXDY, FULCRUM, AAVE .... \n\ @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges. \n\ @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate. \n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.\n\ \n\ Get the borrowing rate on compound for Ethereum. \n\ =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")',
              ui.ButtonSet.OK)
 } 
-function ShowKeyID() {
-  
-  var userProperties = PropertiesService.getUserProperties();
-  var key_id = userProperties.getProperty("KEYID")
-  var ui = SpreadsheetApp.getUi();
-  
-  
-  
-  if (key_id) {
-    var result = ui.prompt('Set your KeyID to increase API limit',
-                           'Your Key ID '+ key_id +' is already set.\n\n Visit charmantadvisory.com in order to validate your KeyID. \n:',
-                           ui.ButtonSet.OK_CANCEL);
-  }
-  else {
-    var result = ui.prompt('Generate your KeyID to increase API limit',
-                           'This service offers you access to your cryptocurrency balances, staking and reward amounts, lending rates as well as cryptocurrency prices .\n\nYou can add this KeyID to all of your Google Sheets that use CRYPTOTOOLS. \nFor more info go to http://charmantadvisory.com/KeyID\n\nOnce subscribed, please enter your KeyID below:',
-                           ui.ButtonSet.OK_CANCEL);  
-  }
-  var button = result.getSelectedButton();
-  var user_keyid = result.getResponseText().replace(/\s+/g, '');
-  if (button == ui.Button.OK) {
-    
-    if (user_keyid && user_keyid.length == 36) {
-      userProperties.setProperty("KEYID", user_keyid);
-      ui.alert('Thanks for generating a new KeyID',
-               'Once you subscribed on charmantadvisory.com/KeyID with the following KeyID, you will have access to higher API limits.\nFor support, please contact ac@charmantadvisory.com'
-               ,ui.ButtonSet.OK);
-    }
-    else if (user_keyid) {
-      ui.alert('KeyID not valid',
-               'The KeyID you entered appears to be not valid.\nIf you believe this is an error, please contact ac@charmantadvisory.com.'
-               ,ui.ButtonSet.OK);
-    }
-  }
-};
 function ShowContactInfo() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Contact Info",
             'Support email: ac@charmantadvisory.com\n\
-             Telegram Chat: https://t.me/TheCryptoCurious',
+             Telegram Chat: https://t.me/TheCryptoCurious\n\
+             Github: https://github.com/Eloise1988\n\
+             API Doc: https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.0.0',
             ui.ButtonSet.OK)
 }
 
