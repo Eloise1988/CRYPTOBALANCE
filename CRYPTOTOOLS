@@ -14,7 +14,7 @@
      CRYPTOSTAKING                For use by end users to retrieve cryptocurrency staking amounts
      CRYPTOREWARSD                For use by end users to retrieve cryptocurrency reward amounts from staking
      CRYPTOLENDING                For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
-     CRYPTOFARMING                For use by end users to retrieve cryptocurrency farming ROI
+     CRYPTODISTRIBUTIONRATE       For use by end users to retrieve the distribution token rate from lending plateforms (COMPOUND)
      CRYPTOSUMETH                 For use by end users to retrieve one's total $ amount on ERC20 address
      CRYPTODEXVOLUME              For use by end users to retrieve DEX volumes $
      CRYPTODEXFEE                 For use by end users to retrieve DEX transaction fees
@@ -776,8 +776,8 @@ async function CRYPTODEXPRICE(token1,token2,exchange="UNI"){
      if (token2.length<20) {
       token2=token2.toUpperCase();
     }
-    if (exchange.toUpperCase()=='1INCH') {
-      var rate=parseFloat(cachedDEX[exchange.toUpperCase()][token1]/cachedDEX[exchange.toUpperCase()][token2])
+    if (exchange.toUpperCase()=='1INCH' || exchange.toUpperCase()=='CAKE' || exchange.toUpperCase()=='PANCAKESWAP') {
+      var rate=parseFloat(cachedDEX[exchange.toUpperCase()][token1]/cachedDEX[exchange.toUpperCase()][token2]);
       cache.put(id_cache, rate);}
     else{
       if(cachedDEX[exchange.toUpperCase()].hasOwnProperty(token1+token2)){
@@ -792,7 +792,7 @@ async function CRYPTODEXPRICE(token1,token2,exchange="UNI"){
   }
 
   catch(err){
-    return "error";
+    return "error-data-unavailable";
   }
 }
 /**CRYPTOFUTURES
@@ -832,5 +832,61 @@ async function CRYPTOFUTURES(ticker){
   catch(err){
     return CRYPTOFUTURES(ticker);
   }}
+/**CRYPTODISTRIBUTIONRATE
+ * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTODISTRIBUTIONRATE("COMPOUND","ETH","APR_BORROW")
+ *
+ * @param {exchange}               the exchange on which you want to retrieve the token distribution rate (only COMPOUND available)
+ * @param {cryptocurrency}         the cryptocurrency ticker you want the lending/borrowing distribution rate from
+ * @param {APR_BORROW or APR_LEND} either APR_BORROW for the borrowing rate or APR_LEND for the distribution rate
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current distribution rate in decimal form,  of cryptocurrency on a specified exchange
+ **/
 
+async function CRYPTODISTRIBUTIONRATE(exchange,ticker,side){
+  id_cache=ticker+exchange+side+"distributionrate"
+  Utilities.sleep(Math.random() * 100)
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
+  try{
+    
+    ticker=ticker.toUpperCase();
+    exchange=exchange.toUpperCase();
+    side=side.toUpperCase();
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/DISTRIBUTIONRATE/"+exchange+"/"+ticker+"/"+side+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    if (content!='None') {
+      if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+        cache.put(id_cache, content)
+      }
+      
+    }
+    
+    return content;
+  }
+
+  catch(err){
+    return CRYPTODISTRIBUTIONRATE(exchange,ticker,side);
+  }
+}
   
