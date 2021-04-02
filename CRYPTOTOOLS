@@ -24,7 +24,7 @@
      PANCAKESWAP                  For use by end users to retrieve all new pairs on Pancakeswap
      CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
      CRYPTOFUTURES                For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
-
+     CRYPTOLP                     For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -889,4 +889,62 @@ async function CRYPTODISTRIBUTIONRATE(exchange,ticker,side){
     return CRYPTODISTRIBUTIONRATE(exchange,ticker,side);
   }
 }
+/**CRYPTOLP
+ * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTOLP("CAKE","BUSD-WBNB","APR")
+ *
+ * @param {exchange}               DEX exchange ticker for the LP
+ * @param {pair}         the cryptocurrency pair ex: WBTC-WETH
+ * @param {APR or TVL} either APR_BORROW for the borrowing rate or APR_LEND for the distribution rate
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the APR or TVL from specific liquidity pool
+ **/
+
+async function CRYPTOLP(exchange,pair,type){
+  id_cache=exchange+pair+type+"lp"
+  Utilities.sleep(Math.random() * 100)
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
   
+  try{
+    
+    pair=pair.toUpperCase();
+    pair=pair.replace("-", "");
+    pair=pair.replace("/", "");
+    exchange=exchange.toUpperCase();
+    tpye=type.toUpperCase();
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/LPOOLS/"+exchange+"/"+pair+"/"+type+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    if (content!='None') {
+      if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+        cache.put(id_cache, content)
+      }
+      
+    }
+    
+    return content;
+  }
+
+  catch(err){
+    return CRYPTOLP(exchange,ticker,side);
+  }
+} 
