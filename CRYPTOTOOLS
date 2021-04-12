@@ -734,7 +734,7 @@ async function CRYPTODEXPRICE(token1,token2,exchange="UNI"){
   }
 
   catch(err){
-    return "error-data-unavailable";
+    return CRYPTODEXPRICE(token1,token2,exchange);
   }
 }
 /**CRYPTOFUTURES
