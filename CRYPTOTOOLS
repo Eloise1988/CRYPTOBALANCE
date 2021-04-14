@@ -864,7 +864,7 @@ async function CRYPTOLP(exchange,pair,type){
     pair=pair.replace("-", "");
     pair=pair.replace("/", "");
     exchange=exchange.toUpperCase();
-    tpye=type.toUpperCase();
+    type=type.toUpperCase();
     
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
