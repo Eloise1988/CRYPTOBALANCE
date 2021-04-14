@@ -810,3 +810,42 @@ async function CRYPTOLP(exchange,pair,type){
     return CRYPTOLP(exchange,ticker,side);
   }
 } 
+/**CRYPTOHOLDERS
+ * Returns a table of the 150 biggest holders by contract address or ticker into Google spreadsheets.
+ * By default, json data gets transformed into a a table 151x3. 
+ * For example:
+ *
+ * =CRYPTOHOLDERS("MKR")
+ * =CRYPTOHOLDERS("MKR")
+ *
+ * @param {ticker}       ticker or contract_address if ticker is not available
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return table with the top 150 holders of cryptocurrency
+ **/
+
+async function CRYPTOHOLDERS(ticker){
+  
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    
+   
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/ERC20HOLDERS/"+ticker+"/"+KEYID;
+    return ImportJSON(url);
+    
+    
+  }
+
+  catch(err){
+    return CRYPTOHOLDERS(ticker);
+  }
+} 
