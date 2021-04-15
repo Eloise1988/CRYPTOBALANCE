@@ -27,6 +27,7 @@
      CRYPTOLP                     For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
      CRYPTOHOLDERS                For use by end users to retrieve list of bigget holders by ERC20 contract address
      CRYPTOTX_ERC20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
+     CRYPTOTX_BEP20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -887,5 +888,43 @@ async function CRYPTOTX_ERC20(address){
 
   catch(err){
     return CRYPTOTX_ERC20(address);
+  }
+} 
+/**CRYPTOTX_BEP20
+ * Returns a table with the list of transactions for an BEP20 wallet address (Binance Smart Chain) into Google spreadsheets.
+ * By default, json data gets transformed into a a table. 
+ * For example:
+ *
+ * =CRYPTOTX_BEP20("0x921112cb26e4bda59ee4d769a99ad70e88c00019")
+ *
+ * @param {address}       the BEP20 address you want the list of transactions from (Binance Smart Chain)
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return table with all BNB + BEP20 Token transactions (date, to, from, value, ticker)
+ **/
+
+async function CRYPTOTX_BEP20(address){
+  
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    
+   
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/TXBEP20/"+address+"/"+KEYID;
+    return ImportJSON(url);
+    
+    
+  }
+
+  catch(err){
+    return CRYPTOTX_BEP20(address);
   }
 } 
