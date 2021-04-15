@@ -25,6 +25,8 @@
      CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
      CRYPTOFUTURES                For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
      CRYPTOLP                     For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
+     CRYPTOHOLDERS                For use by end users to retrieve list of bigget holders by ERC20 contract address
+     CRYPTOTX_ERC20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -847,5 +849,43 @@ async function CRYPTOHOLDERS(ticker){
 
   catch(err){
     return CRYPTOHOLDERS(ticker);
+  }
+} 
+/**CRYPTOTX_ERC20
+ * Returns a table with the list of transactions for an ERC20 wallet address into Google spreadsheets.
+ * By default, json data gets transformed into a a table. 
+ * For example:
+ *
+ * =CRYPTOTX_ERC20("0xf50d9b37e86ff69bc3d7a18bf3d5a04d5ef6cad1")
+ *
+ * @param {address}       the ERC20 address you want the list of transactions from
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return table with all ETH + ERC20 Token transactions (date, to, from, value, ticker)
+ **/
+
+async function CRYPTOTX_ERC20(address){
+  
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    
+   
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/TXERC20/"+address+"/"+KEYID;
+    return ImportJSON(url);
+    
+    
+  }
+
+  catch(err){
+    return CRYPTOTX_ERC20(address);
   }
 } 
