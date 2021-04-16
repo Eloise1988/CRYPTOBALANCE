@@ -25,9 +25,10 @@
      CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
      CRYPTOFUTURES                For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
      CRYPTOLP                     For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
-     CRYPTOHOLDERS                For use by end users to retrieve list of bigget holders by ERC20 contract address
+     CRYPTO_ERC20HOLDERS          For use by end users to retrieve list of bigget holders by ERC20 contract address
+     CRYPTO_BEP20HOLDERS          For use by end users to retrieve list of bigget holders by ERC20 contract address
      CRYPTOTX_ERC20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
-     CRYPTOTX_BEP20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
+     CRYPTOTX_BEP20               For use by end users to retrieve list of all BNB & BEP20 Token transactions
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -813,13 +814,13 @@ async function CRYPTOLP(exchange,pair,type){
     return CRYPTOLP(exchange,ticker,side);
   }
 } 
-/**CRYPTOHOLDERS
+/**CRYPTO_ERC20HOLDERS
  * Returns a table of the 150 biggest holders by contract address or ticker into Google spreadsheets.
  * By default, json data gets transformed into a a table 151x3. 
  * For example:
  *
- * =CRYPTOHOLDERS("MKR")
- * =CRYPTOHOLDERS("MKR")
+ * =CRYPTO_ERC20HOLDERS("MKR")
+ * =CRYPTO_ERC20HOLDERS("0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2")
  *
  * @param {ticker}       ticker or contract_address if ticker is not available
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
@@ -828,7 +829,7 @@ async function CRYPTOLP(exchange,pair,type){
  * @return table with the top 150 holders of cryptocurrency
  **/
 
-async function CRYPTOHOLDERS(ticker){
+async function CRYPTO_ERC20HOLDERS(ticker){
   
   Utilities.sleep(Math.random() * 100)
   
@@ -849,7 +850,46 @@ async function CRYPTOHOLDERS(ticker){
   }
 
   catch(err){
-    return CRYPTOHOLDERS(ticker);
+    return CRYPTO_ERC20HOLDERS(ticker);
+  }
+} 
+/**CRYPTO_BEP20HOLDERS
+ * Returns a table of the 1000 biggest holders by contract address or ticker into Google spreadsheets.
+ * By default, json data gets transformed into a a table 1000x3. 
+ * For example:
+ *
+ * =CRYPTO_BEP20HOLDERS("CAKE")
+ * =CRYPTO_BEP20HOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82")
+ *
+ * @param {ticker}                 ticker or contract_address if ticker is not available
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return table with the top 1000 holders of BEP20 cryptocurrency
+ **/
+
+async function CRYPTO_BEP20HOLDERS(ticker){
+  
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    
+   
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+    url="http://api.charmantadvisory.com/BEP20HOLDERS/"+ticker+"/"+KEYID;
+    return ImportJSON(url);
+    
+    
+  }
+
+  catch(err){
+    return CRYPTO_BEP20HOLDERS(ticker);
   }
 } 
 /**CRYPTOTX_ERC20
