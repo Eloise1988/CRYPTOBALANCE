@@ -1,0 +1,8 @@
+## LIST OF ALL COINS AVAILABLE FOR REWARDS ON BLOCKCHAIN
+
+#### =CRYPTOREWARDS("ticker", "holder's public address")
+
+## TICKER	NAME
+##### XTZ TEZOS
+##### ATOM COSMOS
+##### DUN DUNE
