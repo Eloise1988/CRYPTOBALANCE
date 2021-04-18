@@ -1,0 +1,12 @@
+## LIST OF ALL STAKING COINS AVAILABLE
+
+#### =CRYPTOSTAKING("ticker", "holder's public address")
+
+## TICKER	NAME
+##### XTZ TEZOS_STAKING
+##### ATOM COSMOS
+##### NANO NANO
+##### EOS EOS
+##### DUN DUNE_STAKING
+##### NEAR NEAR PROTOCOL
+##### ONE HARMONY
