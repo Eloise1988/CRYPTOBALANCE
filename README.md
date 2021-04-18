@@ -4,12 +4,12 @@
 ## CRYPTOBALANCE
 
 ### Get your cryptocurrency balance in your Google Sheets. 
-### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/ALL_COINS.md)
+### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_COINS.md)
 
 
 ######
 
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Balance.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/Crypto_Balance.png)
 
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOBALANCE("USDT","0xf977814e90da44bfa03b6295a0616a897441acec", $A$1)
@@ -29,9 +29,9 @@
 ###### Support for other major PoS altcoins is coming later in 2019.
 ##
 
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXPLORER.png)
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE.png)
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/XTZ_EXAMPLE2.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/XTZ_EXPLORER.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/XTZ_EXAMPLE.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/XTZ_EXAMPLE2.png)
 ## 
 ##  
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
@@ -52,7 +52,7 @@
 ###### Example of available exchanges: MAKERDAO - COMPOUND - DYDX - NUO - NEXO - CELSIUS - AAVE - FULCRUM
 ###### Example of available cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC - SAI - USDT - SNX etc...
 ###### Update October 2019 - All rates from https://interest.coinmarketcap.com/
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/Crypto_Lending.png)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/Crypto_Lending.png)
 
 ###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
 ###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
