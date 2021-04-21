@@ -524,7 +524,7 @@ async function UNISWAP(days,volume,liquidity,tx_count){
     url="http://api.charmantadvisory.com/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
     
-    return ImportJSON(url);
+    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
   }
 
   catch(err){
@@ -533,7 +533,7 @@ async function UNISWAP(days,volume,liquidity,tx_count){
   
 }
 /**SUSHISWAP
- * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ * Returns new tradable pairs on Sushiswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
  *
  * By default, data gets transformed into a table 
  * For example:
@@ -566,14 +566,14 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
     url="http://api.charmantadvisory.com/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
     
-    return ImportJSON(url);
+    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
   }
 
   catch(err){
     return SUSHISWAP(days,volume,liquidity,tx_count);
   }}
 /**PANCAKESWAP
- * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ * Returns new tradable pairs on Pancakeswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
  *
  * By default, data gets transformed into a table 
  * For example:
@@ -606,7 +606,7 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
     url="http://api.charmantadvisory.com/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
     
-    return ImportJSON(url);
+    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
   }
 
   catch(err){
