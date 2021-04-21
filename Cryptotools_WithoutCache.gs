@@ -844,7 +844,7 @@ async function CRYPTO_ERC20HOLDERS(ticker){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/ERC20HOLDERS/"+ticker+"/"+KEYID;
-    return ImportJSON(url);
+    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
     
     
   }
@@ -870,7 +870,7 @@ async function CRYPTO_ERC20HOLDERS(ticker){
 
 async function CRYPTO_BEP20HOLDERS(ticker){
   
-  Utilities.sleep(Math.random() * 100)
+  Utilities.sleep(1000)
   
   
   try{
@@ -883,7 +883,7 @@ async function CRYPTO_BEP20HOLDERS(ticker){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/BEP20HOLDERS/"+ticker+"/"+KEYID;
-    return ImportJSON(url);
+    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
     
     
   }
@@ -921,7 +921,7 @@ async function CRYPTOTX_ERC20(address){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/TXERC20/"+address+"/"+KEYID;
-    return ImportJSON(url);
+    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
     
     
   }
@@ -959,7 +959,7 @@ async function CRYPTOTX_BEP20(address){
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
     url="http://api.charmantadvisory.com/TXBEP20/"+address+"/"+KEYID;
-    return ImportJSON(url);
+    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
     
     
   }
