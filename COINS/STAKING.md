@@ -3,10 +3,10 @@
 #### =CRYPTOSTAKING("ticker", "holder's public address")
 
 ## TICKER	NAME
-##### XTZ TEZOS_STAKING
+##### XTZ TEZOS
 ##### ATOM COSMOS
 ##### NANO NANO
 ##### EOS EOS
-##### DUN DUNE_STAKING
+##### DUN DUNE
 ##### NEAR NEAR PROTOCOL
 ##### ONE HARMONY
