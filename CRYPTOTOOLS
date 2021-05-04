@@ -718,7 +718,7 @@ async function CRYPTODEXPRICE(token1,token2,exchange="UNI"){
      if (token2.length<20) {
       token2=token2.toUpperCase();
     }
-    if (exchange.toUpperCase()=='1INCH' || exchange.toUpperCase()=='CAKE' || exchange.toUpperCase()=='PANCAKESWAP') {
+    if (exchange.toUpperCase()=='1INCH' || exchange.toUpperCase()=='CAKE' || exchange.toUpperCase()=='PANCAKESWAP'  || exchange.toUpperCase()=='CAKEV2') {
       var rate=parseFloat(cachedDEX[exchange.toUpperCase()][token1]/cachedDEX[exchange.toUpperCase()][token2]);
       cache.put(id_cache, rate);}
     else{
