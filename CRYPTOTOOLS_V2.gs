@@ -685,6 +685,7 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
  **/
 
 async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
+  Utilities.sleep(Math.random() * 100)
   token1_array = [].concat(token1_array);
   token2_array = [].concat(token2_array);
   exchange_array = [].concat(exchange_array);
@@ -699,15 +700,15 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
     arr3[0] = exchange_array;
     exchange_array= arr3;
   }
-  /*id_cache=token1+token2+exchange+"dexprice"
-  Utilities.sleep(Math.random() * 100)
+  //id_cache=token1_array+token2_array+exchange_array +"dexprice"
+  
+  id_cache=getBase64EncodedMD5(token1_array+token2_array+exchange_array +"dexprice");
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }*/
+    result=cached.split(',');
+    return result.map(function(n) { return n && ("" || Number(n))}); 
+    }
   
   try{
     
@@ -735,7 +736,7 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
           if(cachedDEX[exchange_array[i][0].toUpperCase()].hasOwnProperty(token1.toLowerCase())){
           result_list.push(parseFloat(cachedDEX[exchange_array[i][0].toUpperCase()][token1.toLowerCase()]));
         }
-        else{result_list.push("Coin not in list");
+        else{result_list.push("");
           continue;}}
            
         else if(token2=='' || token1=='' || exchange_array[i][0]=='' ) {
@@ -747,17 +748,18 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
             result_list.push(parseFloat(cachedDEX[exchange_array[i][0].toUpperCase()][token1]/cachedDEX[exchange_array[i][0].toUpperCase()][token2])); 
             }
           else{
-            result_list.push("Coin not in list");}
+            result_list.push("");}
         }
     else{
       if(cachedDEX[exchange_array[i][0].toUpperCase()].hasOwnProperty(token1+token2)){
         result_list.push(parseFloat(cachedDEX[exchange_array[i][0].toUpperCase()][token1+token2]));
         }
       else{
-        result_list.push("Coin not in list");
+        result_list.push("");
       }}
     }
-    return result_list 
+    cache.put(id_cache,result_list);
+    return result_list; 
   }
 
   catch(err){
