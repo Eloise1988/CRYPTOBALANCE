@@ -31,7 +31,7 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.0  Initial release
+  2.0.2  Release
  *====================================================================================================================================*/
 
 
@@ -703,10 +703,12 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
   //id_cache=token1_array+token2_array+exchange_array +"dexprice"
   
   id_cache=getBase64EncodedMD5(token1_array+token2_array+exchange_array +"dexprice");
+  //Logger.log(id_cache)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
   if (cached != null) {
     result=cached.split(',');
+    Logger.log(result)
     return result.map(function(n) { return n && ("" || Number(n))}); 
     }
   
@@ -720,11 +722,11 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
     url="http://api.charmantadvisory.com/DEXPRICE/"+KEYID;
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
-
-    while (content===null) {
+    //Logger.log(content)
+    /*while (content===null) {
       res = await UrlFetchApp.fetch(url);
       content = res.getContentText();
-    }
+    }*/
     var cachedDEX = JSON.parse(content);
     dict={};
     var result_list= [];
