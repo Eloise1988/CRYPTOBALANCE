@@ -702,7 +702,7 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
   }
   //id_cache=token1_array+token2_array+exchange_array +"dexprice"
   
-  id_cache=getBase64EncodedMD5(token1_array+token2_array+exchange_array +"dexprice");
+  id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array+token2_array+exchange_array +"dexprice"));
   //Logger.log(id_cache)
   var cache = CacheService.getScriptCache();
   var cached = cache.get(id_cache);
