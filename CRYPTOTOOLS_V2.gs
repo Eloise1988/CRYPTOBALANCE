@@ -35,16 +35,15 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.3  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 
- *====================================================================================================================================*/
+  2.0.3  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+         May 24th Modification CACHE
+ *====================================================================================================================================*///CACHING TIME  
+//Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
+const expirationInSeconds_=600;
 
 
+/*---------------------------------                       GOOGLE SHEET FORMULA USERINTERFACE ---------------------- */
 
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/**---------------------------------                       GOOGLE SHEET FORMULA USERINTERFACE WITH EXPLANATION                           ---------------------- */
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/**------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 
 function onOpen() {
@@ -143,7 +142,7 @@ async function CRYPTOBALANCE(ticker,address){
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
     
     return content;
@@ -200,7 +199,7 @@ async function CRYPTOLENDING(exchange,ticker,side){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
       
     }
@@ -253,7 +252,7 @@ async function CRYPTOREWARDS(ticker,address){
     url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+KEYID;
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
-    cache.put(id_cache, content)
+    cache.put(id_cache, content,expirationInSeconds_)
     return content;
   }
 
@@ -305,7 +304,7 @@ async function CRYPTOSTAKING(ticker,address){
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
     
     
@@ -361,7 +360,7 @@ async function CRYPTOSUMETH(address){
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
     
     return content;
@@ -420,7 +419,7 @@ async function CRYPTOTVL(exchange){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
       
     }
@@ -478,7 +477,7 @@ async function CRYPTODEXVOLUME(exchange){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }      
     }
     
@@ -535,7 +534,7 @@ async function CRYPTODEXFEE(exchange){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
     }
     return content;
@@ -764,7 +763,7 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
         result_list.push("");
       }}
     }
-    cache.put(id_cache,result_list);
+    cache.put(id_cache,result_list,expirationInSeconds_);
     return result_list; 
   }
 
@@ -854,7 +853,7 @@ async function CRYPTODISTRIBUTIONRATE(exchange,ticker,side){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
       
     }
@@ -913,7 +912,7 @@ async function CRYPTOLP(exchange,pair,type){
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
-        cache.put(id_cache, content)
+        cache.put(id_cache, content,expirationInSeconds_)
       }
       
     }
