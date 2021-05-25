@@ -3,7 +3,6 @@
 
 ## TICKER	NAME
 ##### BTC    BITCOIN
-##### BTCSEGWIT    BITCOIN SEGWIT
 ##### BCH    BITCOIN CASH
 ##### EOS    EOS
 ##### BSV    BITCOIN SV
