@@ -37,6 +37,7 @@
   
   2.0.3  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
          May 24th Modification CACHE
+         May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
@@ -1003,78 +1004,80 @@ async function CRYPTO_BEP20HOLDERS(ticker){
   }
 } 
 /**CRYPTOTX_ERC20
- * Returns a table with the list of transactions for an ERC20 wallet address into Google spreadsheets.
+ * Returns a table with the list of transactions for an ERC20 wallet address into Google spreadsheets filtered by days old.
  * By default, json data gets transformed into a a table. 
  * For example:
  *
- * =CRYPTOTX_ERC20("0xf50d9b37e86ff69bc3d7a18bf3d5a04d5ef6cad1")
+ * =CRYPTOTX_ERC20("0xf50d9b37e86ff69bc3d7a18bf3d5a04d5ef6cad1",10)
  *
  * @param {address}       the ERC20 address you want the list of transactions from
+ * @param {nbdays}          number of days old
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
  * @return table with all ETH + ERC20 Token transactions (date, to, from, value, ticker)
  **/
 
-async function CRYPTOTX_ERC20(address){
+async function CRYPTOTX_ERC20(address,nbdays){
   
   Utilities.sleep(Math.random() * 100)
   
   
   try{
     
-   
+   if(typeof nbdays === 'undefined') nbdays = 10000;
     
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
-    url="http://api.charmantadvisory.com/TXERC20/"+address+"/"+KEYID;
+    url="http://api.charmantadvisory.com/TXERC20/"+address+"/"+nbdays+"/"+KEYID;
     return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
     
     
   }
 
   catch(err){
-    return CRYPTOTX_ERC20(address);
+    return CRYPTOTX_ERC20(address,nbdays);
   }
 } 
 /**CRYPTOTX_BEP20
- * Returns a table with the list of transactions for an BEP20 wallet address (Binance Smart Chain) into Google spreadsheets.
+ * Returns a table with the list of transactions for an BEP20 wallet address (Binance Smart Chain) into Google spreadsheets filtered by days old.
  * By default, json data gets transformed into a a table. 
  * For example:
  *
- * =CRYPTOTX_BEP20("0x921112cb26e4bda59ee4d769a99ad70e88c00019")
+ * =CRYPTOTX_BEP20("0x921112cb26e4bda59ee4d769a99ad70e88c00019",10)
  *
  * @param {address}       the BEP20 address you want the list of transactions from (Binance Smart Chain)
+ * @param {nbdays}          number of days old
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
  * @return table with all BNB + BEP20 Token transactions (date, to, from, value, ticker)
  **/
 
-async function CRYPTOTX_BEP20(address){
+async function CRYPTOTX_BEP20(address,nbdays){
   
   Utilities.sleep(Math.random() * 100)
   
   
   try{
     
-   
+   if(typeof nbdays === 'undefined') nbdays = 10000;
     
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
-    url="http://api.charmantadvisory.com/TXBEP20/"+address+"/"+KEYID;
+    url="http://api.charmantadvisory.com/TXBEP20/"+address+"/"+nbdays+"/"+KEYID;
     return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
     
     
   }
 
   catch(err){
-    return CRYPTOTX_BEP20(address);
+    return CRYPTOTX_BEP20(address,nbdays);
   }
 } 
