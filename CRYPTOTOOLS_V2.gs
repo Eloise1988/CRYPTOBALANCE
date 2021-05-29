@@ -1011,8 +1011,8 @@ async function CRYPTO_BEP20HOLDERS(ticker){
  * =CRYPTOTX_ERC20("0xf50d9b37e86ff69bc3d7a18bf3d5a04d5ef6cad1",10)
  *
  * @param {address}       the ERC20 address you want the list of transactions from
- * @param {nbdays}          number of days old
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @param {nbdays}         optional number of days old, 30d by default
+ * @param {parseOptions}   an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
  * @return table with all ETH + ERC20 Token transactions (date, to, from, value, ticker)
@@ -1020,7 +1020,7 @@ async function CRYPTO_BEP20HOLDERS(ticker){
 
 async function CRYPTOTX_ERC20(address,nbdays){
   
-  Utilities.sleep(Math.random() * 100)
+  Utilities.sleep(Math.random() * 30)
   
   
   try{
@@ -1050,8 +1050,8 @@ async function CRYPTOTX_ERC20(address,nbdays){
  * =CRYPTOTX_BEP20("0x921112cb26e4bda59ee4d769a99ad70e88c00019",10)
  *
  * @param {address}       the BEP20 address you want the list of transactions from (Binance Smart Chain)
- * @param {nbdays}          number of days old
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @param {nbdays}        optional number of days old, 30d by default
+ * @param {parseOptions}  an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
  * @return table with all BNB + BEP20 Token transactions (date, to, from, value, ticker)
@@ -1064,7 +1064,7 @@ async function CRYPTOTX_BEP20(address,nbdays){
   
   try{
     
-   if(typeof nbdays === 'undefined') nbdays = 10000;
+   if(typeof nbdays === 'undefined') nbdays = 30;
     
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
