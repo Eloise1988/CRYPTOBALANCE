@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.0
+  Version:      2.0.4
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -35,9 +35,10 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.3  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+  2.0.4  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
          May 24th Modification CACHE
          May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
+         June 1st UNISWAP SUSHISWAP exception handling
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
@@ -566,24 +567,30 @@ async function CRYPTODEXFEE(exchange){
 async function UNISWAP(days,volume,liquidity,tx_count){
   Utilities.sleep(Math.random() * 100)
   try{
-    
-    
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    if(days != "" && volume != "" && liquidity != "" && tx_count != ""){
+      if(isNaN(days)||isNaN(volume)||isNaN(liquidity)||isNaN(tx_count)){
+      return "Wrong parameters"
+    }
+      else{
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    
-    
-    url="http://api.charmantadvisory.com/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+        
+        
+        url="http://api.charmantadvisory.com/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
-    
-    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
-  }
+        
+        return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
+        
+      }}
+      else{return "Wrong parameters"}}
+
 
   catch(err){
-    return UNISWAP(days,volume,liquidity,tx_count);
+    return err
+    //return UNISWAP(days,volume,liquidity,tx_count);
   }
   
 }
@@ -609,23 +616,29 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
   Utilities.sleep(Math.random() * 100)
   try{
     
+    if(days != "" && volume != "" && liquidity != "" && tx_count != ""){
+      if(isNaN(days)||isNaN(volume)||isNaN(liquidity)||isNaN(tx_count)){
+      return "Wrong parameters"
+    }
+      else{
     
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+      var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+      GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+      var userProperties = PropertiesService.getUserProperties();
+      var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    
-    
-    url="http://api.charmantadvisory.com/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+      
+      
+      url="http://api.charmantadvisory.com/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
-    
-    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
-  }
+      
+      return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
+  }}
+      else{return "Wrong parameters"}}
 
   catch(err){
-    return SUSHISWAP(days,volume,liquidity,tx_count);
+    return err
+    //return SUSHISWAP(days,volume,liquidity,tx_count);
   }}
 /**PANCAKESWAP
  * Returns new tradable pairs on Pancakeswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
@@ -712,7 +725,6 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
   var cached = cache.get(id_cache);
   if (cached != null) {
     result=cached.split(',');
-    Logger.log(result)
     return result.map(function(n) { return n && ("" || Number(n))}); 
     }
   
@@ -727,10 +739,7 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
     var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     //Logger.log(content)
-    /*while (content===null) {
-      res = await UrlFetchApp.fetch(url);
-      content = res.getContentText();
-    }*/
+
     var cachedDEX = JSON.parse(content);
     dict={};
     var result_list= [];
@@ -769,7 +778,8 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
   }
 
   catch(err){
-    return "error";
+    return err
+    //return CRYPTODEXPRICE(token1_array,token2_array,exchange_array);
   }
 }
 /**CRYPTOFUTURES
