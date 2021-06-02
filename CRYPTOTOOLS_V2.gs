@@ -662,23 +662,29 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
   Utilities.sleep(Math.random() * 100)
   try{
     
+    if(days != "" && volume != "" && liquidity != "" && tx_count != ""){
+      if(isNaN(days)||isNaN(volume)||isNaN(liquidity)||isNaN(tx_count)){
+      return "Wrong parameters"
+    }
+      else{
     
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    
-    
-    url="http://api.charmantadvisory.com/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+        
+        
+        url="http://api.charmantadvisory.com/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
 
-    
-    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
-  }
+        
+        return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
+  }}
+      else{return "Wrong parameters"}}
 
   catch(err){
-    return PANCAKESWAP(days,volume,liquidity,tx_count);
+    return err
+    //return PANCAKESWAP(days,volume,liquidity,tx_count);
   }}
   /**CRYPTODEXPRICE
  * Returns DEXes' (decentralized exchanges) prices per pair of tokens.
