@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.0.4
+  Version:      2.0.5
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -29,16 +29,18 @@
      CRYPTO_BEP20HOLDERS          For use by end users to retrieve list of bigget holders by ERC20 contract address
      CRYPTOTX_ERC20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
      CRYPTOTX_BEP20               For use by end users to retrieve list of all BNB & BEP20 Token transactions
+     CRYPTOPOOLPRICE              For use by end users to retrieve list of all BNB & BEP20 Token transactions
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.4  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+  2.0.5  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
          May 24th Modification CACHE
          May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
          June 1st UNISWAP SUSHISWAP exception handling
+         June 7th NEW CRYPTOPOOLPRICE
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
@@ -1097,3 +1099,68 @@ async function CRYPTOTX_BEP20(address,nbdays){
     return CRYPTOTX_BEP20(address,nbdays);
   }
 } 
+  /**CRYPTOPOOLPRICE
+ * Returns prices from decentralized Pool tokens.
+ *
+ * List of available Pools
+ * YEARN, BAL
+ *
+ * By default, data gets transformed into an array of decimal numbers. 
+ * For example:
+ *
+ * =CRYPTOPOOLPRICE("YVCURVE-BBTC","YEARN")
+ * =CRYPTOPOOLPRICE(E39:E100,F39:F100,J39:J100)
+ *
+ * @param {Token_Name}             list of contract address you wish the Pool Price from
+ * @param {Exchange}               list of exchanges on you wish the Pool Price from
+ * @customfunction
+ *
+ * @return the current price  your cryptocurrency pool on specified DEX
+ **/
+
+
+async function CRYPTOPOOLPRICE(token_name_array,exchange_array){
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    if(token_name_array.length>1){
+    token_name_array = [].concat(token_name_array).join("%2C");
+    exchange_array = [].concat(exchange_array).join("%2C");}
+    
+    
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token_name_array+exchange_array +"poolprice"));
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      //Logger.log(result)
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    url="http://api.charmantadvisory.com/POOLPRICE/"+exchange_array +"/"+token_name_array+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(url);
+    var content = JSON.parse(res.getContentText());
+    
+    
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['PRICE']));
+      }
+      else{dict.push("");}
+    }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
+
+  catch(err){
+    return err
+    //return CRYPTOPOOLPRICE(token_name_array,exchange_array);
+  }
+}
