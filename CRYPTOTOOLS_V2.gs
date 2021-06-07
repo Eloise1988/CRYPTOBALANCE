@@ -29,7 +29,8 @@
      CRYPTO_BEP20HOLDERS          For use by end users to retrieve list of bigget holders by ERC20 contract address
      CRYPTOTX_ERC20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
      CRYPTOTX_BEP20               For use by end users to retrieve list of all BNB & BEP20 Token transactions
-     CRYPTOPOOLPRICE              For use by end users to retrieve list of all BNB & BEP20 Token transactions
+     CRYPTOPOOLPRICE              For use by end users to retrieve prices from decentralized Pool tokens
+     CRYPTOFARMING                For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -40,7 +41,7 @@
          May 24th Modification CACHE
          May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
          June 1st UNISWAP SUSHISWAP exception handling
-         June 7th NEW CRYPTOPOOLPRICE
+         June 7th NEW CRYPTOPOOLPRICE + CRYPTOFARMING
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
@@ -1109,7 +1110,7 @@ async function CRYPTOTX_BEP20(address,nbdays){
  * For example:
  *
  * =CRYPTOPOOLPRICE("YVCURVE-BBTC","YEARN")
- * =CRYPTOPOOLPRICE(E39:E100,F39:F100,J39:J100)
+ * =CRYPTOPOOLPRICE(E39:E100,F39:F100)
  *
  * @param {Token_Name}             list of contract address you wish the Pool Price from
  * @param {Exchange}               list of exchanges on you wish the Pool Price from
@@ -1162,5 +1163,70 @@ async function CRYPTOPOOLPRICE(token_name_array,exchange_array){
   catch(err){
     return err
     //return CRYPTOPOOLPRICE(token_name_array,exchange_array);
+  }
+}
+ /**CRYPTOFARMING
+ * Returns apr, apy and tvl from tokens or pools on decentralized exchanges
+ * 
+ *
+ * List of available exchanges, tokens:
+ * https://www.coingecko.com/en/yield-farming.
+ *
+ * By default, data gets transformed into an array of decimal numbers. 
+ * For example:
+ *
+ * =CRYPTOPOOLFARMING("SUSHI","UNI-WETH","APY")
+ * =CRYPTOPOOLFARMING(E39:E100,F39:F100,J39:J100)
+ *
+ * @param {Exchange}               list of exchanges on you wish the dat from
+ * @param {Token_Name}             list of token tickers/pairs 
+ * @param {Data_Type}              list of data_types: 'APR', 'APY', or 'TVL'
+ * @customfunction
+ *
+ * @return the current APR, APY or TVL list for selected exchanges/tickers
+ **/
+
+
+async function CRYPTOFARMING(exchange_array,ticker_array,data_type){
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    if(exchange_array.length>1){
+    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+    data_type = [].concat(data_type).join("%2C").replace("-", "").replace("/", "");
+    ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");}
+    
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker_array+exchange_array+data_type+"farming"));
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    url="http://api.charmantadvisory.com/LPOOLS/"+exchange_array +"/"+ticker_array+"/"+data_type+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(url);
+    var content = JSON.parse(res.getContentText());
+    
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['VALUE']));
+      }
+      else{dict.push("");}
+    }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
+
+  catch(err){
+    return err
+    //return CRYPTOFARMING(exchange_array,ticker_array,data_type);
   }
 }
