@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.0.5
+  Version:      2.0.6
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -37,11 +37,12 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.5  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+  2.0.6  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
          May 24th Modification CACHE
          May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
          June 1st UNISWAP SUSHISWAP exception handling
          June 7th NEW CRYPTOPOOLPRICE + CRYPTOFARMING
+         June 20th UPDATE DEXPRICE METHOD + latest PancakeswapV2 prices
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
@@ -689,108 +690,7 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
     return err
     //return PANCAKESWAP(days,volume,liquidity,tx_count);
   }}
-  /**CRYPTODEXPRICE
- * Returns DEXes' (decentralized exchanges) prices per pair of tokens.
- *
- * List of available DEXes
- * 1INCH, UNISWAP, PANCAKESWAP, SUSHISWAP, BONFIDA, BAL
- *
- * By default, data gets transformed into a decimal number. 
- * For example:
- *
- * =CRYPTODEXPRICE("ETH","BAL","1INCH")
- * =CRYPTODEXPRICE(E39:E100,F39:F100,J39:J100)
- *
- * @param {Token1}                 1st ticker range or its contract address
- * @param {Token2}                 2st ticker range or its contract address
- * @param {Exchange}               ticker range of dex exchange on which you are looking for rate
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current price rate of your cryptocurrency pair,  on specified DEX
- **/
-
-async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
-  Utilities.sleep(Math.random() * 100)
-  token1_array = [].concat(token1_array);
-  token2_array = [].concat(token2_array);
-  exchange_array = [].concat(exchange_array);
-  if (token1_array.length===1) {
-    var arr = Array.from(Array(1), () => new Array(1));
-    var arr2 = Array.from(Array(1), () => new Array(1));
-    var arr3 = Array.from(Array(1), () => new Array(1));
-    arr[0] = token1_array;
-    token1_array= arr;
-    arr2[0] = token2_array;
-    token2_array= arr2;
-    arr3[0] = exchange_array;
-    exchange_array= arr3;
-  }
-  //id_cache=token1_array+token2_array+exchange_array +"dexprice"
   
-  id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array+token2_array+exchange_array +"dexprice"));
-  //Logger.log(id_cache)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    result=cached.split(',');
-    return result.map(function(n) { return n && ("" || Number(n))}); 
-    }
-  
-  try{
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-  
-    url="http://api.charmantadvisory.com/DEXPRICE/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
-    var content = res.getContentText();
-    //Logger.log(content)
-
-    var cachedDEX = JSON.parse(content);
-    dict={};
-    var result_list= [];
-    for (var i=0;i<token1_array.length;i++) {
-        token1=token1_array[i][0].toUpperCase();
-        token2=token2_array[i][0].toUpperCase();
-        
-        if(token2=='' && token1!='' && exchange_array[i][0].toUpperCase()=='BAL' ) {
-          if(cachedDEX[exchange_array[i][0].toUpperCase()].hasOwnProperty(token1.toLowerCase())){
-          result_list.push(parseFloat(cachedDEX[exchange_array[i][0].toUpperCase()][token1.toLowerCase()]));
-        }
-        else{result_list.push("");
-          continue;}}
-           
-        else if(token2=='' || token1=='' || exchange_array[i][0]=='' ) {
-          result_list.push("");
-          continue;}
-        
-        else if (exchange_array[i][0].toUpperCase()=='1INCH' || exchange_array[i][0].toUpperCase()=='CAKE' || exchange_array[i][0].toUpperCase()=='PANCAKESWAP'  || exchange_array[i][0].toUpperCase()=='CAKEV2') {
-          if(cachedDEX[exchange_array[i][0].toUpperCase()].hasOwnProperty(token1) && cachedDEX[exchange_array[i][0].toUpperCase()].hasOwnProperty(token2)){
-            result_list.push(parseFloat(cachedDEX[exchange_array[i][0].toUpperCase()][token1]/cachedDEX[exchange_array[i][0].toUpperCase()][token2])); 
-            }
-          else{
-            result_list.push("");}
-        }
-    else{
-      if(cachedDEX[exchange_array[i][0].toUpperCase()].hasOwnProperty(token1+token2)){
-        result_list.push(parseFloat(cachedDEX[exchange_array[i][0].toUpperCase()][token1+token2]));
-        }
-      else{
-        result_list.push("");
-      }}
-    }
-    cache.put(id_cache,result_list,expirationInSeconds_);
-    return result_list; 
-  }
-
-  catch(err){
-    return err
-    //return CRYPTODEXPRICE(token1_array,token2_array,exchange_array);
-  }
-}
 /**CRYPTOFUTURES
  * Returns BTC or ETH Futures Prices, basis, volume, open interest
  *
@@ -1228,5 +1128,69 @@ async function CRYPTOFARMING(exchange_array,ticker_array,data_type){
   catch(err){
     return err
     //return CRYPTOFARMING(exchange_array,ticker_array,data_type);
+  }
+}
+  /**CRYPTODEXPRICE
+ * Returns DEXes' (decentralized exchanges) prices per pair of tokens.
+ *
+ * List of available DEXes
+ * 1INCH, UNISWAP, PANCAKESWAP, SUSHISWAP, BONFIDA, BAL
+ *
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTODEXPRICE("ETH","BAL","1INCH")
+ * =CRYPTODEXPRICE(E39:E100,F39:F100,J39:J100)
+ *
+ * @param {Token1}                 1st ticker range or its contract address
+ * @param {Token2}                 2st ticker range or its contract address
+ * @param {Exchange}               ticker range of dex exchange on which you are looking for rate
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current price rate of your cryptocurrency pair,  on specified DEX
+ **/
+
+async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    if(exchange_array.length>1){
+    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+    token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+    token2_array = [].concat(token2_array).join("%2C").replace("-", "").replace("/", "");}
+    
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array+token2_array+exchange_array+"dexprice"));
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    url="http://api.charmantadvisory.com/DEXPRICE2/"+token1_array +"/"+token2_array+"/"+exchange_array+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(url);
+    var content = JSON.parse(res.getContentText());
+    
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['PRICE']));
+      }
+      else{dict.push("");}
+    }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
+
+  catch(err){
+    return err
+    //return CRYPTODEXPRICE(token1_array,token2_array,exchange_array);
   }
 }
