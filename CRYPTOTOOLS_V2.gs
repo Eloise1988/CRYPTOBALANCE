@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.0.6
+  Version:      2.0.7
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -37,12 +37,13 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.6  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+  2.0.7  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
          May 24th Modification CACHE
          May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
          June 1st UNISWAP SUSHISWAP exception handling
          June 7th NEW CRYPTOPOOLPRICE + CRYPTOFARMING
          June 20th UPDATE DEXPRICE METHOD + latest PancakeswapV2 prices
+         June 23th UPDATE LENDING RATE METHOD 
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
@@ -158,64 +159,6 @@ async function CRYPTOBALANCE(ticker,address){
       return CRYPTOBALANCE(ticker,address);
   }
 
-}
-
-/**CRYPTOLENDING
- * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
- * By default, data gets transformed into a decimal number. 
- * For example:
- *
- * =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")
- *
- * @param {exchange}               the exchange on which you want to retrieve the lending rate
- * @param {cryptocurrency}         the cryptocurrency ticker you want the lending/borrowing rate from
- * @param {APR_BORROW or APR_LEND} either APR_BORROW for the borrowing rate or APR_LEND for the lending rate
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current lending rate in decimal form,  of cryptocurrency on a specified exchange
- **/
-
-async function CRYPTOLENDING(exchange,ticker,side){
-  id_cache=ticker+exchange+side+"lending"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-    
-    ticker=ticker.toUpperCase();
-    exchange=exchange.toUpperCase();
-    side=side.toUpperCase();
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    
-    url="http://api.charmantadvisory.com/LENDING/"+exchange+"/"+ticker+"/"+side+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
-    var content = res.getContentText();
-    if (content!='None') {
-      if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-      
-    }
-    
-    return content;
-  }
-
-  catch(err){
-    return CRYPTOLENDING(exchange,ticker,side);
-  }
 }
 
 /**CRYPTOREWARDS
@@ -1194,3 +1137,65 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
     //return CRYPTODEXPRICE(token1_array,token2_array,exchange_array);
   }
 }
+/**CRYPTOLENDING
+ * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")
+ * =CRYPTOLENDING(A1:A10,B1:B10,C1:C10)
+ *
+ * @param {exchange}               the exchanges on which you want to retrieve the lending rate 
+ * @param {cryptocurrency}         the cryptocurrency tickers you want the lending/borrowing rates from
+ * @param {APR_BORROW or APR_LEND} either APR_BORROW for the borrowing rate or APR_LEND for the lending rate
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current lending rate in decimal form, range of data if array of data was given
+ **/
+
+async function CRYPTOLENDING(exchange_array,ticker_array,side_array){
+   Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    if(exchange_array.length>1){
+    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+    ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");
+    side_array = [].concat(side_array).join("%2C").replace("-", "").replace("/", "");}
+
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+ticker_array+side_array+"lendingrates"));
+    Logger.log(id_cache)
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    url="http://api.charmantadvisory.com/LENDING2/"+exchange_array +"/"+ticker_array+"/"+side_array+"/"+KEYID;
+    Logger.log(url)
+    var res = await UrlFetchApp.fetch(url);
+    var content = JSON.parse(res.getContentText());
+    Logger.log(content)
+    
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['VALUE']));
+      }
+      else{dict.push("");}
+    }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
+
+  catch(err){
+    return err
+    //return CRYPTOLENDING(exchange_array,ticker_array,side_array);
+  }}
