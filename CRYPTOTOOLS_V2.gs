@@ -568,31 +568,25 @@ async function CRYPTODEXFEE(exchange){
 async function UNISWAP(days,volume,liquidity,tx_count){
   Utilities.sleep(Math.random() * 100)
   try{
-    if(days != "" && volume != "" && liquidity != "" && tx_count != ""){
-      if(isNaN(days)||isNaN(volume)||isNaN(liquidity)||isNaN(tx_count)){
-      return "Wrong parameters"
-    }
-      else{
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    
+      var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+      GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+      var userProperties = PropertiesService.getUserProperties();
+      var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path="http://api.charmantadvisory.com";
-        http_options ={'headers':{'apikey':KEYID}};
-        
-        
-        if (cryptotools_api_key != "") {
-          private_path="https://privateapi.charmantadvisory.com";
-          http_options = {'headers':{'apikey':cryptotools_api_key}};
-        }
-        url="/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+      private_path="http://api.charmantadvisory.com";
+      http_options ={'headers':{'apikey':KEYID}};
       
-        return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
+      
+      if (cryptotools_api_key != "") {
+        private_path="https://privateapi.charmantadvisory.com";
+        http_options = {'headers':{'apikey':cryptotools_api_key}};
+      }
+      url="/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+    
+      return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
         
-      }}
-      else{return "Wrong parameters"}}
-
+      }
 
   catch(err){
     return err
@@ -622,12 +616,6 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
   Utilities.sleep(Math.random() * 100)
   try{
     
-    if(days != "" && volume != "" && liquidity != "" && tx_count != ""){
-      if(isNaN(days)||isNaN(volume)||isNaN(liquidity)||isNaN(tx_count)){
-      return "Wrong parameters"
-    }
-      else{
-    
       var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
       GSUUID= GSUUID.replace(/%2f/gi, 'hello');
       var userProperties = PropertiesService.getUserProperties();
@@ -646,8 +634,7 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
       return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
       
      
-  }}
-      else{return "Wrong parameters"}}
+  }
 
   catch(err){
     return err
@@ -675,12 +662,6 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
   Utilities.sleep(Math.random() * 100)
   try{
     
-    if(days != "" && volume != "" && liquidity != "" && tx_count != ""){
-      if(isNaN(days)||isNaN(volume)||isNaN(liquidity)||isNaN(tx_count)){
-      return "Wrong parameters"
-    }
-      else{
-    
         var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
         GSUUID= GSUUID.replace(/%2f/gi, 'hello');
         var userProperties = PropertiesService.getUserProperties();
@@ -698,8 +679,7 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
         
         return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
 
-  }}
-      else{return "Wrong parameters"}}
+  }
 
   catch(err){
     return err
