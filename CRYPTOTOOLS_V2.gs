@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.0.7
+  Version:      2.0.8
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -37,16 +37,22 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.7  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+  2.0.8  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
          May 24th Modification CACHE
          May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
          June 1st UNISWAP SUSHISWAP exception handling
          June 7th NEW CRYPTOPOOLPRICE + CRYPTOFARMING
          June 20th UPDATE DEXPRICE METHOD + latest PancakeswapV2 prices
-         June 23th UPDATE LENDING RATE METHOD 
+         June 23th UPDATE LENDING RATE METHOD
+         July 9th API-KEY for premium users 
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
+
+
+//COINGECKO PRIVATE KEY 
+//For unlimited calls to Coingecko's API, please provide your private Key in the brackets
+const cryptotools_api_key="";
 
 
 /*---------------------------------                       GOOGLE SHEET FORMULA USERINTERFACE ---------------------- */
@@ -65,6 +71,8 @@ function onOpen() {
       .addItem('CRYPTOLENDING', 'ShowHowCRYPTOLENDING')
       .addSeparator()
       .addSeparator()
+      .addItem('PREMIUM', 'ShowContactInfo')
+      .addSeparator()
       .addItem('Contact Info', 'ShowContactInfo')
       .addToUi();
  
@@ -74,7 +82,7 @@ function onOpen() {
 function ShowHowToRefresh() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Get your wallet Balances",
-           ' Returns cryptocurrencies balances for over 400+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
+           ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
             ui.ButtonSet.OK)
 }
 function ShowHowCRYPTOSTAKING() {
@@ -96,6 +104,15 @@ function ShowHowCRYPTOLENDING() {
            'Returns cryptocurrencies lending rates on different lending plateforms.\n\ \n\ @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Examples of exchanges: NUO, COMPOUND, DXDY, FULCRUM, AAVE .... \n\ @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges. \n\ @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate. \n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.\n\ \n\ Get the borrowing rate on compound for Ethereum. \n\ =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")',
              ui.ButtonSet.OK)
 } 
+
+function ShowPremium() {
+  var ui = SpreadsheetApp.getUi()
+  ui.alert("Premium users",
+            'For users needing faster, higher limits and customization: a private server is available but only accessible through api-key identification\n\
+             Support email: ac@charmantadvisory.com\n\
+             Telegram Chat: https://t.me/TheCryptoCurious',
+            ui.ButtonSet.OK)
+}
 function ShowContactInfo() {
   var ui = SpreadsheetApp.getUi()
   ui.alert("Contact Info",
@@ -105,7 +122,6 @@ function ShowContactInfo() {
              API Doc: https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools',
             ui.ButtonSet.OK)
 }
-
 /**CRYPTOBALANCE
  * Returns cryptocurrency balances into Google spreadsheets. The result is a ONE-dimensional array.
  * By default, data gets transformed into a number so it looks more like a normal price data import. 
@@ -133,19 +149,22 @@ async function CRYPTOBALANCE(ticker,address){
   }
   
   try{
-    
-
-    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
 
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/BALANCE/"+ticker+"/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/BALANCE/"+ticker+"/"+address+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options) ;   
     var content = res.getContentText();
+
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
@@ -156,7 +175,8 @@ async function CRYPTOBALANCE(ticker,address){
   }
 
   catch(err){
-      return CRYPTOBALANCE(ticker,address);
+      return err
+      //return CRYPTOBALANCE(ticker,address);
   }
 
 }
@@ -187,9 +207,7 @@ async function CRYPTOREWARDS(ticker,address){
     return Number(cached);
   }
   
-  
   try{
-    //
 
     ticker=ticker.toUpperCase();
     
@@ -198,8 +216,16 @@ async function CRYPTOREWARDS(ticker,address){
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
     
-    url="http://api.charmantadvisory.com/REWARDS/"+ticker+"/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/REWARDS/"+ticker+"/"+address+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    
     var content = res.getContentText();
     cache.put(id_cache, content,expirationInSeconds_)
     return content;
@@ -237,7 +263,6 @@ async function CRYPTOSTAKING(ticker,address){
       return cached;} 
     return Number(cached);
   }
-  
   try{
 
     ticker=ticker.toUpperCase();
@@ -246,20 +271,23 @@ async function CRYPTOSTAKING(ticker,address){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/STAKING/"+ticker+"/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/STAKING/"+ticker+"/"+address+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     var content = res.getContentText();
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
         content=parseFloat(content);
         cache.put(id_cache, content,expirationInSeconds_)
       }
-    
-    
     return content;
   }
-
   catch(err){
     return CRYPTOSTAKING(ticker,address);
   }
@@ -302,9 +330,16 @@ async function CRYPTOSUMETH(address){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/TOTALETHBALANCE/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/TOTALETHBALANCE/"+address+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    
     var content = res.getContentText();
     if (!isNaN(content) && content.toString().indexOf('.') != -1)
       {
@@ -359,10 +394,16 @@ async function CRYPTOTVL(exchange){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/TVL/"+exchange+"/"+KEYID;
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/TVL/"+exchange+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
    
-    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -417,10 +458,16 @@ async function CRYPTODEXVOLUME(exchange){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/DEXVOLUME/"+exchange+"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(url);
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/DEXVOLUME/"+exchange+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -474,10 +521,17 @@ async function CRYPTODEXFEE(exchange){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/DEXFEE/"+exchange+"/"+KEYID;
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/DEXFEE/"+exchange+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     
-    var res = await UrlFetchApp.fetch(url);
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -524,12 +578,17 @@ async function UNISWAP(days,volume,liquidity,tx_count){
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
+        private_path="http://api.charmantadvisory.com";
+        http_options ={'headers':{'apikey':KEYID}};
         
         
-        url="http://api.charmantadvisory.com/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
-
-        
-        return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
+        if (cryptotools_api_key != "") {
+          private_path="https://privateapi.charmantadvisory.com";
+          http_options = {'headers':{'apikey':cryptotools_api_key}};
+        }
+        url="/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+      
+        return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
         
       }}
       else{return "Wrong parameters"}}
@@ -574,12 +633,19 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
       var userProperties = PropertiesService.getUserProperties();
       var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
+      private_path="http://api.charmantadvisory.com";
+      http_options ={'headers':{'apikey':KEYID}};
       
+      if (cryptotools_api_key != "") {
+        private_path="https://privateapi.charmantadvisory.com";
+        http_options = {'headers':{'apikey':cryptotools_api_key}};
+      }
+      url="/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
       
-      url="http://api.charmantadvisory.com/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
-
+        
+      return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
       
-      return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
+     
   }}
       else{return "Wrong parameters"}}
 
@@ -620,12 +686,18 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
+        private_path="http://api.charmantadvisory.com";
+        http_options ={'headers':{'apikey':KEYID}};
         
+        if (cryptotools_api_key != "") {
+          private_path="https://privateapi.charmantadvisory.com";
+          http_options = {'headers':{'apikey':cryptotools_api_key}};
+        }
+        url="/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+      
         
-        url="http://api.charmantadvisory.com/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+        return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
 
-        
-        return ImportJSON(url,'','noInherit,noTruncate,rawHeaders');
   }}
       else{return "Wrong parameters"}}
 
@@ -660,12 +732,17 @@ async function CRYPTOFUTURES(ticker){
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/"+ticker+"FUTURES/"+KEYID;
     
-    url="http://api.charmantadvisory.com/"+ticker+"FUTURES/"+KEYID;
-
-    
-    return ImportJSON(url);
+    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
+  
   }
 
   catch(err){
@@ -708,9 +785,17 @@ async function CRYPTODISTRIBUTIONRATE(exchange,ticker,side){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/DISTRIBUTIONRATE/"+exchange+"/"+ticker+"/"+side+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/DISTRIBUTIONRATE/"+exchange+"/"+ticker+"/"+side+"/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -767,9 +852,18 @@ async function CRYPTOLP(exchange,pair,type){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/LPOOLS/"+exchange+"/"+pair+"/"+type+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/LPOOLS/"+exchange+"/"+pair+"/"+type+"/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    
     var content = res.getContentText();
     if (content!='None') {
       if (!isNaN(content) && content.toString().indexOf('.') != -1)
@@ -806,22 +900,23 @@ async function CRYPTO_ERC20HOLDERS(ticker){
   
   Utilities.sleep(Math.random() * 100)
   
-  
   try{
-    
-   
-    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    
-    url="http://api.charmantadvisory.com/ERC20HOLDERS/"+ticker+"/"+KEYID;
-    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
-    
-    
-  }
 
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/ERC20HOLDERS/"+ticker+"/"+KEYID;
+    
+    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
+  }
   catch(err){
     return CRYPTO_ERC20HOLDERS(ticker);
   }
@@ -848,19 +943,23 @@ async function CRYPTO_BEP20HOLDERS(ticker){
   
   try{
     
-   
-    
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/BEP20HOLDERS/"+ticker+"/"+KEYID;
-    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/BEP20HOLDERS/"+ticker+"/"+KEYID;
     
+    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
     
   }
-
   catch(err){
     return CRYPTO_BEP20HOLDERS(ticker);
   }
@@ -884,19 +983,25 @@ async function CRYPTOTX_ERC20(address,nbdays){
   
   Utilities.sleep(Math.random() * 30)
   
-  
   try{
     
-   if(typeof nbdays === 'undefined') nbdays = 10000;
-    
+    if(typeof nbdays === 'undefined') nbdays = 10000;
+      
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/TXERC20/"+address+"/"+nbdays+"/"+KEYID;
-    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/TXERC20/"+address+"/"+nbdays+"/"+KEYID;
     
+    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
     
   }
 
@@ -920,23 +1025,26 @@ async function CRYPTOTX_ERC20(address,nbdays){
  **/
 
 async function CRYPTOTX_BEP20(address,nbdays){
-  
   Utilities.sleep(Math.random() * 100)
-  
-  
   try{
     
-   if(typeof nbdays === 'undefined') nbdays = 30;
-    
+    if(typeof nbdays === 'undefined') nbdays = 30;
+      
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
     
-    url="http://api.charmantadvisory.com/TXBEP20/"+address+"/"+nbdays+"/"+KEYID;
-    return ImportJSON(url,'','noInherit,noTruncate,rawHeaders,noHeaders');
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/TXBEP20/"+address+"/"+nbdays+"/"+KEYID;
     
-    
+    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
   }
 
   catch(err){
@@ -988,8 +1096,16 @@ async function CRYPTOPOOLPRICE(token_name_array,exchange_array){
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    url="http://api.charmantadvisory.com/POOLPRICE/"+exchange_array +"/"+token_name_array+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/POOLPRICE/"+exchange_array +"/"+token_name_array+"/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     var content = JSON.parse(res.getContentText());
     
     
@@ -1011,15 +1127,11 @@ async function CRYPTOPOOLPRICE(token_name_array,exchange_array){
  /**CRYPTOFARMING
  * Returns apr, apy and tvl from tokens or pools on decentralized exchanges
  * 
- *
- * List of available exchanges, tokens:
- * https://www.coingecko.com/en/yield-farming.
- *
  * By default, data gets transformed into an array of decimal numbers. 
  * For example:
  *
- * =CRYPTOPOOLFARMING("SUSHI","UNI-WETH","APY")
- * =CRYPTOPOOLFARMING(E39:E100,F39:F100,J39:J100)
+ * =CRYPTOFARMING("SUSHI","UNI-WETH","APY")
+ * =CRYPTOFARMING(E39:E100,F39:F100,J39:J100)
  *
  * @param {Exchange}               list of exchanges on you wish the dat from
  * @param {Token_Name}             list of token tickers/pairs 
@@ -1053,9 +1165,16 @@ async function CRYPTOFARMING(exchange_array,ticker_array,data_type){
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-
-    url="http://api.charmantadvisory.com/LPOOLS/"+exchange_array +"/"+ticker_array+"/"+data_type+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/LPOOLS/"+exchange_array +"/"+ticker_array+"/"+data_type+"/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     var content = JSON.parse(res.getContentText());
     
     var dict = []; 
@@ -1118,8 +1237,16 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    url="http://api.charmantadvisory.com/DEXPRICE2/"+token1_array +"/"+token2_array+"/"+exchange_array+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(url);
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/DEXPRICE2/"+token1_array +"/"+token2_array+"/"+exchange_array+"/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     var content = JSON.parse(res.getContentText());
     
     var dict = []; 
@@ -1179,11 +1306,18 @@ async function CRYPTOLENDING(exchange_array,ticker_array,side_array){
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    url="http://api.charmantadvisory.com/LENDING2/"+exchange_array +"/"+ticker_array+"/"+side_array+"/"+KEYID;
-    Logger.log(url)
-    var res = await UrlFetchApp.fetch(url);
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/LENDING2/"+exchange_array +"/"+ticker_array+"/"+side_array+"/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     var content = JSON.parse(res.getContentText());
-    Logger.log(content)
+    
     
     var dict = []; 
     for (var i=0;i<content.length;i++) {
