@@ -50,8 +50,8 @@
 const expirationInSeconds_=600;
 
 
-//COINGECKO PRIVATE KEY 
-//For unlimited calls to Coingecko's API, please provide your private Key in the brackets
+//CRYPTOTOOLS PRIVATE KEY 
+//For faster & greater access, please provide your private Key in the brackets
 const cryptotools_api_key="";
 
 
