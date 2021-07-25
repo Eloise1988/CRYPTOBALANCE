@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.0.8
+  Version:      2.0.9
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -16,6 +16,7 @@
      CRYPTOLENDING                For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
      CRYPTODISTRIBUTIONRATE       For use by end users to retrieve the distribution token rate from lending plateforms (COMPOUND)
      CRYPTOSUMETH                 For use by end users to retrieve one's total $ amount on ERC20 address
+     CRYPTOSUMBSC                 For use by end users to retrieve one's total $ amount on BEP20 address
      CRYPTODEXVOLUME              For use by end users to retrieve DEX volumes $
      CRYPTODEXFEE                 For use by end users to retrieve DEX transaction fees
      CRYPTOTVL                    For use by end users to retrieve Total Value Locked in Defi projects
@@ -37,7 +38,7 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.8  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+  2.0.9  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
          May 24th Modification CACHE
          May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
          June 1st UNISWAP SUSHISWAP exception handling
@@ -45,6 +46,7 @@
          June 20th UPDATE DEXPRICE METHOD + latest PancakeswapV2 prices
          June 23th UPDATE LENDING RATE METHOD
          July 9th API-KEY for premium users 
+         July 25th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address
  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
@@ -297,7 +299,7 @@ async function CRYPTOSTAKING(ticker,address){
 
 
 /**CRYPTOSUMETH
- * Returns the total ETH amount on an ERC20 address into Google spreadsheets.The result is a ONE-dimensional array.
+ * Returns the total $ amount on an ERC20 address into Google spreadsheets.The result is a ONE-dimensional array.
  * By default, data gets transformed into a number. 
  * For example:
  *
@@ -307,7 +309,7 @@ async function CRYPTOSTAKING(ticker,address){
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
- * @return the current total amount of ETH on an ERC20 address 
+ * @return the current total amount of $ on an ERC20 address 
  **/
 
 async function CRYPTOSUMETH(address){
@@ -351,7 +353,8 @@ async function CRYPTOSUMETH(address){
   }
 
   catch(err){
-    return CRYPTOSUMETH(address);
+    //return CRYPTOSUMETH(address);
+    return err;
   }
 }
 
@@ -1313,3 +1316,62 @@ async function CRYPTOLENDING(exchange_array,ticker_array,side_array){
     return err
     //return CRYPTOLENDING(exchange_array,ticker_array,side_array);
   }}
+  /**CRYPTOSUMBSC
+ * Returns the total $ amount on an BEP20 address into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a number. 
+ * For example:
+ *
+ * =CRYPTOSUMBSC("0x72a53cdbbcc1b9efa39c834a540550e23463aacb", $A$1)
+ *
+ * @param {address}                the bep20 wallet address you want the $ amount from
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current total amount of Binance Smart Chain on an BEP20 address 
+ **/
+
+async function CRYPTOSUMBSC(address){
+  id_cache=address+"cryptosumbsc"
+  Utilities.sleep(Math.random() * 100)
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
+  
+  try{
+    
+    
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/TOTALBSCBALANCE/"+address+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    
+    var content = res.getContentText();
+    if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+        cache.put(id_cache, content,expirationInSeconds_)
+      }
+    
+    return content;
+  }
+
+  catch(err){
+    //return CRYPTOSUMBSC(address);
+    return err;
+  }
+}
