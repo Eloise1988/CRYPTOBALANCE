@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.0.9
+  Version:      2.1.0
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -33,21 +33,23 @@
      CRYPTOPOOLPRICE              For use by end users to retrieve prices from decentralized Pool tokens
      CRYPTOFARMING                For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
   
+    DEFI_NETWORTH                 ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
+
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.9  Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
-         May 24th Modification CACHE
-         May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
-         June 1st UNISWAP SUSHISWAP exception handling
-         June 7th NEW CRYPTOPOOLPRICE + CRYPTOFARMING
-         June 20th UPDATE DEXPRICE METHOD + latest PancakeswapV2 prices
-         June 23th UPDATE LENDING RATE METHOD
-         July 9th API-KEY for premium users 
-         July 25th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address
- *====================================================================================================================================*///CACHING TIME  
+  2.0.1   Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
+  2.0.2   May 24th Modification CACHE
+  2.0.3   May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
+  2.0.4   June 1st UNISWAP SUSHISWAP exception handling
+  2.0.5   June 7th NEW CRYPTOPOOLPRICE + CRYPTOFARMING
+  2.0.6   June 20th UPDATE DEXPRICE METHOD + latest PancakeswapV2 prices
+  2.0.7   June 23th UPDATE LENDING RATE METHOD
+  2.0.8   July 9th API-KEY for premium users 
+  2.0.9   July 25th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address
+  2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address  *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
 
@@ -1374,4 +1376,53 @@ async function CRYPTOSUMBSC(address){
     //return CRYPTOSUMBSC(address);
     return err;
   }
+}
+function DEFI_NETWORTH() {
+  var name_sheet="DEFI_NETWORTH";
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name_sheet);
+  var start_row=25;
+  var start_column=2;
+  sheet.getRange(start_row,start_column,3000,8).clearContent()
+  
+  //Loading List of DEFI addresses
+  address_defi=sheet.getRange(3,3,1,3).getValues();
+  var dict_address = []; 
+    for (var i=0;i<address_defi[0].length;i++) {
+      if (address_defi[0][i]!=""){
+      dict_address.push(address_defi[0][i]);
+      }
+    }
+  address_defi = [].concat(dict_address).join("%2C").replace("-", "").replace("/", ""); 
+  
+  //Loading List of optional protocols
+  protocols_defi=sheet.getRange(6,3,1,5).getValues();
+  var dict_protocols= []; 
+    for (var i=0;i<protocols_defi[0].length;i++) {
+      if (protocols_defi[0][i]!=""){
+      dict_protocols.push(protocols_defi[0][i].replace(" ", "6z6"));
+      }
+    }
+  protocols_defi = [].concat(dict_protocols).join("%2C"); 
+  if (protocols_defi==""){protocols_defi="notapplicable"}
+
+  var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+  GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+  var userProperties = PropertiesService.getUserProperties();
+  var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+  private_path="http://api.charmantadvisory.com";
+  http_options ={'headers':{'apikey':KEYID}};
+  
+  if (cryptotools_api_key != "") {
+    private_path="https://privateapi.charmantadvisory.com";
+    http_options = {'headers':{'apikey':cryptotools_api_key}};
+  }
+  url="/DEFINETWORTH/"+address_defi +"/"+protocols_defi+"/"+KEYID;
+  
+  var res = UrlFetchApp.fetch(private_path+url, http_options);
+  var content = JSON.parse(res.getContentText());
+ 
+  sheet.getRange(start_row,start_column,content.length,content[0].length).setValues(content);
+  
+ 
 }
