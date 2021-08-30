@@ -41,7 +41,9 @@
   Changelog:
   
   2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address  
-  2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell *====================================================================================================================================*///CACHING TIME  
+  2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell *====================================================================================================================================*/
+
+//CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
 
