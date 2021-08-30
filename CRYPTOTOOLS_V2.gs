@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.1.0
+  Version:      2.1.1
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -40,16 +40,8 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.0.1   Release May 17th: Added CRYPTO_ERC20HOLDERS, CRYPTO_BEP20HOLDERS, CRYPTOTX_ERC20, CRYPTOTX_BEP20 +
-  2.0.2   May 24th Modification CACHE
-  2.0.3   May27th CRYPTOTX_ERC20, CRYPTOTX_BEP20 number days old addition
-  2.0.4   June 1st UNISWAP SUSHISWAP exception handling
-  2.0.5   June 7th NEW CRYPTOPOOLPRICE + CRYPTOFARMING
-  2.0.6   June 20th UPDATE DEXPRICE METHOD + latest PancakeswapV2 prices
-  2.0.7   June 23th UPDATE LENDING RATE METHOD
-  2.0.8   July 9th API-KEY for premium users 
-  2.0.9   July 25th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address
-  2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address  *====================================================================================================================================*///CACHING TIME  
+  2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address  
+  2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell *====================================================================================================================================*///CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
 const expirationInSeconds_=600;
 
@@ -373,32 +365,37 @@ async function CRYPTOSUMETH(address){
  * For example:
  *
  * =CRYPTOTVL("MAKER")
+ * =CRYPTOTVL(E39:E100)
  *
- * @param {DEX}                    the name of the DEX  ex:AAVE
+ * @param {DEX}                    the name of the DEX  ex:AAVE or list of DEXes
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
  * @return the current TVL ($) in decimal form,  on specified DEX
  **/
 
-async function CRYPTOTVL(exchange){
-  id_cache=exchange+"tvl"
+async function CRYPTOTVL(exchange_array){
   Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
+  
   try{
+
+    if(exchange_array.length>1){
+    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");}
     
-    
-    
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+"dexvolume"));
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
     private_path="http://api.charmantadvisory.com";
     http_options ={'headers':{'apikey':KEYID}};
     
@@ -406,24 +403,24 @@ async function CRYPTOTVL(exchange){
       private_path="https://privateapi.charmantadvisory.com";
       http_options = {'headers':{'apikey':cryptotools_api_key}};
     }
-    url="/TVL/"+exchange+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-   
-    var content = res.getContentText();
-    if (content!='None') {
-      if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-      
-    }
     
-    return content;
-  }
+    url="/TVL2/"+exchange_array+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    var content = JSON.parse(res.getContentText());
+    
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['TVL']));
+      }
+      else{dict.push("");}
+    }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
 
   catch(err){
-    return CRYPTOTVL(exchange);
+    return err
+    //return CRYPTOTVL(exchange_array);
   }
 }
 /**CRYPTODEXVOLUME
@@ -438,31 +435,37 @@ async function CRYPTOTVL(exchange){
  * For example:
  *
  * =CRYPTODEXVOLUME("LEND")
+ * =CRYPTODEXVOLUME(E39:E100)
  *
- * @param {DEX}                    the name of the DEX  ex:AAVE or ticker LEND
+ * @param {DEX}                    the name of the DEX  ex:AAVE or ticker LEND or LIST of DEXes
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
  * @return the 24h DEX Volume in decimal form,  on specified DEX
  **/
 
-async function CRYPTODEXVOLUME(exchange){
-  id_cache=exchange+"dexvolume"
+async function CRYPTODEXVOLUME(exchange_array){
   Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
   
   try{
+
+    if(exchange_array.length>1){
+    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");}
     
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+"dexvolume"));
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
     private_path="http://api.charmantadvisory.com";
     http_options ={'headers':{'apikey':KEYID}};
     
@@ -470,23 +473,24 @@ async function CRYPTODEXVOLUME(exchange){
       private_path="https://privateapi.charmantadvisory.com";
       http_options = {'headers':{'apikey':cryptotools_api_key}};
     }
-    url="/DEXVOLUME/"+exchange+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-
-    var content = res.getContentText();
-    if (content!='None') {
-      if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }      
-    }
     
-    return content;
-  }
+    url="/DEXVOLUME2/"+exchange_array+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    var content = JSON.parse(res.getContentText());
+    
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['VOLUME']));
+      }
+      else{dict.push("");}
+    }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
 
   catch(err){
-    return CRYPTODEXVOLUME(exchange);
+    return err
+    //return CRYPTODEXVOLUME(exchange_array);
   }
 }
 /**CRYPTODEXFEE
@@ -501,27 +505,32 @@ async function CRYPTODEXVOLUME(exchange){
  * For example:
  *
  * =CRYPTODEXFEE("MAKER")
+ * =CRYPTODEXFEE(E39:E100)
  *
- * @param {DEX}                    the name of the DEX  ex:Maker or ticker:MKR
+ * @param {DEX}                    the name of the DEX  ex:Maker or ticker:MKR or LIST of DEXes
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
  * @return the current takers' fee in decimal form,  on specified DEX
  **/
 
-async function CRYPTODEXFEE(exchange){
-  id_cache=exchange+"dexfee"
+async function CRYPTODEXFEE(exchange_array){
   Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
   
   try{
+
+    if(exchange_array.length>1){
+    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");}
     
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+"dexfee"));
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
     var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
     GSUUID= GSUUID.replace(/%2f/gi, 'hello');
     var userProperties = PropertiesService.getUserProperties();
@@ -534,24 +543,27 @@ async function CRYPTODEXFEE(exchange){
       private_path="https://privateapi.charmantadvisory.com";
       http_options = {'headers':{'apikey':cryptotools_api_key}};
     }
-    url="/DEXFEE/"+exchange+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
     
-    var content = res.getContentText();
-    if (content!='None') {
-      if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
+    url="/DEXFEE2/"+exchange_array+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    var content = JSON.parse(res.getContentText());
+    
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['FEE']));
       }
+      else{dict.push("");}
     }
-    return content;
-  }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
 
   catch(err){
-    return CRYPTODEXFEE(exchange);
+    return err
+    //return CRYPTODEXFEE(exchange_array);
   }
 }
+    
 /**UNISWAP
  * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
  *
