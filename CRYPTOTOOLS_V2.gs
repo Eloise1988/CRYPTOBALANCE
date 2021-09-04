@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.1.1
+  Version:      2.1.2
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -15,8 +15,9 @@
      CRYPTOREWARSD                For use by end users to retrieve cryptocurrency reward amounts from staking
      CRYPTOLENDING                For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
      CRYPTODISTRIBUTIONRATE       For use by end users to retrieve the distribution token rate from lending plateforms (COMPOUND)
-     CRYPTOSUMETH                 For use by end users to retrieve one's total $ amount on ERC20 address
-     CRYPTOSUMBSC                 For use by end users to retrieve one's total $ amount on BEP20 address
+     CRYPTOSUMETH                 For use by end users to retrieve one's total $ amount on ERC20 wallets
+     CRYPTOSUMBSC                 For use by end users to retrieve one's total $ amount on BEP20 wallets
+     CRYPTOSUMATIC                For use by end users to retrieve one's total $ amount on MATIC wallets
      CRYPTODEXVOLUME              For use by end users to retrieve DEX volumes $
      CRYPTODEXFEE                 For use by end users to retrieve DEX transaction fees
      CRYPTOTVL                    For use by end users to retrieve Total Value Locked in Defi projects
@@ -40,8 +41,9 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 address  
-  2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell *====================================================================================================================================*/
+  2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 wallet  
+  2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell 
+  2.1.2   September CRYPTOSUMATIC function retrieves the total $ amount on MATIC Smart Chain wallet  *====================================================================================================================================*/
 
 //CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
@@ -1388,6 +1390,61 @@ async function CRYPTOSUMBSC(address){
 
   catch(err){
     //return CRYPTOSUMBSC(address);
+    return err;
+  }
+}
+ /**CRYPTOSUMATIC
+ * Returns the total $ amount on a matic smart chain wallet address  into Google spreadsheets.The result is a ONE-dimensional array.
+ * By default, data gets transformed into a number. 
+ * For example:
+ *
+ * =CRYPTOSUMATIC("0xBA12222222228d8Ba445958a75a0704d566BF2C8")
+ *
+ * @param {address}                the matic smart chain wallet address you want the $ amount from
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current total $ amount of Matic Smart Chain wallet 
+ **/
+
+async function CRYPTOSUMATIC(address){
+  id_cache=address+"cryptosumatic"
+  Utilities.sleep(Math.random() * 100)
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
+  try{
+    
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/TOTALMATICBALANCE/"+address+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    
+    var content = res.getContentText();
+    if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+        cache.put(id_cache, content,expirationInSeconds_)
+      }
+    return content;
+  }
+
+  catch(err){
+    //return CRYPTOSUMATIC(address);
     return err;
   }
 }
