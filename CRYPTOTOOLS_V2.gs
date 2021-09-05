@@ -1,7 +1,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.1.2
+  Version:      2.1.3
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -25,6 +25,7 @@
      SUSHISWAP                    For use by end users to retrieve all new pairs on Sushiswap
      PANCAKESWAP                  For use by end users to retrieve all new pairs on Pancakeswap
      CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
+     CRYPTOPRICE                  For use by end users to retrieve cryptocurrency prices in USD from Coingecko
      CRYPTOFUTURES                For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
      CRYPTOLP                     For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
      CRYPTO_ERC20HOLDERS          For use by end users to retrieve list of bigget holders by ERC20 contract address
@@ -43,7 +44,8 @@
   
   2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 wallet  
   2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell 
-  2.1.2   September CRYPTOSUMATIC function retrieves the total $ amount on MATIC Smart Chain wallet  *====================================================================================================================================*/
+  2.1.2   September 4th CRYPTOSUMATIC function retrieves the total $ amount on MATIC Smart Chain wallet  
+  2.1.3   September 5th CRYPTOPRICE function retrieves cryptocurrency prices in USD from Coingecko   *====================================================================================================================================*/
 
 //CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
@@ -1496,4 +1498,73 @@ function DEFI_NETWORTH() {
   sheet.getRange(start_row,start_column,content.length,content[0].length).setValues(content);
   
  
+}
+
+ /**CRYPTOPRICE
+ * Returns crypto prices in USD from Coingecko.
+ *
+ * List of available symbols and ids found https://api.coingecko.com/api/v3/search?locale=fr&img_path_only=1
+ *
+ * By default, data gets transformed into a decimal number. 
+ * For example:
+ *
+ * =CRYPTOPRICE("ETH")
+ * =CRYPTOPRICE(E39:E100)
+ *
+ * @param {Token}                  Ticker/id range as found on Coingecko
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current price rate of your cryptocurrency in $
+ **/
+
+async function CRYPTOPRICE(token1_array){
+  Utilities.sleep(Math.random() * 100)
+  
+  
+  try{
+    if(token1_array.length>1){
+    token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+    }
+    
+    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array+"cryptoprice"));
+
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+      result=cached.split(',');
+      return result.map(function(n) { return n && ("" || Number(n))}); 
+      }    
+
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/CRYPTOPRICE/"+token1_array +"/"+KEYID;
+    
+    var res = await UrlFetchApp.fetch(private_path+url, http_options);
+    var content = JSON.parse(res.getContentText());
+    Logger.log(content)
+    var dict = []; 
+    for (var i=0;i<content.length;i++) {
+      if (Object.keys(content[i]).length != 0){
+      dict.push(parseFloat(content[i]['PRICE']));
+      }
+      else{dict.push("");}
+    }
+    cache.put(id_cache,dict,expirationInSeconds_);
+    return dict;}
+
+  catch(err){
+    return err
+    //return CRYPTOPRICE(token1_array);
+  }
 }
