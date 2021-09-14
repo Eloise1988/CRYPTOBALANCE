@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.1.3
+  Version:      2.1.4
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -27,6 +27,7 @@
      UNISWAP                      For use by end users to retrieve all new pairs on Uniswap
      SUSHISWAP                    For use by end users to retrieve all new pairs on Sushiswap
      PANCAKESWAP                  For use by end users to retrieve all new pairs on Pancakeswap
+     ARBITRUMSUSHISWAP            For use by end users to retrieve all new Sushiswap pairs on Arbitrum
      CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
      CRYPTOPRICE                  For use by end users to retrieve cryptocurrency prices in USD from Coingecko
      CRYPTOFUTURES                For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
@@ -48,7 +49,8 @@
   2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 wallet  
   2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell 
   2.1.2   September 4th CRYPTOSUMATIC function retrieves the total $ amount on MATIC Smart Chain wallet  
-  2.1.3   September 5th CRYPTOPRICE function retrieves cryptocurrency prices in USD from Coingecko   *====================================================================================================================================*/
+  2.1.3   September 5th CRYPTOPRICE function retrieves cryptocurrency prices in USD from Coingecko  
+  2.1.4   September 14th ARBITRUM SUSHISWAP function retrieves newly minted pairs on the exchange  *====================================================================================================================================*/
 
 //CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
@@ -617,6 +619,53 @@ async function UNISWAP(days,volume,liquidity,tx_count){
   catch(err){
     return err
     //return UNISWAP(days,volume,liquidity,tx_count);
+  }
+  
+}
+/**ARBITRUMSUSHISWAP
+ * Returns new tradable Sushiswap pairs on Arbitrum, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ *
+ * By default, data gets transformed into a table 
+ * For example:
+ *
+ * =ARBITRUMSUSHISWAP(5,10000,10000,100)
+ *
+ * @param {days}                    the number of Days since the pair is active
+ * @param {volume}                  the minimum Volume ($)
+ * @param {liquidity}               the minimum Liquidity ($)
+ * @param {tx_count}                the number of Transactions existant since creation
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ **/
+
+async function ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count){
+  Utilities.sleep(Math.random() * 100)
+  try{
+    
+      var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+      GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+      var userProperties = PropertiesService.getUserProperties();
+      var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+      private_path="http://api.charmantadvisory.com";
+      http_options ={'headers':{'apikey':KEYID}};
+      
+      
+      if (cryptotools_api_key != "") {
+        private_path="https://privateapi.charmantadvisory.com";
+        http_options = {'headers':{'apikey':cryptotools_api_key}};
+      }
+      url="/ARBITRUMSUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
+    
+      return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
+        
+      }
+
+  catch(err){
+    return err
+    //return ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count);
   }
   
 }
