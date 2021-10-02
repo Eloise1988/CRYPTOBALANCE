@@ -14,7 +14,46 @@
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOBALANCE("USDT","0xf977814e90da44bfa03b6295a0616a897441acec", $A$1)
 
+##
+## DEX
+###### List of DEXes
+###### Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
+###### Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
+###### MCDEX Augur Robo-Advisor for Yield ACO Opium Network Connext 1
+###### Tickers can be used too : UNI, MKR, LEND, SNX, REN, GNO etc..
+##  
+### DEX 24H VOLUMES
+###### Returns DEXes' (decentralized exchanges) 24H Volume.
+![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
+###### =CRYPTODEXVOLUME("DEX ticker/name") 
+###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
 ## 
+
+##  
+### CRYPTOCURRENCY PRICES ON DEX
+###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI are available for the moment.
+![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
+###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
+###### EXAMPLE    =CRYPTODEXPRICE("ETH","BAL","1INCH")
+## 
+
+### DEX Total Locked Values $ (TVL)
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TVL.png)
+###### Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked ($)
+![TVL](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTVLARRAY.gif)
+###### =CRYPTOTVL("DEX ticker/name") 
+###### EXAMPLE    =CRYPTOTVL("UNI")
+##  
+
+### DEX Liquidity Provider Taker's rate
+###### Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.
+![DEXFEE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXFEEARRAY.gif)
+
+###### =CRYPTODEXFEE("DEX PLATFORM ticker/name") 
+###### EXAMPLE    =CRYPTODEXFEE("MAKER")
+##  
+
+ 
 ## CRYPTOSTAKING
 
 ### Returns the amount STAKED on PoS cryptocurrencies
@@ -58,43 +97,7 @@
 ###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
 ##   
 
-## DEX
-###### List of DEXes
-###### Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
-###### Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
-###### MCDEX Augur Robo-Advisor for Yield ACO Opium Network Connext 1
-###### Tickers can be used too : UNI, MKR, LEND, SNX, REN, GNO etc..
-##  
-### DEX 24H VOLUMES
-###### Returns DEXes' (decentralized exchanges) 24H Volume.
-![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
-###### =CRYPTODEXVOLUME("DEX ticker/name") 
-###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
-## 
 
-##  
-### CRYPTOCURRENCY PRICES ON DEX
-###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI are available for the moment.
-![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
-###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
-###### EXAMPLE    =CRYPTODEXPRICE("ETH","BAL","1INCH")
-## 
-
-### DEX Total Locked Values $ (TVL)
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TVL.png)
-###### Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked ($)
-![TVL](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTVLARRAY.gif)
-###### =CRYPTOTVL("DEX ticker/name") 
-###### EXAMPLE    =CRYPTOTVL("UNI")
-##  
-
-### DEX Liquidity Provider Taker's rate
-###### Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.
-![DEXFEE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXFEEARRAY.gif)
-
-###### =CRYPTODEXFEE("DEX PLATFORM ticker/name") 
-###### EXAMPLE    =CRYPTODEXFEE("MAKER")
-##  
 
 ### New tradable pairs on UNISWAP, SUSHISWAP, PANCAKESWAP
 ###### Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
