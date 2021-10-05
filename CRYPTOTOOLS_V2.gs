@@ -54,7 +54,8 @@
   2.1.3   September 5th CRYPTOPRICE function retrieves cryptocurrency prices in USD from Coingecko  
   2.1.4   September 14th ARBITRUM SUSHISWAP function retrieves newly minted pairs on the exchange 
   2.1.5   October 4th PROTOCOLS function retrieves the list of protocols available on zapper.fi 
-  2.1.6   October 5th CRYPTOVOL30D function retrieves cryptocurrency 30D volatility against USD, ETH, BTC *====================================================================================================================================*/
+  2.1.6   October 5th CRYPTOVOL30D function retrieves cryptocurrency 30D volatility against USD, ETH, BTC 
+  *====================================================================================================================================*/
 
 //CACHING TIME  
 //Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
