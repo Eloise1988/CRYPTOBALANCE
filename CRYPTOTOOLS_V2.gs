@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.1.7
+  Version:      2.1.8
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
                 
@@ -39,6 +39,7 @@
      CRYPTOTX_BEP20               For use by end users to retrieve list of all BNB & BEP20 Token transactions
      CRYPTOPOOLPRICE              For use by end users to retrieve prices from decentralized Pool tokens
      CRYPTOFARMING                For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
+     CRYPTOGAS                    For use by end users to retrieve average GWEI gas price (ETH)
   
     DEFI_NETWORTH                 ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                     For use by end users to retrieve the list of protocols available on zapper.fi
@@ -59,6 +60,7 @@
   2.1.5   October 4th PROTOCOLS function retrieves the list of protocols available on zapper.fi 
   2.1.6   October 5th CRYPTOVOL30D function retrieves cryptocurrency 30D volatility against USD, ETH, BTC 
   2.1.7   October 15th CRYPTODEFI, CRYPTODEFI_BALANCE, CRYPTODEFI_BALANCEUSD functions 
+  2.1.8   October 16th CRYPTOGAS function 
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -1647,6 +1649,60 @@ async function CRYPTOVOL30D(token1_array,token2_array){
 
   catch(err){
     return err
+  }
+}
+
+/**CRYPTOGAS
+ * Returns the average GWEI gas price into Google spreadsheets. Only ETH available now.
+ * By default, data gets transformed into a number so it looks more like a normal price data import. 
+ * For example:
+ *
+ *   =CRYPTOGAS("ETH")
+ *
+ * @param {cryptocurrency}  the cryptocurrency TICKER/SYMBOL data to fetch
+ * @param {parseOptions}    an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return a one-dimensional array with the gas price
+ **/
+  
+async function CRYPTOGAS(ticker){
+  Utilities.sleep(Math.random() * 100)
+  id_cache=ticker+"GASPRICE"
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+    if (isNaN(cached)) {
+      return cached;} 
+    return Number(cached);
+  }
+  
+  try{
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    private_path="http://api.charmantadvisory.com";
+    http_options ={'headers':{'apikey':KEYID}};
+    
+    if (cryptotools_api_key != "") {
+      private_path="https://privateapi.charmantadvisory.com";
+      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    }
+    url="/CRYPTOGAS/"+ticker+"/"+KEYID;
+    var res = await UrlFetchApp.fetch(private_path+url, http_options) ;   
+    var content = res.getContentText();
+
+    if (!isNaN(content) && content.toString().indexOf('.') != -1)
+      {
+        content=parseFloat(content);
+        cache.put(id_cache, content,expirationInSeconds_)
+      }
+    return content;
+  }
+  catch(err){
+      return err
   }
 }
 
