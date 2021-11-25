@@ -1,51 +1,49 @@
 /**
-* @OnlyCurrentDoc
-*/
+ * @OnlyCurrentDoc
+ */
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
   Version:      2.1.9
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
-                
   License:      MIT License
-               
   ------------------------------------------------------------------------------------------------------------------------------------
   A library for importing ones balances, staking, rewards, lending & farming rates, dex volume & fees, uniswap new pairs into Google spreadsheets. Functions include:
 
-     CRYPTOBALANCE                For use by end users to retrieve blockchain balances
-     CRYPTOSTAKING                For use by end users to retrieve cryptocurrency staking amounts
-     CRYPTOREWARSD                For use by end users to retrieve cryptocurrency reward amounts from staking
-     CRYPTOLENDING                For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
-     CRYPTODISTRIBUTIONRATE       For use by end users to retrieve the distribution token rate from lending plateforms (COMPOUND)
-     CRYPTOSUMETH                 For use by end users to retrieve one's total $ amount on ERC20 wallets
-     CRYPTOSUMBSC                 For use by end users to retrieve one's total $ amount on BEP20 wallets
-     CRYPTOSUMATIC                For use by end users to retrieve one's total $ amount on MATIC wallets
-     CRYPTODEXVOLUME              For use by end users to retrieve DEX volumes $
-     CRYPTODEXFEE                 For use by end users to retrieve DEX transaction fees
-     CRYPTOTVL                    For use by end users to retrieve Total Value Locked in Defi projects
-     UNISWAP                      For use by end users to retrieve all new pairs on Uniswap
-     SUSHISWAP                    For use by end users to retrieve all new pairs on Sushiswap
-     PANCAKESWAP                  For use by end users to retrieve all new pairs on Pancakeswap
-     ARBITRUMSUSHISWAP            For use by end users to retrieve all new Sushiswap pairs on Arbitrum
-     CRYPTODEXPRICE               For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
-     CRYPTOPRICE                  For use by end users to retrieve cryptocurrency prices in USD from Coingecko
-     CRYPTOVOL30D                 For use by end users to retrieve cryptocurrency 30D volatility against USD, ETH, BTC
-     CRYPTOFUTURES                For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
-     CRYPTOLP                     For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
-     CRYPTO_ERC20HOLDERS          For use by end users to retrieve list of bigget holders by ERC20 contract address
-     CRYPTO_BEP20HOLDERS          For use by end users to retrieve list of bigget holders by ERC20 contract address
-     CRYPTOTX_ERC20               For use by end users to retrieve list of all ETH & ERC20 Token transactions
-     CRYPTOTX_BEP20               For use by end users to retrieve list of all BNB & BEP20 Token transactions
-     CRYPTOPOOLPRICE              For use by end users to retrieve prices from decentralized Pool tokens
-     CRYPTOFARMING                For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
-     CRYPTOGAS                    For use by end users to retrieve average GWEI gas price (ETH)
+    CRYPTOBALANCE                   For use by end users to retrieve blockchain balances
+    CRYPTOSTAKING                   For use by end users to retrieve cryptocurrency staking amounts
+    CRYPTOREWARSD                   For use by end users to retrieve cryptocurrency reward amounts from staking
+    CRYPTOLENDING                   For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
+    CRYPTODISTRIBUTIONRATE          For use by end users to retrieve the distribution token rate from lending plateforms (COMPOUND)
+    CRYPTOSUMETH                    For use by end users to retrieve one's total $ amount on ERC20 wallets
+    CRYPTOSUMBSC                    For use by end users to retrieve one's total $ amount on BEP20 wallets
+    CRYPTOSUMATIC                   For use by end users to retrieve one's total $ amount on MATIC wallets
+    CRYPTODEXVOLUME                 For use by end users to retrieve DEX volumes $
+    CRYPTODEXFEE                    For use by end users to retrieve DEX transaction fees
+    CRYPTOTVL                       For use by end users to retrieve Total Value Locked in Defi projects
+    UNISWAP                         For use by end users to retrieve all new pairs on Uniswap
+    SUSHISWAP                       For use by end users to retrieve all new pairs on Sushiswap
+    PANCAKESWAP                     For use by end users to retrieve all new pairs on Pancakeswap
+    ARBITRUMSUSHISWAP               For use by end users to retrieve all new Sushiswap pairs on Arbitrum
+    CRYPTODEXPRICE                  For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
+    CRYPTOPRICE                     For use by end users to retrieve cryptocurrency prices in USD from Coingecko
+    CRYPTOVOL30D                    For use by end users to retrieve cryptocurrency 30D volatility against USD, ETH, BTC
+    CRYPTOFUTURES                   For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
+    CRYPTOLP                        For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
+    CRYPTO_ERC20HOLDERS             For use by end users to retrieve list of bigget holders by ERC20 contract address
+    CRYPTO_BEP20HOLDERS             For use by end users to retrieve list of bigget holders by ERC20 contract address
+    CRYPTOTX_ERC20                  For use by end users to retrieve list of all ETH & ERC20 Token transactions
+    CRYPTOTX_BEP20                  For use by end users to retrieve list of all BNB & BEP20 Token transactions
+    CRYPTOPOOLPRICE                 For use by end users to retrieve prices from decentralized Pool tokens
+    CRYPTOFARMING                   For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
+    CRYPTOGAS                       For use by end users to retrieve average GWEI gas price (ETH)
   
-    DEFI_NETWORTH                 ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-    PROTOCOLS                     For use by end users to retrieve the list of protocols available on zapper.fi
-    CRYPTODEFI                    For use by end users to retrieve the list of assets by defi protocol  
-    CRYPTODEFI_BALANCE            For use by end users to retrieve the balance by symbol/ticker given a defi protocol 
-    CRYPTODEFI_BALANCEUSD         For use by end users to retrieve the USD amont lended by symbol/ticker given a defi protocol
+    DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
+    PROTOCOLS                       For use by end users to retrieve the list of protocols available on zapper.fi
+    CRYPTODEFI                      For use by end users to retrieve the list of assets by defi protocol  
+    CRYPTODEFI_BALANCE              For use by end users to retrieve the balance by symbol/ticker given a defi protocol 
+    CRYPTODEFI_BALANCEUSD           For use by end users to retrieve the USD amont lended by symbol/ticker given a defi protocol
 
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -65,82 +63,82 @@
   *====================================================================================================================================*/
 
 //CACHING TIME  
-//Expiration time for caching values, by default caching data last 10min=600sec. This value is a const and can be changed to your needs.
-const expirationInSeconds_=600;
+//Expiration time for caching values, by default caching data last 10min = 600sec. This value is a const and can be changed to your needs.
+const expirationInSeconds_ = 600;
 
 
 //CRYPTOTOOLS PRIVATE KEY 
 //For faster & greater access, please provide your private Key in the brackets
-const cryptotools_api_key="";
+const cryptotools_api_key = "";
 
 
 /*---------------------------------                       GOOGLE SHEET FORMULA USERINTERFACE ---------------------- */
 
-
-
 function onOpen() {
-  var ui = SpreadsheetApp.getUi();
-  ui.createMenu('CRYPTOTOOLS')
-      .addItem('CRYPTOBALANCE', 'ShowHowToRefresh')
-      .addSeparator()
-      .addItem('CRYPTOSTAKING', 'ShowHowCRYPTOSTAKING')
-      .addSeparator()    
-      .addItem('CRYPTOREWARDS', 'ShowHowCRYPTOREWARDS')
-      .addSeparator()
-      .addItem('CRYPTOLENDING', 'ShowHowCRYPTOLENDING')
-      .addSeparator()
-      .addSeparator()
-      .addItem('PREMIUM', 'ShowContactInfo')
-      .addSeparator()
-      .addItem('Contact Info', 'ShowContactInfo')
-      .addToUi();
- 
- 
+    var ui = SpreadsheetApp.getUi();
+    ui.createMenu('CRYPTOTOOLS')
+        .addItem('CRYPTOBALANCE', 'ShowHowToRefresh')
+        .addSeparator()
+        .addItem('CRYPTOSTAKING', 'ShowHowCRYPTOSTAKING')
+        .addSeparator()
+        .addItem('CRYPTOREWARDS', 'ShowHowCRYPTOREWARDS')
+        .addSeparator()
+        .addItem('CRYPTOLENDING', 'ShowHowCRYPTOLENDING')
+        .addSeparator()
+        .addSeparator()
+        .addItem('PREMIUM', 'ShowContactInfo')
+        .addSeparator()
+        .addItem('Contact Info', 'ShowContactInfo')
+        .addToUi();
 }
 
 function ShowHowToRefresh() {
-  var ui = SpreadsheetApp.getUi()
-  ui.alert("Get your wallet Balances",
-           ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
-            ui.ButtonSet.OK)
+    var ui = SpreadsheetApp.getUi()
+    ui.alert("Get your wallet Balances",
+        ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
+        ui.ButtonSet.OK)
 }
+
 function ShowHowCRYPTOSTAKING() {
-  var ui = SpreadsheetApp.getUi()
-  ui.alert("Get staking amounts",
-           'Returns the amount STAKED on PoS cryptocurrencies.\n\ \n\@param {"CURRENCY TICKER FOR STAKING"} The cryptocurrency TICKER/SYMBOL data to fetch.\n\@param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\@return The current amount of cryptocurrency on the searched public address.\n\ \n\ Get the EOS staked on the oktothemoon address address \n\=CRYPTOSTAKING("EOS","okbtothemoon")',
-            ui.ButtonSet.OK)
+    var ui = SpreadsheetApp.getUi()
+    ui.alert("Get staking amounts",
+        'Returns the amount STAKED on PoS cryptocurrencies.\n\ \n\@param {"CURRENCY TICKER FOR STAKING"} The cryptocurrency TICKER/SYMBOL data to fetch.\n\@param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\@return The current amount of cryptocurrency on the searched public address.\n\ \n\ Get the EOS staked on the oktothemoon address address \n\=CRYPTOSTAKING("EOS","okbtothemoon")',
+        ui.ButtonSet.OK)
 }
+
 function ShowHowCRYPTOREWARDS() {
-  var ui = SpreadsheetApp.getUi()
-  ui.alert("Get the amount of rewards received from staking",
-           'Returns cryptocurrencies REWARDS on PoS cryptocurrencies.\n\ \n\ @param {"CURRENCY TICKER FOR REWARDS"} The cryptocurrency TICKER/SYMBOL data to fetch.\n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\ @return The current amount of cryptocurrency on the searched public address.\n\ \n\ Get the ATOM rewards for staking on the following address \n\=CRYPTOREWARDS("ATOM","cosmos1r0y7s2vrgk3nw3nkp5tyy8zxjkz7nw9vrvmxun")',
-             ui.ButtonSet.OK)
+    var ui = SpreadsheetApp.getUi()
+    ui.alert("Get the amount of rewards received from staking",
+        'Returns cryptocurrencies REWARDS on PoS cryptocurrencies.\n\ \n\ @param {"CURRENCY TICKER FOR REWARDS"} The cryptocurrency TICKER/SYMBOL data to fetch.\n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\ @return The current amount of cryptocurrency on the searched public address.\n\ \n\ Get the ATOM rewards for staking on the following address \n\=CRYPTOREWARDS("ATOM","cosmos1r0y7s2vrgk3nw3nkp5tyy8zxjkz7nw9vrvmxun")',
+        ui.ButtonSet.OK)
 }
 
 function ShowHowCRYPTOLENDING() {
-  var ui = SpreadsheetApp.getUi()
-  ui.alert("Get cryptocurrency lending rates on decentralized and semi-centralized exchanges",
-           'Returns cryptocurrencies lending rates on different lending plateforms.\n\ \n\ @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Examples of exchanges: NUO, COMPOUND, DXDY, FULCRUM, AAVE .... \n\ @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges. \n\ @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate. \n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.\n\ \n\ Get the borrowing rate on compound for Ethereum. \n\ =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")',
-             ui.ButtonSet.OK)
-} 
+    var ui = SpreadsheetApp.getUi()
+    ui.alert("Get cryptocurrency lending rates on decentralized and semi-centralized exchanges",
+        'Returns cryptocurrencies lending rates on different lending plateforms.\n\ \n\ @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Examples of exchanges: NUO, COMPOUND, DXDY, FULCRUM, AAVE .... \n\ @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges. \n\ @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate. \n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.\n\ \n\ Get the borrowing rate on compound for Ethereum. \n\ =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")',
+        ui.ButtonSet.OK)
+}
 
 function ShowPremium() {
-  var ui = SpreadsheetApp.getUi()
-  ui.alert("Premium users",
-            'For users needing faster, higher limits and customization: a private server is available but only accessible through api-key identification\n\
+    var ui = SpreadsheetApp.getUi()
+    ui.alert("Premium users",
+        'For users needing faster, higher limits and customization: a private server is available but only accessible through api-key identification\n\
              Support email: ac@charmantadvisory.com\n\
              Telegram Chat: https://t.me/TheCryptoCurious',
-            ui.ButtonSet.OK)
+        ui.ButtonSet.OK)
 }
+
 function ShowContactInfo() {
-  var ui = SpreadsheetApp.getUi()
-  ui.alert("Contact Info",
-            'Support email: ac@charmantadvisory.com\n\
+    var ui = SpreadsheetApp.getUi()
+    ui.alert("Contact Info",
+        'Support email: ac@charmantadvisory.com\n\
              Telegram Chat: https://t.me/TheCryptoCurious\n\
              Github: https://github.com/Eloise1988\n\
              API Doc: https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools',
-            ui.ButtonSet.OK)
+        ui.ButtonSet.OK)
 }
+
 /**CRYPTOBALANCE
  * Returns cryptocurrency balances into Google spreadsheets. The result is a ONE-dimensional array.
  * By default, data gets transformed into a number so it looks more like a normal price data import. 
@@ -155,48 +153,54 @@ function ShowContactInfo() {
  *
  * @return a one-dimensional array the balance of cryptocurrency
  **/
-  
-async function CRYPTOBALANCE(ticker,address){
-  Utilities.sleep(Math.random() * 100)
-  id_cache=ticker+address+"balance"
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
+async function CRYPTOBALANCE(ticker, address) {
+    Utilities.sleep(Math.random() * 100)
+    id_cache = ticker + address + "balance"
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/BALANCE/"+ticker+"/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options) ;   
-    var content = res.getContentText();
 
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-    
-    return content;
-  }
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
 
-  catch(err){
-      return err
-      //return CRYPTOBALANCE(ticker,address);
-  }
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/BALANCE/" + ticker + "/" + address + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = res.getContentText();
+
+        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+            content = parseFloat(content);
+            cache.put(id_cache, content, expirationInSeconds_)
+        }
+
+        return content;
+    } catch (err) {
+        return err
+        //return CRYPTOBALANCE(ticker,address);
+    }
 
 }
 
@@ -214,46 +218,54 @@ async function CRYPTOBALANCE(ticker,address){
  *
  * @return the current cryptocurrency rewards from PoS
  **/
+async function CRYPTOREWARDS(ticker, address) {
+    id_cache = ticker + address + "rewards"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
-async function CRYPTOREWARDS(ticker,address){
-  id_cache=ticker+address+"rewards"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-
-    ticker=ticker.toUpperCase();
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/REWARDS/"+ticker+"/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    
-    var content = res.getContentText();
-    cache.put(id_cache, content,expirationInSeconds_)
-    return content;
-  }
 
-  catch(err){
-    return CRYPTOREWARDS(ticker,address);
-  }
+    try {
 
+        ticker = ticker.toUpperCase();
+
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/REWARDS/" + ticker + "/" + address + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+
+        var content = res.getContentText();
+        cache.put(id_cache, content, expirationInSeconds_)
+        
+        return content;
+    } catch (err) {
+        return CRYPTOREWARDS(ticker, address);
+    }
 }
 
 
@@ -271,49 +283,55 @@ async function CRYPTOREWARDS(ticker,address){
  *
  * @return the current amount staked on a cryptocurrency 
  **/
+async function CRYPTOSTAKING(ticker, address) {
+    id_cache = ticker + address + "staking"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
-async function CRYPTOSTAKING(ticker,address){
-  id_cache=ticker+address+"staking"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  try{
-
-    ticker=ticker.toUpperCase();
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/STAKING/"+ticker+"/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = res.getContentText();
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-    return content;
-  }
-  catch(err){
-    return CRYPTOSTAKING(ticker,address);
-  }
 
+    try {
+        ticker = ticker.toUpperCase();
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/STAKING/" + ticker + "/" + address + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = res.getContentText();
+
+        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+            content = parseFloat(content);
+            cache.put(id_cache, content, expirationInSeconds_)
+        }
+
+        return content;
+    } catch (err) {
+        return CRYPTOSTAKING(ticker, address);
+    }
 }
-
-
 
 /**CRYPTOSUMETH
  * Returns the total $ amount on an ERC20 address into Google spreadsheets.The result is a ONE-dimensional array.
@@ -328,53 +346,55 @@ async function CRYPTOSTAKING(ticker,address){
  *
  * @return the current total amount of $ on an ERC20 address 
  **/
+async function CRYPTOSUMETH(address) {
+    id_cache = address + "cryptosumeth"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
-async function CRYPTOSUMETH(address){
-  id_cache=address+"cryptosumeth"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  
-  try{
-    
-    
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/TOTALETHBALANCE/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    
-    var content = res.getContentText();
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-    
-    return content;
-  }
 
-  catch(err){
-    //return CRYPTOSUMETH(address);
-    return err;
-  }
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/TOTALETHBALANCE/" + address + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+
+        var content = res.getContentText();
+        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+            content = parseFloat(content);
+            cache.put(id_cache, content, expirationInSeconds_)
+        }
+
+        return content;
+    } catch (err) {
+        //return CRYPTOSUMETH(address);
+        return err;
+    }
 }
-
 
 /**CRYPTOTVL
  * Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked.The result is a ONE-dimensional array.
@@ -396,56 +416,67 @@ async function CRYPTOSUMETH(address){
  *
  * @return the current TVL ($) in decimal form,  on specified DEX
  **/
+async function CRYPTOTVL(exchange_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTOTVL(exchange_array){
-  Utilities.sleep(Math.random() * 100)
-  
-  try{
+    try {
+        if (exchange_array.length > 1) {
+            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+        }
 
-    if(exchange_array.length>1){
-    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");}
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+"dexvolume"));
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexvolume"));
 
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/TVL2/" + exchange_array + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['TVL']));
+            } else {
+                dict.push("");
+            }
+        }
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTOTVL(exchange_array);
     }
-    
-    url="/TVL2/"+exchange_array+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['TVL']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-    //return CRYPTOTVL(exchange_array);
-  }
 }
+
 /**CRYPTODEXVOLUME
  * Returns DEXes' (decentralized exchanges) 24H Volume.The result is a ONE-dimensional array.
  *
@@ -466,56 +497,68 @@ async function CRYPTOTVL(exchange_array){
  *
  * @return the 24h DEX Volume in decimal form,  on specified DEX
  **/
+async function CRYPTODEXVOLUME(exchange_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTODEXVOLUME(exchange_array){
-  Utilities.sleep(Math.random() * 100)
-  
-  try{
+    try {
+        if (exchange_array.length > 1) {
+            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+        }
 
-    if(exchange_array.length>1){
-    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");}
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+"dexvolume"));
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexvolume"));
 
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/DEXVOLUME2/" + exchange_array + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['VOLUME']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTODEXVOLUME(exchange_array);
     }
-    
-    url="/DEXVOLUME2/"+exchange_array+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['VOLUME']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-    //return CRYPTODEXVOLUME(exchange_array);
-  }
 }
+
 /**CRYPTODEXFEE
  * Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.The result is a ONE-dimensional array.
  *
@@ -536,57 +579,68 @@ async function CRYPTODEXVOLUME(exchange_array){
  *
  * @return the current takers' fee in decimal form,  on specified DEX
  **/
+async function CRYPTODEXFEE(exchange_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTODEXFEE(exchange_array){
-  Utilities.sleep(Math.random() * 100)
-  
-  try{
+    try {
+        if (exchange_array.length > 1) {
+            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+        }
 
-    if(exchange_array.length>1){
-    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");}
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+"dexfee"));
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexfee"));
 
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/DEXFEE2/" + exchange_array + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['FEE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTODEXFEE(exchange_array);
     }
-    
-    url="/DEXFEE2/"+exchange_array+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['FEE']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-    //return CRYPTODEXFEE(exchange_array);
-  }
 }
-    
+
 /**UNISWAP
  * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
  *
@@ -604,36 +658,39 @@ async function CRYPTODEXFEE(exchange_array){
  *
  * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
+async function UNISWAP(days, volume, liquidity, tx_count) {
+    Utilities.sleep(Math.random() * 100)
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-async function UNISWAP(days,volume,liquidity,tx_count){
-  Utilities.sleep(Math.random() * 100)
-  try{
-    
-      var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-      GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-      var userProperties = PropertiesService.getUserProperties();
-      var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
 
-      private_path="http://api.charmantadvisory.com";
-      http_options ={'headers':{'apikey':KEYID}};
-      
-      
-      if (cryptotools_api_key != "") {
-        private_path="https://privateapi.charmantadvisory.com";
-        http_options = {'headers':{'apikey':cryptotools_api_key}};
-      }
-      url="/UNISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
-    
-      return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
-        
-      }
 
-  catch(err){
-    return err
-    //return UNISWAP(days,volume,liquidity,tx_count);
-  }
-  
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/UNISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return err
+        //return UNISWAP(days,volume,liquidity,tx_count);
+    }
 }
+
 /**ARBITRUMSUSHISWAP
  * Returns new tradable Sushiswap pairs on Arbitrum, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
  *
@@ -651,36 +708,39 @@ async function UNISWAP(days,volume,liquidity,tx_count){
  *
  * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
+async function ARBITRUMSUSHISWAP(days, volume, liquidity, tx_count) {
+    Utilities.sleep(Math.random() * 100)
 
-async function ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count){
-  Utilities.sleep(Math.random() * 100)
-  try{
-    
-      var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-      GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-      var userProperties = PropertiesService.getUserProperties();
-      var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-      private_path="http://api.charmantadvisory.com";
-      http_options ={'headers':{'apikey':KEYID}};
-      
-      
-      if (cryptotools_api_key != "") {
-        private_path="https://privateapi.charmantadvisory.com";
-        http_options = {'headers':{'apikey':cryptotools_api_key}};
-      }
-      url="/ARBITRUMSUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
-    
-      return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
-        
-      }
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
 
-  catch(err){
-    return err
-    //return ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count);
-  }
-  
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/ARBITRUMSUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return err
+        //return ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count);
+    }
 }
+
 /**SUSHISWAP
  * Returns new tradable pairs on Sushiswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
  *
@@ -698,35 +758,39 @@ async function ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count){
  *
  * @return a table with all new tradable pairs on Sushiswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
+async function SUSHISWAP(days, volume, liquidity, tx_count) {
+    Utilities.sleep(Math.random() * 100)
 
-async function SUSHISWAP(days,volume,liquidity,tx_count){
-  Utilities.sleep(Math.random() * 100)
-  try{
-    
-      var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-      GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-      var userProperties = PropertiesService.getUserProperties();
-      var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-      private_path="http://api.charmantadvisory.com";
-      http_options ={'headers':{'apikey':KEYID}};
-      
-      if (cryptotools_api_key != "") {
-        private_path="https://privateapi.charmantadvisory.com";
-        http_options = {'headers':{'apikey':cryptotools_api_key}};
-      }
-      url="/SUSHISWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
-      
-        
-      return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
-      
-     
-  }
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
 
-  catch(err){
-    return err
-    //return SUSHISWAP(days,volume,liquidity,tx_count);
-  }}
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/SUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return err
+        //return SUSHISWAP(days,volume,liquidity,tx_count);
+    }
+}
+
 /**PANCAKESWAP
  * Returns new tradable pairs on Pancakeswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
  *
@@ -744,35 +808,40 @@ async function SUSHISWAP(days,volume,liquidity,tx_count){
  *
  * @return a table with all new tradable pairs on Sushiswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
+async function PANCAKESWAP(days, volume, liquidity, tx_count) {
+    Utilities.sleep(Math.random() * 100)
 
-async function PANCAKESWAP(days,volume,liquidity,tx_count){
-  Utilities.sleep(Math.random() * 100)
-  try{
-    
+    try {
         var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID= GSUUID.replace(/%2f/gi, 'hello');
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path="http://api.charmantadvisory.com";
-        http_options ={'headers':{'apikey':KEYID}};
-        
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
         if (cryptotools_api_key != "") {
-          private_path="https://privateapi.charmantadvisory.com";
-          http_options = {'headers':{'apikey':cryptotools_api_key}};
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
         }
-        url="/PANCAKESWAPFILTER/"+days+"/"+volume+"/"+liquidity+"/"+tx_count+"/"+KEYID;
-      
-        
-        return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
+        url = "/PANCAKESWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
 
-  }
 
-  catch(err){
-    return err
-    //return PANCAKESWAP(days,volume,liquidity,tx_count);
-  }}
-  
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return err
+        //return PANCAKESWAP(days,volume,liquidity,tx_count);
+    }
+}
+
 /**CRYPTOFUTURES
  * Returns BTC or ETH Futures Prices, basis, volume, open interest
  *
@@ -787,34 +856,38 @@ async function PANCAKESWAP(days,volume,liquidity,tx_count){
  *
  * @return a table with all Id,	Exchange,	Price,	24h	Index Price,	Basis,	Spread,	Expiry,	Open Interest,	24h Volume	 for BTC and ETH futures
  **/
+async function CRYPTOFUTURES(ticker) {
+    Utilities.sleep(Math.random() * 100)
+    try {
+        ticker = ticker.toUpperCase();
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-async function CRYPTOFUTURES(ticker){
-  Utilities.sleep(Math.random() * 100)
-  try{
-    
-    
-    ticker=ticker.toUpperCase();
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/" + ticker + "FUTURES/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return CRYPTOFUTURES(ticker);
     }
-    url="/"+ticker+"FUTURES/"+KEYID;
-    
-    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate',includeXPath_,defaultTransform_);
-  
-  }
+}
 
-  catch(err){
-    return CRYPTOFUTURES(ticker);
-  }}
 /**CRYPTODISTRIBUTIONRATE
  * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
  * By default, data gets transformed into a decimal number. 
@@ -830,55 +903,59 @@ async function CRYPTOFUTURES(ticker){
  *
  * @return the current distribution rate in decimal form,  of cryptocurrency on a specified exchange
  **/
+async function CRYPTODISTRIBUTIONRATE(exchange, ticker, side) {
+    id_cache = ticker + exchange + side + "distributionrate"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
-async function CRYPTODISTRIBUTIONRATE(exchange,ticker,side){
-  id_cache=ticker+exchange+side+"distributionrate"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-    
-    ticker=ticker.toUpperCase();
-    exchange=exchange.toUpperCase();
-    side=side.toUpperCase();
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/DISTRIBUTIONRATE/"+exchange+"/"+ticker+"/"+side+"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = res.getContentText();
-    if (content!='None') {
-      if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-      
-    }
-    
-    return content;
-  }
 
-  catch(err){
-    return CRYPTODISTRIBUTIONRATE(exchange,ticker,side);
-  }
+    try {
+        ticker = ticker.toUpperCase();
+        exchange = exchange.toUpperCase();
+        side = side.toUpperCase();
+
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/DISTRIBUTIONRATE/" + exchange + "/" + ticker + "/" + side + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = res.getContentText();
+        if (content != 'None') {
+            if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+                content = parseFloat(content);
+                cache.put(id_cache, content, expirationInSeconds_)
+            }
+        }
+
+        return content;
+    } catch (err) {
+        return CRYPTODISTRIBUTIONRATE(exchange, ticker, side);
+    }
 }
 /**CRYPTOLP
  * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
@@ -895,59 +972,65 @@ async function CRYPTODISTRIBUTIONRATE(exchange,ticker,side){
  *
  * @return the APR or TVL from specific liquidity pool
  **/
+async function CRYPTOLP(exchange, pair, type) {
+    id_cache = exchange + pair + type + "lp"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
-async function CRYPTOLP(exchange,pair,type){
-  id_cache=exchange+pair+type+"lp"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-    
-    pair=pair.toUpperCase();
-    pair=pair.replace("-", "");
-    pair=pair.replace("/", "");
-    exchange=exchange.toUpperCase();
-    type=type.toUpperCase();
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/LPOOLS/"+exchange+"/"+pair+"/"+type+"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    
-    var content = res.getContentText();
-    if (content!='None') {
-      if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-      
-    }
-    
-    return content;
-  }
 
-  catch(err){
-    return CRYPTOLP(exchange,ticker,side);
-  }
-} 
+    try {
+        pair = pair.toUpperCase();
+        pair = pair.replace("-", "");
+        pair = pair.replace("/", "");
+        exchange = exchange.toUpperCase();
+        type = type.toUpperCase();
+
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/LPOOLS/" + exchange + "/" + pair + "/" + type + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+
+        var content = res.getContentText();
+        if (content != 'None') {
+            if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+                content = parseFloat(content);
+                cache.put(id_cache, content, expirationInSeconds_)
+            }
+
+        }
+
+        return content;
+    } catch (err) {
+        return CRYPTOLP(exchange, ticker, side);
+    }
+}
+
 /**CRYPTO_ERC20HOLDERS
  * Returns a table of the 150 biggest holders by contract address or ticker into Google spreadsheets.
  * By default, json data gets transformed into a a table 151x3. 
@@ -962,32 +1045,38 @@ async function CRYPTOLP(exchange,pair,type){
  *
  * @return table with the top 150 holders of cryptocurrency
  **/
+async function CRYPTO_ERC20HOLDERS(ticker) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTO_ERC20HOLDERS(ticker){
-  
-  Utilities.sleep(Math.random() * 100)
-  
-  try{
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/ERC20HOLDERS/" + ticker + "/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return CRYPTO_ERC20HOLDERS(ticker);
     }
-    url="/ERC20HOLDERS/"+ticker+"/"+KEYID;
-    
-    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
-  }
-  catch(err){
-    return CRYPTO_ERC20HOLDERS(ticker);
-  }
-} 
+}
+
 /**CRYPTO_BEP20HOLDERS
  * Returns a table of the 1000 biggest holders by contract address or ticker into Google spreadsheets.
  * By default, json data gets transformed into a a table 1000x3. 
@@ -1002,35 +1091,38 @@ async function CRYPTO_ERC20HOLDERS(ticker){
  *
  * @return table with the top 1000 holders of BEP20 cryptocurrency
  **/
+async function CRYPTO_BEP20HOLDERS(ticker) {
+    Utilities.sleep(1000)
 
-async function CRYPTO_BEP20HOLDERS(ticker){
-  
-  Utilities.sleep(1000)
-  
-  
-  try{
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/BEP20HOLDERS/" + ticker + "/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return CRYPTO_BEP20HOLDERS(ticker);
     }
-    url="/BEP20HOLDERS/"+ticker+"/"+KEYID;
-    
-    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
-    
-  }
-  catch(err){
-    return CRYPTO_BEP20HOLDERS(ticker);
-  }
-} 
+}
+
 /**CRYPTOTX_ERC20
  * Returns a table with the list of transactions for an ERC20 wallet address into Google spreadsheets filtered by days old.
  * By default, json data gets transformed into a a table. 
@@ -1045,37 +1137,40 @@ async function CRYPTO_BEP20HOLDERS(ticker){
  *
  * @return table with all ETH + ERC20 Token transactions (date, to, from, value, ticker)
  **/
+async function CRYPTOTX_ERC20(address, nbdays) {
+    Utilities.sleep(Math.random() * 30)
 
-async function CRYPTOTX_ERC20(address,nbdays){
-  
-  Utilities.sleep(Math.random() * 30)
-  
-  try{
-    
-    if(typeof nbdays === 'undefined') nbdays = 10000;
-      
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    try {
+        if (typeof nbdays === 'undefined') nbdays = 10000;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/TXERC20/" + address + "/" + nbdays + "/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return CRYPTOTX_ERC20(address, nbdays);
     }
-    url="/TXERC20/"+address+"/"+nbdays+"/"+KEYID;
-    
-    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
-    
-  }
+}
 
-  catch(err){
-    return CRYPTOTX_ERC20(address,nbdays);
-  }
-} 
 /**CRYPTOTX_BEP20
  * Returns a table with the list of transactions for an BEP20 wallet address (Binance Smart Chain) into Google spreadsheets filtered by days old.
  * By default, json data gets transformed into a a table. 
@@ -1090,35 +1185,41 @@ async function CRYPTOTX_ERC20(address,nbdays){
  *
  * @return table with all BNB + BEP20 Token transactions (date, to, from, value, ticker)
  **/
+async function CRYPTOTX_BEP20(address, nbdays) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTOTX_BEP20(address,nbdays){
-  Utilities.sleep(Math.random() * 100)
-  try{
-    
-    if(typeof nbdays === 'undefined') nbdays = 30;
-      
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    try {
+        if (typeof nbdays === 'undefined') nbdays = 30;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/TXBEP20/" + address + "/" + nbdays + "/" + KEYID;
+
+        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return CRYPTOTX_BEP20(address, nbdays);
     }
-    url="/TXBEP20/"+address+"/"+nbdays+"/"+KEYID;
-    
-    return ImportJSONAdvanced(private_path+url,http_options,'','noInherit,noTruncate,rawHeaders,noHeaders',includeXPath_,defaultTransform_);
-  }
+}
 
-  catch(err){
-    return CRYPTOTX_BEP20(address,nbdays);
-  }
-} 
-  /**CRYPTOPOOLPRICE
+/**CRYPTOPOOLPRICE
  * Returns prices from decentralized Pool tokens.
  *
  * List of available Pools
@@ -1137,61 +1238,72 @@ async function CRYPTOTX_BEP20(address,nbdays){
  * @return the current price  your cryptocurrency pool on specified DEX
  **/
 
+async function CRYPTOPOOLPRICE(token_name_array, exchange_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTOPOOLPRICE(token_name_array,exchange_array){
-  Utilities.sleep(Math.random() * 100)
-  
-  
-  try{
-    if(token_name_array.length>1){
-    token_name_array = [].concat(token_name_array).join("%2C");
-    exchange_array = [].concat(exchange_array).join("%2C");}
-    
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token_name_array+exchange_array +"poolprice"));
+    try {
+        if (token_name_array.length > 1) {
+            token_name_array = [].concat(token_name_array).join("%2C");
+            exchange_array = [].concat(exchange_array).join("%2C");
+        }
 
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      //Logger.log(result)
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token_name_array + exchange_array + "poolprice"));
 
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            //Logger.log(result)
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/POOLPRICE/" + exchange_array + "/" + token_name_array + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['PRICE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTOPOOLPRICE(token_name_array,exchange_array);
     }
-    url="/POOLPRICE/"+exchange_array +"/"+token_name_array+"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['PRICE']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-    //return CRYPTOPOOLPRICE(token_name_array,exchange_array);
-  }
 }
- /**CRYPTOFARMING
+
+/**CRYPTOFARMING
  * Returns apr, apy and tvl from tokens or pools on decentralized exchanges
  * 
  * By default, data gets transformed into an array of decimal numbers. 
@@ -1207,59 +1319,70 @@ async function CRYPTOPOOLPRICE(token_name_array,exchange_array){
  *
  * @return the current APR, APY or TVL list for selected exchanges/tickers
  **/
+async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
+    Utilities.sleep(Math.random() * 100)
 
+    try {
+        if (exchange_array.length > 1) {
+            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+            data_type = [].concat(data_type).join("%2C").replace("-", "").replace("/", "");
+            ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");
+        }
 
-async function CRYPTOFARMING(exchange_array,ticker_array,data_type){
-  Utilities.sleep(Math.random() * 100)
-  
-  
-  try{
-    if(exchange_array.length>1){
-    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
-    data_type = [].concat(data_type).join("%2C").replace("-", "").replace("/", "");
-    ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");}
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker_array+exchange_array+data_type+"farming"));
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker_array + exchange_array + data_type + "farming"));
 
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/LPOOLS/" + exchange_array + "/" + ticker_array + "/" + data_type + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['VALUE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTOFARMING(exchange_array,ticker_array,data_type);
     }
-    url="/LPOOLS/"+exchange_array +"/"+ticker_array+"/"+data_type+"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['VALUE']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-    //return CRYPTOFARMING(exchange_array,ticker_array,data_type);
-  }
 }
-  /**CRYPTODEXPRICE
+
+/**CRYPTODEXPRICE
  * Returns DEXes' (decentralized exchanges) prices per pair of tokens.
  *
  * List of available DEXes
@@ -1279,58 +1402,70 @@ async function CRYPTOFARMING(exchange_array,ticker_array,data_type){
  *
  * @return the current price rate of your cryptocurrency pair,  on specified DEX
  **/
+async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
-  Utilities.sleep(Math.random() * 100)
-  
-  
-  try{
-    if(exchange_array.length>1){
-    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
-    token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
-    token2_array = [].concat(token2_array).join("%2C").replace("-", "").replace("/", "");}
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array+token2_array+exchange_array+"dexprice"));
+    try {
+        if (exchange_array.length > 1) {
+            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+            token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+            token2_array = [].concat(token2_array).join("%2C").replace("-", "").replace("/", "");
+        }
 
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array + token2_array + exchange_array + "dexprice"));
 
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/DEXPRICE2/" + token1_array + "/" + token2_array + "/" + exchange_array + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['PRICE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTODEXPRICE(token1_array,token2_array,exchange_array);
     }
-    url="/DEXPRICE2/"+token1_array +"/"+token2_array+"/"+exchange_array+"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['PRICE']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-    //return CRYPTODEXPRICE(token1_array,token2_array,exchange_array);
-  }
 }
+
 /**CRYPTOLENDING
  * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
  * By default, data gets transformed into a decimal number. 
@@ -1347,60 +1482,73 @@ async function CRYPTODEXPRICE(token1_array,token2_array,exchange_array){
  *
  * @return the current lending rate in decimal form, range of data if array of data was given
  **/
+async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTOLENDING(exchange_array,ticker_array,side_array){
-   Utilities.sleep(Math.random() * 100)
-  
-  
-  try{
-    if(exchange_array.length>1){
-    exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
-    ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");
-    side_array = [].concat(side_array).join("%2C").replace("-", "").replace("/", "");}
+    try {
+        if (exchange_array.length > 1) {
+            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+            ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");
+            side_array = [].concat(side_array).join("%2C").replace("-", "").replace("/", "");
+        }
 
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array+ticker_array+side_array+"lendingrates"));
-    Logger.log(id_cache)
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + ticker_array + side_array + "lendingrates"));
+        Logger.log(id_cache)
 
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/LENDING2/" + exchange_array + "/" + ticker_array + "/" + side_array + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['VALUE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTOLENDING(exchange_array,ticker_array,side_array);
     }
-    url="/LENDING2/"+exchange_array +"/"+ticker_array+"/"+side_array+"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['VALUE']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
+}
 
-  catch(err){
-    return err
-    //return CRYPTOLENDING(exchange_array,ticker_array,side_array);
-  }}
-  /**CRYPTOSUMBSC
+/**CRYPTOSUMBSC
  * Returns the total $ amount on an BEP20 address into Google spreadsheets.The result is a ONE-dimensional array.
  * By default, data gets transformed into a number. 
  * For example:
@@ -1414,52 +1562,55 @@ async function CRYPTOLENDING(exchange_array,ticker_array,side_array){
  * @return the current total amount of Binance Smart Chain on an BEP20 address 
  **/
 
-async function CRYPTOSUMBSC(address){
-  id_cache=address+"cryptosumbsc"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  
-  try{
-    
-    
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+async function CRYPTOSUMBSC(address) {
+    id_cache = address + "cryptosumbsc"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/TOTALBSCBALANCE/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    
-    var content = res.getContentText();
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-    
-    return content;
-  }
 
-  catch(err){
-    //return CRYPTOSUMBSC(address);
-    return err;
-  }
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/TOTALBSCBALANCE/" + address + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+
+        var content = res.getContentText();
+        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+            content = parseFloat(content);
+            cache.put(id_cache, content, expirationInSeconds_)
+        }
+
+        return content;
+    } catch (err) {
+        //return CRYPTOSUMBSC(address);
+        return err;
+    }
 }
- /**CRYPTOSUMATIC
+
+/**CRYPTOSUMATIC
  * Returns the total $ amount on a matic smart chain wallet address  into Google spreadsheets.The result is a ONE-dimensional array.
  * By default, data gets transformed into a number. 
  * For example:
@@ -1472,50 +1623,55 @@ async function CRYPTOSUMBSC(address){
  *
  * @return the current total $ amount of Matic Smart Chain wallet 
  **/
+async function CRYPTOSUMATIC(address) {
+    id_cache = address + "cryptosumatic"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
-async function CRYPTOSUMATIC(address){
-  id_cache=address+"cryptosumatic"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-    
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/TOTALMATICBALANCE/"+address+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    
-    var content = res.getContentText();
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-    return content;
-  }
 
-  catch(err){
-    //return CRYPTOSUMATIC(address);
-    return err;
-  }
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/TOTALMATICBALANCE/" + address + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+
+        var content = res.getContentText();
+        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+            content = parseFloat(content);
+            cache.put(id_cache, content, expirationInSeconds_)
+        }
+        return content;
+    } catch (err) {
+        //return CRYPTOSUMATIC(address);
+        return err;
+    }
 }
 
- /**CRYPTOPRICE
+/**CRYPTOPRICE
  * Returns crypto prices in USD from Coingecko.
  *
  * List of available symbols and ids found https://api.coingecko.com/api/v3/search?locale=fr&img_path_only=1
@@ -1532,56 +1688,66 @@ async function CRYPTOSUMATIC(address){
  *
  * @return the current price rate of your cryptocurrency in $
  **/
+async function CRYPTOPRICE(token1_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTOPRICE(token1_array){
-  Utilities.sleep(Math.random() * 100)
-  
-  
-  try{
-    if(token1_array.length>1){
-    token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+    try {
+        if (token1_array.length > 1) {
+            token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+        }
+
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array + "cryptoprice"));
+
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
+
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/CRYPTOPRICE/" + token1_array + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+        Logger.log(content)
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['PRICE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
+        //return CRYPTOPRICE(token1_array);
     }
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array+"cryptoprice"));
-
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
-
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
-    }
-    url="/CRYPTOPRICE/"+token1_array +"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    Logger.log(content)
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['PRICE']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-    //return CRYPTOPRICE(token1_array);
-  }
 }
 
 /**CRYPTOVOL30D
@@ -1599,58 +1765,68 @@ async function CRYPTOPRICE(token1_array){
  *
  * @returns the current 30d volatility of your cryptocurrency in $, ETH, BTC
  **/
+async function CRYPTOVOL30D(token1_array, token2_array) {
+    Utilities.sleep(Math.random() * 100)
 
-async function CRYPTOVOL30D(token1_array,token2_array){
-  Utilities.sleep(Math.random() * 100)
-  
-  
-  try{
-    if(token1_array.length>1){
-    token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+    try {
+        if (token1_array.length > 1) {
+            token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+        }
+        if (token2_array.length > 1) {
+            token2_array = [].concat(token2_array).join("%2C").replace("-", "").replace("/", "");
+        }
+
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array + token2_array + "VOL30D"));
+
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
+
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/30DVOL/" + token1_array + "/" + token2_array + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['VOLATILTY_30D']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err
     }
-    if(token2_array.length>1){
-    token2_array = [].concat(token2_array).join("%2C").replace("-", "").replace("/", "");
-    }
-    
-    id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array+token2_array+"VOL30D"));
-
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-      result=cached.split(',');
-      return result.map(function(n) { return n && ("" || Number(n))}); 
-      }    
-
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
-    }
-    url="/30DVOL/"+token1_array +"/"+token2_array +"/"+KEYID;
-    
-    var res = await UrlFetchApp.fetch(private_path+url, http_options);
-    var content = JSON.parse(res.getContentText());
-    
-    var dict = []; 
-    for (var i=0;i<content.length;i++) {
-      if (Object.keys(content[i]).length != 0){
-      dict.push(parseFloat(content[i]['VOLATILTY_30D']));
-      }
-      else{dict.push("");}
-    }
-    cache.put(id_cache,dict,expirationInSeconds_);
-    return dict;}
-
-  catch(err){
-    return err
-  }
 }
 
 /**CRYPTOGAS
@@ -1666,45 +1842,53 @@ async function CRYPTOVOL30D(token1_array,token2_array){
  *
  * @return a one-dimensional array with the gas price
  **/
-  
-async function CRYPTOGAS(ticker){
-  Utilities.sleep(Math.random() * 100)
-  id_cache=ticker+"GASPRICE"
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    if (isNaN(cached)) {
-      return cached;} 
-    return Number(cached);
-  }
-  
-  try{
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-    private_path="http://api.charmantadvisory.com";
-    http_options ={'headers':{'apikey':KEYID}};
-    
-    if (cryptotools_api_key != "") {
-      private_path="https://privateapi.charmantadvisory.com";
-      http_options = {'headers':{'apikey':cryptotools_api_key}};
+async function CRYPTOGAS(ticker) {
+    Utilities.sleep(Math.random() * 100)
+    id_cache = ticker + "GASPRICE"
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
     }
-    url="/CRYPTOGAS/"+ticker+"/"+KEYID;
-    var res = await UrlFetchApp.fetch(private_path+url, http_options) ;   
-    var content = res.getContentText();
 
-    if (!isNaN(content) && content.toString().indexOf('.') != -1)
-      {
-        content=parseFloat(content);
-        cache.put(id_cache, content,expirationInSeconds_)
-      }
-    return content;
-  }
-  catch(err){
-      return err
-  }
+    try {
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/CRYPTOGAS/" + ticker + "/" + KEYID;
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = res.getContentText();
+
+        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+            content = parseFloat(content);
+            cache.put(id_cache, content, expirationInSeconds_)
+        }
+
+        return content;
+    } catch (err) {
+        return err
+    }
 }
 
 /*====================================================================================================================================*
@@ -1712,10 +1896,8 @@ async function CRYPTOGAS(ticker){
   ====================================================================================================================================
   Version:      1.0.4
   Project Page: https://github.com/Eloise1988/DEFIASSETS/
-  Copyright:    (c) 2021 by Eloise1988
-                
+  Copyright:    (c) 2021 by Eloise1988   
   License:     MIT License
-               
   ------------------------------------------------------------------------------------------------------------------------------------
   A library for importing the list of all assets (tokens, pools, nft, claimable etc...) from smart chains:
   
@@ -1735,71 +1917,83 @@ async function CRYPTOGAS(ticker){
   1.0.3   CRYPTODEFI_BALANCE returns the balance by symbol/ticker given a defi protocol into Google spreadsheets.  
   1.0.4   CRYPTODEFI_BALANCEUSD returns the USD amont lended by symbol/ticker given a defi protocol into Google spreadsheets.   
 *====================================================================================================================================*/
-/**DEFI_NETWORTH 
+
+/*DEFI_NETWORTH 
  * ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-**/
+ */
 function DEFI_NETWORTH() {
-  //Name of the tab where you want to have your data
-  var name_sheet="DEFI_NETWORTH";
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name_sheet);
+    //Name of the tab where you want to have your data
+    var name_sheet = "DEFI_NETWORTH";
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name_sheet);
 
-  // Table start row and columns
-  var start_row=25;
-  var start_column=2;
+    // Table start row and columns
+    var start_row = 25;
+    var start_column = 2;
 
-  //Clearing old data
-  sheet.getRange(start_row,start_column,3000,8).clearContent()
-  
-  //Loading List of DEFI addresses in cells C3:E3
-  address_defi=sheet.getRange(3,3,1,3).getValues();
-  var dict_address = []; 
-    for (var i=0;i<address_defi[0].length;i++) {
-      if (address_defi[0][i]!=""){
-      dict_address.push(address_defi[0][i]);
-      }
+    //Clearing old data
+    sheet.getRange(start_row, start_column, 3000, 8).clearContent()
+
+    //Loading List of DEFI addresses in cells C3:E3
+    address_defi = sheet.getRange(3, 3, 1, 3).getValues();
+    var dict_address = [];
+    for (var i = 0; i < address_defi[0].length; i++) {
+        if (address_defi[0][i] != "") {
+            dict_address.push(address_defi[0][i]);
+        }
     }
-  address_defi = [].concat(dict_address).join("%2C").replace("-", "").replace("/", ""); 
-  
-  //Loading List of optional protocols in cells C6:G6
-  protocols_defi=sheet.getRange(6,3,1,5).getValues();
-  
-  try{var dict_protocols= []; 
-    for (var i=0;i<protocols_defi[0].length;i++) {
-      if (protocols_defi[0][i]!=""){
-      dict_protocols.push(protocols_defi[0][i].replace(" ", "6z6").toLowerCase());
-      }
-    }
-  protocols_defi = [].concat(dict_protocols).join("%2C");}
-  catch(err){
-    protocols_defi="";
-  } 
-  if (protocols_defi==""){protocols_defi="notapplicable"}
-  
-  //Connection to the API endpoints I created
-  var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-  GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-  var userProperties = PropertiesService.getUserProperties();
-  var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    address_defi = [].concat(dict_address).join("%2C").replace("-", "").replace("/", "");
 
-  private_path="http://api.charmantadvisory.com";
-  http_options ={'headers':{'apikey':KEYID}};
-  
-  if (cryptotools_api_key != "") {
-    private_path="https://privateapi.charmantadvisory.com";
-    http_options = {'headers':{'apikey':cryptotools_api_key}};
-  }
-  url="/DEFINETWORTH/"+address_defi +"/"+protocols_defi+"/"+KEYID;
-  
-  // Calling the API and retrieving the data
-  
-  var res = UrlFetchApp.fetch(private_path+url, http_options);
-  var content = JSON.parse(res.getContentText());
-  
-  //Setting the values in the range defined at the beginning of the script
-  sheet.getRange(start_row,start_column,content.length,content[0].length).setValues(content);
-  
- 
+    //Loading List of optional protocols in cells C6:G6
+    protocols_defi = sheet.getRange(6, 3, 1, 5).getValues();
+
+    try {
+        var dict_protocols = [];
+        for (var i = 0; i < protocols_defi[0].length; i++) {
+            if (protocols_defi[0][i] != "") {
+                dict_protocols.push(protocols_defi[0][i].replace(" ", "6z6").toLowerCase());
+            }
+        }
+        protocols_defi = [].concat(dict_protocols).join("%2C");
+    } catch (err) {
+        protocols_defi = "";
+    }
+
+    if (protocols_defi == "") {
+        protocols_defi = "notapplicable"
+    }
+
+    //Connection to the API endpoints I created
+    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+    GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+    var userProperties = PropertiesService.getUserProperties();
+    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+    private_path = "http://api.charmantadvisory.com";
+    http_options = {
+        'headers': {
+            'apikey': KEYID
+        }
+    };
+
+    if (cryptotools_api_key != "") {
+        private_path = "https://privateapi.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': cryptotools_api_key
+            }
+        };
+    }
+    url = "/DEFINETWORTH/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+
+    // Calling the API and retrieving the data
+
+    var res = UrlFetchApp.fetch(private_path + url, http_options);
+    var content = JSON.parse(res.getContentText());
+
+    //Setting the values in the range defined at the beginning of the script
+    sheet.getRange(start_row, start_column, content.length, content[0].length).setValues(content);
 }
+
 /**CRYPTODEFI 
  * Returns the list assets lended, staked... by defi protocol into Google spreadsheets. 
  * By default, data gets transformed into a array/number. 
@@ -1815,57 +2009,65 @@ function DEFI_NETWORTH() {
  * @return a dimensional array containing the list of assets staked, lended with price, value, balance etc...
  **/
 async function CRYPTODEFI(address, protocols) {
-  try{
-  address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", ""); 
-  protocols_defi = [].concat(protocols.toLowerCase().replace(" ", "6z6")).join("%2C");
-  
-  id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5,address_defi+protocols_defi+'cryptodefi'));
-  
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    result=JSON.parse(cached);
-    return result; 
-  }
+    try {
+        address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", "");
+        protocols_defi = [].concat(protocols.toLowerCase().replace(" ", "6z6")).join("%2C");
 
-  
-  //Connection to the API endpoints 
-  var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-  GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-  var userProperties = PropertiesService.getUserProperties();
-  var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + protocols_defi + 'cryptodefi'));
 
-  private_path="http://api.charmantadvisory.com";
-  http_options ={'headers':{'apikey':KEYID}};
-  
-  if (cryptotools_api_key != "") {
-    private_path="https://privateapi.charmantadvisory.com";
-    http_options = {'headers':{'apikey':cryptotools_api_key}};
-  }
-  url="/DEFIFORMULA/"+address_defi +"/"+protocols_defi+"/"+KEYID;
-  
-  
-   var res = await UrlFetchApp.fetch(private_path+url, http_options);
-   var content = res.getContentText();
-   var parsedJSON = JSON.parse(content);
-   
-   var data=[]
-   data.push(["NETWORK","PROTOCOL","ADDRESS","TYPE","SYMBOL","BALANCE","PRICE","BALANCE_USD"])
-  
-  for (var i=0;i<parsedJSON.length;i++) {
-        data.push([parsedJSON[i]["NETWORK"],parsedJSON[i]["PROTOCOL"],parsedJSON[i]["ADDRESS"],parsedJSON[i]["TYPE"],parsedJSON[i]["SYMBOL"],parsedJSON[i]["BALANCE"],parsedJSON[i]["PRICE"],parsedJSON[i]["BALANCE_USD"]]);
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = JSON.parse(cached);
+            return result;
+        }
+
+        // Connexion to the API endpoints 
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
         };
-  try{cache.put(id_cache,JSON.stringify(data),expirationInSeconds_);
-  return data; } 
-  catch(err){ 
-    return data;
-  }   
-  }
 
-  catch(err){
-    return err;
-  }
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+
+        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var content = res.getContentText();
+        var parsedJSON = JSON.parse(content);
+
+        var data = []
+        data.push(["NETWORK", "PROTOCOL", "ADDRESS", "TYPE", "SYMBOL", "BALANCE", "PRICE", "BALANCE_USD"])
+
+        for (var i = 0; i < parsedJSON.length; i++) {
+            data.push([parsedJSON[i]["NETWORK"], parsedJSON[i]["PROTOCOL"], parsedJSON[i]["ADDRESS"], parsedJSON[i]["TYPE"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["BALANCE"], parsedJSON[i]["PRICE"], parsedJSON[i]["BALANCE_USD"]]);
+        };
+
+        try {
+            cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
+
+            return data;
+        } catch (err) {
+            return data;
+        }
+    } catch (err) {
+        return err;
+    }
 }
+
 /**CRYPTODEFI_BALANCE
  * Returns the staked/lended balance by symbol/ticker given a defi protocol into Google spreadsheets. 
  * By default, data gets transformed into a array/number. 
@@ -1881,53 +2083,65 @@ async function CRYPTODEFI(address, protocols) {
  *
  * @return a dimensional array containing the balance amount staked, lend etc...
  **/
-async function CRYPTODEFI_BALANCE(address,ticker, protocols) {
-  try{
-  address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", ""); 
-  protocols_defi = [].concat(protocols.toLowerCase().replace(" ", "6z6")).join("%2C");
-  ticker= ticker.toUpperCase();
-  
-  //Cache
-  id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi+ticker+protocols_defi+"CRYPTODEFIASSET"));
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    result=cached.split(',');
-    return result.map(function(n) { return n && ("" || Number(n))}); 
-    }    
+async function CRYPTODEFI_BALANCE(address, ticker, protocols) {
+    try {
+        address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", "");
+        protocols_defi = [].concat(protocols.toLowerCase().replace(" ", "6z6")).join("%2C");
+        ticker = ticker.toUpperCase();
 
-  //Connection to the API endpoints 
-  var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-  GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-  var userProperties = PropertiesService.getUserProperties();
-  var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        // Cache
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + ticker + protocols_defi + "CRYPTODEFIASSET"));
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-  private_path="http://api.charmantadvisory.com";
-  http_options ={'headers':{'apikey':KEYID}};
-  
-  if (cryptotools_api_key != "") {
-    private_path="https://privateapi.charmantadvisory.com";
-    http_options = {'headers':{'apikey':cryptotools_api_key}};
-  }
-  url="/DEFIFORMULA/"+address_defi +"/"+protocols_defi+"/"+KEYID;
-  
-  // Calling the API and retrieving the data
-  var res = UrlFetchApp.fetch(private_path+url, http_options);
-  var content = JSON.parse(res.getContentText());
-  
-  var dict = []; 
-  for (var i=0;i<content.length;i++) {
-    if (content[i]['SYMBOL'].toUpperCase()== ticker){
-    dict.push(parseFloat(content[i]['BALANCE']));
+        // Connexion to the API endpoints 
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+        url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+
+        // Calling the API and retrieving the data
+        var res = UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (content[i]['SYMBOL'].toUpperCase() == ticker) {
+                dict.push(parseFloat(content[i]['BALANCE']));
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err;
     }
-  }
-  cache.put(id_cache,dict,expirationInSeconds_);
-  return dict;}
-  
-  catch(err){
-    return err;
-  }
 }
+
 /**CRYPTODEFI_BALANCEUSD
  * Returns the staked/lended USD value by symbol/ticker given a defi protocol into Google spreadsheets. 
  * By default, data gets transformed into a array/number. 
@@ -1943,52 +2157,64 @@ async function CRYPTODEFI_BALANCE(address,ticker, protocols) {
  *
  * @return a dimensional array containing the USD amount staked, lend etc...
  **/
-async function CRYPTODEFI_BALANCEUSD(address,ticker, protocols) {
-  try{
-  address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", ""); 
-  protocols_defi = [].concat(protocols.replace(" ", "6z6").toLowerCase()).join("%2C");
-  ticker= ticker.toUpperCase();
-  
-  //Cache
-  id_cache=Utilities.base64Encode( Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi+ticker+protocols_defi+"CRYPTODEFIVALUE"));
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-    result=cached.split(',');
-    return result.map(function(n) { return n && ("" || Number(n))}); 
-    }    
+async function CRYPTODEFI_BALANCEUSD(address, ticker, protocols) {
+    try {
+        address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", "");
+        protocols_defi = [].concat(protocols.replace(" ", "6z6").toLowerCase()).join("%2C");
+        ticker = ticker.toUpperCase();
 
-  //Connection to the API endpoints 
-  var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-  GSUUID= GSUUID.replace(/%2f/gi, 'hello');
-  var userProperties = PropertiesService.getUserProperties();
-  var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        // Cache
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + ticker + protocols_defi + "CRYPTODEFIVALUE"));
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
 
-  private_path="http://api.charmantadvisory.com";
-  http_options ={'headers':{'apikey':KEYID}};
-  
-  if (cryptotools_api_key != "") {
-    private_path="https://privateapi.charmantadvisory.com";
-    http_options = {'headers':{'apikey':cryptotools_api_key}};
-  }
-  url="/DEFIFORMULA/"+address_defi +"/"+protocols_defi+"/"+KEYID;
-  
-  // Calling the API and retrieving the data
-  var res = UrlFetchApp.fetch(private_path+url, http_options);
-  var content = JSON.parse(res.getContentText());
-  
-  var dict = []; 
-  for (var i=0;i<content.length;i++) {
-    if (content[i]['SYMBOL'].toUpperCase()== ticker){
-    dict.push(parseFloat(content[i]['BALANCE_USD']));
+        // Connexion to the API endpoints 
+        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
+        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
+        var userProperties = PropertiesService.getUserProperties();
+        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        private_path = "http://api.charmantadvisory.com";
+        http_options = {
+            'headers': {
+                'apikey': KEYID
+            }
+        };
+
+        if (cryptotools_api_key != "") {
+            private_path = "https://privateapi.charmantadvisory.com";
+            http_options = {
+                'headers': {
+                    'apikey': cryptotools_api_key
+                }
+            };
+        }
+
+        url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+
+        // Calling the API and retrieving the data
+        var res = UrlFetchApp.fetch(private_path + url, http_options);
+        var content = JSON.parse(res.getContentText());
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (content[i]['SYMBOL'].toUpperCase() == ticker) {
+                dict.push(parseFloat(content[i]['BALANCE_USD']));
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+        
+        return dict;
+    } catch (err) {
+        return err;
     }
-  }
-  cache.put(id_cache,dict,expirationInSeconds_);
-  return dict;}
-  
-  catch(err){
-    return err;
-  }
 }
 
 /**PROTOCOLS
@@ -2003,8 +2229,8 @@ async function CRYPTODEFI_BALANCEUSD(address,ticker, protocols) {
  *
  * @return a dimensional array containing the list of all available protocols
  **/
-async function PROTOCOLS(){
-  var protocol_List = ["ethereum abracadabra","ethereum alchemix","ethereum alpha-v2","ethereum apy","ethereum arcx","ethereum armor","ethereum badger","ethereum balancer-v1","ethereum balancer-v2","ethereum bancor","ethereum bao","ethereum barnbridge","ethereum barnbridge-smart-yield","ethereum based-money","ethereum basis-cash","ethereum basis-gold","ethereum basket-dao","ethereum bella","ethereum benchmark","ethereum big-data","ethereum boring-dao","ethereum b-protocol","ethereum compound","ethereum convex","ethereum cream","ethereum cream-iron-bank","ethereum cryptex","ethereum curve","ethereum defi-dollar","ethereum defisaver","ethereum defi-swap","ethereum derivadex","ethereum deversifi","ethereum dfi-money","ethereum dforce","ethereum dhedge","ethereum dodo","ethereum dodo","ethereum dopex","ethereum dsd","ethereum dydx","ethereum dydx","ethereum 88mph","ethereum 88mph-v3","ethereum element","ethereum esd","ethereum essentia","ethereum fei","ethereum float-protocol","ethereum frax","ethereum futureswap","ethereum governor-dao","ethereum gro","ethereum harvest","ethereum hegic","ethereum idle","ethereum illuvium","ethereum index-coop","ethereum indexed","ethereum inverse","ethereum inverse","ethereum keeper-dao","ethereum keep-network","ethereum klondike","ethereum klondike-v2","ethereum kyber-dmm","ethereum launchpool","ethereum linkswap","ethereum liquity","ethereum loopring","ethereum maker","ethereum mirror","ethereum mith-cash","ethereum mooniswap","ethereum mstable","ethereum mushroom","ethereum nsure-network","ethereum olympus","ethereum 1inch","ethereum onx","ethereum opium-network","ethereum opyn","ethereum orion-protocol","ethereum perpetual-protocol","ethereum pickle","ethereum pie-dao","ethereum pooltogether","ethereum popsicle","ethereum powerpool","ethereum rally","ethereum rari","ethereum rari-fuse","ethereum realt","ethereum reflexer","ethereum ren","ethereum ribbon","ethereum sablier","ethereum saddle","ethereum sfinance","ethereum shapeshift","ethereum shared-stake","ethereum shell","ethereum smoothy","ethereum snowswap","ethereum stake-dao","ethereum strudel","ethereum sushiswap","ethereum sushiswap-kashi","ethereum swerve","ethereum synlev","ethereum synthetix","ethereum the-graph","ethereum tokemak","ethereum tokenlon","ethereum tokensets","ethereum tornado-cash","ethereum uniswap","ethereum uniswap-v2","ethereum uniswap-v3","ethereum unit","ethereum value","ethereum vesper","ethereum xsigma","ethereum xtoken","ethereum yam","ethereum yaxis","ethereum yearn","ethereum zlot","ethereum epns","polygon aavegotchi","polygon aave-v2","polygon adamant","polygon apeswap","polygon augur","polygon balancer-v2","polygon barnbridge-smart-yield","polygon beefy","polygon cream","polygon curve","polygon dfyn","polygon dinoswap","polygon dodo","polygon dodo","polygon eleven-finance","polygon harvest","polygon iron","polygon kyber-dmm","polygon pickle","polygon polywhale","polygon pooltogether","polygon quickswap","polygon superfluid","polygon sushiswap","polygon sushiswap-bentobox","polygon sushiswap-kashi","polygon waultswap","avalanche aave-v2","avalanche abracadabra","avalanche beefy","avalanche benqi","avalanche curve","avalanche lydia","avalanche pangolin","avalanche penguin","avalanche snowball","avalanche stormswap","avalanche teddy-cash","avalanche traderjoe","avalanche wonderland","avalanche yieldyak","arbitrum abracadabra","arbitrum adamant","arbitrum badger","arbitrum balancer-v2","arbitrum beefy","arbitrum curve","arbitrum dforce","arbitrum dodo","arbitrum dodo","arbitrum pickle","arbitrum sushiswap","arbitrum sushiswap-bentobox","arbitrum sushiswap-kashi","arbitrum swapr","arbitrum uniswap-v3","arbitrum wepiggy","fantom abracadabra","fantom beefy","fantom cream","fantom curve","fantom reaper","fantom scream","fantom spiritswap","fantom spookyswap","fantom sushiswap","binance-smart-chain apeswap","binance-smart-chain autofarm","binance-smart-chain beefy","binance-smart-chain belt","binance-smart-chain bzx","binance-smart-chain cream","binance-smart-chain dodo","binance-smart-chain eleven-finance","binance-smart-chain ellipsis","binance-smart-chain harvest","binance-smart-chain impossible-finance","binance-smart-chain 1inch","binance-smart-chain pancakeswap","binance-smart-chain popsicle","binance-smart-chain sushiswap","binance-smart-chain sushiswap-bentobox","binance-smart-chain sushiswap-kashi","binance-smart-chain venus","binance-smart-chain waultswap","optimism lyra","optimism synthetix","optimism uniswap-v3"];
-  
-  return protocol_List;
+async function PROTOCOLS() {
+    var protocol_List = ["ethereum abracadabra", "ethereum alchemix", "ethereum alpha-v2", "ethereum apy", "ethereum arcx", "ethereum armor", "ethereum badger", "ethereum balancer-v1", "ethereum balancer-v2", "ethereum bancor", "ethereum bao", "ethereum barnbridge", "ethereum barnbridge-smart-yield", "ethereum based-money", "ethereum basis-cash", "ethereum basis-gold", "ethereum basket-dao", "ethereum bella", "ethereum benchmark", "ethereum big-data", "ethereum boring-dao", "ethereum b-protocol", "ethereum compound", "ethereum convex", "ethereum cream", "ethereum cream-iron-bank", "ethereum cryptex", "ethereum curve", "ethereum defi-dollar", "ethereum defisaver", "ethereum defi-swap", "ethereum derivadex", "ethereum deversifi", "ethereum dfi-money", "ethereum dforce", "ethereum dhedge", "ethereum dodo", "ethereum dodo", "ethereum dopex", "ethereum dsd", "ethereum dydx", "ethereum dydx", "ethereum 88mph", "ethereum 88mph-v3", "ethereum element", "ethereum esd", "ethereum essentia", "ethereum fei", "ethereum float-protocol", "ethereum frax", "ethereum futureswap", "ethereum governor-dao", "ethereum gro", "ethereum harvest", "ethereum hegic", "ethereum idle", "ethereum illuvium", "ethereum index-coop", "ethereum indexed", "ethereum inverse", "ethereum inverse", "ethereum keeper-dao", "ethereum keep-network", "ethereum klondike", "ethereum klondike-v2", "ethereum kyber-dmm", "ethereum launchpool", "ethereum linkswap", "ethereum liquity", "ethereum loopring", "ethereum maker", "ethereum mirror", "ethereum mith-cash", "ethereum mooniswap", "ethereum mstable", "ethereum mushroom", "ethereum nsure-network", "ethereum olympus", "ethereum 1inch", "ethereum onx", "ethereum opium-network", "ethereum opyn", "ethereum orion-protocol", "ethereum perpetual-protocol", "ethereum pickle", "ethereum pie-dao", "ethereum pooltogether", "ethereum popsicle", "ethereum powerpool", "ethereum rally", "ethereum rari", "ethereum rari-fuse", "ethereum realt", "ethereum reflexer", "ethereum ren", "ethereum ribbon", "ethereum sablier", "ethereum saddle", "ethereum sfinance", "ethereum shapeshift", "ethereum shared-stake", "ethereum shell", "ethereum smoothy", "ethereum snowswap", "ethereum stake-dao", "ethereum strudel", "ethereum sushiswap", "ethereum sushiswap-kashi", "ethereum swerve", "ethereum synlev", "ethereum synthetix", "ethereum the-graph", "ethereum tokemak", "ethereum tokenlon", "ethereum tokensets", "ethereum tornado-cash", "ethereum uniswap", "ethereum uniswap-v2", "ethereum uniswap-v3", "ethereum unit", "ethereum value", "ethereum vesper", "ethereum xsigma", "ethereum xtoken", "ethereum yam", "ethereum yaxis", "ethereum yearn", "ethereum zlot", "ethereum epns", "polygon aavegotchi", "polygon aave-v2", "polygon adamant", "polygon apeswap", "polygon augur", "polygon balancer-v2", "polygon barnbridge-smart-yield", "polygon beefy", "polygon cream", "polygon curve", "polygon dfyn", "polygon dinoswap", "polygon dodo", "polygon dodo", "polygon eleven-finance", "polygon harvest", "polygon iron", "polygon kyber-dmm", "polygon pickle", "polygon polywhale", "polygon pooltogether", "polygon quickswap", "polygon superfluid", "polygon sushiswap", "polygon sushiswap-bentobox", "polygon sushiswap-kashi", "polygon waultswap", "avalanche aave-v2", "avalanche abracadabra", "avalanche beefy", "avalanche benqi", "avalanche curve", "avalanche lydia", "avalanche pangolin", "avalanche penguin", "avalanche snowball", "avalanche stormswap", "avalanche teddy-cash", "avalanche traderjoe", "avalanche wonderland", "avalanche yieldyak", "arbitrum abracadabra", "arbitrum adamant", "arbitrum badger", "arbitrum balancer-v2", "arbitrum beefy", "arbitrum curve", "arbitrum dforce", "arbitrum dodo", "arbitrum dodo", "arbitrum pickle", "arbitrum sushiswap", "arbitrum sushiswap-bentobox", "arbitrum sushiswap-kashi", "arbitrum swapr", "arbitrum uniswap-v3", "arbitrum wepiggy", "fantom abracadabra", "fantom beefy", "fantom cream", "fantom curve", "fantom reaper", "fantom scream", "fantom spiritswap", "fantom spookyswap", "fantom sushiswap", "binance-smart-chain apeswap", "binance-smart-chain autofarm", "binance-smart-chain beefy", "binance-smart-chain belt", "binance-smart-chain bzx", "binance-smart-chain cream", "binance-smart-chain dodo", "binance-smart-chain eleven-finance", "binance-smart-chain ellipsis", "binance-smart-chain harvest", "binance-smart-chain impossible-finance", "binance-smart-chain 1inch", "binance-smart-chain pancakeswap", "binance-smart-chain popsicle", "binance-smart-chain sushiswap", "binance-smart-chain sushiswap-bentobox", "binance-smart-chain sushiswap-kashi", "binance-smart-chain venus", "binance-smart-chain waultswap", "optimism lyra", "optimism synthetix", "optimism uniswap-v3"];
+
+    return protocol_List;
 }
