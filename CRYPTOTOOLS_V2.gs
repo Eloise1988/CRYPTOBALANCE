@@ -38,8 +38,8 @@
     CRYPTOPOOLPRICE                 For use by end users to retrieve prices from decentralized Pool tokens
     CRYPTOFARMING                   For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
     CRYPTOGAS                       For use by end users to retrieve average GWEI gas price (ETH)
-    CRYPTOSUPPLY                    For use by end users to retrieve the max supply on an list of erc20, bep20, matic tokens.
-    CRYPTOHOLDERS                   For use by end users to retrieve the number of holders on an list of erc20, bep20, matic tokens.
+    CRYPTOSUPPLY                    For use by end users to retrieve the max supply on a list of erc20, bep20, matic tokens.
+    CRYPTOHOLDERS                   For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                       For use by end users to retrieve the list of protocols available on zapper.fi
@@ -1905,7 +1905,7 @@ async function CRYPTOGAS(ticker) {
 }
 
 /**CRYPTOSUPPLY
- * Returns the max supply on an list of erc20, bep20, matic tokens.
+ * Returns the max supply on a list of erc20, bep20, matic tokens.
  *
  * For example:
  *
@@ -1983,7 +1983,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
 }
 
 /**CRYPTOHOLDERS
- * Returns the number of holders on an list of erc20, bep20, matic tokens.
+ * Returns the number of holders on a list of erc20, bep20, matic tokens.
  *
  * For example:
  *
