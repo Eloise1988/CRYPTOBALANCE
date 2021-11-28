@@ -14,6 +14,37 @@
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOBALANCE("USDT","0xf977814e90da44bfa03b6295a0616a897441acec", $A$1)
 
+### SPECIAL CASES ERC20, BEP20, MATIC, AVAX, TEZOS, SOLANA, FANTOM tokens that are not in the available token list:
+###### You can call the balance using its contract address
+
+###### ERC20
+###### For example balance for Uniswap (ERC 20)
+###### =CRYPTOBALANCE("0x1f9840a85d5af5bf1d1762f925bdaddc4201f984","holder's public address")
+
+###### BEP20
+###### For example balance for Pancakeswap (BEP20), insert b before contract address to signal it's bep20 a contract address 
+###### =CRYPTOBALANCE("b0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","holder's public address")
+
+###### MATIC TOKENS
+###### For example balance for USDC on Matic, insert m before contract address to signal it's a MATIC chain contract address 
+###### =CRYPTOBALANCE("m0x2791bca1f2de4661ed88a30c99a7a9449aa84174", "0x5d864785dce52b839c580ad8ced47ba36b90ea11")
+
+###### AVAX SMART CHAIN
+###### For example balance for Memorie (MEMO)
+###### =CRYPTOBALANCE("a0x136Acd46C134E8269052c62A67042D6bDeDde3C9","holder's public address")
+
+###### TEZOS TOKENS
+###### For example balance for KUSD
+###### =CRYPTOBALANCE("KT1K9gCRgaLRFKTErYt1wVxA3Frb9FjasjTV","holder's public address")
+
+###### SOLANA TOKENS
+###### For example balance for Wrapped USDC
+###### =CRYPTOBALANCE("BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW","holder's public address")
+
+###### FANTOM TOKENS
+###### For example balance for DAI
+###### =CRYPTOBALANCE("f0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e","holder's public address")
+
 ##
 ## DEX
 ###### List of DEXes
