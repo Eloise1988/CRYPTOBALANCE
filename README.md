@@ -113,6 +113,34 @@
 ###### EXAMPLE    =PANCAKESWAP(5,10000,10000,100)
 ##  
 
+### CRYPTOSUPPLY
+###### Returns the max supply on a list of erc20, bep20, matic tokens.
+###### Available Networks
+######  - ERC (erc20)
+######  - BEP (binance smart chain)
+######  - MATIC (polygon smart chain)
+![CRYPTOSUPPLY](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptosupply.gif)
+
+###### =CRYPTOSUPPLY(Ticker or smart contract, network)
+###### EXAMPLE    =CRYPTOSUPPLY("ETH","ERC")
+###### EXAMPLE    =CRYPTOSUPPLY("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","BEP")
+###### EXAMPLE    =CRYPTOSUPPLY(E39:E100,F39:F100)
+## 
+
+### CRYPTOHOLDERS
+###### Returns the number of holders on a list of erc20, bep20, matic tokens.
+###### Available Networks
+######  - ERC (erc20)
+######  - BEP (binance smart chain)
+######  - MATIC (polygon smart chain)
+![CRYPTOHOLDERS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptoholders.gif)
+
+###### =CRYPTOHOLDERS(Ticker or smart contract, network)
+###### EXAMPLE    =CRYPTOHOLDERS("ETH","ERC")
+###### EXAMPLE    =CRYPTOHOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","BEP")
+###### EXAMPLE    =CRYPTOHOLDERS(E39:E100,F39:F100)
+## 
+
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
 ###### 2. Go to Tools › Script editor
