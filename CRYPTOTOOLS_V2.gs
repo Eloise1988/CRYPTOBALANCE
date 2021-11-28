@@ -148,6 +148,15 @@ function ShowContactInfo() {
  * For example:
  *
  *   =CRYPTOBALANCE("BTC", "14ByqnCtawEV1VdQbLqxYWPdey1JbfpwRy","$A$1")
+ * 
+ * ............................  Special Cases  ........................................... 
+ *   =CRYPTOBALANCE(" ERC20 contract address","ERC20 holder address")
+ *   =CRYPTOBALANCE("b"+ "BEP20 contract address","holder address") 
+ *   =CRYPTOBALANCE("m"+ "MATIC contract address", "holder address")
+ *   =CRYPTOBALANCE("a"+ "AVAX contract address", "holder address") 
+ *   =CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address")
+ *   =CRYPTOBALANCE("TEZOS contract address","holder address") 
+ *   =CRYPTOBALANCE("SOLANA contract address","holder address")
  *
  * @param {cryptocurrency}  the cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
  * @param {address}         the wallet address associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
@@ -155,6 +164,7 @@ function ShowContactInfo() {
  * @customfunction
  *
  * @return a one-dimensional array the balance of cryptocurrency
+ *  
  **/
 async function CRYPTOBALANCE(ticker, address) {
     Utilities.sleep(Math.random() * 100)
