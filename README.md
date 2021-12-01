@@ -1,5 +1,8 @@
 # CRYPTOCURRENCY TOOLS USED IN GOOGLE SHEETS
-### [API Documentation](https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.1)
+###### [Link to Google Sheets public template!](https://docs.google.com/spreadsheets/d/1-QNPo7-gq3vLMoxrCWg_DwTA5dfD9b-Lv-tRVTqo1RE/edit?usp=sharing)   
+###### [Link to the Medium Publication](https://medium.com/coinmonks/how-to-value-your-stocks-crypto-portfolio-in-google-sheets-22bb7b42c39d)
+###### [Link to Google Sheet's Set-up](https://medium.com/the-cryptocurious/google-sheet-open-source-cryptotools-set-up-9420e3940a8a)
+###### [API Documentation](https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools/1.1)
 
 ## CRYPTOBALANCE
 
