@@ -43,10 +43,21 @@
 
 ##  
 ### CRYPTOCURRENCY PRICES ON DEX
-###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI are available for the moment.
+###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI, MATIC, PANGOLIN, FANTOM, are available for the moment.
 ![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
 ###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
 ###### EXAMPLE    =CRYPTODEXPRICE("ETH","BAL","1INCH")
+######  
+![DEXPRICE_MaticSushi](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_MATIC_SUSHISWAP.gif)
+###### The price feed comes from Sushiswap's exchange on the polygon/matic network.
+###### EXAMPLE    =CRYPTODEXPRICE("WMATIC","WETH","MATIC")
+![DEXPRICE_FantomSushi](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_fantomSushiswap.gif)
+###### The price feed comes from Sushiswap's exchange on the fantom network.
+###### EXAMPLE    =CRYPTODEXPRICE("WMFTM","USDC","FTM")
+![DEXPRICE_AvaxPangolin](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/dexprice_avaxpangolin.gif)
+###### The price feed comes from Pangolin's exchange on the avalanche network.
+###### EXAMPLE    =CRYPTODEXPRICE("ETH","WAVAX","PNG")
+
 ## 
 
 ### DEX Total Locked Values $ (TVL)
