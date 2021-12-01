@@ -48,14 +48,16 @@
 ###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
 ###### EXAMPLE    =CRYPTODEXPRICE("ETH","BAL","1INCH")
 ######  
+#### Prices from  Sushiswap's exchange on the polygon/matic network
 ![DEXPRICE_MaticSushi](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_MATIC_SUSHISWAP.gif)
-###### The price feed comes from Sushiswap's exchange on the polygon/matic network.
 ###### EXAMPLE    =CRYPTODEXPRICE("WMATIC","WETH","MATIC")
+
+#### Prices from  Sushiswap's exchange on the fantom network
 ![DEXPRICE_FantomSushi](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_fantomSushiswap.gif)
-###### The price feed comes from Sushiswap's exchange on the fantom network.
 ###### EXAMPLE    =CRYPTODEXPRICE("WMFTM","USDC","FTM")
+
+#### Prices from Pangolin's exchange on the avalanche network
 ![DEXPRICE_AvaxPangolin](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/dexprice_avaxpangolin.gif)
-###### The price feed comes from Pangolin's exchange on the avalanche network.
 ###### EXAMPLE    =CRYPTODEXPRICE("ETH","WAVAX","PNG")
 
 ## 
