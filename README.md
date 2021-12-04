@@ -68,7 +68,7 @@
 ###### EXAMPLE    =CRYPTODEXPRICE("BTC","USDC","DXL")
 
 #### Prices from Osmosis' exchange on the Cosmos network
-![DEXPRICE_OsmosisCosmo](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexprice_osmosiscosmos.gif)
+![DEXPRICE_OsmosisCosmo](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexpice_osmosiscosmos.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("ATOM","OSMO","OSMO")
 
 ## 
