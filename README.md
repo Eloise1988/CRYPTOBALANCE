@@ -46,22 +46,30 @@
 
 ##  
 ### CRYPTOCURRENCY PRICES ON DEX
-###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI, MATIC, PANGOLIN, FANTOM, are available for the moment.
+###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI, MATIC, PANGOLIN, FANTOM, OSMOSIS, DEXLAB are available for the moment.
 ![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
 ###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
 ###### EXAMPLE    =CRYPTODEXPRICE("ETH","BAL","1INCH")
 ######  
-#### Prices from  Sushiswap's exchange on the polygon/matic network
+#### Prices from  Sushiswap's exchange on the Polygon/Matic network
 ![DEXPRICE_MaticSushi](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_MATIC_SUSHISWAP.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("WMATIC","WETH","MATIC")
 
-#### Prices from  Sushiswap's exchange on the fantom network
+#### Prices from  Sushiswap's exchange on the Fantom network
 ![DEXPRICE_FantomSushi](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_fantomSushiswap.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("WMFTM","USDC","FTM")
 
-#### Prices from Pangolin's exchange on the avalanche network
+#### Prices from Pangolin's exchange on the Avalanche network
 ![DEXPRICE_AvaxPangolin](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/dexprice_avaxpangolin.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("ETH","WAVAX","PNG")
+
+#### Prices from DexLab's exchange on the Solana network
+![DEXPRICE_DexLabSolana](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexprice_dexlabSolana.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("BTC","USDC","DXL")
+
+#### Prices from Osmosis' exchange on the Cosmos network
+![DEXPRICE_OsmosisCosmo](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexprice_osmosiscosmos.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("ATOM","OSMO","OSMO")
 
 ## 
 
