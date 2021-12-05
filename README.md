@@ -7,9 +7,6 @@
 ## CRYPTOBALANCE
 
 ### Get your cryptocurrency balance in your Google Sheets. 
-### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_COINS.md) [Staking](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/STAKING.md) [Rewards](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/REWARDS.md)
-
-
 ######
 
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/Crypto_Balance.png)
@@ -28,23 +25,11 @@
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
 
+### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_COINS.md) [Staking](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/STAKING.md) [Rewards](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/REWARDS.md)
 
 ##
 ## DEX
-###### List of DEXes
-###### Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
-###### Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
-###### MCDEX Augur Robo-Advisor for Yield ACO Opium Network Connext 1
-###### Tickers can be used too : UNI, MKR, LEND, SNX, REN, GNO etc..
-##  
-### DEX 24H VOLUMES
-###### Returns DEXes' (decentralized exchanges) 24H Volume.
-![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
-###### =CRYPTODEXVOLUME("DEX ticker/name") 
-###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
-## 
 
-##  
 ### CRYPTOCURRENCY PRICES ON DEX
 ###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI, MATIC, PANGOLIN, FANTOM, OSMOSIS, DEXLAB are available for the moment.
 ![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
@@ -71,6 +56,13 @@
 ![DEXPRICE_OsmosisCosmo](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexpice_osmosiscosmos.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("ATOM","OSMO","OSMO")
 
+
+##  
+### DEX 24H VOLUMES
+###### Returns DEXes' (decentralized exchanges) 24H Volume.
+![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
+###### =CRYPTODEXVOLUME("DEX ticker/name") 
+###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
 ## 
 
 ### DEX Total Locked Values $ (TVL)
