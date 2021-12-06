@@ -39,7 +39,7 @@
     CRYPTOFARMING                   For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
     CRYPTOGAS                       For use by end users to retrieve average GWEI gas price (ETH)
     CRYPTOSUPPLY                    For use by end users to retrieve the max supply on a list of erc20, bep20, matic tokens.
-    CRYPTOHOLDERS                   For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
+    CRYPTOHOLDERCOUNT                   For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                       For use by end users to retrieve the list of protocols available on zapper.fi
@@ -63,6 +63,7 @@
   2.1.8   October 16th CRYPTOGAS function 
   2.1.9   November 8th cache CRYPTODEFI
   2.2.0   November 26th cache CRYPTOSUPPLY and CRYPTOHOLDERS functions
+  2.2.1   December 6 changed name CRYPTOHOLDERS to CRYPTOHOLDERCOUNT
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -1983,14 +1984,14 @@ async function CRYPTOSUPPLY(token_array, network_array) {
     }
 }
 
-/**CRYPTOHOLDERS
+/**CRYPTOHOLDERCOUNT
  * Returns the number of holders on a list of erc20, bep20, matic tokens.
  *
  * For example:
  *
- * =CRYPTOHOLDERS("ETH","ERC")
- * =CRYPTOHOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","BEP")
- * =CRYPTOHOLDERS(E39:E100,F39:F100)
+ * =CRYPTOHOLDERCOUNT("ETH","ERC")
+ * =CRYPTOHOLDERCOUNT("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","BEP")
+ * =CRYPTOHOLDERCOUNT(E39:E100,F39:F100)
  *
  * @param {Token}                  Ticker or smart contract list
  * @param {Network}                ERC (erc20), BEP (binance smart chain), MATIC (polygon smart chain)
@@ -1999,7 +2000,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
  *
  * @return the current list of number of holders per token and exchange
  **/
-async function CRYPTOHOLDERS(token_array, network_array) {
+async function CRYPTOHOLDERCOUNT(token_array, network_array) {
     Utilities.sleep(Math.random() * 100)
 
     try {
