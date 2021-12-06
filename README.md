@@ -155,7 +155,7 @@
 ###### EXAMPLE    =CRYPTOSUPPLY(E39:E100,F39:F100)
 ## 
 
-### CRYPTOHOLDERS
+### CRYPTOHOLDERCOUNT
 ###### Returns the number of holders on a list of erc20, bep20, matic tokens.
 ###### Available Networks
 ######  - ERC (erc20)
@@ -163,7 +163,7 @@
 ######  - MATIC (polygon smart chain)
 ![CRYPTOHOLDERS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptoholders.gif)
 
-###### =CRYPTOHOLDERS(Ticker or smart contract, network)
+###### =CRYPTOHOLDERCOUNT(Ticker or smart contract, network)
 ###### EXAMPLE    =CRYPTOHOLDERS("ETH","ERC")
 ###### EXAMPLE    =CRYPTOHOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","BEP")
 ###### EXAMPLE    =CRYPTOHOLDERS(E39:E100,F39:F100)
@@ -175,6 +175,13 @@
 ###### EXAMPLE =CRYPTOTX_ERC20("holder's address")
 ![CRYPTOTXBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_BEP20.gif)
 ###### EXAMPLE =CRYPTOTX_BEP20("holder's address")
+
+### CRYPTO_HOLDER
+###### Returns the list of holders on ERC20 and BEP20
+![CRYPTO_HOLDERERC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTO_HOLDER_ERC20.gif)
+###### EXAMPLE =CRYPTO_HOLDER_ERC20("holder's address")
+![CRYPTO_HOLDERBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTO_HOLDER_BEP20.gif)
+###### EXAMPLE =CRYPTOTX_HOLDER_BEP20("holder's address")
 
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
