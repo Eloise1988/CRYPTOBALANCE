@@ -169,6 +169,13 @@
 ###### EXAMPLE    =CRYPTOHOLDERS(E39:E100,F39:F100)
 ## 
 
+### CRYPTOTX
+###### Returns the list of transactions on ERC20 and BEP20
+![CRYPTOTXERC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_ERC20.gif)
+###### EXAMPLE =CRYPTOTX_ERC20("holder's address")
+![CRYPTOTXBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_BEP20.gif)
+###### EXAMPLE =CRYPTOTX_BEP20("holder's address")
+
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
 ###### 2. Go to Tools › Script editor
