@@ -14,16 +14,19 @@
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOBALANCE("USDT","0xf977814e90da44bfa03b6295a0616a897441acec", $A$1)
 
-### SPECIAL CASES ERC20, BEP20, MATIC, AVAX, TEZOS, SOLANA, FANTOM tokens that are not in the available token list:
+### SPECIAL CASES ERC20, BEP20, MATIC, AVAX, TEZOS, SOLANA, FANTOM, ARBITRUM, RIPPLE and TRON tokens that are not in the available token list:
 ###### You can call the balance using its contract address
 ###### =CRYPTOBALANCE(" ERC20 contract address","ERC20 holder address")
 ###### =CRYPTOBALANCE("b"+ "BEP20 contract address","holder address") 
 ###### =CRYPTOBALANCE("m"+ "MATIC contract address", "holder address")
 ###### =CRYPTOBALANCE("a"+ "AVAX contract address", "holder address") 
 ###### =CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address")
+###### =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address")
 ###### =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address")
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
+###### =CRYPTOBALANCE("TRON contract address","holder address")
+###### =CRYPTOBALANCE("XRP contract address","holder address")
 
 ### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_COINS.md) [Staking](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/STAKING.md) [Rewards](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/REWARDS.md)
 
