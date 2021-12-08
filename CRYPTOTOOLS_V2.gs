@@ -156,9 +156,12 @@ function ShowContactInfo() {
  *   =CRYPTOBALANCE("m"+ "MATIC contract address", "holder address")
  *   =CRYPTOBALANCE("a"+ "AVAX contract address", "holder address") 
  *   =CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address")
+ *   =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address")
  *   =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address")
  *   =CRYPTOBALANCE("TEZOS contract address","holder address") 
  *   =CRYPTOBALANCE("SOLANA contract address","holder address")
+ *   =CRYPTOBALANCE("XRP contract address","holder address")
+ *   =CRYPTOBALANCE("TRON contract address","holder address")
  *
  * @param {cryptocurrency}  the cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
  * @param {address}         the wallet address associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
