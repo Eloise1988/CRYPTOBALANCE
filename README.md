@@ -59,6 +59,10 @@
 ![DEXPRICE_OsmosisCosmo](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexpice_osmosiscosmos.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("ATOM","OSMO","OSMO")
 
+#### Prices from Quickswap's exchange on Matic's network
+![DEXPRICE_QuickswapMatic](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexprice_quickswapmatic.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("WBTC","USDC","QUICK")
+
 
 ##  
 ### DEX 24H VOLUMES
