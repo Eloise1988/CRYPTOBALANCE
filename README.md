@@ -2,7 +2,7 @@
 ###### [Link to Google Sheets public template!](https://docs.google.com/spreadsheets/d/19aZM9IVdexcvb5U4gnC4TKOotgtkgxcEjGzMGv6OxyU/edit?usp=sharing)   
 ###### [Link to the Medium Publication](https://medium.com/coinmonks/how-to-value-your-stocks-crypto-portfolio-in-google-sheets-22bb7b42c39d)
 ###### [Link to Google Sheet's Set-up](https://medium.com/the-cryptocurious/google-sheet-open-source-cryptotools-set-up-9420e3940a8a)
-###### [API Documentation](https://www.charmantadvisory.com/openapi)
+###### [API Documentation](https://api.charmantadvisory.com/openapi)
 
 ## CRYPTOBALANCE
 
