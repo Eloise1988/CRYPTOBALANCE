@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.2.0
+  Version:      2.2.2
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
   License:      MIT License
@@ -52,18 +52,8 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.1.0   July 24th CRYPTOSUMBSC function retrieves the total $ amount on BEP20 wallet  
-  2.1.1   August 30 Request TVL, DEXFEE, DEXVOLUME by array instead of a single cell 
-  2.1.2   September 4th CRYPTOSUMATIC function retrieves the total $ amount on MATIC Smart Chain wallet  
-  2.1.3   September 5th CRYPTOPRICE function retrieves cryptocurrency prices in USD from Coingecko  
-  2.1.4   September 14th ARBITRUM SUSHISWAP function retrieves newly minted pairs on the exchange 
-  2.1.5   October 4th PROTOCOLS function retrieves the list of protocols available on zapper.fi 
-  2.1.6   October 5th CRYPTOVOL30D function retrieves cryptocurrency 30D volatility against USD, ETH, BTC 
-  2.1.7   October 15th CRYPTODEFI, CRYPTODEFI_BALANCE, CRYPTODEFI_BALANCEUSD functions 
-  2.1.8   October 16th CRYPTOGAS function 
-  2.1.9   November 8th cache CRYPTODEFI
-  2.2.0   November 26th cache CRYPTOSUPPLY and CRYPTOHOLDERS functions
-  2.2.1   December 6 changed name CRYPTOHOLDERS to CRYPTOHOLDERCOUNT
+  2.2.1   12/06/21 changed name CRYPTOHOLDERS to CRYPTOHOLDERCOUNT
+  2.2.2   12/13/21 DOMAIN NAME change
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -128,7 +118,6 @@ function ShowPremium() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Premium users",
         'For users needing faster, higher limits and customization: a private server is available but only accessible through api-key identification\n\
-             Support email: ac@charmantadvisory.com\n\
              Telegram Chat: https://t.me/TheCryptoCurious',
         ui.ButtonSet.OK)
 }
@@ -136,10 +125,9 @@ function ShowPremium() {
 function ShowContactInfo() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Contact Info",
-        'Support email: ac@charmantadvisory.com\n\
-             Telegram Chat: https://t.me/TheCryptoCurious\n\
-             Github: https://github.com/Eloise1988\n\
-             API Doc: https://app.swaggerhub.com/apis-docs/Eloise1988/Crypto-Tools',
+        'Telegram Chat: https://t.me/TheCryptoCurious\n\
+         Github: https://github.com/Eloise1988\n\
+         API Doc: https://api.cryptotools.one/openapi',
         ui.ButtonSet.OK)
 }
 
@@ -190,7 +178,7 @@ async function CRYPTOBALANCE(ticker, address) {
         var userProperties = PropertiesService.getUserProperties();
 
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -198,7 +186,7 @@ async function CRYPTOBALANCE(ticker, address) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -258,7 +246,7 @@ async function CRYPTOREWARDS(ticker, address) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -266,7 +254,7 @@ async function CRYPTOREWARDS(ticker, address) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -320,7 +308,7 @@ async function CRYPTOSTAKING(ticker, address) {
         GSUUID = GSUUID.replace(/%2f/gi, 'hello');
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -328,7 +316,7 @@ async function CRYPTOSTAKING(ticker, address) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -382,7 +370,7 @@ async function CRYPTOSUMETH(address) {
         GSUUID = GSUUID.replace(/%2f/gi, 'hello');
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -390,7 +378,7 @@ async function CRYPTOSUMETH(address) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -458,7 +446,7 @@ async function CRYPTOTVL(exchange_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -466,7 +454,7 @@ async function CRYPTOTVL(exchange_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -539,7 +527,7 @@ async function CRYPTODEXVOLUME(exchange_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -547,7 +535,7 @@ async function CRYPTODEXVOLUME(exchange_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -621,7 +609,7 @@ async function CRYPTODEXFEE(exchange_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -629,7 +617,7 @@ async function CRYPTODEXFEE(exchange_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -684,7 +672,7 @@ async function UNISWAP(days, volume, liquidity, tx_count) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -693,7 +681,7 @@ async function UNISWAP(days, volume, liquidity, tx_count) {
 
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -735,7 +723,7 @@ async function ARBITRUMSUSHISWAP(days, volume, liquidity, tx_count) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -743,7 +731,7 @@ async function ARBITRUMSUSHISWAP(days, volume, liquidity, tx_count) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -785,7 +773,7 @@ async function SUSHISWAP(days, volume, liquidity, tx_count) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -793,7 +781,7 @@ async function SUSHISWAP(days, volume, liquidity, tx_count) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -835,7 +823,7 @@ async function PANCAKESWAP(days, volume, liquidity, tx_count) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -843,7 +831,7 @@ async function PANCAKESWAP(days, volume, liquidity, tx_count) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -883,7 +871,7 @@ async function CRYPTOFUTURES(ticker) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -891,7 +879,7 @@ async function CRYPTOFUTURES(ticker) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -944,7 +932,7 @@ async function CRYPTODISTRIBUTIONRATE(exchange, ticker, side) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -952,7 +940,7 @@ async function CRYPTODISTRIBUTIONRATE(exchange, ticker, side) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1015,7 +1003,7 @@ async function CRYPTOLP(exchange, pair, type) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1023,7 +1011,7 @@ async function CRYPTOLP(exchange, pair, type) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1072,7 +1060,7 @@ async function CRYPTO_ERC20HOLDERS(ticker) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1080,7 +1068,7 @@ async function CRYPTO_ERC20HOLDERS(ticker) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1118,7 +1106,7 @@ async function CRYPTO_BEP20HOLDERS(ticker) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1126,7 +1114,7 @@ async function CRYPTO_BEP20HOLDERS(ticker) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1166,7 +1154,7 @@ async function CRYPTOTX_ERC20(address, nbdays) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1174,7 +1162,7 @@ async function CRYPTOTX_ERC20(address, nbdays) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1214,7 +1202,7 @@ async function CRYPTOTX_BEP20(address, nbdays) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1222,7 +1210,7 @@ async function CRYPTOTX_BEP20(address, nbdays) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1282,7 +1270,7 @@ async function CRYPTOPOOLPRICE(token_name_array, exchange_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1290,7 +1278,7 @@ async function CRYPTOPOOLPRICE(token_name_array, exchange_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1362,7 +1350,7 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
         GSUUID = GSUUID.replace(/%2f/gi, 'hello');
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1370,7 +1358,7 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1446,7 +1434,7 @@ async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1454,7 +1442,7 @@ async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1527,7 +1515,7 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1535,7 +1523,7 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1597,7 +1585,7 @@ async function CRYPTOSUMBSC(address) {
         GSUUID = GSUUID.replace(/%2f/gi, 'hello');
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1605,7 +1593,7 @@ async function CRYPTOSUMBSC(address) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1659,7 +1647,7 @@ async function CRYPTOSUMATIC(address) {
         GSUUID = GSUUID.replace(/%2f/gi, 'hello');
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1667,7 +1655,7 @@ async function CRYPTOSUMATIC(address) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1730,7 +1718,7 @@ async function CRYPTOPRICE(token1_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1738,7 +1726,7 @@ async function CRYPTOPRICE(token1_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1810,7 +1798,7 @@ async function CRYPTOVOL30D(token1_array, token2_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1818,7 +1806,7 @@ async function CRYPTOVOL30D(token1_array, token2_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1878,7 +1866,7 @@ async function CRYPTOGAS(ticker) {
         var userProperties = PropertiesService.getUserProperties();
 
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1886,7 +1874,7 @@ async function CRYPTOGAS(ticker) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -1950,7 +1938,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -1958,7 +1946,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -2028,7 +2016,7 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -2036,7 +2024,7 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -2141,7 +2129,7 @@ function DEFI_NETWORTH() {
     var userProperties = PropertiesService.getUserProperties();
     var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-    private_path = "http://api.charmantadvisory.com";
+    private_path = "http://api.cryptotools.one";
     http_options = {
         'headers': {
             'apikey': KEYID
@@ -2149,7 +2137,7 @@ function DEFI_NETWORTH() {
     };
 
     if (cryptotools_api_key != "") {
-        private_path = "https://privateapi.charmantadvisory.com";
+        private_path = "https://privateapi.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': cryptotools_api_key
@@ -2201,7 +2189,7 @@ async function CRYPTODEFI(address, protocols) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -2209,7 +2197,7 @@ async function CRYPTODEFI(address, protocols) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -2279,7 +2267,7 @@ async function CRYPTODEFI_BALANCE(address, ticker, protocols) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -2287,7 +2275,7 @@ async function CRYPTODEFI_BALANCE(address, ticker, protocols) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
@@ -2353,7 +2341,7 @@ async function CRYPTODEFI_BALANCEUSD(address, ticker, protocols) {
         var userProperties = PropertiesService.getUserProperties();
         var KEYID = userProperties.getProperty("KEYID") || GSUUID;
 
-        private_path = "http://api.charmantadvisory.com";
+        private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
                 'apikey': KEYID
@@ -2361,7 +2349,7 @@ async function CRYPTODEFI_BALANCEUSD(address, ticker, protocols) {
         };
 
         if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.charmantadvisory.com";
+            private_path = "https://privateapi.cryptotools.one";
             http_options = {
                 'headers': {
                     'apikey': cryptotools_api_key
