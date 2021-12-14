@@ -73,14 +73,8 @@ function onOpen() {
     ui.createMenu('CRYPTOTOOLS')
         .addItem('CRYPTOBALANCE', 'ShowHowToRefresh')
         .addSeparator()
-        .addItem('CRYPTOSTAKING', 'ShowHowCRYPTOSTAKING')
         .addSeparator()
-        .addItem('CRYPTOREWARDS', 'ShowHowCRYPTOREWARDS')
-        .addSeparator()
-        .addItem('CRYPTOLENDING', 'ShowHowCRYPTOLENDING')
-        .addSeparator()
-        .addSeparator()
-        .addItem('PREMIUM', 'ShowContactInfo')
+        .addItem('PREMIUM', 'ShowPremium')
         .addSeparator()
         .addItem('Contact Info', 'ShowContactInfo')
         .addToUi();
@@ -89,30 +83,11 @@ function onOpen() {
 function ShowHowToRefresh() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Get your wallet Balances",
-        ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1)',
+        ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1) \n\ \n\ Special Cases\n\=CRYPTOBALANCE(" ERC20 contract address","ERC20 holder address") \n\ =CRYPTOBALANCE("b"+ "BEP20 contract address","holder address") \n\ =CRYPTOBALANCE("m"+ "MATIC contract address", "holder address") \n\ =CRYPTOBALANCE("a"+ "AVAX contract address", "holder address") \n\=CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address") \n\ =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address") \n\ =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address") \n\ =CRYPTOBALANCE("TEZOS contract address","holder address") \n\ =CRYPTOBALANCE("SOLANA contract address","holder address") \n\ =CRYPTOBALANCE("XRP contract address","holder address") \n\ =CRYPTOBALANCE("TRON contract address","holder address") \n\ ',
         ui.ButtonSet.OK)
 }
 
-function ShowHowCRYPTOSTAKING() {
-    var ui = SpreadsheetApp.getUi()
-    ui.alert("Get staking amounts",
-        'Returns the amount STAKED on PoS cryptocurrencies.\n\ \n\@param {"CURRENCY TICKER FOR STAKING"} The cryptocurrency TICKER/SYMBOL data to fetch.\n\@param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\@return The current amount of cryptocurrency on the searched public address.\n\ \n\ Get the EOS staked on the oktothemoon address address \n\=CRYPTOSTAKING("EOS","okbtothemoon")',
-        ui.ButtonSet.OK)
-}
 
-function ShowHowCRYPTOREWARDS() {
-    var ui = SpreadsheetApp.getUi()
-    ui.alert("Get the amount of rewards received from staking",
-        'Returns cryptocurrencies REWARDS on PoS cryptocurrencies.\n\ \n\ @param {"CURRENCY TICKER FOR REWARDS"} The cryptocurrency TICKER/SYMBOL data to fetch.\n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the rewards from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\@param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances.\n\ @return The current amount of cryptocurrency on the searched public address.\n\ \n\ Get the ATOM rewards for staking on the following address \n\=CRYPTOREWARDS("ATOM","cosmos1r0y7s2vrgk3nw3nkp5tyy8zxjkz7nw9vrvmxun")',
-        ui.ButtonSet.OK)
-}
-
-function ShowHowCRYPTOLENDING() {
-    var ui = SpreadsheetApp.getUi()
-    ui.alert("Get cryptocurrency lending rates on decentralized and semi-centralized exchanges",
-        'Returns cryptocurrencies lending rates on different lending plateforms.\n\ \n\ @param {"EXCHANGE"} The exchange on which you want to retrieve the lending rate. data to fetch. Examples of exchanges: NUO, COMPOUND, DXDY, FULCRUM, AAVE .... \n\ @param {"TOKEN NAME"} associated to the cryptocurrency you want the lending from. Please pay attention on the available tickers on exchanges. \n\ @param {"APR_BORROW or APR_LEND"} either APR_BORROW which corresponds to the borrowing rate or APR_LEND which corresponds to the lending rate. \n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return the current lending rate in decimal form,  of cryptocurrency on the searched public address.\n\ \n\ Get the borrowing rate on compound for Ethereum. \n\ =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW")',
-        ui.ButtonSet.OK)
-}
 
 function ShowPremium() {
     var ui = SpreadsheetApp.getUi()
@@ -126,6 +101,8 @@ function ShowContactInfo() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Contact Info",
         'Telegram Chat: https://t.me/TheCryptoCurious\n\
+         Medium: https://eloise88.medium.com/\n\
+         Patreon: https://www.patreon.com/cryptotools\n\
          Github: https://github.com/Eloise1988\n\
          API Doc: https://api.cryptotools.one/openapi',
         ui.ButtonSet.OK)
