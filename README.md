@@ -5,23 +5,10 @@
 ###### [API Documentation](https://api.cryptotools.one/openapi)
 
 ## FUNCTIONS
-|  ###### [Cryptobalance](#cryptobalance) 	|  ###### [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  ###### [DEX 24h Volumes](#dex-volumes) 	|  ###### [DEX TVL](#dex-tvl)
+|  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)
+|  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	|  [Lending](#cryptolending) 	|  [Max Token Supply](#cryptosupply)
+|  [Number of Holders per contract](#cryptoholdercount) 	|  [List of Transactions](#cryptotx) 	|  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)
 
-
-
-
-###### [Staking](#cryptostaking)
-###### [Rewards](#cryptorewards)
-###### [Lending](#cryptolending)
-###### [Max Token Supply](#cryptosupply)
-###### [Number of Holders per contract](#cryptoholdercount)
-###### [List of Transactions](#cryptotx)
-###### [List of Holders](#crypto_holder)
-###### [New Tradeable Pairs](#new-tradable-pairs)
-
-CRYPTOHOLDERCOUNT
-CRYPTOTX
-CRYPTO_HOLDER
 
 ## CRYPTOBALANCE
 
