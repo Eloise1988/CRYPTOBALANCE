@@ -4,6 +4,9 @@
 ###### [Link to Google Sheet's Set-up](https://medium.com/the-cryptocurious/google-sheet-open-source-cryptotools-set-up-9420e3940a8a)
 ###### [API Documentation](https://api.cryptotools.one/openapi)
 
+## FUNCTIONS
+### [Cryptobalance function](#cryptobalance)
+
 ## CRYPTOBALANCE
 
 ### Get your cryptocurrency balance in your Google Sheets. 
