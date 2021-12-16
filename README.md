@@ -5,10 +5,11 @@
 ###### [API Documentation](https://api.cryptotools.one/openapi)
 
 ## FUNCTIONS
-###### [Cryptobalance](#cryptobalance)
-###### [Prices on DEX](#cryptocurrency-prices-on-dex)
-###### [DEX 24h Volumes](#dex-volumes)
-###### [DEX TVL](#dex-tvl)
+|  ###### [Cryptobalance](#cryptobalance) 	|  ###### [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  ###### [DEX 24h Volumes](#dex-volumes) 	|  ###### [DEX TVL](#dex-tvl)
+
+
+
+
 ###### [Staking](#cryptostaking)
 ###### [Rewards](#cryptorewards)
 ###### [Lending](#cryptolending)
