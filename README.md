@@ -140,7 +140,7 @@
 
 
 
-### New tradable pairs on UNISWAP, SUSHISWAP, PANCAKESWAP
+### New tradable pairs
 ###### Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
 ![UNISWAP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/UNISWAP.gif)
 
