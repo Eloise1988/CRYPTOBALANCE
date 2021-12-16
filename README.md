@@ -7,8 +7,8 @@
 ## FUNCTIONS
 ###### [Cryptobalance](#cryptobalance)
 ###### [Prices on DEX](#cryptocurrency-prices-on-dex)
-###### [DEX 24h Volumes](#dex-24h-volumes)
-###### [DEX TVL](#dex-total-locked-values)
+###### [DEX 24h Volumes](#dex-volumes)
+###### [DEX TVL](#dex-tvl)
 ###### [Staking](#cryptostaking)
 ###### [Rewards](#cryptorewards)
 ###### [Lending](#cryptolending)
@@ -83,14 +83,14 @@ CRYPTO_HOLDER
 
 
 ##  
-### DEX 24H VOLUMES
+### DEX VOLUMES
 ###### Returns DEXes' (decentralized exchanges) 24H Volume.
 ![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
 ###### =CRYPTODEXVOLUME("DEX ticker/name") 
 ###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
 ## 
 
-### DEX Total Locked Values $ (TVL)
+### DEX TVL 
 ![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TVL.png)
 ###### Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked ($)
 ![TVL](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTVLARRAY.gif)
