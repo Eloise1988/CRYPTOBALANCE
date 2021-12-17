@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.2.2
+  Version:      2.2.3
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
   License:      MIT License
@@ -54,6 +54,7 @@
   
   2.2.1   12/06/21 changed name CRYPTOHOLDERS to CRYPTOHOLDERCOUNT
   2.2.2   12/13/21 DOMAIN NAME change
+  2.2.3   12/17/21 GSSUID modified to Key ID Sheet 
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -150,11 +151,8 @@ async function CRYPTOBALANCE(ticker, address) {
     }
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
 
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
         private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
@@ -218,10 +216,7 @@ async function CRYPTOREWARDS(ticker, address) {
 
         ticker = ticker.toUpperCase();
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -281,10 +276,9 @@ async function CRYPTOSTAKING(ticker, address) {
 
     try {
         ticker = ticker.toUpperCase();
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+        
         private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
@@ -343,10 +337,9 @@ async function CRYPTOSUMETH(address) {
     }
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+
         private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
@@ -418,10 +411,7 @@ async function CRYPTOTVL(exchange_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -499,10 +489,7 @@ async function CRYPTODEXVOLUME(exchange_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -581,10 +568,7 @@ async function CRYPTODEXFEE(exchange_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -644,10 +628,8 @@ async function CRYPTODEXFEE(exchange_array) {
 async function UNISWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -695,10 +677,8 @@ async function ARBITRUMSUSHISWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -745,10 +725,8 @@ async function SUSHISWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -795,10 +773,8 @@ async function PANCAKESWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -843,10 +819,8 @@ async function CRYPTOFUTURES(ticker) {
     Utilities.sleep(Math.random() * 100)
     try {
         ticker = ticker.toUpperCase();
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -904,10 +878,7 @@ async function CRYPTODISTRIBUTIONRATE(exchange, ticker, side) {
         exchange = exchange.toUpperCase();
         side = side.toUpperCase();
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -975,10 +946,7 @@ async function CRYPTOLP(exchange, pair, type) {
         exchange = exchange.toUpperCase();
         type = type.toUpperCase();
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1032,10 +1000,8 @@ async function CRYPTO_ERC20HOLDERS(ticker) {
     Utilities.sleep(Math.random() * 100)
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1078,10 +1044,8 @@ async function CRYPTO_BEP20HOLDERS(ticker) {
     Utilities.sleep(1000)
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1126,10 +1090,7 @@ async function CRYPTOTX_ERC20(address, nbdays) {
     try {
         if (typeof nbdays === 'undefined') nbdays = 10000;
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1174,10 +1135,7 @@ async function CRYPTOTX_BEP20(address, nbdays) {
     try {
         if (typeof nbdays === 'undefined') nbdays = 30;
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1242,10 +1200,7 @@ async function CRYPTOPOOLPRICE(token_name_array, exchange_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1323,10 +1278,8 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+
         private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
@@ -1406,10 +1359,7 @@ async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1487,10 +1437,7 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1558,10 +1505,9 @@ async function CRYPTOSUMBSC(address) {
     }
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+
         private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
@@ -1620,10 +1566,9 @@ async function CRYPTOSUMATIC(address) {
     }
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+
         private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
@@ -1690,10 +1635,7 @@ async function CRYPTOPRICE(token1_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1714,7 +1656,7 @@ async function CRYPTOPRICE(token1_array) {
 
         var res = await UrlFetchApp.fetch(private_path + url, http_options);
         var content = JSON.parse(res.getContentText());
-        Logger.log(content)
+        
         var dict = [];
         for (var i = 0; i < content.length; i++) {
             if (Object.keys(content[i]).length != 0) {
@@ -1770,10 +1712,7 @@ async function CRYPTOVOL30D(token1_array, token2_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1838,11 +1777,9 @@ async function CRYPTOGAS(ticker) {
     }
 
     try {
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
+        
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
         private_path = "http://api.cryptotools.one";
         http_options = {
             'headers': {
@@ -1910,10 +1847,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -1988,10 +1922,7 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
             });
         }
 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -2101,10 +2032,7 @@ function DEFI_NETWORTH() {
     }
 
     //Connection to the API endpoints I created
-    var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-    GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-    var userProperties = PropertiesService.getUserProperties();
-    var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+    var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
     private_path = "http://api.cryptotools.one";
     http_options = {
@@ -2161,10 +2089,7 @@ async function CRYPTODEFI(address, protocols) {
         }
 
         // Connexion to the API endpoints 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -2239,10 +2164,7 @@ async function CRYPTODEFI_BALANCE(address, ticker, protocols) {
         }
 
         // Connexion to the API endpoints 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
@@ -2313,10 +2235,7 @@ async function CRYPTODEFI_BALANCEUSD(address, ticker, protocols) {
         }
 
         // Connexion to the API endpoints 
-        var GSUUID = encodeURIComponent(Session.getTemporaryActiveUserKey());
-        GSUUID = GSUUID.replace(/%2f/gi, 'hello');
-        var userProperties = PropertiesService.getUserProperties();
-        var KEYID = userProperties.getProperty("KEYID") || GSUUID;
+        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 
         private_path = "http://api.cryptotools.one";
         http_options = {
