@@ -179,8 +179,7 @@ async function CRYPTOBALANCE(ticker, address) {
 
         return content;
     } catch (err) {
-        return err
-        //return CRYPTOBALANCE(ticker,address);
+        return err;
     }
 
 }
