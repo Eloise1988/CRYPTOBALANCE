@@ -109,6 +109,31 @@ function ShowContactInfo() {
         ui.ButtonSet.OK)
 }
 
+// Sheet Identification + API headers predefined
+const KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+function url_header(){
+  
+
+  private_path = "http://api.cryptotools.one";
+  http_options = {
+      'headers': {
+          'apikey': KEYID
+      }
+  };
+
+  if (cryptotools_api_key != "") {
+      private_path = "https://privateapi.cryptotools.one";
+      http_options = {
+          'headers': {
+              'apikey': cryptotools_api_key
+          }
+      };
+  }
+  return [private_path,http_options]
+
+}
+
+
 /**CRYPTOBALANCE
  * Returns cryptocurrency balances into Google spreadsheets. The result is a ONE-dimensional array.
  * By default, data gets transformed into a number so it looks more like a normal price data import. 
@@ -152,24 +177,10 @@ async function CRYPTOBALANCE(ticker, address) {
 
     try {
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/BALANCE/" + ticker + "/" + address + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = res.getContentText();
 
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
@@ -215,33 +226,17 @@ async function CRYPTOREWARDS(ticker, address) {
 
         ticker = ticker.toUpperCase();
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-
         url = "/REWARDS/" + ticker + "/" + address + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
 
         var content = res.getContentText();
         cache.put(id_cache, content, expirationInSeconds_)
         
         return content;
     } catch (err) {
-        return CRYPTOREWARDS(ticker, address);
+        return err;
     }
 }
 
@@ -276,26 +271,10 @@ async function CRYPTOSTAKING(ticker, address) {
     try {
         ticker = ticker.toUpperCase();
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-        
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-
         url = "/STAKING/" + ticker + "/" + address + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = res.getContentText();
 
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
@@ -305,7 +284,7 @@ async function CRYPTOSTAKING(ticker, address) {
 
         return content;
     } catch (err) {
-        return CRYPTOSTAKING(ticker, address);
+        return err;
     }
 }
 
@@ -337,26 +316,10 @@ async function CRYPTOSUMETH(address) {
 
     try {
         
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-
         url = "/TOTALETHBALANCE/" + address + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
 
         var content = res.getContentText();
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
@@ -366,7 +329,6 @@ async function CRYPTOSUMETH(address) {
 
         return content;
     } catch (err) {
-        //return CRYPTOSUMETH(address);
         return err;
     }
 }
@@ -410,26 +372,10 @@ async function CRYPTOTVL(exchange_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-
         url = "/TVL2/" + exchange_array + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -444,8 +390,7 @@ async function CRYPTOTVL(exchange_array) {
 
         return dict;
     } catch (err) {
-        return err
-        //return CRYPTOTVL(exchange_array);
+        return err;
     }
 }
 
@@ -488,26 +433,10 @@ async function CRYPTODEXVOLUME(exchange_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-
         url = "/DEXVOLUME2/" + exchange_array + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -523,8 +452,7 @@ async function CRYPTODEXVOLUME(exchange_array) {
 
         return dict;
     } catch (err) {
-        return err
-        //return CRYPTODEXVOLUME(exchange_array);
+        return err;
     }
 }
 
@@ -567,26 +495,9 @@ async function CRYPTODEXFEE(exchange_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-
         url = "/DEXFEE2/" + exchange_array + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header()
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -602,8 +513,7 @@ async function CRYPTODEXFEE(exchange_array) {
 
         return dict;
     } catch (err) {
-        return err
-        //return CRYPTODEXFEE(exchange_array);
+        return err;
     }
 }
 
@@ -626,33 +536,12 @@ async function CRYPTODEXFEE(exchange_array) {
  **/
 async function UNISWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
-    try {
+  
+    url = "/UNISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+    full_url_options=url_header();
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/UNISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return err
-        //return UNISWAP(days,volume,liquidity,tx_count);
-    }
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    
 }
 
 /**ARBITRUMSUSHISWAP
@@ -674,33 +563,10 @@ async function UNISWAP(days, volume, liquidity, tx_count) {
  **/
 async function ARBITRUMSUSHISWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
-
-    try {
         
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/ARBITRUMSUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return err
-        //return ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count);
-    }
+    url = "/ARBITRUMSUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+    full_url_options=url_header();
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
 }
 
 /**SUSHISWAP
@@ -723,32 +589,10 @@ async function ARBITRUMSUSHISWAP(days, volume, liquidity, tx_count) {
 async function SUSHISWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
 
-    try {
-        
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+    url = "/SUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+    full_url_options=url_header();
 
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/SUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return err
-        //return SUSHISWAP(days,volume,liquidity,tx_count);
-    }
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
 }
 
 /**PANCAKESWAP
@@ -771,33 +615,11 @@ async function SUSHISWAP(days, volume, liquidity, tx_count) {
 async function PANCAKESWAP(days, volume, liquidity, tx_count) {
     Utilities.sleep(Math.random() * 100)
 
-    try {
-        
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+    url = "/PANCAKESWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+    full_url_options=url_header();
 
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/PANCAKESWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
-
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return err
-        //return PANCAKESWAP(days,volume,liquidity,tx_count);
-    }
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    
 }
 
 /**CRYPTOFUTURES
@@ -816,32 +638,12 @@ async function PANCAKESWAP(days, volume, liquidity, tx_count) {
  **/
 async function CRYPTOFUTURES(ticker) {
     Utilities.sleep(Math.random() * 100)
-    try {
-        ticker = ticker.toUpperCase();
-        
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+    ticker = ticker.toUpperCase();
+    
+    url = "/" + ticker + "FUTURES/" + KEYID;
+    full_url_options=url_header();
 
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/" + ticker + "FUTURES/" + KEYID;
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return CRYPTOFUTURES(ticker);
-    }
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
 }
 
 /**CRYPTODISTRIBUTIONRATE
@@ -877,26 +679,10 @@ async function CRYPTODISTRIBUTIONRATE(exchange, ticker, side) {
         exchange = exchange.toUpperCase();
         side = side.toUpperCase();
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/DISTRIBUTIONRATE/" + exchange + "/" + ticker + "/" + side + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = res.getContentText();
         if (content != 'None') {
             if (!isNaN(content) && content.toString().indexOf('.') != -1) {
@@ -907,7 +693,7 @@ async function CRYPTODISTRIBUTIONRATE(exchange, ticker, side) {
 
         return content;
     } catch (err) {
-        return CRYPTODISTRIBUTIONRATE(exchange, ticker, side);
+        return err;
     }
 }
 /**CRYPTOLP
@@ -945,26 +731,10 @@ async function CRYPTOLP(exchange, pair, type) {
         exchange = exchange.toUpperCase();
         type = type.toUpperCase();
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/LPOOLS/" + exchange + "/" + pair + "/" + type + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
 
         var content = res.getContentText();
         if (content != 'None') {
@@ -977,7 +747,7 @@ async function CRYPTOLP(exchange, pair, type) {
 
         return content;
     } catch (err) {
-        return CRYPTOLP(exchange, ticker, side);
+        return err;
     }
 }
 
@@ -1000,26 +770,9 @@ async function CRYPTO_ERC20HOLDERS(ticker) {
 
     try {
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/ERC20HOLDERS/" + ticker + "/" + KEYID;
 
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
+        return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
     } catch (err) {
         return CRYPTO_ERC20HOLDERS(ticker);
     }
@@ -1042,31 +795,10 @@ async function CRYPTO_ERC20HOLDERS(ticker) {
 async function CRYPTO_BEP20HOLDERS(ticker) {
     Utilities.sleep(1000)
 
-    try {
+    url = "/BEP20HOLDERS/" + ticker + "/" + KEYID;
+    full_url_options=url_header();
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/BEP20HOLDERS/" + ticker + "/" + KEYID;
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return CRYPTO_BEP20HOLDERS(ticker);
-    }
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
 }
 
 /**CRYPTOTX_ERC20
@@ -1086,32 +818,13 @@ async function CRYPTO_BEP20HOLDERS(ticker) {
 async function CRYPTOTX_ERC20(address, nbdays) {
     Utilities.sleep(Math.random() * 30)
 
-    try {
-        if (typeof nbdays === 'undefined') nbdays = 10000;
+    if (typeof nbdays === 'undefined') nbdays = 10000;
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+    url = "/TXERC20/" + address + "/" + nbdays + "/" + KEYID;
+    full_url_options=url_header();
 
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/TXERC20/" + address + "/" + nbdays + "/" + KEYID;
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return CRYPTOTX_ERC20(address, nbdays);
-    }
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    
 }
 
 /**CRYPTOTX_BEP20
@@ -1131,32 +844,13 @@ async function CRYPTOTX_ERC20(address, nbdays) {
 async function CRYPTOTX_BEP20(address, nbdays) {
     Utilities.sleep(Math.random() * 100)
 
-    try {
-        if (typeof nbdays === 'undefined') nbdays = 30;
+    if (typeof nbdays === 'undefined') nbdays = 30;
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+    url = "/TXBEP20/" + address + "/" + nbdays + "/" + KEYID;
+    full_url_options=url_header();
 
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/TXBEP20/" + address + "/" + nbdays + "/" + KEYID;
-
-        return ImportJSONAdvanced(private_path + url, http_options, '', 'noInherit,noTruncate,rawHeaders,noHeaders', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return CRYPTOTX_BEP20(address, nbdays);
-    }
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    
 }
 
 /**CRYPTOPOOLPRICE
@@ -1199,26 +893,10 @@ async function CRYPTOPOOLPRICE(token_name_array, exchange_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/POOLPRICE/" + exchange_array + "/" + token_name_array + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
 
@@ -1236,7 +914,6 @@ async function CRYPTOPOOLPRICE(token_name_array, exchange_array) {
         return dict;
     } catch (err) {
         return err
-        //return CRYPTOPOOLPRICE(token_name_array,exchange_array);
     }
 }
 
@@ -1277,26 +954,10 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/LPOOLS/" + exchange_array + "/" + ticker_array + "/" + data_type + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -1312,8 +973,7 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
 
         return dict;
     } catch (err) {
-        return err
-        //return CRYPTOFARMING(exchange_array,ticker_array,data_type);
+        return err;
     }
 }
 
@@ -1358,26 +1018,10 @@ async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/DEXPRICE2/" + token1_array + "/" + token2_array + "/" + exchange_array + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -1393,8 +1037,7 @@ async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
 
         return dict;
     } catch (err) {
-        return err
-        //return CRYPTODEXPRICE(token1_array,token2_array,exchange_array);
+        return err;
     }
 }
 
@@ -1436,26 +1079,10 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/LENDING2/" + exchange_array + "/" + ticker_array + "/" + side_array + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
 
@@ -1472,8 +1099,7 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
 
         return dict;
     } catch (err) {
-        return err
-        //return CRYPTOLENDING(exchange_array,ticker_array,side_array);
+        return err;
     }
 }
 
@@ -1505,25 +1131,10 @@ async function CRYPTOSUMBSC(address) {
 
     try {
         
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/TOTALBSCBALANCE/" + address + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
 
         var content = res.getContentText();
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
@@ -1533,7 +1144,6 @@ async function CRYPTOSUMBSC(address) {
 
         return content;
     } catch (err) {
-        //return CRYPTOSUMBSC(address);
         return err;
     }
 }
@@ -1566,25 +1176,10 @@ async function CRYPTOSUMATIC(address) {
 
     try {
         
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/TOTALMATICBALANCE/" + address + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
 
         var content = res.getContentText();
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
@@ -1593,7 +1188,6 @@ async function CRYPTOSUMATIC(address) {
         }
         return content;
     } catch (err) {
-        //return CRYPTOSUMATIC(address);
         return err;
     }
 }
@@ -1634,26 +1228,10 @@ async function CRYPTOPRICE(token1_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/CRYPTOPRICE/" + token1_array + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
         
         var dict = [];
@@ -1669,8 +1247,7 @@ async function CRYPTOPRICE(token1_array) {
 
         return dict;
     } catch (err) {
-        return err
-        //return CRYPTOPRICE(token1_array);
+        return err;
     }
 }
 
@@ -1711,26 +1288,10 @@ async function CRYPTOVOL30D(token1_array, token2_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/30DVOL/" + token1_array + "/" + token2_array + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -1746,7 +1307,7 @@ async function CRYPTOVOL30D(token1_array, token2_array) {
 
         return dict;
     } catch (err) {
-        return err
+        return err;
     }
 }
 
@@ -1776,27 +1337,11 @@ async function CRYPTOGAS(ticker) {
     }
 
     try {
-        
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
 
         url = "/CRYPTOGAS/" + ticker + "/" + KEYID;
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = res.getContentText();
 
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
@@ -1806,7 +1351,7 @@ async function CRYPTOGAS(ticker) {
 
         return content;
     } catch (err) {
-        return err
+        return err;
     }
 }
 
@@ -1846,26 +1391,10 @@ async function CRYPTOSUPPLY(token_array, network_array) {
             });
         }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/SUPPLYCOINS/" + token_array + "/" + network_array + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -1881,7 +1410,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
 
         return dict;
     } catch (err) {
-        return err
+        return err;
     }
 }
 
@@ -1904,61 +1433,44 @@ async function CRYPTOSUPPLY(token_array, network_array) {
 async function CRYPTOHOLDERCOUNT(token_array, network_array) {
     Utilities.sleep(Math.random() * 100)
 
-    try {
-        if (token_array.length > 1) {
-            network_array = [].concat(network_array).join("%2C");
-            token_array = [].concat(token_array).join("%2C");
-        }
+    
+      if (token_array.length > 1) {
+          network_array = [].concat(network_array).join("%2C");
+          token_array = [].concat(token_array).join("%2C");
+      }
 
-        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token_array + network_array + "nbholders"));
-        
-        var cache = CacheService.getScriptCache();
-        var cached = cache.get(id_cache);
-        if (cached != null) {
-            result = cached.split(',');
-            return result.map(function(n) {
-                return n && ("" || Number(n))
-            });
-        }
+      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token_array + network_array + "nbholders"));
+      
+      var cache = CacheService.getScriptCache();
+      var cached = cache.get(id_cache);
+      if (cached != null) {
+          result = cached.split(',');
+          return result.map(function(n) {
+              return n && ("" || Number(n))
+          });
+      }
 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+      
+      url = "/NBHOLDERSCOINS/" + token_array + "/" + network_array + "/" + KEYID;
+      full_url_options=url_header()
+      var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+      var content = JSON.parse(res.getContentText());
 
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
+      var dict = [];
+      for (var i = 0; i < content.length; i++) {
+          if (Object.keys(content[i]).length != 0) {
+              dict.push(parseFloat(content[i]['HOLDERS']));
+          } else {
+              dict.push("");
+          }
+      }
 
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-        url = "/NBHOLDERSCOINS/" + token_array + "/" + network_array + "/" + KEYID;
+      cache.put(id_cache, dict, expirationInSeconds_);
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
-        var content = JSON.parse(res.getContentText());
-
-        var dict = [];
-        for (var i = 0; i < content.length; i++) {
-            if (Object.keys(content[i]).length != 0) {
-                dict.push(parseFloat(content[i]['HOLDERS']));
-            } else {
-                dict.push("");
-            }
-        }
-
-        cache.put(id_cache, dict, expirationInSeconds_);
-
-        return dict;
-    } catch (err) {
-        return err
-    }
+      return dict;
+    
 }
+
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
@@ -2031,28 +1543,13 @@ function DEFI_NETWORTH() {
     }
 
     //Connection to the API endpoints I created
-    var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-    private_path = "http://api.cryptotools.one";
-    http_options = {
-        'headers': {
-            'apikey': KEYID
-        }
-    };
-
-    if (cryptotools_api_key != "") {
-        private_path = "https://privateapi.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': cryptotools_api_key
-            }
-        };
-    }
+    
     url = "/DEFINETWORTH/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+    full_url_options=url_header();
 
     // Calling the API and retrieving the data
 
-    var res = UrlFetchApp.fetch(private_path + url, http_options);
+    var res = UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
     var content = JSON.parse(res.getContentText());
 
     //Setting the values in the range defined at the beginning of the script
@@ -2088,26 +1585,10 @@ async function CRYPTODEFI(address, protocols) {
         }
 
         // Connexion to the API endpoints 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+        full_url_options=url_header();
 
-        var res = await UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = res.getContentText();
         var parsedJSON = JSON.parse(content);
 
@@ -2163,27 +1644,11 @@ async function CRYPTODEFI_BALANCE(address, ticker, protocols) {
         }
 
         // Connexion to the API endpoints 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
         url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+        full_url_options=url_header();
 
         // Calling the API and retrieving the data
-        var res = UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
@@ -2234,28 +1699,11 @@ async function CRYPTODEFI_BALANCEUSD(address, ticker, protocols) {
         }
 
         // Connexion to the API endpoints 
-        var KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
-
-        private_path = "http://api.cryptotools.one";
-        http_options = {
-            'headers': {
-                'apikey': KEYID
-            }
-        };
-
-        if (cryptotools_api_key != "") {
-            private_path = "https://privateapi.cryptotools.one";
-            http_options = {
-                'headers': {
-                    'apikey': cryptotools_api_key
-                }
-            };
-        }
-
         url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
+        full_url_options=url_header();
 
         // Calling the API and retrieving the data
-        var res = UrlFetchApp.fetch(private_path + url, http_options);
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
