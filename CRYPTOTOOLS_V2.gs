@@ -114,7 +114,7 @@ const KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
 function url_header(){
   
 
-  private_path = "http://api.cryptotools.one";
+  private_path = "https://api.cryptotools.one";
   http_options = {
       'headers': {
           'apikey': KEYID
