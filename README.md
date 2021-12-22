@@ -29,6 +29,7 @@
 ###### =CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address")
 ###### =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address")
 ###### =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address")
+###### =CRYPTOBALANCE(celo"+ "CELO contract address", "holder address")
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
 ###### =CRYPTOBALANCE("TRON contract address","holder address")
