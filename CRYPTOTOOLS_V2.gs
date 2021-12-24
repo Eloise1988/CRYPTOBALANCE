@@ -74,10 +74,9 @@ function onOpen() {
     ui.createMenu('CRYPTOTOOLS')
         .addItem('CRYPTOBALANCE', 'ShowHowToRefresh')
         .addSeparator()
-        .addSeparator()
         .addItem('PREMIUM', 'ShowPremium')
         .addSeparator()
-        .addItem('Contact Info', 'ShowContactInfo')
+        .addItem('CONTACT', 'ShowContactInfo')
         .addToUi();
 }
 
@@ -94,7 +93,7 @@ function ShowPremium() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Premium users",
         'For users needing faster, higher limits and customization: a private server is available but only accessible through api-key identification\n\
-             Telegram Chat: https://t.me/TheCryptoCurious',
+             Telegram Chat: https://t.me/TheCryptoCurious \n\ API Documentation: https://api.cryptotools.one/openapi',
         ui.ButtonSet.OK)
 }
 
