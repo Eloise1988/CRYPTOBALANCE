@@ -70,6 +70,14 @@
 ![DEXPRICE_QuickswapMatic](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptodexprice_quickswapmatic.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("WBTC","USDC","QUICK")
 
+#### Prices from Sushiswap's exchange on Celo's network
+![DEXPRICE_SushiswapCelo](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CELOSUSHISWAP_DEXPRICE.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("BTC","CUSD","CELO")
+
+#### Prices from Spookyswap's exchange on Fantom's network
+![DEXPRICE_FantomSUSHISWAP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/FANTOMSPOOKYSWAP_DEXPRICE.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("FUSDT","WFTM","BOO")
+
 
 ##  
 ### DEX VOLUMES
