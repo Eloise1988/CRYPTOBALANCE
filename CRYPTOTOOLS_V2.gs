@@ -74,6 +74,9 @@ function onOpen() {
     ui.createMenu('CRYPTOTOOLS')
         .addItem('CRYPTOBALANCE', 'ShowHowToRefresh')
         .addSeparator()
+        .addItem('CRYPTODEXPRICE', 'ShowDEXPrice')
+        .addSeparator()
+        .addSeparator()
         .addItem('PREMIUM', 'ShowPremium')
         .addSeparator()
         .addItem('CONTACT', 'ShowContactInfo')
@@ -84,6 +87,12 @@ function ShowHowToRefresh() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Get your wallet Balances",
         ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1) \n\ \n\ Special Cases\n\=CRYPTOBALANCE(" ERC20 contract address","ERC20 holder address") \n\ =CRYPTOBALANCE("b"+ "BEP20 contract address","holder address") \n\ =CRYPTOBALANCE("m"+ "MATIC contract address", "holder address") \n\ =CRYPTOBALANCE("a"+ "AVAX contract address", "holder address") \n\=CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address") \n\ =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address") \n\ =CRYPTOBALANCE("celo"+ "CELO contract address", "holder address") \n\ =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address") \n\ =CRYPTOBALANCE("TEZOS contract address","holder address") \n\ =CRYPTOBALANCE("SOLANA contract address","holder address") \n\ =CRYPTOBALANCE("XRP contract address","holder address") \n\ =CRYPTOBALANCE("TRON contract address","holder address") \n\ ',
+        ui.ButtonSet.OK)
+}
+function ShowDEXPrice() {
+    var ui = SpreadsheetApp.getUi()
+    ui.alert("Get DEX Prices",
+        ' Returns cryptocurrency prices on different networks and DEXes. \n\ \n\ @param {"CURRENCY TICKER1"} The cryptocurrency TICKER or contract to fetch data from. \n\ @param {"CURRENCY TICKER2"} The versus cryptocurrency TICKER or contract. \n\ @param {"EXCHANGE"} the exchange ticker you want the balance from, see list below.  \n\ @return The current price. \n\ \n Get the price of WETH-USDT on Uniswap V2: \n\ Example:\n=CRYPTODEXPRICE("WETH","USDT","UNI") \n\ \n\ List of networks/exchanges tickers to use:\n\ \n\ Ethereum Smart chain \n\ UNI - Uniswap V2 on ERC20 \n\ 1INCH - 1INCH on ERC20 \n\ SUSHI - Sushiswap on ERC20 \n\ \n\ Binance Smart Chain \n\ CAKE - Pancakeswap V2 on BEP20 \n\ BABY - Babyswap on BEP20 \n\ \n\ Matic/Polygon Smart Chain \n\ QUICK - Quickswap on polygon \n\ MATIC - Sushiswap on Polygon/Matic \n\ \n\ Fantom Chain \n\ BOO - Spookyswap on Fantom \n\ FTM - Sushiswap on Fantom \n\ \n\ Solana Chain \n\ FIDA - Bonfida on Solana \n\ DXL - DEXLabs on Solana \n\ \n\ Cosmos Chain \n\ OSMO - Osmosis on Cosmos \n\ \n\ Celo Chain \n\ CELO - Sushiswap on Celo \n\ \n\ Avalanche Chain \n\ PNG - Pangolin on Avalanche \n\ \n\ ',
         ui.ButtonSet.OK)
 }
 
@@ -988,6 +997,37 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
  *
  * =CRYPTODEXPRICE("ETH","BAL","1INCH")
  * =CRYPTODEXPRICE(E39:E100,F39:F100,J39:J100)
+ * 
+ * ...............     List of networks/exchanges ticker to use          ..............
+ * Ethereum Smart chain 
+ * UNI - Uniswap V2 on ERC20 
+ * 1INCH - 1INCH on ERC20 
+ * SUSHI - Sushiswap on ERC20 
+ * 
+ * Binance Smart Chain 
+ * CAKE - Pancakeswap V2 on BEP20 
+ * BABY - Babyswap on BEP20 
+ * 
+ * Matic/Polygon Smart Chain 
+ * QUICK - Quickswap on polygon 
+ * MATIC - Sushiswap on Polygon/Matic
+ * 
+ * Fantom Chain 
+ * BOO - Spookyswap on Fantom 
+ * FTM - Sushiswap on Fantom 
+ * 
+ * Solana Chain 
+ * FIDA - Bonfida on Solana 
+ * DXL - DEXLabs on Solana 
+ * 
+ * Cosmos Chain 
+ * OSMO - Osmosis on Cosmos 
+ * 
+ * Celo Chain 
+ * CELO - Sushiswap on Celo 
+ * 
+ * Avalanche Chain 
+ * PNG - Pangolin on Avalanche 
  *
  * @param {Token1}                 1st ticker range or its contract address
  * @param {Token2}                 2st ticker range or its contract address
