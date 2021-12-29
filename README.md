@@ -42,6 +42,38 @@
 
 ### CRYPTOCURRENCY PRICES ON DEX
 ###### Returns prices of cryptocurrency prices on different decentralized exchanges, 1INCH, UNI, CAKE, SUSHI, MATIC, PANGOLIN, FANTOM, OSMOSIS, DEXLAB are available for the moment.
+
+### List of networks/exchanges ticker to use
+##### **Ethereum Smart chain**
+##### UNI - Uniswap V2 on ERC20 
+##### 1INCH - 1INCH on ERC20 
+##### SUSHI - Sushiswap on ERC20 
+##### 
+##### **Binance Smart Chain** 
+##### CAKE - Pancakeswap V2 on BEP20 
+##### BABY - Babyswap on BEP20 
+##### 
+##### **Matic/Polygon Smart Chain** 
+##### QUICK - Quickswap on polygon 
+##### MATIC - Sushiswap on Polygon/Matic
+##### 
+##### **Fantom Chain** 
+##### BOO - Spookyswap on Fantom 
+##### FTM - Sushiswap on Fantom 
+#####  
+##### **Solana Chain** 
+##### FIDA - Bonfida on Solana 
+##### DXL - DEXLabs on Solana 
+##### 
+##### **Cosmos Chain** 
+##### OSMO - Osmosis on Cosmos 
+##### 
+##### **Celo Chain** 
+##### CELO - Sushiswap on Celo 
+##### 
+##### **Avalanche Chain** 
+##### PNG - Pangolin on Avalanche 
+##### 
 ![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
 ###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
 ###### EXAMPLE    =CRYPTODEXPRICE("ETH","BAL","1INCH")
