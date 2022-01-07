@@ -91,7 +91,7 @@
 ###### EXAMPLE    =CRYPTODEXPRICE("FUSDT","WFTM","BOO")
 
 #### Prices from TraderJoe's exchange on Avalanche's network
-![DEXPRICE_AVAXJOE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/DEXPRICE_AVAX_JOE.gif)
+![DEXPRICE_AVAXJOE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_AVAX_JOE.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("WAVX","BNB","JOE")
 
 
