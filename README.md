@@ -29,7 +29,8 @@
 ###### =CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address")
 ###### =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address")
 ###### =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address")
-###### =CRYPTOBALANCE(celo"+ "CELO contract address", "holder address")
+###### =CRYPTOBALANCE("celo"+ "CELO contract address", "holder address")
+###### =CRYPTOBALANCE("wan"+ "WANCHAIN smart contract address", "holder address")
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
 ###### =CRYPTOBALANCE("TRON contract address","holder address")
@@ -51,7 +52,7 @@
 ##### ***Solana Chain*** - FIDA - Bonfida on Solana - DXL - DEXLabs on Solana 
 ##### ***Cosmos Chain*** - OSMO - Osmosis on Cosmos 
 ##### ***Celo Chain*** - CELO - Sushiswap on Celo 
-##### ***Avalanche Chain*** - PNG - Pangolin on Avalanche 
+##### ***Avalanche Chain*** - PNG - Pangolin on Avalanche - JOE - TraderJoe on Avalanche 
 ##### 
 ![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
 ###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
@@ -88,6 +89,10 @@
 #### Prices from Spookyswap's exchange on Fantom's network
 ![DEXPRICE_FantomSUSHISWAP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/FANTOMSPOOKYSWAP_DEXPRICE.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("FUSDT","WFTM","BOO")
+
+#### Prices from TraderJoe's exchange on Avalanche's network
+![DEXPRICE_AVAXJOE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/DEXPRICE_AVAX_JOE.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("WAVX","BNB","JOE")
 
 
 ##  
