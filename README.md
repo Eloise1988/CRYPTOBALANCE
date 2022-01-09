@@ -53,6 +53,7 @@
 ##### ***Cosmos Chain*** - OSMO - Osmosis on Cosmos 
 ##### ***Celo Chain*** - CELO - Sushiswap on Celo 
 ##### ***Avalanche Chain*** - PNG - Pangolin on Avalanche - JOE - TraderJoe on Avalanche 
+##### ***Aurora Chain*** - TRI - Trisolaris/Near on Aurora - WANNA - Wannaswap on Aurora
 ##### 
 ![DEXPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_ARRAY_UNI.gif)
 ###### =CRYPTODEXPRICE(ticker1/contract_address_1, ticker2/contract_address_2, exchange ticker) 
@@ -93,6 +94,14 @@
 #### Prices from TraderJoe's exchange on Avalanche's network
 ![DEXPRICE_AVAXJOE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_AVAX_JOE.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("WAVX","BNB","JOE")
+
+#### Prices from Trisolaris' / NEAR exchange on Aurora EVM
+![DEXPRICE_AURORATRI](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_AURORATRI.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("SAFE","WETH","TRI")
+
+#### Prices from Wannaswap's exchange on Aurora EVM
+![DEXPRICE_AURORAWANNA](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_AURORAWANNA.gif)
+###### EXAMPLE    =CRYPTODEXPRICE("LOCK","USDT","WANNA")
 
 
 ##  
