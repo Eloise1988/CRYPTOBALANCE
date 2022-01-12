@@ -31,6 +31,8 @@
 ###### =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address")
 ###### =CRYPTOBALANCE("celo"+ "CELO contract address", "holder address")
 ###### =CRYPTOBALANCE("wan"+ "WANCHAIN smart contract address", "holder address")
+###### =CRYPTOBALANCE("aurora"+ "AURORA smart contract address", "holder address")
+###### =CRYPTOBALANCE("op"+ "OPTIMISTIC smart contract address", "holder address")
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
 ###### =CRYPTOBALANCE("TRON contract address","holder address")
