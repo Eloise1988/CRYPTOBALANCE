@@ -1408,15 +1408,17 @@ async function CRYPTOGAS(ticker) {
 }
 
 /**CRYPTOSUPPLY
- * Returns the max supply on a list of erc20, bep20, matic tokens.
+ * Returns the max supply on a list of erc20, bep20, matic, arbitrum tokens.
  *
  * For example:
  *
- * =CRYPTOSUPPLY("ETH","ERC")
+ * =CRYPTOSUPPLY("0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2","ERC")
  * =CRYPTOSUPPLY("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","BEP")
+ * =CRYPTOSUPPLY("0x6f7C932e7684666C9fd1d44527765433e01fF61d","MATIC")
+ * =CRYPTOSUPPLY("0xf97f4df75117a78c1a5a0dbb814af92458539fb4","ARB")
  * =CRYPTOSUPPLY(E39:E100,F39:F100)
  *
- * @param {Token}                  Ticker or smart contract list
+ * @param {Token}                  Smart contract list
  * @param {Network}                ERC (erc20), BEP (binance smart chain), MATIC (polygon smart chain)
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
