@@ -122,7 +122,7 @@
 ###### EXAMPLE    =CRYPTOTVL("UNI")
 ##  
 
-### DEX Liquidity Provider Taker's rate
+### DEX Fees
 ###### Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.
 ![DEXFEE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXFEEARRAY.gif)
 
