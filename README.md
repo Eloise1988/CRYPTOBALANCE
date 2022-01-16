@@ -7,7 +7,7 @@
 ## FUNCTIONS
 |  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)
 |  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	|  [Lending](#cryptolending) 	|  [Max Token Supply](#cryptosupply)
-|  [Number of Holders per contract](#cryptoholdercount) 	|  [List of Transactions](#cryptotx) 	|  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)
+|  [Number of Holders per contract](#cryptoholdercount) 	|  [List of Transactions](#cryptotx) 	|  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	|  [$ Sum by address](#$-sum-by-address) 	|  [DEX fees](#dex-fees) 	|  [Distribution Rate](#distribution-rate)  |  [Futures](#futures) 	|  [Farming](#farming) 	|  [Pool Price](#pool-price) 	|  [Gas price (ETH)](#gas-price)
 
 
 ## CRYPTOBALANCE
