@@ -191,11 +191,13 @@
 ##  
 
 ### CRYPTOSUPPLY
-###### Returns the max supply on a list of erc20, bep20, matic tokens.
+###### Returns the max supply on a list of erc20, bep20, matic and arbitrum tokens.
 ###### Available Networks
 ######  - ERC (erc20)
 ######  - BEP (binance smart chain)
 ######  - MATIC (polygon smart chain)
+######  - ARB (arbitrum smart chain)
+
 ![CRYPTOSUPPLY](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptosupply.gif)
 
 ###### =CRYPTOSUPPLY(Ticker or smart contract, network)
