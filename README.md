@@ -237,6 +237,15 @@
 ![CRYPTO_HOLDERBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTO_HOLDER_BEP20.gif)
 ###### EXAMPLE =CRYPTOTX_HOLDER_BEP20("holder's address")
 
+
+### VOLATILITY
+###### Returns the 30d % volatility of a cryptocurrency against USD, ETH, or BTC
+![CRYPTO_VOLATILITY](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptovol30d_usd.gif)
+###### EXAMPLE =CRYPTO_HOLDER_ERC20(TICKER,VS_CURRENCY)
+###### EXAMPLE=CRYPTOVOL30D("ETH")
+###### EXAMPLE=CRYPTOVOL30D("ETH","BTC")
+
+
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
 ###### 2. Go to Tools › Script editor
