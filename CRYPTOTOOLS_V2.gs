@@ -38,7 +38,7 @@
     CRYPTOPOOLPRICE                 For use by end users to retrieve prices from decentralized Pool tokens
     CRYPTOFARMING                   For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
     CRYPTOGAS                       For use by end users to retrieve average GWEI gas price (ETH)
-    CRYPTOSUPPLY                    For use by end users to retrieve the max supply on a list of erc20, bep20, matic tokens.
+    CRYPTOSUPPLY                    For use by end users to retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
     CRYPTOHOLDERCOUNT                   For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
@@ -1408,7 +1408,7 @@ async function CRYPTOGAS(ticker) {
 }
 
 /**CRYPTOSUPPLY
- * Returns the max supply on a list of erc20, bep20, matic, arbitrum tokens.
+ * Returns the max supply on a list of erc20, bep20, matic, arbitrum, avalanche, moon-river, fantom tokens.
  *
  * For example:
  *
@@ -1419,7 +1419,7 @@ async function CRYPTOGAS(ticker) {
  * =CRYPTOSUPPLY(E39:E100,F39:F100)
  *
  * @param {Token}                  Smart contract list
- * @param {Network}                ERC (erc20), BEP (binance smart chain), MATIC (polygon smart chain)
+ * @param {Network}                ERC, BEP, MATIC, ARB, AVAX, FTM, MOVR
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
@@ -1469,7 +1469,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
 }
 
 /**CRYPTOHOLDERCOUNT
- * Returns the number of holders on a list of erc20, bep20, matic tokens.
+ * Returns the number of holders on a list of erc20, bep20, matic, arbitrum, avalanche, moon-river, fantom tokens.
  *
  * For example:
  *
@@ -1478,7 +1478,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
  * =CRYPTOHOLDERCOUNT(E39:E100,F39:F100)
  *
  * @param {Token}                  Ticker or smart contract list
- * @param {Network}                ERC (erc20), BEP (binance smart chain), MATIC (polygon smart chain)
+ * @param {Network}                ERC, BEP, MATIC, ARB, AVAX, FTM, MOVR
  * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
  * @customfunction
  *
