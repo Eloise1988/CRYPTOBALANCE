@@ -7,7 +7,7 @@
 ## FUNCTIONS
 |  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)
 |  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	|  [Lending](#cryptolending) 	|  [Max Token Supply](#cryptosupply)
-|  [Number of Holders per contract](#cryptoholdercount) 	|  [List of Transactions](#cryptotx) 	|  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	|  [$ Sum by address](#$-sum-by-address) 	|  [DEX fees](#dex-fees) 	|  [Distribution Rate](#distribution-rate)  |  [Futures](#futures) 	|  [Farming](#farming) 	|  [Pool Price](#pool-price) 	|  [Gas price (ETH)](#gas-price) 	|  [Crypto Address ROI](#crypto-address-roi)
+|  [Number of Holders per contract](#cryptoholdercount) 	|  [List of Transactions](#cryptotx) 	|  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) 	|  [DEX fees](#dex-fees) 	|  [Distribution Rate](#distribution-rate)  |  [Futures](#futures) 	|  [Farming](#farming) 	|  [Pool Price](#pool-price) 	|  [Gas price (ETH)](#gas-price) 	|  [Crypto Address ROI](#crypto-address-roi)
 
 
 ## CRYPTOBALANCE
@@ -245,10 +245,10 @@
 ###### EXAMPLE=CRYPTOVOL30D("ETH")
 ###### EXAMPLE=CRYPTOVOL30D("ETH","BTC")
 
-### $ SUM BY ADDRESS
+### DOLLAR VALUATION BY ADDRESS
 ###### Returns the USD total amount of ERC20, BEP20 or MATIC address
 ![CRYPTO_SUMETH$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/polychainsumeth.gif)
-###### EXAMPLE ==CRYPTOSUMETH("holder's address")
+###### EXAMPLE =CRYPTOSUMETH("holder's address")
 ![CRYPTO_SUMBSC$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOSUMBSC.gif)
 ###### EXAMPLE =CRYPTOSUMBSC("holder's address")
 ![CRYPTO_SUMMATIC$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/totalsummatic.gif)
