@@ -194,12 +194,15 @@
 ##  
 
 ### CRYPTOSUPPLY
-###### Returns the max supply on a list of erc20, bep20, matic and arbitrum tokens.
+###### Returns the max supply on a list of erc20, bep20, matic, avalanche, fantom, moon-river and arbitrum tokens.
 ###### Available Networks
 ######  - ERC (erc20)
 ######  - BEP (binance smart chain)
 ######  - MATIC (polygon smart chain)
 ######  - ARB (arbitrum smart chain)
+######  - AVAX (avalanche smart chain)
+######  - FTM (fantom smart chain)
+######  - MOVR (moon-river smart chain)
 
 ![CRYPTOSUPPLY](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptosupply.gif)
 
@@ -210,11 +213,15 @@
 ## 
 
 ### CRYPTOHOLDERCOUNT
-###### Returns the number of holders on a list of erc20, bep20, matic tokens.
+###### Returns the number of holders on a list of erc20, bep20, matic, avalanche, fantom, moon-river and arbitrum tokens.
 ###### Available Networks
 ######  - ERC (erc20)
 ######  - BEP (binance smart chain)
 ######  - MATIC (polygon smart chain)
+######  - AVAX (avalanche smart chain)
+######  - FTM (fantom smart chain)
+######  - MOVR (moon-river smart chain)
+
 ![CRYPTOHOLDERS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptoholders.gif)
 
 ###### =CRYPTOHOLDERCOUNT(Ticker or smart contract, network)
