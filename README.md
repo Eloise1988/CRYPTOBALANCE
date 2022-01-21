@@ -256,9 +256,7 @@
 ###### Returns the USD total amount of ERC20, BEP20 or MATIC address
 ![CRYPTO_SUMETH$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/polychainsumeth.gif)
 ###### EXAMPLE =CRYPTOSUMETH("holder's address")
-![CRYPTO_SUMBSC$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOSUMBSC.gif)
 ###### EXAMPLE =CRYPTOSUMBSC("holder's address")
-![CRYPTO_SUMMATIC$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/totalsummatic.gif)
 ###### EXAMPLE =CRYPTOSUMATIC("holder's address")
 
 ### FUTURES
