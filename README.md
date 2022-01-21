@@ -261,6 +261,13 @@
 ![CRYPTO_SUMMATIC$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/totalsummatic.gif)
 ###### EXAMPLE =CRYPTOSUMATIC("holder's address")
 
+### FUTURES
+###### Returns BTC or ETH Futures Prices, basis, volume, open interest
+![CRYPTOFUTURES_BTC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOFUTURES.gif)
+###### EXAMPLE =CRYPTOFUTURES("BTC")
+###### EXAMPLE =CRYPTOFUTURES("ETH")
+
+
 
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
