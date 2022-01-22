@@ -265,6 +265,11 @@
 ###### EXAMPLE =CRYPTOFUTURES("BTC")
 ###### EXAMPLE =CRYPTOFUTURES("ETH")
 
+### GAS PRICE
+###### Returns the average GWEI gas price into Google spreadsheets. Only ETH available now.
+![CRYPTOFUTURES_BTC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptogas.gif)
+###### EXAMPLE =CRYPTOGAS("ETH")
+
 
 
 ## CRYPTO TOOLS SETUP
