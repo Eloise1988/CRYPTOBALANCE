@@ -167,12 +167,14 @@
 ### Get the cryptocurrency lending rate from multiple lending platforms. 
 ###### Example of available exchanges: MAKER - COMPOUND - YEARN - DYDX - NUO - NEXO - CELSIUS - AAVE - FULCRUM -NEXO
 ###### Example of available cryptocurrencies: ETH - DAI- USDC- BAT- ZRX- WBTC - SAI - USDT - SNX etc...
-###### Update October 2019 - All rates from https://interest.coinmarketcap.com/
+
 ![LENDINGARRAY](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOLENDINGARRAY.gif)
 
 ###### =CRYPTOLENDING("LENDING PLATFORM","TICKER","SIDE", refresh_cell) 
 ###### EXAMPLE    =CRYPTOLENDING("COMPOUND","ETH","APR_BORROW", refresh_cell) 
-##   
+##  
+
+![LENDINGARRAY2](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/distribution_rate_compound.gif)
 
 
 
