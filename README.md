@@ -278,6 +278,11 @@
 ###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","APY")
 ###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","TVL")
 
+### POOL PRICE
+###### Returns prices from decentralized Pool tokens.
+![CRYPTOPOOLPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/poolprice.png)
+###### EXAMPLE =CRYPTOPOOLPRICE("YVCURVE-BBTC","YEARN")
+
 
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
