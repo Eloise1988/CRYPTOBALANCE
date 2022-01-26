@@ -5,9 +5,11 @@
 ###### [API Documentation](https://api.cryptotools.one/openapi)
 
 ## FUNCTIONS
-|  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)
-|  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	|  [Lending](#cryptolending) 	|  [Max Token Supply](#cryptosupply)
-|  [Number of Holders per contract](#cryptoholdercount) 	|  [List of Transactions](#cryptotx) 	|  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) 	|  [DEX fees](#dex-fees) 	|  [Futures](#futures) 	|  [Farming](#crypto-farming) 	|  [Pool Price](#pool-price) 	|  [Gas price (ETH)](#gas-price) 	|  [Crypto Address ROI](#crypto-address-roi)
+|  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	
+|  [Lending](#cryptolending) 	|  [Farming](#crypto-farming) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) |  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)   	
+|  [DEX fees](#dex-fees)  |  [Pool Price](#pool-price) 	|  [Max Token Supply](#cryptosupply)  |  [Number of Holders per contract](#cryptoholdercount)  
+|  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	 	
+|  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)  |  [Crypto Address ROI](#crypto-address-roi)
 
 
 ## CRYPTOBALANCE
