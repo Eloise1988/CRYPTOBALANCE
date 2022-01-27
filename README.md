@@ -149,8 +149,23 @@
 ##  
 
 ![LENDINGARRAY2](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/distribution_rate_compound.gif)
-
 ##  
+
+### CRYPTO FARMING
+###### Returns apy and tvl from tokens or pools on decentralized exchanges
+![CRYPTOFARMING](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOFARMING.gif)
+###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","APY")
+###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","TVL")
+
+
+### DOLLAR VALUATION BY ADDRESS
+###### Returns the USD total amount of ERC20, BEP20 or MATIC address
+![CRYPTO_SUMETH$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/polychainsumeth.gif)
+###### EXAMPLE =CRYPTOSUMETH("holder's address")
+###### EXAMPLE =CRYPTOSUMBSC("holder's address")
+###### EXAMPLE =CRYPTOSUMATIC("holder's address")
+
+
 ### DEX VOLUMES
 ###### Returns DEXes' (decentralized exchanges) 24H Volume.
 ![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
@@ -252,12 +267,6 @@
 ###### EXAMPLE=CRYPTOVOL30D("ETH")
 ###### EXAMPLE=CRYPTOVOL30D("ETH","BTC")
 
-### DOLLAR VALUATION BY ADDRESS
-###### Returns the USD total amount of ERC20, BEP20 or MATIC address
-![CRYPTO_SUMETH$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/polychainsumeth.gif)
-###### EXAMPLE =CRYPTOSUMETH("holder's address")
-###### EXAMPLE =CRYPTOSUMBSC("holder's address")
-###### EXAMPLE =CRYPTOSUMATIC("holder's address")
 
 ### FUTURES
 ###### Returns BTC or ETH Futures Prices, basis, volume, open interest
@@ -270,11 +279,6 @@
 ![CRYPTOFUTURES_BTC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptogas.gif)
 ###### EXAMPLE =CRYPTOGAS("ETH")
 
-### CRYPTO FARMING
-###### Returns apy and tvl from tokens or pools on decentralized exchanges
-![CRYPTOFARMING](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOFARMING.gif)
-###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","APY")
-###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","TVL")
 
 ### POOL PRICE
 ###### Returns prices from decentralized Pool tokens.
