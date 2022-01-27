@@ -189,24 +189,11 @@
 ###### EXAMPLE    =CRYPTODEXFEE("MAKER")
 ##  
 
+### POOL PRICE
+###### Returns prices from decentralized Pool tokens.
+![CRYPTOPOOLPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/poolprice.png)
+###### EXAMPLE =CRYPTOPOOLPRICE("YVCURVE-BBTC","YEARN")
 
-
-### New tradable pairs
-###### Returns new tradable pairs on Uniswap, Sushiswap (Arbitrum+Ethereum) , Pancakeswap giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
-![UNISWAP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/UNISWAP.gif)
-
-###### =UNISWAP(days,volume,liquidity,tx_count)
-###### EXAMPLE    =UNISWAP(5,10000,10000,100)
-
-###### =SUSHISWAP(days,volume,liquidity,tx_count)
-###### EXAMPLE    =SUSHISWAP(5,10000,10000,100)
-
-###### =PANCAKESWAP(days,volume,liquidity,tx_count)
-###### EXAMPLE    =PANCAKESWAP(5,10000,10000,100)
-
-###### =ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count)
-###### EXAMPLE    =ARBITRUMSUSHISWAP(5,10000,10000,100)
-##  
 
 ### CRYPTOSUPPLY
 ###### Returns the max supply on a list of erc20, bep20, matic, avalanche, fantom, moon-river and arbitrum tokens.
@@ -245,13 +232,6 @@
 ###### EXAMPLE    =CRYPTOHOLDERS(E39:E100,F39:F100)
 ## 
 
-### CRYPTOTX
-###### Returns the list of transactions on ERC20 and BEP20
-![CRYPTOTXERC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_ERC20.gif)
-###### EXAMPLE =CRYPTOTX_ERC20("holder's address")
-![CRYPTOTXBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_BEP20.gif)
-###### EXAMPLE =CRYPTOTX_BEP20("holder's address")
-
 ### CRYPTO_HOLDER
 ###### Returns the list of holders on ERC20 and BEP20
 ![CRYPTO_HOLDERERC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTO_HOLDER_ERC20.gif)
@@ -259,6 +239,22 @@
 ![CRYPTO_HOLDERBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTO_HOLDER_BEP20.gif)
 ###### EXAMPLE =CRYPTOTX_HOLDER_BEP20("holder's address")
 
+### New tradable pairs
+###### Returns new tradable pairs on Uniswap, Sushiswap (Arbitrum+Ethereum) , Pancakeswap giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+![UNISWAP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/UNISWAP.gif)
+
+###### =UNISWAP(days,volume,liquidity,tx_count)
+###### EXAMPLE    =UNISWAP(5,10000,10000,100)
+
+###### =SUSHISWAP(days,volume,liquidity,tx_count)
+###### EXAMPLE    =SUSHISWAP(5,10000,10000,100)
+
+###### =PANCAKESWAP(days,volume,liquidity,tx_count)
+###### EXAMPLE    =PANCAKESWAP(5,10000,10000,100)
+
+###### =ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count)
+###### EXAMPLE    =ARBITRUMSUSHISWAP(5,10000,10000,100)
+##  
 
 ### VOLATILITY
 ###### Returns the 30d % volatility of a cryptocurrency against USD, ETH, or BTC
@@ -274,16 +270,19 @@
 ###### EXAMPLE =CRYPTOFUTURES("BTC")
 ###### EXAMPLE =CRYPTOFUTURES("ETH")
 
+
 ### GAS PRICE
 ###### Returns the average GWEI gas price into Google spreadsheets. Only ETH available now.
 ![CRYPTOFUTURES_BTC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptogas.gif)
 ###### EXAMPLE =CRYPTOGAS("ETH")
 
 
-### POOL PRICE
-###### Returns prices from decentralized Pool tokens.
-![CRYPTOPOOLPRICE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/poolprice.png)
-###### EXAMPLE =CRYPTOPOOLPRICE("YVCURVE-BBTC","YEARN")
+### CRYPTOTX
+###### Returns the list of transactions on ERC20 and BEP20
+![CRYPTOTXERC](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_ERC20.gif)
+###### EXAMPLE =CRYPTOTX_ERC20("holder's address")
+![CRYPTOTXBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_BEP20.gif)
+###### EXAMPLE =CRYPTOTX_BEP20("holder's address")
 
 
 ## CRYPTO TOOLS SETUP
