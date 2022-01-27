@@ -105,32 +105,6 @@
 ![DEXPRICE_AURORAWANNA](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXPRICE_AURORAWANNA.gif)
 ###### EXAMPLE    =CRYPTODEXPRICE("LOCK","USDT","WANNA")
 
-
-##  
-### DEX VOLUMES
-###### Returns DEXes' (decentralized exchanges) 24H Volume.
-![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
-###### =CRYPTODEXVOLUME("DEX ticker/name") 
-###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
-## 
-
-### DEX TVL 
-![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TVL.png)
-###### Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked ($)
-![TVL](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTVLARRAY.gif)
-###### =CRYPTOTVL("DEX ticker/name") 
-###### EXAMPLE    =CRYPTOTVL("UNI")
-##  
-
-### DEX Fees
-###### Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.
-![DEXFEE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXFEEARRAY.gif)
-
-###### =CRYPTODEXFEE("DEX PLATFORM ticker/name") 
-###### EXAMPLE    =CRYPTODEXFEE("MAKER")
-##  
-
- 
 ## CRYPTOSTAKING
 
 ### Returns the amount STAKED on PoS cryptocurrencies
@@ -175,6 +149,30 @@
 ##  
 
 ![LENDINGARRAY2](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/distribution_rate_compound.gif)
+
+##  
+### DEX VOLUMES
+###### Returns DEXes' (decentralized exchanges) 24H Volume.
+![DEXVOLUME](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXVOLUMEARRAY.gif)
+###### =CRYPTODEXVOLUME("DEX ticker/name") 
+###### EXAMPLE    =CRYPTODEXVOLUME("LEND")
+## 
+
+### DEX TVL 
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TVL.png)
+###### Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked ($)
+![TVL](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTVLARRAY.gif)
+###### =CRYPTOTVL("DEX ticker/name") 
+###### EXAMPLE    =CRYPTOTVL("UNI")
+##  
+
+### DEX Fees
+###### Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.
+![DEXFEE](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTODEXFEEARRAY.gif)
+
+###### =CRYPTODEXFEE("DEX PLATFORM ticker/name") 
+###### EXAMPLE    =CRYPTODEXFEE("MAKER")
+##  
 
 
 
