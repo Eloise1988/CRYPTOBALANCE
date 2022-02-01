@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.2.5
+  Version:      2.2.6
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
   License:      MIT License
@@ -23,7 +23,6 @@
     CRYPTOTVL                       For use by end users to retrieve Total Value Locked in Defi projects
     UNISWAP                         For use by end users to retrieve all new pairs on Uniswap
     SUSHISWAP                       For use by end users to retrieve all new pairs on Sushiswap
-    PANCAKESWAP                     For use by end users to retrieve all new pairs on Pancakeswap
     ARBITRUMSUSHISWAP               For use by end users to retrieve all new Sushiswap pairs on Arbitrum
     CRYPTODEXPRICE                  For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
     CRYPTOPRICE                     For use by end users to retrieve cryptocurrency prices in USD from Coingecko
@@ -55,7 +54,8 @@
   2.2.2   12/13/21 DOMAIN NAME change
   2.2.3   12/17/21 GSSUID modified to Key ID Sheet 
   2.2.4   01/23/21 Deleted CRYPTODISTRIBUTION Function
-  2.2.5   01/30/21 Added PALM network tokens to CRYPTOBALANCE
+  2.2.5   01/30/22 Added PALM network tokens to CRYPTOBALANCE
+  2.2.6   02/01/22 Deleted Defunct PANCAKESWAP
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -611,33 +611,6 @@ async function SUSHISWAP(days, volume, liquidity, tx_count) {
     full_url_options=url_header();
 
     return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-}
-
-/**PANCAKESWAP
- * Returns new tradable pairs on Pancakeswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
- *
- * By default, data gets transformed into a table 
- * For example:
- *
- * =PANCAKESWAP(5,10000,10000,100)
- *
- * @param {days}                    the number of Days since the pair is active
- * @param {volume}                  the minimum Volume ($)
- * @param {liquidity}               the minimum Liquidity ($)
- * @param {tx_count}                the number of Transactions existant since creation
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a table with all new tradable pairs on Sushiswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
- **/
-async function PANCAKESWAP(days, volume, liquidity, tx_count) {
-    Utilities.sleep(Math.random() * 100)
-
-    url = "/PANCAKESWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
-    full_url_options=url_header();
-
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    
 }
 
 /**CRYPTOFUTURES
