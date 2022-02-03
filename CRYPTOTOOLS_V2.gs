@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.2.6
+  Version:      2.2.7
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
   License:      MIT License
@@ -18,6 +18,7 @@
     CRYPTOSUMETH                    For use by end users to retrieve one's total $ amount on ERC20 wallets
     CRYPTOSUMBSC                    For use by end users to retrieve one's total $ amount on BEP20 wallets
     CRYPTOSUMATIC                   For use by end users to retrieve one's total $ amount on MATIC wallets
+    CRYPTOSUMUSD                    For use by end users to retrieve one's total $ amount on all chains or by chain
     CRYPTODEXVOLUME                 For use by end users to retrieve DEX volumes $
     CRYPTODEXFEE                    For use by end users to retrieve DEX transaction fees
     CRYPTOTVL                       For use by end users to retrieve Total Value Locked in Defi projects
@@ -56,6 +57,7 @@
   2.2.4   01/23/21 Deleted CRYPTODISTRIBUTION Function
   2.2.5   01/30/22 Added PALM network tokens to CRYPTOBALANCE
   2.2.6   02/01/22 Deleted Defunct PANCAKESWAP
+  2.2.6   02/03/22 New function CRYPTOSUMUSD
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -335,6 +337,53 @@ async function CRYPTOSUMETH(address) {
     try {
         
         url = "/TOTALETHBALANCE/" + address + "/" + KEYID;
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+
+        var content = res.getContentText();
+        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
+            content = parseFloat(content);
+            cache.put(id_cache, content, expirationInSeconds_)
+        }
+
+        return content;
+    } catch (err) {
+        return err;
+    }
+}
+
+/**CRYPTOSUMUSD
+ * Returns the total $ amount on all chains or on a specific chain like eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movre, cvo, aurora etc ...into Google spreadsheets.
+ * For example:
+ *
+ * =CRYPTOSUMUSD("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b", "eth")
+ * =CRYPTOSUMUSD("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b")
+ *
+ * @param {address}                the wallet address you want the sum from
+ * @param {chain}                  optional or by chain: eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movre, cvo, aurora...
+ * @customfunction
+ *
+ * @return the current total amount of $ on specific chain or total
+ **/
+async function CRYPTOSUMUSD(address,chain) {
+    id_cache = address +chain+ "cryptosumusd"
+    Utilities.sleep(Math.random() * 100)
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
+
+    if (cached != null) {
+        if (isNaN(cached)) {
+            return cached;
+        }
+        return Number(cached);
+    }
+
+    try {
+        if (typeof chain === 'undefined') chain = "all";
+        chain = chain.toLowerCase();
+        
+        url = "/TOTALUSDBALANCE/" + address + "/" + chain + "/" + KEYID;
         full_url_options=url_header();
 
         var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
