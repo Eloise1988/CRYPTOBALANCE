@@ -165,7 +165,8 @@
 ###### EXAMPLE =CRYPTOSUMETH("holder's address")
 ###### EXAMPLE =CRYPTOSUMBSC("holder's address")
 ###### EXAMPLE =CRYPTOSUMATIC("holder's address")
-
+![CRYPTO_SUM$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptosumusd.gif)
+###### EXAMPLE =CRYPTOSUMUSD("holder's address","network" as optional)
 
 ### DEX VOLUMES
 ###### Returns DEXes' (decentralized exchanges) 24H Volume.
