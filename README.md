@@ -20,7 +20,7 @@
 ###### =CRYPTOBALANCE("TICKER","ADDRESS", refresh_cell) 
 ###### EXAMPLE    =CRYPTOBALANCE("USDT","0xf977814e90da44bfa03b6295a0616a897441acec", $A$1)
 
-### SPECIAL CASES ERC20, BEP20, MATIC, AVAX, TEZOS, SOLANA, FANTOM, ARBITRUM, RIPPLE and TRON tokens that are not in the available token list:
+### SPECIAL CASES ERC20, BEP20, MATIC, AVAX, TEZOS, SOLANA ... tokens that are not in the available token list:
 ###### You can call the balance using its contract address
 ###### =CRYPTOBALANCE(" ERC20 contract address","ERC20 holder address")
 ###### =CRYPTOBALANCE("b"+ "BEP20 contract address","holder address") 
@@ -34,6 +34,7 @@
 ###### =CRYPTOBALANCE("aurora"+ "AURORA smart contract address", "holder address")
 ###### =CRYPTOBALANCE("op"+ "OPTIMISTIC smart contract address", "holder address")
 ###### =CRYPTOBALANCE("palm"+ "PALM NETWORK smart contract address", "holder address")
+###### =CRYPTOBALANCE("cronos"+ "CRONOS NETWORK smart contract address", "holder address")
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
 ###### =CRYPTOBALANCE("TRON contract address","holder address")
