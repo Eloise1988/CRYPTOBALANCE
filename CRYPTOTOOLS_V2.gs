@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.2.7
+  Version:      2.2.8
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
   License:      MIT License
@@ -38,7 +38,7 @@
     CRYPTOFARMING                   For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
     CRYPTOGAS                       For use by end users to retrieve average GWEI gas price (ETH)
     CRYPTOSUPPLY                    For use by end users to retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
-    CRYPTOHOLDERCOUNT                   For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
+    CRYPTOHOLDERCOUNT               For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                       For use by end users to retrieve the list of protocols available on zapper.fi
@@ -57,7 +57,8 @@
   2.2.4   01/23/21 Deleted CRYPTODISTRIBUTION Function
   2.2.5   01/30/22 Added PALM network tokens to CRYPTOBALANCE
   2.2.6   02/01/22 Deleted Defunct PANCAKESWAP
-  2.2.6   02/03/22 New function CRYPTOSUMUSD
+  2.2.7   02/03/22 New function CRYPTOSUMUSD
+  2.2.8   02/08/22 Added CRONOS Network to CRYPTOBALANCE
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -89,7 +90,7 @@ function onOpen() {
 function ShowHowToRefresh() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Get your wallet Balances",
-        ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1) \n\ \n\ Special Cases\n\=CRYPTOBALANCE(" ERC20 contract address","ERC20 holder address") \n\ =CRYPTOBALANCE("b"+ "BEP20 contract address","holder address") \n\ =CRYPTOBALANCE("m"+ "MATIC contract address", "holder address") \n\ =CRYPTOBALANCE("a"+ "AVAX contract address", "holder address") \n\=CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address") \n\ =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address") \n\ =CRYPTOBALANCE("celo"+ "CELO contract address", "holder address") \n\ =CRYPTOBALANCE("wan"+ "WANCHAIN contract address", "holder address")\n\ =CRYPTOBALANCE("aurora"+ "AURORA contract address", "holder address") \n\ =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address") \n\ Palm Network \n\ =CRYPTOBALANCE("palm"+ "PALM contract address", "holder address") \n\ =CRYPTOBALANCE("TEZOS contract address","holder address") \n\ =CRYPTOBALANCE("SOLANA contract address","holder address") \n\ =CRYPTOBALANCE("XRP contract address","holder address") \n\ =CRYPTOBALANCE("TRON contract address","holder address") \n\ \n\ ETH Balance on : \n\ Arbitrum \n\ =CRYPTOBALANCE("ARBETH","holder address") \n\ Optimistic \n\ =CRYPTOBALANCE("OPETH","holder address") \n\ Aurora \n\ =CRYPTOBALANCE("AURORAETH","holder address") ',
+        ' Returns cryptocurrencies balances for over 1000+ cryptocurrencies. \n\ \n\ @param {"CURRENCY TICKER"} The cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC. \n\ @param {"PUBLIC WALLET ADDRESS"} associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.\n\ @param {"EMPTY CELL REFERENCE"} refresh_cell ONLY on 3rd argument. Reference an empty cell and change its content to force refresh the balances. \n\ @return The current amount of cryptocurrency on the searched public address. \n\ \n\ In your CRYPTOBALANCE function, add a 3rd argument to a locked reference cell, like A1. \nFrom now on every time you change the content of the cell A1, your data will be updated.\n\ \nGet the amount of BTC on the following wallet: \n\ Example:\n=CRYPTOBALANCE("BTC","35hK24tcLEWcgNA4JxpvbkNkoAcDGqQPsP",$A$1) \n\ \n\ Special Cases\n\=CRYPTOBALANCE(" ERC20 contract address","ERC20 holder address") \n\ =CRYPTOBALANCE("b"+ "BEP20 contract address","holder address") \n\ =CRYPTOBALANCE("m"+ "MATIC contract address", "holder address") \n\ =CRYPTOBALANCE("a"+ "AVAX contract address", "holder address") \n\=CRYPTOBALANCE("f"+ "FANTOM contract address", "holder address") \n\ =CRYPTOBALANCE("arb"+ "ARBITRUM contract address", "holder address") \n\ =CRYPTOBALANCE("celo"+ "CELO contract address", "holder address") \n\ =CRYPTOBALANCE("wan"+ "WANCHAIN contract address", "holder address")\n\ =CRYPTOBALANCE("aurora"+ "AURORA contract address", "holder address") \n\ =CRYPTOBALANCE("movr"+ "MOONRIVER contract address", "holder address") \n\ Palm Network \n\ =CRYPTOBALANCE("palm"+ "PALM contract address", "holder address") \n\ Cronos Network \n\ =CRYPTOBALANCE("cronos"+ "CRONOS contract address", "holder address") \n\ =CRYPTOBALANCE("TEZOS contract address","holder address") \n\ =CRYPTOBALANCE("SOLANA contract address","holder address") \n\ =CRYPTOBALANCE("XRP contract address","holder address") \n\ =CRYPTOBALANCE("TRON contract address","holder address") \n\ \n\ ETH Balance on : \n\ Arbitrum \n\ =CRYPTOBALANCE("ARBETH","holder address") \n\ Optimistic \n\ =CRYPTOBALANCE("OPETH","holder address") \n\ Aurora \n\ =CRYPTOBALANCE("AURORAETH","holder address") ',
         ui.ButtonSet.OK)
 }
 function ShowDEXPrice() {
@@ -164,6 +165,7 @@ function url_header(){
  *   =CRYPTOBALANCE("wan"+ "WANCHAIN contract address", "holder address")
  *   =CRYPTOBALANCE("aurora"+ "AURORA contract address", "holder address")
  *   =CRYPTOBALANCE("palm"+ "PALM contract address", "holder address")
+ *   =CRYPTOBALANCE("cronos"+ "CRONOS contract address", "holder address")
  *   =CRYPTOBALANCE("TEZOS contract address","holder address") 
  *   =CRYPTOBALANCE("SOLANA contract address","holder address")
  *   =CRYPTOBALANCE("XRP contract address","holder address")
