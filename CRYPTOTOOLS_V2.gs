@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.2.9
+  Version:      2.3.0
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2021 by Eloise1988
   License:      MIT License
@@ -39,6 +39,7 @@
     CRYPTOGAS                       For use by end users to retrieve average GWEI gas price (ETH)
     CRYPTOSUPPLY                    For use by end users to retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
     CRYPTOHOLDERCOUNT               For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
+    CRYPTOTOKENLIST                 For use by end users to retrieve the list of all tokens by address (per chain/all chains)
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                       For use by end users to retrieve the list of protocols available on zapper.fi
@@ -51,15 +52,7 @@
   ------------------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.2.1   12/06/21 changed name CRYPTOHOLDERS to CRYPTOHOLDERCOUNT
-  2.2.2   12/13/21 DOMAIN NAME change
-  2.2.3   12/17/21 GSSUID modified to Key ID Sheet 
-  2.2.4   01/23/21 Deleted CRYPTODISTRIBUTION Function
-  2.2.5   01/30/22 Added PALM network tokens to CRYPTOBALANCE
-  2.2.6   02/01/22 Deleted Defunct PANCAKESWAP
-  2.2.7   02/03/22 New function CRYPTOSUMUSD
-  2.2.8   02/08/22 Added CRONOS Network to CRYPTOBALANCE
-  2.2.9   02/14/22 Added GNOSIS Chain to CRYPTOBALANCE
+  2.3.0   02/16/22 New function CRYPTOTOKENLIST
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -1501,6 +1494,58 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
 
       return dict;
     
+}
+
+/**CRYPTOTOKENLIST
+ * Returns the list of all tokens on all chains or on a specific chain like eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movre, cvo, aurora etc ...
+ * For example:
+ *
+ * =CRYPTOTOKENLIST("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b", "eth")
+ * =CRYPTOTOKENLIST("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b")
+ *
+ * @param {address}                the wallet address you want the list of tokens from
+ * @param {chain}                  optional or by chain: eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movre, cvo, aurora...
+ * @customfunction
+ *
+ * @return a dimensional array containing the list of all tokens by chain, contract, symbol and amount.
+ **/
+async function CRYPTOTOKENLIST(address, chain) {
+  if (typeof chain === 'undefined') chain = "all";
+        chain = chain.toLowerCase();
+  id_cache = address +chain+ "cryptotokenlist"
+  Utilities.sleep(Math.random() * 100)
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get(id_cache);
+  if (cached != null) {
+      result = JSON.parse(cached);
+      return result;
+  }
+
+    try {
+        
+        url = "/CRYPTOLIST/" + address + "/" + chain + "/" + KEYID;
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+
+        var content = res.getContentText();
+        var parsedJSON = JSON.parse(content);
+
+        var data = []
+        data.push(["CHAIN", "CONTRACT", "SYMBOL", "AMOUNT"])
+        for (var i = 0; i < parsedJSON.length; i++) {
+            data.push([parsedJSON[i]["CHAIN"], parsedJSON[i]["CONTRACT"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["AMOUNT"]]);
+        };
+
+        try {
+            cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
+            return data;
+        } catch (err) {
+            return data;
+        }
+    } catch (err) {
+        return err;
+    }
 }
 
 /*====================================================================================================================================*
