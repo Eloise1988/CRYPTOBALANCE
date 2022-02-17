@@ -43,6 +43,16 @@
 
 ### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_COINS.md) [Staking](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/STAKING.md) [Rewards](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/REWARDS.md)
 
+## LIST ALL TOKEN AMOUNTS ON ERC ADDRESS
+
+### Returns the list of all tokens on all chains or on a specific chain like eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movre, cvo, aurora etc ...
+######
+
+![alt text](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTOKENLIST.gif)
+
+###### =CRYPTOTOKENLIST("ADDRESS","CHAIN optional") 
+###### EXAMPLE    =CRYPTOTOKENLIST("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b")
+
 ##
 ## DEX
 
