@@ -6,7 +6,7 @@
   ====================================================================================================================================
   Version:      2.3.0
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
-  Copyright:    (c) 2021 by Eloise1988
+  Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
   ------------------------------------------------------------------------------------------------------------------------------------
   A library for importing ones balances, staking, rewards, lending & farming rates, dex volume & fees, uniswap new pairs into Google spreadsheets. Functions include:
