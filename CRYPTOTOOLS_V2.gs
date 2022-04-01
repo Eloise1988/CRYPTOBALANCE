@@ -53,6 +53,7 @@
   Changelog:
   
   2.3.0   02/16/22 New function CRYPTOTOKENLIST
+  2.3.1   01/04/22 Fixed CryptoPrice Bug
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -1237,7 +1238,7 @@ async function CRYPTOPRICE(token1_array) {
 
     try {
         if (token1_array.length > 1) {
-            token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+            token1_array = [].concat(token1_array).join("%2C").replace("/", "");
         }
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array + "cryptoprice"));
