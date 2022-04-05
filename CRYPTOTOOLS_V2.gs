@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.3.1
+  Version:      2.3.2
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -27,6 +27,7 @@
     ARBITRUMSUSHISWAP               For use by end users to retrieve all new Sushiswap pairs on Arbitrum
     CRYPTODEXPRICE                  For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
     CRYPTOPRICE                     For use by end users to retrieve cryptocurrency prices in USD from Coingecko
+    CRYPTOPRICEBYNAME               For use by end users to retrieve cryptocurrency prices in USD using Coingecko API id
     CRYPTOVOL30D                    For use by end users to retrieve cryptocurrency 30D volatility against USD, ETH, BTC
     CRYPTOFUTURES                   For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
     CRYPTOLP                        For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
@@ -54,6 +55,7 @@
   
   2.3.0   02/16/22 New function CRYPTOTOKENLIST
   2.3.1   01/04/22 Fixed CryptoPrice Bug
+  2.3.2   04/04/22 Update CRYPTOLP, CRYPTOFARMING and New Function CRYPTOPRICEBYNAME 
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -423,7 +425,7 @@ async function CRYPTOTVL(exchange_array) {
 
     try {
         if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
         }
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexvolume"));
@@ -484,7 +486,7 @@ async function CRYPTODEXVOLUME(exchange_array) {
 
     try {
         if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
         }
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexvolume"));
@@ -546,7 +548,7 @@ async function CRYPTODEXFEE(exchange_array) {
 
     try {
         if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
+            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
         }
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexfee"));
@@ -714,8 +716,7 @@ async function CRYPTOLP(exchange, pair, type) {
 
     try {
         pair = pair.toUpperCase();
-        pair = pair.replace("-", "");
-        pair = pair.replace("/", "");
+        pair = pair.replace("/", "").replace("-", "");
         exchange = exchange.toUpperCase();
         type = type.toUpperCase();
 
@@ -926,9 +927,9 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
 
     try {
         if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
-            data_type = [].concat(data_type).join("%2C").replace("-", "").replace("/", "");
-            ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");
+            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "").replace("-", "");
+            data_type = [].concat(data_type).join("%2C").replace("-", "");
+            ticker_array = [].concat(ticker_array).join("%2C").replace("-", "");
         }
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker_array + exchange_array + data_type + "farming"));
@@ -1086,9 +1087,9 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
 
     try {
         if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("-", "").replace("/", "");
-            ticker_array = [].concat(ticker_array).join("%2C").replace("-", "").replace("/", "");
-            side_array = [].concat(side_array).join("%2C").replace("-", "").replace("/", "");
+            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
+            ticker_array = [].concat(ticker_array).join("%2C").replace("/", "");
+            side_array = [].concat(side_array).join("%2C").replace("/", "");
         }
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + ticker_array + side_array + "lendingrates"));
@@ -1275,6 +1276,65 @@ async function CRYPTOPRICE(token1_array) {
     }
 }
 
+/**CRYPTOPRICEBYNAME
+ * Returns crypto prices in USD from Coingecko using the api id that can be found on coingecko's crypto page.
+ *
+ * List of available ids found https://api.coingecko.com/api/v3/search?locale=fr&img_path_only=1
+ *
+ * By default, data gets transformed into a list 
+ * For example:
+ *
+ * =CRYPTOPRICEBYNAME("ethereum")
+ * =CRYPTOPRICEBYNAME(E39:E100)
+ *
+ * @param {Token}                  Coingecko id range as found on Coingecko
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current price rate of your cryptocurrency in $
+ **/
+async function CRYPTOPRICEBYNAME(token1_array) {
+    Utilities.sleep(Math.random() * 100)
+
+    try {
+        if (token1_array.length > 1) {
+            token1_array = [].concat(token1_array).join("%2C").replace("/", "");
+        }
+
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array + "cryptopricebyname"));
+
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
+
+        url = "/CRYPTOPRICEBYNAME/" + token1_array + "/" + KEYID;
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var content = JSON.parse(res.getContentText());
+        
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['PRICE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
+    } catch (err) {
+        return err;
+    }
+}
+
 /**CRYPTOVOL30D
  * Returns the 30d % volatility of a cryptocurrency against USD, ETH, or BTC
  * By default, data gets transformed into a list. 
@@ -1295,10 +1355,10 @@ async function CRYPTOVOL30D(token1_array, token2_array) {
 
     try {
         if (token1_array.length > 1) {
-            token1_array = [].concat(token1_array).join("%2C").replace("-", "").replace("/", "");
+            token1_array = [].concat(token1_array).join("%2C").replace("/", "");
         }
         if (token2_array.length > 1) {
-            token2_array = [].concat(token2_array).join("%2C").replace("-", "").replace("/", "");
+            token2_array = [].concat(token2_array).join("%2C").replace("/", "");
         }
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array + token2_array + "VOL30D"));
