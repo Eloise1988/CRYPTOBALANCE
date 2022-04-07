@@ -15,10 +15,7 @@
     CRYPTOSTAKING                   For use by end users to retrieve cryptocurrency staking amounts
     CRYPTOREWARSD                   For use by end users to retrieve cryptocurrency reward amounts from staking
     CRYPTOLENDING                   For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
-    CRYPTOSUMETH                    For use by end users to retrieve one's total $ amount on ERC20 wallets
-    CRYPTOSUMBSC                    For use by end users to retrieve one's total $ amount on BEP20 wallets
-    CRYPTOSUMATIC                   For use by end users to retrieve one's total $ amount on MATIC wallets
-    CRYPTOSUMUSD                    For use by end users to retrieve one's total $ amount on all chains or by chain
+    CRYPTOSUMUSD                    For use by end users to retrieve one's total $ amount on all chains or by ETH, BSC ... chain
     CRYPTODEXVOLUME                 For use by end users to retrieve DEX volumes $
     CRYPTODEXFEE                    For use by end users to retrieve DEX transaction fees
     CRYPTOTVL                       For use by end users to retrieve Total Value Locked in Defi projects
@@ -56,6 +53,7 @@
   2.3.0   02/16/22 New function CRYPTOTOKENLIST
   2.3.1   01/04/22 Fixed CryptoPrice Bug
   2.3.2   04/04/22 Update CRYPTOLP, CRYPTOFARMING and New Function CRYPTOPRICEBYNAME 
+  2.3.3   07/04/22 Deleted CRYPTOSUMATIC, CRYPTOSUMETH, CRYPTOSUBSC which are replaced by CRYPTOSUMUSD
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -308,50 +306,6 @@ async function CRYPTOSTAKING(ticker, address) {
     }
 }
 
-/**CRYPTOSUMETH
- * Returns the total $ amount on an ERC20 address into Google spreadsheets.The result is a ONE-dimensional array.
- * By default, data gets transformed into a number. 
- * For example:
- *
- * =CRYPTOSUMETH("0xd47297cdcf36eed17305d6a5471c6cd482c7e91c", $A$1)
- *
- * @param {address}                the erc20 wallet address you want the sum from
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current total amount of $ on an ERC20 address 
- **/
-async function CRYPTOSUMETH(address) {
-    id_cache = address + "cryptosumeth"
-    Utilities.sleep(Math.random() * 100)
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-
-    if (cached != null) {
-        if (isNaN(cached)) {
-            return cached;
-        }
-        return Number(cached);
-    }
-
-    try {
-        
-        url = "/TOTALETHBALANCE/" + address + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-
-        var content = res.getContentText();
-        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-            content = parseFloat(content);
-            cache.put(id_cache, content, expirationInSeconds_)
-        }
-
-        return content;
-    } catch (err) {
-        return err;
-    }
-}
 
 /**CRYPTOSUMUSD
  * Returns the total $ amount on all chains or on a specific chain like eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movre, cvo, aurora etc ...into Google spreadsheets.
@@ -1123,95 +1077,6 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
         cache.put(id_cache, dict, expirationInSeconds_);
 
         return dict;
-    } catch (err) {
-        return err;
-    }
-}
-
-/**CRYPTOSUMBSC
- * Returns the total $ amount on an BEP20 address into Google spreadsheets.The result is a ONE-dimensional array.
- * By default, data gets transformed into a number. 
- * For example:
- *
- * =CRYPTOSUMBSC("0x72a53cdbbcc1b9efa39c834a540550e23463aacb", $A$1)
- *
- * @param {address}                the bep20 wallet address you want the $ amount from
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current total amount of Binance Smart Chain on an BEP20 address 
- **/
-
-async function CRYPTOSUMBSC(address) {
-    id_cache = address + "cryptosumbsc"
-    Utilities.sleep(Math.random() * 100)
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-        if (isNaN(cached)) {
-            return cached;
-        }
-        return Number(cached);
-    }
-
-    try {
-        
-        url = "/TOTALBSCBALANCE/" + address + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-
-        var content = res.getContentText();
-        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-            content = parseFloat(content);
-            cache.put(id_cache, content, expirationInSeconds_)
-        }
-
-        return content;
-    } catch (err) {
-        return err;
-    }
-}
-
-/**CRYPTOSUMATIC
- * Returns the total $ amount on a matic smart chain wallet address  into Google spreadsheets.The result is a ONE-dimensional array.
- * By default, data gets transformed into a number. 
- * For example:
- *
- * =CRYPTOSUMATIC("0xBA12222222228d8Ba445958a75a0704d566BF2C8")
- *
- * @param {address}                the matic smart chain wallet address you want the $ amount from
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current total $ amount of Matic Smart Chain wallet 
- **/
-async function CRYPTOSUMATIC(address) {
-    id_cache = address + "cryptosumatic"
-    Utilities.sleep(Math.random() * 100)
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-
-    if (cached != null) {
-        if (isNaN(cached)) {
-            return cached;
-        }
-        return Number(cached);
-    }
-
-    try {
-        
-        url = "/TOTALMATICBALANCE/" + address + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-
-        var content = res.getContentText();
-        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-            content = parseFloat(content);
-            cache.put(id_cache, content, expirationInSeconds_)
-        }
-        return content;
     } catch (err) {
         return err;
     }
