@@ -173,10 +173,6 @@
 
 ### DOLLAR VALUATION BY ADDRESS
 ###### Returns the USD total amount of ERC20, BEP20 or MATIC address
-![CRYPTO_SUMETH$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/polychainsumeth.gif)
-###### EXAMPLE =CRYPTOSUMETH("holder's address")
-###### EXAMPLE =CRYPTOSUMBSC("holder's address")
-###### EXAMPLE =CRYPTOSUMATIC("holder's address")
 ![CRYPTO_SUM$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptosumusd.gif)
 ###### EXAMPLE =CRYPTOSUMUSD("holder's address","network" as optional)
 
