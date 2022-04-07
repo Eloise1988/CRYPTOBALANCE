@@ -6,7 +6,7 @@
 
 ## FUNCTIONS
 |  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	
-|  [Lending](#cryptolending) 	|  [Farming](#crypto-farming) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) |  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)  |  [DEX fees](#dex-fees)  |  [Pool Price](#pool-price) 	|  [Max Token Supply](#cryptosupply)  |  [Number of Holders per contract](#cryptoholdercount)  |  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	 	
+|  [Lending](#cryptolending) 	|  [Farming](#crypto-farming) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) |  [Token List](#token-list) |  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)  |  [DEX fees](#dex-fees)  |  [Pool Price](#pool-price) 	|  [Max Token Supply](#cryptosupply)  |  [Number of Holders per contract](#cryptoholdercount)  |  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	 	
 |  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)  
 
 
@@ -175,6 +175,14 @@
 ###### Returns the USD total amount of ERC20, BEP20 or MATIC address
 ![CRYPTO_SUM$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptosumusd.gif)
 ###### EXAMPLE =CRYPTOSUMUSD("holder's address","network" as optional)
+
+### TOKEN LIST
+###### Returns the list of all tokens by address (per chain/all chains, evm, solana, harmony, terra...)
+###### Available chains, eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movr, cvo, aurora, ...
+###### OR/ if you are looking for the total on all chains or tokens on solana, harmony (one) and terra (luna) define to:
+###### all
+![CRYPTO_LIST](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptotokenlist_sol.gif)
+###### EXAMPLE =CRYPTOTOKENLIST("holder's address","network" as optional)
 
 ### DEX VOLUMES
 ###### Returns DEXes' (decentralized exchanges) 24H Volume.
