@@ -43,7 +43,7 @@
 
 ### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_COINS.md) [Staking](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/STAKING.md) [Rewards](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/REWARDS.md)
 
-## LIST ALL TOKEN AMOUNTS ON ERC ADDRESS
+## LIST ALL TOKEN AMOUNTS ON EVM, SOLANA, HARMONY, TERRA ADDRESS
 
 ### Returns the list of all tokens on all chains or on a specific chain like eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movre, cvo, aurora etc ...
 ######
@@ -52,6 +52,11 @@
 
 ###### =CRYPTOTOKENLIST("ADDRESS","CHAIN optional") 
 ###### EXAMPLE    =CRYPTOTOKENLIST("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b")
+
+
+![CRYPTO_LIST](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptotokenlist_sol.gif)
+###### EXAMPLE =CRYPTOTOKENLIST("holder's address","network" as optional)
+###### EXAMPLE    =CRYPTOTOKENLIST("BV3kgWcxB7txcfVMywYp3ZqwkYujrd3HePMkujAK5xFR")
 
 ##
 ## DEX
@@ -176,13 +181,6 @@
 ![CRYPTO_SUM$](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptosumusd.gif)
 ###### EXAMPLE =CRYPTOSUMUSD("holder's address","network" as optional)
 
-### TOKEN LIST
-###### Returns the list of all tokens by address (per chain/all chains, evm, solana, harmony, terra...)
-###### Available chains, eth, matic, bsc, xdai, ftm, avax, op, arb, celo, movr, cvo, aurora, ...
-###### OR/ if you are looking for the total on all chains or tokens on solana, harmony (one) and terra (luna) define to:
-###### all
-![CRYPTO_LIST](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptotokenlist_sol.gif)
-###### EXAMPLE =CRYPTOTOKENLIST("holder's address","network" as optional)
 
 ### DEX VOLUMES
 ###### Returns DEXes' (decentralized exchanges) 24H Volume.
