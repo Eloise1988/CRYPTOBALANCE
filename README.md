@@ -52,10 +52,6 @@
 
 ###### =CRYPTOTOKENLIST("ADDRESS","CHAIN optional") 
 ###### EXAMPLE    =CRYPTOTOKENLIST("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b")
-
-
-![CRYPTO_LIST](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/cryptotokenlist_sol.gif)
-###### EXAMPLE =CRYPTOTOKENLIST("holder's address","network" as optional)
 ###### EXAMPLE    =CRYPTOTOKENLIST("BV3kgWcxB7txcfVMywYp3ZqwkYujrd3HePMkujAK5xFR")
 
 ##
