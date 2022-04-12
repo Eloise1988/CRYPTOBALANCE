@@ -54,12 +54,12 @@
 
 
 ###### You can also retrieve the list of tokens on
-###### solana (sol)
-###### tezos (xtz)
-###### terra (luna)
-###### tron (tron)
-###### cardano (ada)
-###### wanchain (wan)
+- solana (sol)
+- tezos (xtz)
+- terra (luna)
+- tron (tron)
+- cardano (ada)
+- wanchain (wan)
 
 ###### EXAMPLE    =CRYPTOTOKENLIST("0xdb3b93c27442c1dcb52537d6fca7b8a1d7f8c50b")
 ###### EXAMPLE    =CRYPTOTOKENLIST("BV3kgWcxB7txcfVMywYp3ZqwkYujrd3HePMkujAK5xFR")
