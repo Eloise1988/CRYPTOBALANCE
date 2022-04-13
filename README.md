@@ -178,6 +178,23 @@
 ### CRYPTO FARMING
 ###### Returns apy and tvl from tokens or pools on decentralized exchanges
 ![CRYPTOFARMING](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOFARMING.gif)
+###### List of exchanges
+- CAKE
+- CRV
+- FARM
+- SUSHI
+- XVS
+- YEARN
+- BUNNY
+- PNG
+- BOO
+- AUTO
+- SPIRIT
+- BABY
+- WAULT
+- MDEX
+- YFI
+- ...
 ###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","APY")
 ###### EXAMPLE =CRYPTOFARMING("SUSHI","UNI-WETH","TVL")
 
