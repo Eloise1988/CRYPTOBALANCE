@@ -4,7 +4,7 @@
 /*====================================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   ====================================================================================================================================
-  Version:      2.3.2
+  Version:      2.3.4
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -15,6 +15,7 @@
     CRYPTOSTAKING                   For use by end users to retrieve cryptocurrency staking amounts
     CRYPTOREWARSD                   For use by end users to retrieve cryptocurrency reward amounts from staking
     CRYPTOLENDING                   For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
+    CRYPTOLENDINGREWARD             For use by end users to retrieve reward apy lending/borrowing rates from AAVE & COMPOUND
     CRYPTOSUMUSD                    For use by end users to retrieve one's total $ amount on all chains or by ETH, BSC ... chain
     CRYPTODEXVOLUME                 For use by end users to retrieve DEX volumes $
     CRYPTODEXFEE                    For use by end users to retrieve DEX transaction fees
@@ -54,6 +55,7 @@
   2.3.1   01/04/22 Fixed CryptoPrice Bug
   2.3.2   04/04/22 Update CRYPTOLP, CRYPTOFARMING and New Function CRYPTOPRICEBYNAME 
   2.3.3   07/04/22 Deleted CRYPTOSUMATIC, CRYPTOSUMETH, CRYPTOSUBSC which are replaced by CRYPTOSUMUSD
+  2.3.4   23/04/22 Added CRYPTOLENDINGREWARD
   *====================================================================================================================================*/
 
 //CACHING TIME  
@@ -1469,6 +1471,67 @@ async function CRYPTOTOKENLIST(address, chain) {
         } catch (err) {
             return data;
         }
+    } catch (err) {
+        return err;
+    }
+}
+
+/**CRYPTOLENDINGREWARD
+ * Returns cryptocurrency apy rewars rates on different lending plateforms (COMPOUND & AAVE) into Google spreadsheets.
+ * For example:
+ *
+ * =CRYPTOLENDINGREWARD("AAVE","BUSD","APR_BORROW")
+ * =CRYPTOLENDINGREWARD(A1:A10,B1:B10,C1:C10)
+ *
+ * @param {exchange}               the exchanges on which you want to retrieve the reward apy rate (COMPOUND or AAVE)
+ * @param {cryptocurrency}         the cryptocurrency tickers you want the lending/borrowing rates from
+ * @param {APR_BORROW or APR_LEND} either APR_BORROW for the borrowing rate or APR_LEND for the lending rate
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return the current lending rate in decimal form, range of data if array of data was given
+ **/
+async function CRYPTOLENDINGREWARD(exchange_array, ticker_array, side_array) {
+    Utilities.sleep(Math.random() * 100)
+
+    try {
+        if (exchange_array.length > 1) {
+            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
+            ticker_array = [].concat(ticker_array).join("%2C").replace("/", "");
+            side_array = [].concat(side_array).join("%2C").replace("/", "");
+        }
+
+        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + ticker_array + side_array + "lendingratesreward"));
+        Logger.log(id_cache)
+
+        var cache = CacheService.getScriptCache();
+        var cached = cache.get(id_cache);
+        if (cached != null) {
+            result = cached.split(',');
+            return result.map(function(n) {
+                return n && ("" || Number(n))
+            });
+        }
+
+        url = "/LENDINGREWARD/" + exchange_array + "/" + ticker_array + "/" + side_array + "/" + KEYID;
+        full_url_options=url_header();
+
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var content = JSON.parse(res.getContentText());
+
+
+        var dict = [];
+        for (var i = 0; i < content.length; i++) {
+            if (Object.keys(content[i]).length != 0) {
+                dict.push(parseFloat(content[i]['VALUE']));
+            } else {
+                dict.push("");
+            }
+        }
+
+        cache.put(id_cache, dict, expirationInSeconds_);
+
+        return dict;
     } catch (err) {
         return err;
     }
