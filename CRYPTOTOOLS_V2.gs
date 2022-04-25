@@ -1477,7 +1477,7 @@ async function CRYPTOTOKENLIST(address, chain) {
 }
 
 /**CRYPTOLENDINGREWARD
- * Returns cryptocurrency apy rewars rates on different lending plateforms (COMPOUND & AAVE) into Google spreadsheets.
+ * Returns cryptocurrency apy rewards rates on different lending plateforms (COMPOUND & AAVE) into Google spreadsheets.
  * For example:
  *
  * =CRYPTOLENDINGREWARD("AAVE","BUSD","APR_BORROW")
