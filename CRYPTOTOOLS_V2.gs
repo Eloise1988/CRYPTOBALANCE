@@ -1,54 +1,66 @@
 /**
  * @OnlyCurrentDoc
  */
-/*====================================================================================================================================*
+//CRYPTOTOOLS PRIVATE KEY 
+//For faster & greater access, please provide your private Key in the brackets
+const cryptotools_api_key = "";
+
+//CACHING TIME  
+//Expiration time for caching values, by default caching data is 10min = 600sec. This value can be adapted to your needs.
+const expirationInSeconds_ = 600;
+
+/*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
-  ====================================================================================================================================
-  Version:      2.3.4
+  =======================================================================================================================*
+  Version:      2.3.5
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
-  ------------------------------------------------------------------------------------------------------------------------------------
-  A library for importing ones balances, staking, rewards, lending & farming rates, dex volume & fees, uniswap new pairs into Google spreadsheets. Functions include:
+  ------------------------------------------------------------------------------------------------------------------------
+  A library for importing blockchain data endpoints into Google spreadsheets. Functions include:
 
-    CRYPTOBALANCE                   For use by end users to retrieve blockchain balances
-    CRYPTOSTAKING                   For use by end users to retrieve cryptocurrency staking amounts
-    CRYPTOREWARSD                   For use by end users to retrieve cryptocurrency reward amounts from staking
-    CRYPTOLENDING                   For use by end users to retrieve cryptocurrency lending/borrowing rates from dex echanges
-    CRYPTOLENDINGREWARD             For use by end users to retrieve reward apy lending/borrowing rates from AAVE & COMPOUND
-    CRYPTOSUMUSD                    For use by end users to retrieve one's total $ amount on all chains or by ETH, BSC ... chain
-    CRYPTODEXVOLUME                 For use by end users to retrieve DEX volumes $
-    CRYPTODEXFEE                    For use by end users to retrieve DEX transaction fees
-    CRYPTOTVL                       For use by end users to retrieve Total Value Locked in Defi projects
-    UNISWAP                         For use by end users to retrieve all new pairs on Uniswap
-    SUSHISWAP                       For use by end users to retrieve all new pairs on Sushiswap
-    ARBITRUMSUSHISWAP               For use by end users to retrieve all new Sushiswap pairs on Arbitrum
-    CRYPTODEXPRICE                  For use by end users to retrieve DEX (decentralized exchanges) cryptocurrency pair prices
-    CRYPTOPRICE                     For use by end users to retrieve cryptocurrency prices in USD from Coingecko
-    CRYPTOPRICEBYNAME               For use by end users to retrieve cryptocurrency prices in USD using Coingecko API id
-    CRYPTOVOL30D                    For use by end users to retrieve cryptocurrency 30D volatility against USD, ETH, BTC
-    CRYPTOFUTURES                   For use by end users to retrieve BTC, ETH Futures Prices, basis, volume, open interest
-    CRYPTOLP                        For use by end users to retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
-    CRYPTO_ERC20HOLDERS             For use by end users to retrieve list of bigget holders by ERC20 contract address
-    CRYPTO_BEP20HOLDERS             For use by end users to retrieve list of bigget holders by ERC20 contract address
-    CRYPTOTX_ERC20                  For use by end users to retrieve list of all ETH & ERC20 Token transactions
-    CRYPTOTX_BEP20                  For use by end users to retrieve list of all BNB & BEP20 Token transactions
-    CRYPTOPOOLPRICE                 For use by end users to retrieve prices from decentralized Pool tokens
-    CRYPTOFARMING                   For use by end users to retrieve TVL, APR, APY from decentralized Pool / tokens
-    CRYPTOGAS                       For use by end users to retrieve average GWEI gas price (ETH)
-    CRYPTOSUPPLY                    For use by end users to retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
-    CRYPTOHOLDERCOUNT               For use by end users to retrieve the number of holders on a list of erc20, bep20, matic tokens.
-    CRYPTOTOKENLIST                 For use by end users to retrieve the list of all tokens by address (per chain/all chains)
+    CRYPTOBALANCE                   Retrieve blockchain balances
+    CRYPTOSTAKING                   Retrieve cryptocurrency staking amounts
+    CRYPTOREWARSD                   Retrieve cryptocurrency reward amounts from staking
+    CRYPTOLENDING                   Retrieve cryptocurrency lending/borrowing rates from dex echanges
+    CRYPTOLENDINGREWARD             Retrieve reward apy lending/borrowing rates from AAVE & COMPOUND
+    CRYPTOSUMUSD                    Retrieve one's total $ amount on all chains or by ETH, BSC ... chain
+    CRYPTODEXVOLUME                 Retrieve DEX volumes $
+    CRYPTODEXFEE                    Retrieve DEX transaction fees
+    CRYPTOTVL                       Retrieve Total Value Locked in Defi projects
+    UNISWAP                         Retrieve all new pairs on Uniswap
+    SUSHISWAP                       Retrieve all new pairs on Sushiswap
+    ARBITRUMSUSHISWAP               Retrieve all new Sushiswap pairs on Arbitrum
+    CRYPTODEXPRICE                  Retrieve DEX (decentralized exchanges) cryptocurrency pair prices
+    CRYPTOPRICE                     Retrieve cryptocurrency prices in USD from Coingecko
+    CRYPTOPRICEBYNAME               Retrieve cryptocurrency prices in USD using Coingecko API id
+    CRYPTOVOL30D                    Retrieve cryptocurrency 30D volatility against USD, ETH, BTC
+    CRYPTOFUTURES                   Retrieve BTC, ETH Futures Prices, basis, volume, open interest
+    CRYPTOLP                        Retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
+    CRYPTO_ERC20HOLDERS             Retrieve list of bigget holders by ERC20 contract address
+    CRYPTO_BEP20HOLDERS             Retrieve list of bigget holders by ERC20 contract address
+    CRYPTOTX_ERC20                  Retrieve list of all ETH & ERC20 Token transactions
+    CRYPTOTX_BEP20                  Retrieve list of all BNB & BEP20 Token transactions
+    CRYPTOPOOLPRICE                 Retrieve prices from decentralized Pool tokens
+    CRYPTOFARMING                   Retrieve TVL, APR, APY from decentralized Pool / tokens
+    CRYPTOGAS                       Retrieve average GWEI gas price (ETH)
+    CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
+    CRYPTOHOLDERCOUNT               Retrieve the number of holders on a list of erc20, bep20, matic tokens.
+    CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain/all chains)
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-    PROTOCOLS                       For use by end users to retrieve the list of protocols available on zapper.fi
-    CRYPTODEFI                      For use by end users to retrieve the list of assets by defi protocol  
-    CRYPTODEFI_BALANCE              For use by end users to retrieve the balance by symbol/ticker given a defi protocol 
-    CRYPTODEFI_BALANCEUSD           For use by end users to retrieve the USD amont lended by symbol/ticker given a defi protocol
+    PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
+    CRYPTODEFI                      Retrieve the list of assets by defi protocol  
+    CRYPTODEFI_BALANCE              Retrieve the balance by symbol/ticker given a defi protocol 
+    CRYPTODEFI_BALANCEUSD           Retrieve the USD amont lended by symbol/ticker given a defi protocol
+  
 
+    PREMIUM FUNCTIONS
+    CRYPTOLATESTPAIRS               Retrieve all new pairs by chain & DEX
+  
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
-  ------------------------------------------------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
   2.3.0   02/16/22 New function CRYPTOTOKENLIST
@@ -56,19 +68,10 @@
   2.3.2   04/04/22 Update CRYPTOLP, CRYPTOFARMING and New Function CRYPTOPRICEBYNAME 
   2.3.3   07/04/22 Deleted CRYPTOSUMATIC, CRYPTOSUMETH, CRYPTOSUBSC which are replaced by CRYPTOSUMUSD
   2.3.4   23/04/22 Added CRYPTOLENDINGREWARD
-  *====================================================================================================================================*/
+  2.3.5   27/05/22 Added CRYPTOLATESTPAIRS for Premium Users
+  *========================================================================================================================*/
 
-//CACHING TIME  
-//Expiration time for caching values, by default caching data last 10min = 600sec. This value is a const and can be changed to your needs.
-const expirationInSeconds_ = 600;
-
-
-//CRYPTOTOOLS PRIVATE KEY 
-//For faster & greater access, please provide your private Key in the brackets
-const cryptotools_api_key = "";
-
-
-/*---------------------------------                       GOOGLE SHEET FORMULA USERINTERFACE ---------------------- */
+/*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
 
 function onOpen() {
     var ui = SpreadsheetApp.getUi();
@@ -567,27 +570,28 @@ async function UNISWAP(days, volume, liquidity, tx_count) {
     
 }
 
-/**ARBITRUMSUSHISWAP
- * Returns new tradable Sushiswap pairs on Arbitrum, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+/**CRYPTOLATESTPAIRS
+ * Returns new tradable pairs by DEX and chain, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions. Premium Function. 
  *
- * By default, data gets transformed into a table 
  * For example:
  *
- * =ARBITRUMSUSHISWAP(5,10000,10000,100)
+ * =CRYPTOLATESTPAIRS(5,0,0,0,"eth","uni-v3")
  *
  * @param {days}                    the number of Days since the pair is active
  * @param {volume}                  the minimum Volume ($)
  * @param {liquidity}               the minimum Liquidity ($)
  * @param {tx_count}                the number of Transactions existant since creation
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @param {chain}                   eth, matic, avax, movr, ftm, one, arbitrum, aurora
+ * @param {dex}                     uni-v2, uni-v3, sushi, quick, algb,solar, boo, spirit, tri, wanna, viperswap
+ * @param {tx_count}                the number of Transactions existant since creation
  * @customfunction
  *
  * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
-async function ARBITRUMSUSHISWAP(days, volume, liquidity, tx_count) {
+async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, exchange) {
     Utilities.sleep(Math.random() * 100)
         
-    url = "/ARBITRUMSUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
+    url = "/PAIRSFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + chain + "/" + exchange + "/" + KEYID;
     full_url_options=url_header();
     return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
 }
@@ -1548,10 +1552,10 @@ async function CRYPTOLENDINGREWARD(exchange_array, ticker_array, side_array) {
   A library for importing the list of all assets (tokens, pools, nft, claimable etc...) from smart chains:
   
   DEFI_NETWORTH                 ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-  PROTOCOLS                     For use by end users to retrieve the list of protocols available on zapper.fi
-  CRYPTODEFI                    For use by end users to retrieve the list of assets by defi protocol  
-  CRYPTODEFI_BALANCE            For use by end users to retrieve the balance by symbol/ticker given a defi protocol 
-  CRYPTODEFI_BALANCEUSD         For use by end users to retrieve the USD amont lended by symbol/ticker given a defi protocol
+  PROTOCOLS                     Retrieve the list of protocols available on zapper.fi
+  CRYPTODEFI                    Retrieve the list of assets by defi protocol  
+  CRYPTODEFI_BALANCE            Retrieve the balance by symbol/ticker given a defi protocol 
+  CRYPTODEFI_BALANCEUSD         Retrieve the USD amont lended by symbol/ticker given a defi protocol
   
   For bug reports see https://github.com/Eloise1988/DEFIASSETS/issues
   ------------------------------------------------------------------------------------------------------------------------------------
