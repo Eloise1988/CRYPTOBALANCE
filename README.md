@@ -290,8 +290,6 @@
 ###### =SUSHISWAP(days,volume,liquidity,tx_count)
 ###### EXAMPLE    =SUSHISWAP(5,10000,10000,100)
 
-###### =ARBITRUMSUSHISWAP(days,volume,liquidity,tx_count)
-###### EXAMPLE    =ARBITRUMSUSHISWAP(5,10000,10000,100)
 ##  
 
 ### VOLATILITY
