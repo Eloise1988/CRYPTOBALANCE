@@ -9,6 +9,8 @@
 |  [Lending](#cryptolending) 	|  [Farming](#crypto-farming) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) |  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)  |  [DEX fees](#dex-fees)  |  [Pool Price](#pool-price) 	|  [Max Token Supply](#cryptosupply)  |  [Number of Holders per contract](#cryptoholdercount)  |  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	 	
 |  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)  
 
+## PREMIUM
+|  [Cryptolatestpairs](#cryptolatestpairs) 	
 
 ## CRYPTOBALANCE
 
@@ -319,6 +321,23 @@
 ###### EXAMPLE =CRYPTOTX_ERC20("holder's address")
 ![CRYPTOTXBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_BEP20.gif)
 ###### EXAMPLE =CRYPTOTX_BEP20("holder's address")
+
+### CRYPTOTLATESTPAIRS
+###### Returns new tradable pairs by DEX and chain, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions. Premium Function.
+###### 
+###### Here is the list of all available chain&DEX:
+###### ETH -- UNI-V2, UNI-V3, SUSHI
+###### MATIC -- QUICK, UNI-V3, SUSHI, ALGB
+###### AVAX -- PNG, JOE
+###### MOVR -- SOLAR, SUSHI
+###### FTM -- BOO, SPIRIT
+###### ONE -- VIPERSWAP
+###### ARBITRUM -- UNI-V3, SUSHI
+###### AURORA -- TRI, WANNA
+
+![CRYPTOTLATESTPAIRS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOLATESTPAIRS.gif)
+###### EXAMPLE =CRYPTOLATESTPAIRS(10,2000,10000,0,"ETH","UNI-V3")
+
 
 
 ## CRYPTO TOOLS SETUP
