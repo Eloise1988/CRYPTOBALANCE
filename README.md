@@ -322,7 +322,7 @@
 ![CRYPTOTXBEP](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOTX_BEP20.gif)
 ###### EXAMPLE =CRYPTOTX_BEP20("holder's address")
 
-### CRYPTOTLATESTPAIRS
+### CRYPTOLATESTPAIRS
 ###### Returns new tradable pairs by DEX and chain, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions. Premium Function.
 ###### 
 ###### Here is the list of all available chain&DEX:
