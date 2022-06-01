@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.3.5
+  Version:      2.3.6
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -44,7 +44,6 @@ const expirationInSeconds_ = 600;
     CRYPTOPOOLPRICE                 Retrieve prices from decentralized Pool tokens
     CRYPTOFARMING                   Retrieve TVL, APR, APY from decentralized Pool / tokens
     CRYPTOGAS                       Retrieve average GWEI gas price (ETH)
-    CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
     CRYPTOHOLDERCOUNT               Retrieve the number of holders on a list of erc20, bep20, matic tokens.
     CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain/all chains)
   
@@ -57,18 +56,14 @@ const expirationInSeconds_ = 600;
 
     PREMIUM FUNCTIONS
     CRYPTOLATESTPAIRS               Retrieve all new pairs by chain & DEX
+    CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
   ----------------------------------------------------------------------------------------------------------------------------
   Changelog:
   
-  2.3.0   02/16/22 New function CRYPTOTOKENLIST
-  2.3.1   01/04/22 Fixed CryptoPrice Bug
-  2.3.2   04/04/22 Update CRYPTOLP, CRYPTOFARMING and New Function CRYPTOPRICEBYNAME 
-  2.3.3   07/04/22 Deleted CRYPTOSUMATIC, CRYPTOSUMETH, CRYPTOSUBSC which are replaced by CRYPTOSUMUSD
-  2.3.4   23/04/22 Added CRYPTOLENDINGREWARD
-  2.3.5   27/05/22 Added CRYPTOLATESTPAIRS for Premium Users
+  2.3.6   06/01/22 CRYPTOSUPPLY for Premium Users
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1311,7 +1306,7 @@ async function CRYPTOGAS(ticker) {
 }
 
 /**CRYPTOSUPPLY
- * Returns the max supply on a list of erc20, bep20, matic, arbitrum, avalanche, moon-river, fantom tokens.
+ * Premium Plan Function: Returns the max supply on a list of erc20, bep20, matic, arbitrum, avalanche, moon-river, fantom tokens.
  *
  * For example:
  *
@@ -1367,7 +1362,7 @@ async function CRYPTOSUPPLY(token_array, network_array) {
 
         return dict;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
