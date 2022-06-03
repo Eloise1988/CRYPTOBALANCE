@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.3.6
+  Version:      2.3.7
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -57,6 +57,7 @@ const expirationInSeconds_ = 600;
     PREMIUM FUNCTIONS
     CRYPTOLATESTPAIRS               Retrieve all new pairs by chain & DEX
     CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
+    TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -64,6 +65,7 @@ const expirationInSeconds_ = 600;
   Changelog:
   
   2.3.6   06/01/22 CRYPTOSUPPLY for Premium Users
+  2.3.7   06/01/22 TOPNFT for Premium Users
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1675,7 +1677,64 @@ async function CRYPTODEFI(address, protocols) {
         return err;
     }
 }
+/**TOPNFT 
+ * Returns the top 5 NFTs, dollar value, total sum on an ethereum address. 
+ * By default, data gets transformed into a array/number. 
+ * For example:
+ *
+ *   =TOPNFT("0xc36442b4a4522e871399cd717abdd847ab11fe88")           
+ * 
+ * @param {address}                        array of ethereum address
+ * @customfunction
+ *
+ * @return a dimensional array containing the list of the top 5 NFT, listed by usd amount. 
+ **/
+async function TOPNFT(address) {
+      var data = []
+      
+      address_defi = [].concat(address).join("%2C");
+      Logger.log(address_defi)
+      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + 'topnft'));
 
+      var cache = CacheService.getScriptCache();
+      var cached = cache.get(id_cache);
+      if (cached != null) {
+          result = JSON.parse(cached);
+          return result;
+      }
+
+      // Connexion to the API endpoints 
+      url = "/TOPNFT/" + address_defi + "/" + KEYID;
+      full_url_options=url_header();
+      var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+      var content = res.getContentText();
+      var parsedJSON = JSON.parse(content);
+
+      for (var i = 0; i < parsedJSON.length; i++) {
+        var data_base = []
+        for (var j = 0; j < parsedJSON[i].length; j++){
+           if (j != parsedJSON[i].length-1) {
+             Logger.log(Object.keys(parsedJSON[i][j]).length)
+             if (Object.keys(parsedJSON[i][j]).length != 0) {
+              data_base.push(parsedJSON[i][j]["ID"].toString() +' | '+ parsedJSON[i][j]["BALANCE_USD"].toString());
+              }
+              else{
+                data_base.push('');
+              }
+           }
+           else{
+             data_base.push(parsedJSON[i][j]["BALANCE_USD"]);
+           }
+        }
+       data.push(data_base);
+      };
+      try {
+          cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
+          return data;
+      } catch (err) {
+          return data;
+      }
+}
 /**CRYPTODEFI_BALANCE
  * Returns the staked/lended balance by symbol/ticker given a defi protocol into Google spreadsheets. 
  * By default, data gets transformed into a array/number. 
