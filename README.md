@@ -10,7 +10,7 @@
 |  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)  
 
 ## PREMIUM
-|  [Cryptolatestpairs](#cryptolatestpairs) 	
+|  [Cryptolatestpairs](#cryptolatestpairs) 	|  [TopNft](#topnft) 	|  [btcunconfirmed](#btc-balance-accounting-for-unconfirmed-tx) 	
 
 ## CRYPTOBALANCE
 
