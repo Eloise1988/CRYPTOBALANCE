@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.3.7
+  Version:      2.3.8
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -58,6 +58,7 @@ const expirationInSeconds_ = 600;
     CRYPTOLATESTPAIRS               Retrieve all new pairs by chain & DEX
     CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
     TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
+    BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -66,6 +67,7 @@ const expirationInSeconds_ = 600;
   
   2.3.6   06/01/22 CRYPTOSUPPLY for Premium Users
   2.3.7   06/01/22 TOPNFT for Premium Users
+  2.3.8   06/06/22 BTCBALANCE_UNCONFIRMED for Premium Users
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1693,7 +1695,6 @@ async function TOPNFT(address) {
       var data = []
       
       address_defi = [].concat(address).join("%2C");
-      Logger.log(address_defi)
       id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + 'topnft'));
 
       var cache = CacheService.getScriptCache();
@@ -1733,6 +1734,47 @@ async function TOPNFT(address) {
           return data;
       } catch (err) {
           return data;
+      }
+}
+/**BTCBALANCE_UNCONFIRMED 
+ * Returns the balance on a BTC including the unconfirmed transactions from the mempool, you can request up to 5 address in one call. 
+ * For example:
+ *
+ *   =BTCBALANCE_UNCONFIRMED("17bMJF9LPBVU1aN8YMVg5Y754tzjJiTMzH")           
+ * 
+ * @param {address}                        array of btc addresses (max 5)
+ * @customfunction
+ *
+ * @return a dimensional array containing the BTC balances. 
+ **/
+async function BTCBALANCE_UNCONFIRMED(address) {
+      var data = []
+      
+      address_btc = [].concat(address).join("%2C");
+      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_btc + 'btcunconfirmedbalance'));
+
+      var cache = CacheService.getScriptCache();
+      var cached = cache.get(id_cache);
+      if (cached != null) {
+          result = JSON.parse(cached);
+          return result;
+      }
+
+      // Connexion to the API endpoints 
+      url = "/BTCUNCONFIRMED/" + address_btc + "/" + KEYID;
+      full_url_options=url_header();
+      var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+      var content = res.getContentText();
+      var parsedJSON = JSON.parse(content);
+
+      for (var i = 0; i < parsedJSON.length; i++) {
+            data.push(parsedJSON[i]["BALANCE"]);
+      };
+      try {
+          cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
+          return data;
+      } catch (err) {
+          return content;
       }
 }
 /**CRYPTODEFI_BALANCE
