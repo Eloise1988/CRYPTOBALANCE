@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.3.8
+  Version:      2.3.9
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -46,6 +46,7 @@ const expirationInSeconds_ = 600;
     CRYPTOGAS                       Retrieve average GWEI gas price (ETH)
     CRYPTOHOLDERCOUNT               Retrieve the number of holders on a list of erc20, bep20, matic tokens.
     CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain/all chains)
+    BINANCEWIDRAWFEE                Retrieve the withdrawal fee from binance
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
@@ -68,6 +69,7 @@ const expirationInSeconds_ = 600;
   2.3.6   06/01/22 CRYPTOSUPPLY for Premium Users
   2.3.7   06/01/22 TOPNFT for Premium Users
   2.3.8   06/06/22 BTCBALANCE_UNCONFIRMED for Premium Users
+  2.3.9   06/15/22 BINANCEWIDRAWFEE
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1539,33 +1541,7 @@ async function CRYPTOLENDINGREWARD(exchange_array, ticker_array, side_array) {
         return err;
     }
 }
-
-/*====================================================================================================================================*
-  CryptoTools Google Sheet Feed by Eloise1988
-  ====================================================================================================================================
-  Version:      1.0.4
-  Project Page: https://github.com/Eloise1988/DEFIASSETS/
-  Copyright:    (c) 2021 by Eloise1988   
-  License:     MIT License
-  ------------------------------------------------------------------------------------------------------------------------------------
-  A library for importing the list of all assets (tokens, pools, nft, claimable etc...) from smart chains:
   
-  DEFI_NETWORTH                 ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-  PROTOCOLS                     Retrieve the list of protocols available on zapper.fi
-  CRYPTODEFI                    Retrieve the list of assets by defi protocol  
-  CRYPTODEFI_BALANCE            Retrieve the balance by symbol/ticker given a defi protocol 
-  CRYPTODEFI_BALANCEUSD         Retrieve the USD amont lended by symbol/ticker given a defi protocol
-  
-  For bug reports see https://github.com/Eloise1988/DEFIASSETS/issues
-  ------------------------------------------------------------------------------------------------------------------------------------
-  Changelog:
-  
-  1.0.0   Creation DEFI_NETWORTH ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-  1.0.1   PROTOCOLS returns the list of protocols available on the Zapper api
-  1.0.2   CRYPTODEFI returns the list assets by defi protocol  
-  1.0.3   CRYPTODEFI_BALANCE returns the balance by symbol/ticker given a defi protocol into Google spreadsheets.  
-  1.0.4   CRYPTODEFI_BALANCEUSD returns the USD amont lended by symbol/ticker given a defi protocol into Google spreadsheets.   
-*====================================================================================================================================*/
 
 /*DEFI_NETWORTH 
  * ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
@@ -1715,7 +1691,6 @@ async function TOPNFT(address) {
         var data_base = []
         for (var j = 0; j < parsedJSON[i].length; j++){
            if (j != parsedJSON[i].length-1) {
-             Logger.log(Object.keys(parsedJSON[i][j]).length)
              if (Object.keys(parsedJSON[i][j]).length != 0) {
               data_base.push(parsedJSON[i][j]["ID"].toString() +' | '+ parsedJSON[i][j]["BALANCE_USD"].toString());
               }
@@ -1903,4 +1878,47 @@ async function PROTOCOLS() {
     var protocol_List = ["ethereum abracadabra", "ethereum alchemix", "ethereum alpha-v2", "ethereum apy", "ethereum arcx", "ethereum armor", "ethereum badger", "ethereum balancer-v1", "ethereum balancer-v2", "ethereum bancor", "ethereum bao", "ethereum barnbridge", "ethereum barnbridge-smart-yield", "ethereum based-money", "ethereum basis-cash", "ethereum basis-gold", "ethereum basket-dao", "ethereum bella", "ethereum benchmark", "ethereum big-data", "ethereum boring-dao", "ethereum b-protocol", "ethereum compound", "ethereum convex", "ethereum cream", "ethereum cream-iron-bank", "ethereum cryptex", "ethereum curve", "ethereum defi-dollar", "ethereum defisaver", "ethereum defi-swap", "ethereum derivadex", "ethereum deversifi", "ethereum dfi-money", "ethereum dforce", "ethereum dhedge", "ethereum dodo", "ethereum dodo", "ethereum dopex", "ethereum dsd", "ethereum dydx", "ethereum dydx", "ethereum 88mph", "ethereum 88mph-v3", "ethereum element", "ethereum esd", "ethereum essentia", "ethereum fei", "ethereum float-protocol", "ethereum frax", "ethereum futureswap", "ethereum governor-dao", "ethereum gro", "ethereum harvest", "ethereum hegic", "ethereum idle", "ethereum illuvium", "ethereum index-coop", "ethereum indexed", "ethereum inverse", "ethereum inverse", "ethereum keeper-dao", "ethereum keep-network", "ethereum klondike", "ethereum klondike-v2", "ethereum kyber-dmm", "ethereum launchpool", "ethereum linkswap", "ethereum liquity", "ethereum loopring", "ethereum maker", "ethereum mirror", "ethereum mith-cash", "ethereum mooniswap", "ethereum mstable", "ethereum mushroom", "ethereum nsure-network", "ethereum olympus", "ethereum 1inch", "ethereum onx", "ethereum opium-network", "ethereum opyn", "ethereum orion-protocol", "ethereum perpetual-protocol", "ethereum pickle", "ethereum pie-dao", "ethereum pooltogether", "ethereum popsicle", "ethereum powerpool", "ethereum rally", "ethereum rari", "ethereum rari-fuse", "ethereum realt", "ethereum reflexer", "ethereum ren", "ethereum ribbon", "ethereum sablier", "ethereum saddle", "ethereum sfinance", "ethereum shapeshift", "ethereum shared-stake", "ethereum shell", "ethereum smoothy", "ethereum snowswap", "ethereum stake-dao", "ethereum strudel", "ethereum sushiswap", "ethereum sushiswap-kashi", "ethereum swerve", "ethereum synlev", "ethereum synthetix", "ethereum the-graph", "ethereum tokemak", "ethereum tokenlon", "ethereum tokensets", "ethereum tornado-cash", "ethereum uniswap", "ethereum uniswap-v2", "ethereum uniswap-v3", "ethereum unit", "ethereum value", "ethereum vesper", "ethereum xsigma", "ethereum xtoken", "ethereum yam", "ethereum yaxis", "ethereum yearn", "ethereum zlot", "ethereum epns", "polygon aavegotchi", "polygon aave-v2", "polygon adamant", "polygon apeswap", "polygon augur", "polygon balancer-v2", "polygon barnbridge-smart-yield", "polygon beefy", "polygon cream", "polygon curve", "polygon dfyn", "polygon dinoswap", "polygon dodo", "polygon dodo", "polygon eleven-finance", "polygon harvest", "polygon iron", "polygon kyber-dmm", "polygon pickle", "polygon polywhale", "polygon pooltogether", "polygon quickswap", "polygon superfluid", "polygon sushiswap", "polygon sushiswap-bentobox", "polygon sushiswap-kashi", "polygon waultswap", "avalanche aave-v2", "avalanche abracadabra", "avalanche beefy", "avalanche benqi", "avalanche curve", "avalanche lydia", "avalanche pangolin", "avalanche penguin", "avalanche snowball", "avalanche stormswap", "avalanche teddy-cash", "avalanche traderjoe", "avalanche wonderland", "avalanche yieldyak", "arbitrum abracadabra", "arbitrum adamant", "arbitrum badger", "arbitrum balancer-v2", "arbitrum beefy", "arbitrum curve", "arbitrum dforce", "arbitrum dodo", "arbitrum dodo", "arbitrum pickle", "arbitrum sushiswap", "arbitrum sushiswap-bentobox", "arbitrum sushiswap-kashi", "arbitrum swapr", "arbitrum uniswap-v3", "arbitrum wepiggy", "fantom abracadabra", "fantom beefy", "fantom cream", "fantom curve", "fantom reaper", "fantom scream", "fantom spiritswap", "fantom spookyswap", "fantom sushiswap", "binance-smart-chain apeswap", "binance-smart-chain autofarm", "binance-smart-chain beefy", "binance-smart-chain belt", "binance-smart-chain bzx", "binance-smart-chain cream", "binance-smart-chain dodo", "binance-smart-chain eleven-finance", "binance-smart-chain ellipsis", "binance-smart-chain harvest", "binance-smart-chain impossible-finance", "binance-smart-chain 1inch", "binance-smart-chain pancakeswap", "binance-smart-chain popsicle", "binance-smart-chain sushiswap", "binance-smart-chain sushiswap-bentobox", "binance-smart-chain sushiswap-kashi", "binance-smart-chain venus", "binance-smart-chain waultswap", "optimism lyra", "optimism synthetix", "optimism uniswap-v3"];
 
     return protocol_List;
+}
+
+/**BTCBALANCE_UNCONFIRMED 
+ * Returns the balance on a BTC including the unconfirmed transactions from the mempool, you can request up to 5 address in one call. 
+ * For example:
+ *
+ *   =BTCBALANCE_UNCONFIRMED("17bMJF9LPBVU1aN8YMVg5Y754tzjJiTMzH")           
+ * 
+ * @param {address}                        array of btc addresses (max 5)
+ * @customfunction
+ *
+ * @return a dimensional array containing the BTC balances. 
+ **/
+async function BINANCEWIDRAWFEE(ticker,network) {
+      var data = []
+      
+      ticker = [].concat(ticker).join("%2C");
+      network= [].concat(network).join("%2C");
+      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker+network + 'BINANCEWIDRAWFEE'));
+
+      var cache = CacheService.getScriptCache();
+      var cached = cache.get(id_cache);
+      if (cached != null) {
+          result = JSON.parse(cached);
+          return result;
+      }
+
+      // Connexion to the API endpoints 
+      url = "/BINANCEWITHDRAWDATA/" + ticker+ "/" + network + "/" + KEYID;
+      full_url_options=url_header();
+      var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+      var content = res.getContentText();
+      var parsedJSON = JSON.parse(content);
+
+      for (var i = 0; i < parsedJSON.length; i++) {
+            data.push(parsedJSON[i]["WITHDRAWFEE"]);
+      };
+      try {
+          cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
+          return data;
+      } catch (err) {
+          return content;
+      }
 }
