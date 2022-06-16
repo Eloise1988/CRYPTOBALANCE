@@ -344,6 +344,7 @@
 ![BINANCEWITHDRAWLFEES](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/binancewithdrawfee.gif)
 ###### EXAMPLE =BINANCEWIDRAWFEE("1INCH","BSC")
 
+![BINANCEFEES](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/BinanceFees.png)
 
 
 ## CRYPTO TOOLS SETUP
