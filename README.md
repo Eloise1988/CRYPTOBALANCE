@@ -7,7 +7,7 @@
 ## FUNCTIONS
 |  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	
 |  [Lending](#cryptolending) 	|  [Farming](#crypto-farming) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) |  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)  |  [DEX fees](#dex-fees)  |  [Pool Price](#pool-price) 	|  [Max Token Supply](#cryptosupply)  |  [Number of Holders per contract](#cryptoholdercount)  |  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	 	
-|  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)  
+|  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)   	|  [Binance Withdrawal Fees](#binance-withdrawal-fees)  
 
 ## PREMIUM
 |  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#topnft) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-tx) 	
@@ -335,6 +335,14 @@
 
 ![CRYPTOTLATESTPAIRS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOLATESTPAIRS.gif)
 ###### EXAMPLE =CRYPTOLATESTPAIRS(10,2000,10000,0,"ETH","UNI-V3")
+
+
+### BINANCE WITHDRAWAL FEES
+###### Returns the list of withdrawal fees from Binance by ticker and network
+###### 
+
+![BINANCEWITHDRAWLFEES](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/binancewithdrawfee.gif)
+###### EXAMPLE =BINANCEWIDRAWFEE("1INCH","BSC")
 
 
 
