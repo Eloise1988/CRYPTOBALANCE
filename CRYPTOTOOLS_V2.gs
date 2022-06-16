@@ -46,7 +46,7 @@ const expirationInSeconds_ = 600;
     CRYPTOGAS                       Retrieve average GWEI gas price (ETH)
     CRYPTOHOLDERCOUNT               Retrieve the number of holders on a list of erc20, bep20, matic tokens.
     CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain/all chains)
-    BINANCEWIDRAWFEE                Retrieve the withdrawal fee from binance
+    BINANCEWITHDRAWFEE                Retrieve the withdrawals fee from binance
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
@@ -69,7 +69,7 @@ const expirationInSeconds_ = 600;
   2.3.6   06/01/22 CRYPTOSUPPLY for Premium Users
   2.3.7   06/01/22 TOPNFT for Premium Users
   2.3.8   06/06/22 BTCBALANCE_UNCONFIRMED for Premium Users
-  2.3.9   06/15/22 BINANCEWIDRAWFEE
+  2.3.9   06/15/22 BINANCEWITHDRAWFEE
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1880,18 +1880,19 @@ async function PROTOCOLS() {
     return protocol_List;
 }
 
-/**BTCBALANCE_UNCONFIRMED 
- * Returns the balance on a BTC including the unconfirmed transactions from the mempool, you can request up to 5 address in one call. 
+/**BINANCEWITHDRAWFEE 
+ * Returns the list of withdrawal fees from Binance by ticker and network
  * For example:
  *
- *   =BTCBALANCE_UNCONFIRMED("17bMJF9LPBVU1aN8YMVg5Y754tzjJiTMzH")           
+ *   =BINANCEWITHDRAWFEE("1INCH","BSC")           
  * 
- * @param {address}                        array of btc addresses (max 5)
+ * @param {ticker}                        array of tickers (btc, ada, eth, zil etc)
+ * @param {network}                       array of networks (eth, bsc ,ada etc)
  * @customfunction
  *
- * @return a dimensional array containing the BTC balances. 
+ * @return a dimensional array containing the withdrawal fees from Binance 
  **/
-async function BINANCEWIDRAWFEE(ticker,network) {
+async function BINANCEWITHDRAWFEE(ticker,network) {
       var data = []
       
       ticker = [].concat(ticker).join("%2C");
