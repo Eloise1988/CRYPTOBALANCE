@@ -10,7 +10,7 @@
 |  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)   	|  [Binance Withdrawal Fees](#binance-withdrawal-fees)  
 
 ## PREMIUM
-|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#topnft) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-tx) 	
+|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#list-top-nfts) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-tx) 	
 
 ## CRYPTOBALANCE
 
@@ -346,6 +346,13 @@
 
 ![BINANCEFEES](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/BinanceFees.png)
 
+
+### LIST TOP NFTS
+###### Returns the top 5 NFTs, dollar value, total sum on an ethereum address. Premium Function.
+###### 
+
+![CRYPTOTLATESTPAIRS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TOPNFT.gif)
+###### EXAMPLE =TOPNFT("0xc36442b4a4522e871399cd717abdd847ab11fe88")  
 
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
