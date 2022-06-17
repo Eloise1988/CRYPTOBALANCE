@@ -10,7 +10,7 @@
 |  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)   	|  [Binance Withdrawal Fees](#binance-withdrawal-fees)  
 
 ## PREMIUM
-|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#list-top-nfts) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-tx) 	
+|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#list-top-nfts) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-transactions) 	
 
 ## CRYPTOBALANCE
 
@@ -351,8 +351,17 @@
 ###### Returns the top 5 NFTs, dollar value, total sum on an ethereum address. Premium Function.
 ###### 
 
-![CRYPTOTLATESTPAIRS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TOPNFT.gif)
-###### EXAMPLE =TOPNFT("0xc36442b4a4522e871399cd717abdd847ab11fe88")  
+![TOPNFTS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/TOPNFT.gif)
+###### EXAMPLE =TOPNFT("0xc36442b4a4522e871399cd717abdd847ab11fe88") 
+
+
+btc-balance-accounting-for-unconfirmed-transactions
+### BTC BALANCE ACCOUNTING FOR UNCONFIRMED TRANSACTIONS
+###### Returns the balance on a BTC including the unconfirmed transactions from the mempool, you can request up to 5 address in one call.  Premium Function.
+###### 
+
+![BTCUNCONFIRMEDTX](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/BTCBALANCE_UNCONFIRMED.gif)
+###### EXAMPLE =BTCBALANCE_UNCONFIRMED("17bMJF9LPBVU1aN8YMVg5Y754tzjJiTMzH")
 
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
