@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.3.9
+  Version:      2.4.0
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -60,6 +60,7 @@ const expirationInSeconds_ = 600;
     CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
     TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
     BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
+    BTCBALANCE_UNCONFIRMED_IN       Retrieve the sum of BTC inflows including unconfirmed transactions (up to 5 addresses) 
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -70,6 +71,7 @@ const expirationInSeconds_ = 600;
   2.3.7   06/01/22 TOPNFT for Premium Users
   2.3.8   06/06/22 BTCBALANCE_UNCONFIRMED for Premium Users
   2.3.9   06/15/22 BINANCEWITHDRAWFEE
+  2.4.0   06/19/22 BTCBALANCE_UNCONFIRMEDIN for Premium Users
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1738,20 +1740,64 @@ async function BTCBALANCE_UNCONFIRMED(address) {
       // Connexion to the API endpoints 
       url = "/BTCUNCONFIRMED/" + address_btc + "/" + KEYID;
       full_url_options=url_header();
-      var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-      var content = res.getContentText();
-      var parsedJSON = JSON.parse(content);
-
-      for (var i = 0; i < parsedJSON.length; i++) {
-            data.push(parsedJSON[i]["BALANCE"]);
-      };
       try {
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var parsedJSON = JSON.parse(res.getContentText());
+
+        for (var i = 0; i < parsedJSON.length; i++) {
+              data.push(parsedJSON[i]["BALANCE"]);
+        };
+      
           cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
           return data;
       } catch (err) {
-          return content;
+          return res.getContentText();
       }
 }
+/**BTCBALANCE_UNCONFIRMEDIN 
+ * Premium Plan Function: Returns the BTC balance of positive inflows including the unconfirmed transactions from the mempool, you can request up to 5 address in one call. 
+ * For example:
+ *
+ *   =BTCBALANCE_UNCONFIRMEDIN("17bMJF9LPBVU1aN8YMVg5Y754tzjJiTMzH")           
+ * 
+ * @param {address}                        array of btc addresses (max 5)
+ * @customfunction
+ *
+ * @return a dimensional array containing the BTC balances. 
+ **/
+async function BTCBALANCE_UNCONFIRMEDIN(address) {
+      var data = []
+      
+      address_btc = [].concat(address).join("%2C");
+      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_btc + 'btcunconfirmedbalancein'));
+
+      var cache = CacheService.getScriptCache();
+      var cached = cache.get(id_cache);
+      if (cached != null) {
+          result = JSON.parse(cached);
+          return result;
+      }
+
+      // Connexion to the API endpoints 
+      url = "/BTCUNCONFIRMEDFUNDED/" + address_btc + "/" + KEYID;
+
+      
+      full_url_options=url_header();
+      try {
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var parsedJSON = JSON.parse(res.getContentText());
+
+        for (var i = 0; i < parsedJSON.length; i++) {
+              data.push(parsedJSON[i]["BALANCE"]);
+        };
+      
+          cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
+          return data;
+      } catch (err) {
+          return res.getContentText();
+      }
+}
+
 /**CRYPTODEFI_BALANCE
  * Returns the staked/lended balance by symbol/ticker given a defi protocol into Google spreadsheets. 
  * By default, data gets transformed into a array/number. 
