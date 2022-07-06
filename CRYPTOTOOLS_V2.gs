@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.0
+  Version:      2.4.1
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -46,7 +46,8 @@ const expirationInSeconds_ = 600;
     CRYPTOGAS                       Retrieve average GWEI gas price (ETH)
     CRYPTOHOLDERCOUNT               Retrieve the number of holders on a list of erc20, bep20, matic tokens.
     CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain/all chains)
-    BINANCEWITHDRAWFEE                Retrieve the withdrawals fee from binance
+    BINANCEWITHDRAWFEE              Retrieve the withdrawals fee from binance
+    CRYPTOHIST                      Retrieve the historical OHLC data
   
     DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
     PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
@@ -72,6 +73,7 @@ const expirationInSeconds_ = 600;
   2.3.8   06/06/22 BTCBALANCE_UNCONFIRMED for Premium Users
   2.3.9   06/15/22 BINANCEWITHDRAWFEE
   2.4.0   06/19/22 BTCBALANCE_UNCONFIRMEDIN for Premium Users
+  2.4.1   07/05/22 CRYPTOHIST for historical OHLC data
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1797,6 +1799,50 @@ async function BTCBALANCE_UNCONFIRMEDIN(address) {
           return res.getContentText();
       }
 }
+
+/**CRYPTOHIST 
+ * Returns the historical cryptocurrency OHLC you can request up to 5 address in one call. Premium Plan for hist > 3mth of data
+ * For example:
+ *
+ *   =CRYPTOHIST("BTC","CLOSE","2020-01-01","2021-12-31")           
+ * 
+ * @param {ticker}                        array of ticker (max 3 on freemium)
+ * @param {datatype}                      either "open","high","low","close","volume","marketcap"
+ * @param {startdate}                     start date in text format "yyyy-mm-dd" 
+ * @param {endate}                        end date in text format "yyyy-mm-dd"
+ * @customfunction
+ *
+ * @return a dimensional array containing the historical data. 
+ **/
+async function CRYPTOHIST (ticker,datatype,startdate,endate) {
+      
+      ticker = [].concat(ticker).join("%2C");
+      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker + datatype + startdate + endate + 'historydata'));
+
+      var cache = CacheService.getScriptCache();
+      var cached = cache.get(id_cache);
+      if (cached != null) {
+          result = JSON.parse(cached);
+          return result;
+      }
+
+      // Connexion to the API endpoints 
+      url = "/PRICEHIST/" + ticker + "/"+ datatype + "/"+ startdate + "/" + endate + "/"+ KEYID;
+
+      
+      full_url_options=url_header();
+      
+      try {
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var parsedJSON = JSON.parse(res.getContentText());
+          cache.put(id_cache, JSON.stringify(parsedJSON), expirationInSeconds_);
+
+          return parsedJSON;
+      } catch (err) {
+          return res.getContentText();
+      }
+}
+
 
 /**CRYPTODEFI_BALANCE
  * Returns the staked/lended balance by symbol/ticker given a defi protocol into Google spreadsheets. 
