@@ -336,6 +336,13 @@
 ![CRYPTOTLATESTPAIRS](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOLATESTPAIRS.gif)
 ###### EXAMPLE =CRYPTOLATESTPAIRS(10,2000,10000,0,"ETH","UNI-V3")
 
+### HISTORICAL OHLC
+###### Returns the historical cryptocurrency OHLC. Open, High, Close, Volume, Low, Marketcap 
+###### Premium Plan for historical data greater than 3mth.
+
+###### EXAMPLE =CRYPTOHIST("BTC","CLOSE","2020-01-01","2021-12-31") 
+###### 
+
 
 ### BINANCE WITHDRAWAL FEES
 ###### Returns the list of withdrawal fees from Binance by ticker and network
