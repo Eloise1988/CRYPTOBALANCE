@@ -1801,7 +1801,7 @@ async function BTCBALANCE_UNCONFIRMEDIN(address) {
 }
 
 /**CRYPTOHIST 
- * Returns the historical cryptocurrency OHLC you can request up to 5 address in one call. Premium Plan for hist > 3mth of data
+ * Returns the historical cryptocurrency OHLC. Open, High, Close, Volume, Low, Marketcap.  Premium Plan for historical data greater than 3mth.
  * For example:
  *
  *   =CRYPTOHIST("BTC","CLOSE","2020-01-01","2021-12-31")           
