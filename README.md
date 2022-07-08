@@ -340,6 +340,7 @@
 ###### Returns the historical cryptocurrency OHLC. Open, High, Close, Volume, Low, Marketcap 
 ###### Premium Plan for historical data greater than 3mth.
 
+![CRYPTOHIST](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOHIST.gif)
 ###### EXAMPLE =CRYPTOHIST("BTC","CLOSE","2020-01-01","2021-12-31") 
 ###### 
 
