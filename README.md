@@ -337,7 +337,7 @@
 ###### EXAMPLE =CRYPTOLATESTPAIRS(10,2000,10000,0,"ETH","UNI-V3")
 
 ### HISTORICAL OHLC
-###### Returns the historical cryptocurrency OHLC. Open, High, Close, Volume, Low, Marketcap 
+###### Returns the historical cryptocurrency OHLC. Open, High, Close, Volume, Low 
 ###### Premium Plan for historical data greater than 3mth.
 
 ![CRYPTOHIST](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF/CRYPTOHIST.gif)
