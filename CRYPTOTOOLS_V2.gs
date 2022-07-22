@@ -1827,7 +1827,7 @@ async function CRYPTOHIST (ticker,datatype,startdate,endate) {
       }
 
       // Connexion to the API endpoints 
-      url = "/PRICEHIST/" + ticker + "/"+ datatype + "/"+ startdate + "/" + endate + "/"+ KEYID;
+      url = "/PRICEHISTO/" + ticker + "/"+ datatype + "/"+ startdate + "/" + endate + "/"+ KEYID;
 
       
       full_url_options=url_header();
