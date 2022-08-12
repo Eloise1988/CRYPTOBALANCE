@@ -10,7 +10,7 @@
 |  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)   	|  [Binance Withdrawal Fees](#binance-withdrawal-fees) 	|  [Historical OHLC](#historical-ohlc) 	
 
 ## PREMIUM
-|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#list-top-nfts) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-transactions) 	|  [BTC positive flows with unconfirmed tx](#btc-positive-flows-with-unconfirmed-transactions) 	|  [Historical OHLC](#historical-ohlc) 	|  [Max Token Supply](#cryptosupply)  
+|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#list-top-nfts) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-transactions) 	|  [BTC positive flows with unconfirmed tx](#btc-positive-flows-with-unconfirmed-transactions) 	|  [Historical OHLC](#historical-ohlc) 	|  [Max Token Supply](#cryptosupply)  |  [Multiple chain Transactions (BTC, BNB, ETH, OP, MATIC...)](#cryptobtctx)  
 
 ## CRYPTOBALANCE
 
