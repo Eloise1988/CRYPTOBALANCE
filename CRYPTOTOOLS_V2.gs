@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.1
+  Version:      2.4.2
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -62,6 +62,7 @@ const expirationInSeconds_ = 600;
     TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
     BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
     BTCBALANCE_UNCONFIRMED_IN       Retrieve the sum of BTC inflows including unconfirmed transactions (up to 5 addresses) 
+    CRYPTOTX                        Retrieve the historical transaction list on a range of addresses.
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -74,6 +75,7 @@ const expirationInSeconds_ = 600;
   2.3.9   06/15/22 BINANCEWITHDRAWFEE
   2.4.0   06/19/22 BTCBALANCE_UNCONFIRMEDIN for Premium Users
   2.4.1   07/05/22 CRYPTOHIST for historical OHLC data
+  2.4.2   08/13/22 CRYPTOTX for historical transactions
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1843,6 +1845,48 @@ async function CRYPTOHIST (ticker,datatype,startdate,endate) {
       }
 }
 
+
+/**CRYPTOTX 
+ * Returns the historical transaction list on a range of addresses.
+ * For example:
+ *
+ *   =CRYPTOTX("bc1q0c36c38k2shz4jetd0a6nmlhahxd5alqmz3xcj","BTC")   
+ *   =CRYPTOTX(a1:a2,b1:b2)          
+ * 
+ * @param {addresses}                     array of addresses (max 3 on freemium)
+ * @param {network}                       available btc,eth (erc20),bnb (bep20),op,cronos,ftm,arb,avax,matic,movr
+ * @customfunction
+ *
+ * @return a dimensional array containing the transactional data 
+ **/
+async function CRYPTOTX(addresses,network) {
+      
+      addresses = [].concat(addresses).join("%2C");
+      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, addresses + network + 'transactiondata'));
+
+      var cache = CacheService.getScriptCache();
+      var cached = cache.get(id_cache);
+      if (cached != null) {
+          result = JSON.parse(cached);
+          return result;
+      }
+
+      // Connexion to the API endpoints 
+      url = "/TXALL/" + addresses + "/"+ network + "/"+ KEYID;
+
+      
+      full_url_options=url_header();
+      
+      try {
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var parsedJSON = JSON.parse(res.getContentText());
+          cache.put(id_cache, JSON.stringify(parsedJSON), expirationInSeconds_);
+
+          return parsedJSON;
+      } catch (err) {
+          return res.getContentText();
+      }
+}
 
 /**CRYPTODEFI_BALANCE
  * Returns the staked/lended balance by symbol/ticker given a defi protocol into Google spreadsheets. 
