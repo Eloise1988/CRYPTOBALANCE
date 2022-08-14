@@ -10,7 +10,7 @@
 |  [Futures](#futures) 	|  [Gas price (ETH)](#gas-price) 	|  [List of Transactions](#cryptotx)   	|  [Binance Withdrawal Fees](#binance-withdrawal-fees) 	|  [Historical OHLC](#historical-ohlc) 	
 
 ## PREMIUM
-|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#list-top-nfts) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-transactions) 	|  [BTC positive flows with unconfirmed tx](#btc-positive-flows-with-unconfirmed-transactions) 	|  [Historical OHLC](#historical-ohlc) 	|  [Max Token Supply](#cryptosupply)  |  [Multiple chain Transactions (BTC, BNB, ETH, OP, MATIC...)](#cryptobtctx)  
+|  [Crypto DEX new pairs](#cryptolatestpairs) 	|  [Top Nfts by address](#list-top-nfts) 	|  [BTC balance with unconfirmed tx](#btc-balance-accounting-for-unconfirmed-transactions) 	|  [BTC positive flows with unconfirmed tx](#btc-positive-flows-with-unconfirmed-transactions) 	|  [Historical OHLC](#historical-ohlc) 	|  [Max Token Supply](#cryptosupply)  |  [Multiple chain Transactions (BTC, BNB, ETH, OP, MATIC...)](#crypto-transaction-list)  
 
 ## CRYPTOBALANCE
 
@@ -376,6 +376,14 @@
 
 ![BTCUNCONFIRMEDTX](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF//btcunconfirmedin.gif)
 ###### EXAMPLE =BTCBALANCE_UNCONFIRMEDIN("bc1qh5y7707wtqgyl65vegxrrm46xmlk2pn8mmcwyd")
+
+
+### CRYPTO TRANSACTION LIST
+###### Returns the historical transaction list on a range of addresses. Premium Function for multiple chains/addresses.
+###### 
+
+![CRYPTOALLTX](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/GIF//cryptotxall.gif)
+###### EXAMPLE =CRYPTOTX("bc1q0c36c38k2shz4jetd0a6nmlhahxd5alqmz3xcj","BTC") 
 
 ## CRYPTO TOOLS SETUP
 ###### 1. Open a Google sheet where you wish to use CRYPTOBALANCE(), CRYPTOLENDING(), CRYPTOSTAKING() or CRYPTOREWARDS(), UNISWAP(), DEXPRICES() etc ..
