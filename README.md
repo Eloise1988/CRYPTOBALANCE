@@ -3,6 +3,7 @@
 ###### [Link to the Medium Publication](https://medium.com/coinmonks/how-to-value-your-stocks-crypto-portfolio-in-google-sheets-22bb7b42c39d)
 ###### [Link to Google Sheet's Set-up](https://medium.com/the-cryptocurious/google-sheet-open-source-cryptotools-set-up-9420e3940a8a)
 ###### [API Documentation](https://api.cryptotools.one/openapi)
+###### [Discord](https://discord.gg/dxaQ4tkX)
 
 ## FUNCTIONS
 |  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	
