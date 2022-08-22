@@ -39,6 +39,8 @@
 ###### =CRYPTOBALANCE("palm"+ "PALM NETWORK smart contract address", "holder address")
 ###### =CRYPTOBALANCE("cronos"+ "CRONOS NETWORK smart contract address", "holder address")
 ###### =CRYPTOBALANCE("gnosis"+ "GNOSIS NETWORK smart contract address", "holder address")
+###### =CRYPTOBALANCE("evmos"+ "EVMOS contract address", "holder address")
+###### =CRYPTOBALANCE("moon"+ "MOONBEAM contract address", "holder address")
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
 ###### =CRYPTOBALANCE("TRON contract address","holder address")
