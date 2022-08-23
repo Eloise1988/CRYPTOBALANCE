@@ -1850,7 +1850,7 @@ async function CRYPTOHIST (ticker,datatype,startdate,endate) {
 
 /**CRYPTOTX 
  * Returns the historical transaction list on a range of addresses.
- * For example:
+ * Networks available: btc,eth,bnb,op,cronos,ftm,arb,avax,matic,movr
  *
  *   =CRYPTOTX("bc1q0c36c38k2shz4jetd0a6nmlhahxd5alqmz3xcj","BTC")   
  *   =CRYPTOTX(a1:a2,b1:b2)          
