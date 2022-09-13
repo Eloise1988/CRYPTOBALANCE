@@ -176,6 +176,7 @@ function url_header(){
  *   =CRYPTOBALANCE("gnosis"+ "GNOSIS contract address", "holder address")
  *   =CRYPTOBALANCE("evmos"+ "EVMOS contract address", "holder address")
  *   =CRYPTOBALANCE("moon"+ "MOONBEAM contract address", "holder address")
+ *   =CRYPTOBALANCE("doge"+ "DOGECHAIN contract address", "holder address")
  *   =CRYPTOBALANCE("TEZOS contract address","holder address") 
  *   =CRYPTOBALANCE("SOLANA contract address","holder address")
  *   =CRYPTOBALANCE("XRP contract address","holder address")
