@@ -41,10 +41,12 @@
 ###### =CRYPTOBALANCE("gnosis"+ "GNOSIS NETWORK smart contract address", "holder address")
 ###### =CRYPTOBALANCE("evmos"+ "EVMOS contract address", "holder address")
 ###### =CRYPTOBALANCE("moon"+ "MOONBEAM contract address", "holder address")
+###### =CRYPTOBALANCE("doge"+ "DOGECHAIN contract address", "holder address")
 ###### =CRYPTOBALANCE("TEZOS contract address","holder address") 
 ###### =CRYPTOBALANCE("SOLANA contract address","holder address")
 ###### =CRYPTOBALANCE("TRON contract address","holder address")
 ###### =CRYPTOBALANCE("XRP contract address","holder address")
+
 
 ### Available coins [ERC20-BEP20](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_ERC20_BEP20.md) [Other Blockchains](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/ALL_COINS.md) [Staking](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/STAKING.md) [Rewards](https://raw.githubusercontent.com/Eloise1988/CRYPTOBALANCE/master/COINS/REWARDS.md)
 
