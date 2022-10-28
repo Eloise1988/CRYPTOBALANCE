@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.2
+  Version:      2.4.3
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -49,12 +49,6 @@ const expirationInSeconds_ = 600;
     BINANCEWITHDRAWFEE              Retrieve the withdrawals fee from binance
     CRYPTOHIST                      Retrieve the historical OHLC data
   
-    DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-    PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
-    CRYPTODEFI                      Retrieve the list of assets by defi protocol  
-    CRYPTODEFI_BALANCE              Retrieve the balance by symbol/ticker given a defi protocol 
-    CRYPTODEFI_BALANCEUSD           Retrieve the USD amont lended by symbol/ticker given a defi protocol
-  
 
     PREMIUM FUNCTIONS
     CRYPTOLATESTPAIRS               Retrieve all new pairs by chain & DEX
@@ -63,6 +57,11 @@ const expirationInSeconds_ = 600;
     BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
     BTCBALANCE_UNCONFIRMED_IN       Retrieve the sum of BTC inflows including unconfirmed transactions (up to 5 addresses) 
     CRYPTOTX                        Retrieve the historical transaction list on a range of addresses.
+    DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
+    PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
+    CRYPTODEFI                      Retrieve the list of assets by defi protocol  
+    CRYPTODEFI_BALANCE              Retrieve the balance by symbol/ticker given a defi protocol 
+    CRYPTODEFI_BALANCEUSD           Retrieve the USD amont lended by symbol/ticker given a defi protocol
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -76,6 +75,7 @@ const expirationInSeconds_ = 600;
   2.4.0   06/19/22 BTCBALANCE_UNCONFIRMEDIN for Premium Users
   2.4.1   07/05/22 CRYPTOHIST for historical OHLC data
   2.4.2   08/13/22 CRYPTOTX for historical transactions
+  2.4.3   10/28/22 DEFI function for Premium Users
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1474,9 +1474,9 @@ async function CRYPTOTOKENLIST(address, chain) {
         var parsedJSON = JSON.parse(content);
 
         var data = []
-        data.push(["CHAIN", "CONTRACT", "SYMBOL", "AMOUNT","USD"])
+        data.push(["CHAIN", "CONTRACT", "SYMBOL", "AMOUNT"])
         for (var i = 0; i < parsedJSON.length; i++) {
-            data.push([parsedJSON[i]["CHAIN"], parsedJSON[i]["CONTRACT"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["AMOUNT"], parsedJSON[i]["USD"]]);
+            data.push([parsedJSON[i]["CHAIN"], parsedJSON[i]["CONTRACT"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["AMOUNT"]]);
         };
 
         try {
@@ -1661,7 +1661,7 @@ async function CRYPTODEFI(address, protocols) {
             return data;
         }
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 /**TOPNFT 
@@ -1717,7 +1717,7 @@ async function TOPNFT(address) {
           cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
           return data;
       } catch (err) {
-          return data;
+          return res.getContentText();
       }
 }
 /**BTCBALANCE_UNCONFIRMED 
@@ -1942,7 +1942,7 @@ async function CRYPTODEFI_BALANCE(address, ticker, protocols) {
 
         return dict;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
@@ -1997,7 +1997,7 @@ async function CRYPTODEFI_BALANCEUSD(address, ticker, protocols) {
         
         return dict;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
