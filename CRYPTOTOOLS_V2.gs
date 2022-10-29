@@ -24,7 +24,6 @@ const expirationInSeconds_ = 600;
     CRYPTOREWARSD                   Retrieve cryptocurrency reward amounts from staking
     CRYPTOLENDING                   Retrieve cryptocurrency lending/borrowing rates from dex echanges
     CRYPTOLENDINGREWARD             Retrieve reward apy lending/borrowing rates from AAVE & COMPOUND
-    CRYPTOSUMUSD                    Retrieve one's total $ amount on all chains or by ETH, BSC ... chain
     CRYPTODEXVOLUME                 Retrieve DEX volumes $
     CRYPTODEXFEE                    Retrieve DEX transaction fees
     CRYPTOTVL                       Retrieve Total Value Locked in Defi projects
@@ -61,7 +60,8 @@ const expirationInSeconds_ = 600;
     PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
     CRYPTODEFI                      Retrieve the list of assets by defi protocol  
     CRYPTODEFI_BALANCE              Retrieve the balance by symbol/ticker given a defi protocol 
-    CRYPTODEFI_BALANCEUSD           Retrieve the USD amont lended by symbol/ticker given a defi protocol
+    CRYPTODEFI_BALANCEUSD           Retrieve the USD amont lended by symbol/ticker given a defi protocol    
+    CRYPTOSUMUSD                    Retrieve one's total $ amount on all chains or by ETH, BSC ... chain
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
