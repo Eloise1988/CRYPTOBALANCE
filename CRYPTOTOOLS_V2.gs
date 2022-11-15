@@ -1474,9 +1474,9 @@ async function CRYPTOTOKENLIST(address, chain) {
         var parsedJSON = JSON.parse(content);
 
         var data = []
-        data.push(["CHAIN", "CONTRACT", "SYMBOL", "AMOUNT"])
+        data.push(["CHAIN", "CONTRACT", "SYMBOL","PRICE", "$AMOUNT"])
         for (var i = 0; i < parsedJSON.length; i++) {
-            data.push([parsedJSON[i]["CHAIN"], parsedJSON[i]["CONTRACT"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["AMOUNT"]]);
+            data.push([parsedJSON[i]["CHAIN"], parsedJSON[i]["CONTRACT"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["PRICE"],parsedJSON[i]["$AMOUNT"]]);
         };
 
         try {
