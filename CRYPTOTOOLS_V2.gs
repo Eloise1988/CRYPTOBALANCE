@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.3
+  Version:      2.4.4
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -76,6 +76,7 @@ const expirationInSeconds_ = 600;
   2.4.1   07/05/22 CRYPTOHIST for historical OHLC data
   2.4.2   08/13/22 CRYPTOTX for historical transactions
   2.4.3   10/28/22 DEFI function for Premium Users
+  2.4.4   11/15/22 CRYPTOBALANCE can now retrieve multiple blockchain balances
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -187,9 +188,8 @@ function url_header(){
  *   Optimistic =CRYPTOBALANCE("OPETH","holder address") 
  *   Aurora     =CRYPTOBALANCE("AURORAETH","holder address")
  *
- * @param {cryptocurrency}  the cryptocurrency TICKER/SYMBOL data to fetch, for example the symbol of Bitcoin is BTC.
- * @param {address}         the wallet address associated to the cryptocurrency you want the balance from. Please pay attention, DO NOT TO ENTER your private wallet address.
- * @param {parseOptions}    an optional fixed cell for automatic refresh of the data
+ * @param {cryptocurrency}  the cryptocurrency array TICKER/SYMBOL, for example the symbol of Bitcoin is BTC.
+ * @param {address}         the wallet address associated to the cryptocurrency you want the balance from. 
  * @customfunction
  *
  * @return a one-dimensional array the balance of cryptocurrency
@@ -197,33 +197,33 @@ function url_header(){
  **/
 async function CRYPTOBALANCE(ticker, address) {
     Utilities.sleep(Math.random() * 100)
-    id_cache = ticker + address + "balance"
+    ticker = [].concat(ticker).join("%2C");
+    address= [].concat(address).join("%2C");
+    var data = [];
+    id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker+address + 'balances'));
+   
     var cache = CacheService.getScriptCache();
     var cached = cache.get(id_cache);
-
     if (cached != null) {
-        if (isNaN(cached)) {
-            return cached;
-        }
-        return Number(cached);
+        result = JSON.parse(cached);
+        return result;
     }
 
+    // Connexion to the API endpoints 
+    url = "/BALANCES/" + ticker+ "/" + address + "/" + KEYID;
+    full_url_options=url_header();
+    var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+    var content = res.getContentText();
+    var parsedJSON = JSON.parse(content);
+
+    for (var i = 0; i < parsedJSON.length; i++) {
+          data.push(parsedJSON[i]["QUANTITY"]);
+    };
     try {
-
-        url = "/BALANCE/" + ticker + "/" + address + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var content = res.getContentText();
-
-        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-            content = parseFloat(content);
-            cache.put(id_cache, content, expirationInSeconds_)
-        }
-
-        return content;
+        cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
+        return data;
     } catch (err) {
-        return err;
+        return content;
     }
 
 }
