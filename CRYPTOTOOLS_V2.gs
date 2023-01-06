@@ -12,7 +12,7 @@ const expirationInSeconds_ = 600;
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.4
+  Version:      2.4.5
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -77,6 +77,7 @@ const expirationInSeconds_ = 600;
   2.4.2   08/13/22 CRYPTOTX for historical transactions
   2.4.3   10/28/22 DEFI function for Premium Users
   2.4.4   11/15/22 CRYPTOBALANCE can now retrieve multiple blockchain balances
+  2.4.5   06/01/23 New erc chains available on cryptobalance + fixed formatting issue 
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -155,8 +156,7 @@ function url_header(){
 
 
 /**CRYPTOBALANCE
- * Returns cryptocurrency balances into Google spreadsheets. The result is a ONE-dimensional array.
- * By default, data gets transformed into a number so it looks more like a normal price data import. 
+ * Returns cryptocurrency balances into Google spreadsheets.
  * For example:
  *
  *   =CRYPTOBALANCE("BTC", "14ByqnCtawEV1VdQbLqxYWPdey1JbfpwRy","$A$1")
@@ -172,6 +172,7 @@ function url_header(){
  *   =CRYPTOBALANCE("celo"+ "CELO contract address", "holder address")
  *   =CRYPTOBALANCE("wan"+ "WANCHAIN contract address", "holder address")
  *   =CRYPTOBALANCE("aurora"+ "AURORA contract address", "holder address")
+ *   =CRYPTOBALANCE("op"+ "OPTIMISTIC contract address", "holder address")
  *   =CRYPTOBALANCE("palm"+ "PALM contract address", "holder address")
  *   =CRYPTOBALANCE("cronos"+ "CRONOS contract address", "holder address")
  *   =CRYPTOBALANCE("gnosis"+ "GNOSIS contract address", "holder address")
@@ -182,6 +183,8 @@ function url_header(){
  *   =CRYPTOBALANCE("SOLANA contract address","holder address")
  *   =CRYPTOBALANCE("XRP contract address","holder address")
  *   =CRYPTOBALANCE("TRON contract address","holder address")
+ *   =CRYPTOBALANCE("ADA Token Fingerprint","holder address")
+ *   =CRYPTOBALANCE("HBAR contract","holder address")
  * 
  *  ............................  ETH Balance on  ........................................... 
  *   Arbitrum   =CRYPTOBALANCE("ARBETH","holder address")
@@ -217,8 +220,13 @@ async function CRYPTOBALANCE(ticker, address) {
     var parsedJSON = JSON.parse(content);
 
     for (var i = 0; i < parsedJSON.length; i++) {
-          data.push(parsedJSON[i]["QUANTITY"]);
-    };
+      var quantity = parsedJSON[i]["QUANTITY"];
+      try {
+        data.push(parseFloat(quantity));
+      } catch (error) {
+        data.push(quantity);
+      }
+    }
     try {
         cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
         return data;
