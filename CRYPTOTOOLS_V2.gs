@@ -199,44 +199,31 @@ function url_header(){
  *  
  **/
 async function CRYPTOBALANCE(ticker, address) {
-    Utilities.sleep(Math.random() * 100)
-    if (!Array.isArray(ticker) && Array.isArray(address)) {
-      var temp = ticker;
-      ticker = [];
-      for (var i = 0; i < address.length; i++) {
-        ticker.push(temp);
-      }
-      ticker = ticker.join("%2C");
-    } else {
-      ticker = [].concat(ticker).join("%2C");
-    }
-    address = [].concat(address).join("%2C");
+    const sleepTime = Math.random() * 100;
+    Utilities.sleep(sleepTime);
+    if (!Array.isArray(ticker)) ticker = [ticker];
+    if (!Array.isArray(address)) address = [address];
+    ticker = ticker.join("%2C");
+    address = address.join("%2C");
+    let data = [];
 
-    var data = [];
-    id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker+address + 'balances'));
-   
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-    if (cached != null) {
-        result = JSON.parse(cached);
-        return result;
-    }
+    const id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker+address + 'balances'));
+    const cache = CacheService.getScriptCache();
+    const cached = cache.get(id_cache);
+    if (cached != null) return JSON.parse(cached);
 
     // Connexion to the API endpoints 
-    url = "/BALANCES/" + ticker+ "/" + address + "/" + KEYID;
-    full_url_options=url_header();
-    var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-    var content = res.getContentText();
-    var parsedJSON = JSON.parse(content);
+    const url = "/BALANCES/" + ticker+ "/" + address + "/" + KEYID;
+    const full_url_options = url_header();
+    const res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+    const content = res.getContentText();
+    const parsedJSON = JSON.parse(content);
 
-    for (var i = 0; i < parsedJSON.length; i++) {
-      var quantity = parsedJSON[i]["QUANTITY"];
-      try {
-        data.push(parseFloat(quantity));
-      } catch (error) {
-        data.push(quantity);
-      }
-    }
+    data = parsedJSON.map(item => {
+      const quantity = item.QUANTITY;
+      return isNaN(parseFloat(quantity)) ? quantity : parseFloat(quantity);
+    });
+
     try {
         cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
         return data;
