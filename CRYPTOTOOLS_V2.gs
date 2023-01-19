@@ -248,10 +248,10 @@ async function CRYPTOBALANCE(ticker, address) {
  * @return the current cryptocurrency rewards from PoS
  **/
 async function CRYPTOREWARDS(ticker, address) {
-    id_cache = ticker + address + "rewards"
-    Utilities.sleep(Math.random() * 100)
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
+    let id_cache = `${ticker}${address}rewards`;
+    Utilities.sleep(Math.random() * 100);
+    let cache = CacheService.getScriptCache();
+    let cached = cache.get(id_cache);
 
     if (cached != null) {
         if (isNaN(cached)) {
@@ -260,23 +260,20 @@ async function CRYPTOREWARDS(ticker, address) {
         return Number(cached);
     }
 
+    let url = `/REWARDS/${ticker}/${address}/${KEYID}`;
+    let full_url_options = url_header();
+
     try {
-
         ticker = ticker.toUpperCase();
-
-        url = "/REWARDS/" + ticker + "/" + address + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-
-        var content = res.getContentText();
-        cache.put(id_cache, content, expirationInSeconds_)
-        
+        let res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        let content = res.getContentText();
+        cache.put(id_cache, content, expirationInSeconds_);
         return content;
     } catch (err) {
         return err;
     }
 }
+
 
 
 /**CRYPTOSTAKING
@@ -294,30 +291,26 @@ async function CRYPTOREWARDS(ticker, address) {
  * @return the current amount staked on a cryptocurrency 
  **/
 async function CRYPTOSTAKING(ticker, address) {
-    id_cache = ticker + address + "staking"
-    Utilities.sleep(Math.random() * 100)
-    var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
+    const id_cache = `${ticker.toUpperCase()}${address}staking`;
+    Utilities.sleep(Math.random() * 100);
+    const cache = CacheService.getScriptCache();
+    const cached = cache.get(id_cache);
 
-    if (cached != null) {
-        if (isNaN(cached)) {
-            return cached;
-        }
-        return Number(cached);
+    if (cached) {
+        return !isNaN(cached) ? Number(cached) : cached;
     }
 
     try {
-        ticker = ticker.toUpperCase();
+        const url = `/STAKING/${ticker.toUpperCase()}/${address}/${KEYID}`;
+        const full_url_options=url_header();
 
-        url = "/STAKING/" + ticker + "/" + address + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var content = res.getContentText();
+        const res = await UrlFetchApp.fetch(`${full_url_options[0]}${url}`, full_url_options[1]);
+        const content = res.getContentText();
 
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-            content = parseFloat(content);
-            cache.put(id_cache, content, expirationInSeconds_)
+            const parsedContent = parseFloat(content);
+            cache.put(id_cache, parsedContent, expirationInSeconds_);
+            return parsedContent;
         }
 
         return content;
@@ -346,15 +339,15 @@ async function CRYPTOSUMUSD(address,chain) {
     var cache = CacheService.getScriptCache();
     var cached = cache.get(id_cache);
 
-    if (cached != null) {
-        if (isNaN(cached)) {
+    if (cached !== null) {
+        if (Number(cached) === cached) {
             return cached;
         }
         return Number(cached);
     }
 
     try {
-        if (typeof chain === 'undefined') chain = "all";
+        if (!chain) chain = "all";
         chain = chain.toLowerCase();
         
         url = "/TOTALUSDBALANCE/" + address + "/" + chain + "/" + KEYID;
@@ -363,8 +356,8 @@ async function CRYPTOSUMUSD(address,chain) {
         var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
 
         var content = res.getContentText();
-        if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-            content = parseFloat(content);
+        
+        if(Number(content) === content) {
             cache.put(id_cache, content, expirationInSeconds_)
         }
 
@@ -373,6 +366,7 @@ async function CRYPTOSUMUSD(address,chain) {
         return err;
     }
 }
+
 
 /**CRYPTOTVL
  * Returns DEXes' (decentralized exchanges) Total Cryptocurrency Value Locked.The result is a ONE-dimensional array.
@@ -398,9 +392,10 @@ async function CRYPTOTVL(exchange_array) {
     Utilities.sleep(Math.random() * 100)
 
     try {
-        if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
+        if (!Array.isArray(exchange_array)) {
+            exchange_array = [exchange_array];
         }
+        exchange_array = exchange_array.join("%2C").replace("/", "");
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexvolume"));
 
@@ -420,9 +415,9 @@ async function CRYPTOTVL(exchange_array) {
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
-        for (var i = 0; i < content.length; i++) {
-            if (Object.keys(content[i]).length != 0) {
-                dict.push(parseFloat(content[i]['TVL']));
+        for (const item of content) {
+            if (item.TVL) {
+                dict.push(parseFloat(item.TVL));
             } else {
                 dict.push("");
             }
@@ -434,6 +429,8 @@ async function CRYPTOTVL(exchange_array) {
         return err;
     }
 }
+
+
 
 /**CRYPTODEXVOLUME
  * Returns DEXes' (decentralized exchanges) 24H Volume.The result is a ONE-dimensional array.
@@ -459,9 +456,10 @@ async function CRYPTODEXVOLUME(exchange_array) {
     Utilities.sleep(Math.random() * 100)
 
     try {
-        if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
+        if (!Array.isArray(exchange_array)) {
+            exchange_array = [exchange_array];
         }
+        exchange_array = exchange_array.join("%2C").replace("/", "");
 
         id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexvolume"));
 
@@ -481,9 +479,9 @@ async function CRYPTODEXVOLUME(exchange_array) {
         var content = JSON.parse(res.getContentText());
 
         var dict = [];
-        for (var i = 0; i < content.length; i++) {
-            if (Object.keys(content[i]).length != 0) {
-                dict.push(parseFloat(content[i]['VOLUME']));
+        for (const item of content) {
+            if (item.VOLUME) {
+                dict.push(parseFloat(item.VOLUME));
             } else {
                 dict.push("");
             }
@@ -496,6 +494,7 @@ async function CRYPTODEXVOLUME(exchange_array) {
         return err;
     }
 }
+
 
 /**CRYPTODEXFEE
  * Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.The result is a ONE-dimensional array.
