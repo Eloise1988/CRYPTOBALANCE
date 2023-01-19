@@ -27,12 +27,8 @@ const expirationInSeconds_ = 600;
     CRYPTODEXVOLUME                 Retrieve DEX volumes $
     CRYPTODEXFEE                    Retrieve DEX transaction fees
     CRYPTOTVL                       Retrieve Total Value Locked in Defi projects
-    UNISWAP                         Retrieve all new pairs on Uniswap
-    SUSHISWAP                       Retrieve all new pairs on Sushiswap
-    ARBITRUMSUSHISWAP               Retrieve all new Sushiswap pairs on Arbitrum
     CRYPTODEXPRICE                  Retrieve DEX (decentralized exchanges) cryptocurrency pair prices
     CRYPTOPRICE                     Retrieve cryptocurrency prices in USD from Coingecko
-    CRYPTOPRICEBYNAME               Retrieve cryptocurrency prices in USD using Coingecko API id
     CRYPTOVOL30D                    Retrieve cryptocurrency 30D volatility against USD, ETH, BTC
     CRYPTOFUTURES                   Retrieve BTC, ETH Futures Prices, basis, volume, open interest
     CRYPTOLP                        Retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
@@ -54,29 +50,13 @@ const expirationInSeconds_ = 600;
     CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
     TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
     BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
-    BTCBALANCE_UNCONFIRMED_IN       Retrieve the sum of BTC inflows including unconfirmed transactions (up to 5 addresses) 
     CRYPTOTX                        Retrieve the historical transaction list on a range of addresses.
-    DEFI_NETWORTH                   ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
-    PROTOCOLS                       Retrieve the list of protocols available on zapper.fi
-    CRYPTODEFI                      Retrieve the list of assets by defi protocol  
-    CRYPTODEFI_BALANCE              Retrieve the balance by symbol/ticker given a defi protocol 
-    CRYPTODEFI_BALANCEUSD           Retrieve the USD amont lended by symbol/ticker given a defi protocol    
     CRYPTOSUMUSD                    Retrieve one's total $ amount on all chains or by ETH, BSC ... chain
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
   ----------------------------------------------------------------------------------------------------------------------------
   Changelog:
-  
-  2.3.6   06/01/22 CRYPTOSUPPLY for Premium Users
-  2.3.7   06/01/22 TOPNFT for Premium Users
-  2.3.8   06/06/22 BTCBALANCE_UNCONFIRMED for Premium Users
-  2.3.9   06/15/22 BINANCEWITHDRAWFEE
-  2.4.0   06/19/22 BTCBALANCE_UNCONFIRMEDIN for Premium Users
-  2.4.1   07/05/22 CRYPTOHIST for historical OHLC data
-  2.4.2   08/13/22 CRYPTOTX for historical transactions
-  2.4.3   10/28/22 DEFI function for Premium Users
-  2.4.4   11/15/22 CRYPTOBALANCE can now retrieve multiple blockchain balances
   2.4.5   06/01/23 New erc chains available on cryptobalance + fixed formatting issue 
   *========================================================================================================================*/
 
@@ -557,32 +537,6 @@ async function CRYPTODEXFEE(exchange_array) {
     }
 }
 
-/**UNISWAP
- * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
- *
- * By default, data gets transformed into a table 
- * For example:
- *
- * =UNISWAP(5,10000,10000,100)
- *
- * @param {days}                    the number of Days since the pair is active
- * @param {volume}                  the minimum Volume ($)
- * @param {liquidity}               the minimum Liquidity ($)
- * @param {tx_count}                the number of Transactions existant since creation
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
- **/
-async function UNISWAP(days, volume, liquidity, tx_count) {
-    Utilities.sleep(Math.random() * 100)
-  
-    url = "/UNISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
-    full_url_options=url_header();
-
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    
-}
 
 /**CRYPTOLATESTPAIRS
  * Returns new tradable pairs by DEX and chain, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions. Premium Function. 
@@ -610,31 +564,6 @@ async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, excha
     return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
 }
 
-/**SUSHISWAP
- * Returns new tradable pairs on Sushiswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
- *
- * By default, data gets transformed into a table 
- * For example:
- *
- * =SUSHISWAP(5,10000,10000,100)
- *
- * @param {days}                    the number of Days since the pair is active
- * @param {volume}                  the minimum Volume ($)
- * @param {liquidity}               the minimum Liquidity ($)
- * @param {tx_count}                the number of Transactions existant since creation
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a table with all new tradable pairs on Sushiswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
- **/
-async function SUSHISWAP(days, volume, liquidity, tx_count) {
-    Utilities.sleep(Math.random() * 100)
-
-    url = "/SUSHISWAPFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + KEYID;
-    full_url_options=url_header();
-
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-}
 
 /**CRYPTOFUTURES
  * Returns BTC or ETH Futures Prices, basis, volume, open interest
@@ -1161,64 +1090,6 @@ async function CRYPTOPRICE(token1_array) {
     }
 }
 
-/**CRYPTOPRICEBYNAME
- * Returns crypto prices in USD from Coingecko using the api id that can be found on coingecko's crypto page.
- *
- * List of available ids found https://api.coingecko.com/api/v3/search?locale=fr&img_path_only=1
- *
- * By default, data gets transformed into a list 
- * For example:
- *
- * =CRYPTOPRICEBYNAME("ethereum")
- * =CRYPTOPRICEBYNAME(E39:E100)
- *
- * @param {Token}                  Coingecko id range as found on Coingecko
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current price rate of your cryptocurrency in $
- **/
-async function CRYPTOPRICEBYNAME(token1_array) {
-    Utilities.sleep(Math.random() * 100)
-
-    try {
-        if (token1_array.length > 1) {
-            token1_array = [].concat(token1_array).join("%2C").replace("/", "");
-        }
-
-        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, token1_array + "cryptopricebyname"));
-
-        var cache = CacheService.getScriptCache();
-        var cached = cache.get(id_cache);
-        if (cached != null) {
-            result = cached.split(',');
-            return result.map(function(n) {
-                return n && ("" || Number(n))
-            });
-        }
-
-        url = "/CRYPTOPRICEBYNAME/" + token1_array + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var content = JSON.parse(res.getContentText());
-        
-        var dict = [];
-        for (var i = 0; i < content.length; i++) {
-            if (Object.keys(content[i]).length != 0) {
-                dict.push(parseFloat(content[i]['PRICE']));
-            } else {
-                dict.push("");
-            }
-        }
-
-        cache.put(id_cache, dict, expirationInSeconds_);
-
-        return dict;
-    } catch (err) {
-        return err;
-    }
-}
 
 /**CRYPTOVOL30D
  * Returns the 30d % volatility of a cryptocurrency against USD, ETH, or BTC
@@ -1556,118 +1427,6 @@ async function CRYPTOLENDINGREWARD(exchange_array, ticker_array, side_array) {
 }
   
 
-/*DEFI_NETWORTH 
- * ScriptRunTime Function that gets DEFI NETWORTH based on list of addresses
- */
-function DEFI_NETWORTH() {
-    //Name of the tab where you want to have your data
-    var name_sheet = "DEFI_NETWORTH";
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name_sheet);
-
-    // Table start row and columns
-    var start_row = 25;
-    var start_column = 2;
-
-    //Clearing old data
-    sheet.getRange(start_row, start_column, 3000, 8).clearContent()
-
-    //Loading List of DEFI addresses in cells C3:E3
-    address_defi = sheet.getRange(3, 3, 1, 3).getValues();
-    var dict_address = [];
-    for (var i = 0; i < address_defi[0].length; i++) {
-        if (address_defi[0][i] != "") {
-            dict_address.push(address_defi[0][i]);
-        }
-    }
-    address_defi = [].concat(dict_address).join("%2C").replace("-", "").replace("/", "");
-
-    //Loading List of optional protocols in cells C6:G6
-    protocols_defi = sheet.getRange(6, 3, 1, 5).getValues();
-
-    try {
-        var dict_protocols = [];
-        for (var i = 0; i < protocols_defi[0].length; i++) {
-            if (protocols_defi[0][i] != "") {
-                dict_protocols.push(protocols_defi[0][i].replace(" ", "6z6").toLowerCase());
-            }
-        }
-        protocols_defi = [].concat(dict_protocols).join("%2C");
-    } catch (err) {
-        protocols_defi = "";
-    }
-
-    if (protocols_defi == "") {
-        protocols_defi = "notapplicable"
-    }
-
-    //Connection to the API endpoints I created
-    
-    url = "/DEFINETWORTH/" + address_defi + "/" + protocols_defi + "/" + KEYID;
-    full_url_options=url_header();
-
-    // Calling the API and retrieving the data
-
-    var res = UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-    var content = JSON.parse(res.getContentText());
-
-    //Setting the values in the range defined at the beginning of the script
-    sheet.getRange(start_row, start_column, content.length, content[0].length).setValues(content);
-}
-
-/**CRYPTODEFI 
- * Returns the list assets lended, staked... by defi protocol into Google spreadsheets. 
- * By default, data gets transformed into a array/number. 
- * For example:
- *
- *   =CRYPTODEFI("0x98d946dc96e49a5bf9fdfb6bafbbfd02f746f18c","binance-smart-chain autofarm")           
- * 
- * @param {address}                        Ethereum/bsc/polygon/fantom smart chain address
- * @param {protocol}                       from the list of protocols available in the protocol function
- * @param {parseOptions}                   an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a dimensional array containing the list of assets staked, lended with price, value, balance etc...
- **/
-async function CRYPTODEFI(address, protocols) {
-    try {
-        address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", "");
-        protocols_defi = [].concat(protocols.toLowerCase().replace(" ", "6z6")).join("%2C");
-
-        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + protocols_defi + 'cryptodefi'));
-
-        var cache = CacheService.getScriptCache();
-        var cached = cache.get(id_cache);
-        if (cached != null) {
-            result = JSON.parse(cached);
-            return result;
-        }
-
-        // Connexion to the API endpoints 
-        url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var content = res.getContentText();
-        var parsedJSON = JSON.parse(content);
-
-        var data = []
-        data.push(["NETWORK", "PROTOCOL", "ADDRESS", "TYPE", "SYMBOL", "BALANCE", "PRICE", "BALANCE_USD"])
-
-        for (var i = 0; i < parsedJSON.length; i++) {
-            data.push([parsedJSON[i]["NETWORK"], parsedJSON[i]["PROTOCOL"], parsedJSON[i]["ADDRESS"], parsedJSON[i]["TYPE"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["BALANCE"], parsedJSON[i]["PRICE"], parsedJSON[i]["BALANCE_USD"]]);
-        };
-
-        try {
-            cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
-
-            return data;
-        } catch (err) {
-            return data;
-        }
-    } catch (err) {
-        return res.getContentText();
-    }
-}
 /**TOPNFT 
  * Returns the top 5 NFTs, dollar value, total sum on an ethereum address. 
  * By default, data gets transformed into a array/number. 
@@ -1765,49 +1524,7 @@ async function BTCBALANCE_UNCONFIRMED(address) {
           return res.getContentText();
       }
 }
-/**BTCBALANCE_UNCONFIRMEDIN 
- * Premium Plan Function: Returns the BTC balance of positive inflows including the unconfirmed transactions from the mempool, you can request up to 5 address in one call. 
- * For example:
- *
- *   =BTCBALANCE_UNCONFIRMEDIN("17bMJF9LPBVU1aN8YMVg5Y754tzjJiTMzH")           
- * 
- * @param {address}                        array of btc addresses (max 5)
- * @customfunction
- *
- * @return a dimensional array containing the BTC balances. 
- **/
-async function BTCBALANCE_UNCONFIRMEDIN(address) {
-      var data = []
-      
-      address_btc = [].concat(address).join("%2C");
-      id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_btc + 'btcunconfirmedbalancein'));
 
-      var cache = CacheService.getScriptCache();
-      var cached = cache.get(id_cache);
-      if (cached != null) {
-          result = JSON.parse(cached);
-          return result;
-      }
-
-      // Connexion to the API endpoints 
-      url = "/BTCUNCONFIRMEDFUNDED/" + address_btc + "/" + KEYID;
-
-      
-      full_url_options=url_header();
-      try {
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var parsedJSON = JSON.parse(res.getContentText());
-
-        for (var i = 0; i < parsedJSON.length; i++) {
-              data.push(parsedJSON[i]["BALANCE"]);
-        };
-      
-          cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
-          return data;
-      } catch (err) {
-          return res.getContentText();
-      }
-}
 
 /**CRYPTOHIST 
  * Returns the historical cryptocurrency OHLC. Open, High, Close, Volume, Low.  Premium Plan for historical data greater than 3mth.
@@ -1893,134 +1610,6 @@ async function CRYPTOTX(addresses,network) {
       } catch (err) {
           return res.getContentText();
       }
-}
-
-/**CRYPTODEFI_BALANCE
- * Returns the staked/lended balance by symbol/ticker given a defi protocol into Google spreadsheets. 
- * By default, data gets transformed into a array/number. 
- * For example:
- *
- *   =CRYPTODEFI_BALANCE("0x98d946dc96e49a5bf9fdfb6bafbbfd02f746f18c","CAKE","binance-smart-chain autofarm")           
- * 
- * @param {address}                        Ethereum/bsc/polygon/fantom smart chain address
- * @param {ticker}                         Ticker/Symbol
- * @param {protocol}                       from the list of protocols available in the protocol function
- * @param {parseOptions}                   an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a dimensional array containing the balance amount staked, lend etc...
- **/
-async function CRYPTODEFI_BALANCE(address, ticker, protocols) {
-    try {
-        address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", "");
-        protocols_defi = [].concat(protocols.toLowerCase().replace(" ", "6z6")).join("%2C");
-        ticker = ticker.toUpperCase();
-
-        // Cache
-        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + ticker + protocols_defi + "CRYPTODEFIASSET"));
-        var cache = CacheService.getScriptCache();
-        var cached = cache.get(id_cache);
-        if (cached != null) {
-            result = cached.split(',');
-            return result.map(function(n) {
-                return n && ("" || Number(n))
-            });
-        }
-
-        // Connexion to the API endpoints 
-        url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
-        full_url_options=url_header();
-
-        // Calling the API and retrieving the data
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var content = JSON.parse(res.getContentText());
-
-        var dict = [];
-        for (var i = 0; i < content.length; i++) {
-            if (content[i]['SYMBOL'].toUpperCase() == ticker) {
-                dict.push(parseFloat(content[i]['BALANCE']));
-            }
-        }
-
-        cache.put(id_cache, dict, expirationInSeconds_);
-
-        return dict;
-    } catch (err) {
-        return res.getContentText();
-    }
-}
-
-/**CRYPTODEFI_BALANCEUSD
- * Returns the staked/lended USD value by symbol/ticker given a defi protocol into Google spreadsheets. 
- * By default, data gets transformed into a array/number. 
- * For example:
- *
- *   =CRYPTODEFI_BALANCEUSD("0x98d946dc96e49a5bf9fdfb6bafbbfd02f746f18c","CAKE","binance-smart-chain autofarm")           
- * 
- * @param {address}                        Ethereum/bsc/polygon/fantom smart chain address
- * @param {ticker}                         Ticker/Symbol
- * @param {protocol}                       from the list of protocols available in the protocol function
- * @param {parseOptions}                   an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a dimensional array containing the USD amount staked, lend etc...
- **/
-async function CRYPTODEFI_BALANCEUSD(address, ticker, protocols) {
-    try {
-        address_defi = [].concat(address).join("%2C").replace("-", "").replace("/", "");
-        protocols_defi = [].concat(protocols.replace(" ", "6z6").toLowerCase()).join("%2C");
-        ticker = ticker.toUpperCase();
-
-        // Cache
-        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, address_defi + ticker + protocols_defi + "CRYPTODEFIVALUE"));
-        var cache = CacheService.getScriptCache();
-        var cached = cache.get(id_cache);
-        if (cached != null) {
-            result = cached.split(',');
-            return result.map(function(n) {
-                return n && ("" || Number(n))
-            });
-        }
-
-        // Connexion to the API endpoints 
-        url = "/DEFIFORMULA/" + address_defi + "/" + protocols_defi + "/" + KEYID;
-        full_url_options=url_header();
-
-        // Calling the API and retrieving the data
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var content = JSON.parse(res.getContentText());
-
-        var dict = [];
-        for (var i = 0; i < content.length; i++) {
-            if (content[i]['SYMBOL'].toUpperCase() == ticker) {
-                dict.push(parseFloat(content[i]['BALANCE_USD']));
-            }
-        }
-
-        cache.put(id_cache, dict, expirationInSeconds_);
-        
-        return dict;
-    } catch (err) {
-        return res.getContentText();
-    }
-}
-
-/**PROTOCOLS
- * Returns the list of protocols available on the Zapper api. 
- * By default, data gets transformed into a array. 
- * For example:
- *
- *   =PROTOCOLS()           
- * 
- * @param {parseOptions}                   an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return a dimensional array containing the list of all available protocols
- **/
-async function PROTOCOLS() {
-    var protocol_List = ["ethereum abracadabra", "ethereum alchemix", "ethereum alpha-v2", "ethereum apy", "ethereum arcx", "ethereum armor", "ethereum badger", "ethereum balancer-v1", "ethereum balancer-v2", "ethereum bancor", "ethereum bao", "ethereum barnbridge", "ethereum barnbridge-smart-yield", "ethereum based-money", "ethereum basis-cash", "ethereum basis-gold", "ethereum basket-dao", "ethereum bella", "ethereum benchmark", "ethereum big-data", "ethereum boring-dao", "ethereum b-protocol", "ethereum compound", "ethereum convex", "ethereum cream", "ethereum cream-iron-bank", "ethereum cryptex", "ethereum curve", "ethereum defi-dollar", "ethereum defisaver", "ethereum defi-swap", "ethereum derivadex", "ethereum deversifi", "ethereum dfi-money", "ethereum dforce", "ethereum dhedge", "ethereum dodo", "ethereum dodo", "ethereum dopex", "ethereum dsd", "ethereum dydx", "ethereum dydx", "ethereum 88mph", "ethereum 88mph-v3", "ethereum element", "ethereum esd", "ethereum essentia", "ethereum fei", "ethereum float-protocol", "ethereum frax", "ethereum futureswap", "ethereum governor-dao", "ethereum gro", "ethereum harvest", "ethereum hegic", "ethereum idle", "ethereum illuvium", "ethereum index-coop", "ethereum indexed", "ethereum inverse", "ethereum inverse", "ethereum keeper-dao", "ethereum keep-network", "ethereum klondike", "ethereum klondike-v2", "ethereum kyber-dmm", "ethereum launchpool", "ethereum linkswap", "ethereum liquity", "ethereum loopring", "ethereum maker", "ethereum mirror", "ethereum mith-cash", "ethereum mooniswap", "ethereum mstable", "ethereum mushroom", "ethereum nsure-network", "ethereum olympus", "ethereum 1inch", "ethereum onx", "ethereum opium-network", "ethereum opyn", "ethereum orion-protocol", "ethereum perpetual-protocol", "ethereum pickle", "ethereum pie-dao", "ethereum pooltogether", "ethereum popsicle", "ethereum powerpool", "ethereum rally", "ethereum rari", "ethereum rari-fuse", "ethereum realt", "ethereum reflexer", "ethereum ren", "ethereum ribbon", "ethereum sablier", "ethereum saddle", "ethereum sfinance", "ethereum shapeshift", "ethereum shared-stake", "ethereum shell", "ethereum smoothy", "ethereum snowswap", "ethereum stake-dao", "ethereum strudel", "ethereum sushiswap", "ethereum sushiswap-kashi", "ethereum swerve", "ethereum synlev", "ethereum synthetix", "ethereum the-graph", "ethereum tokemak", "ethereum tokenlon", "ethereum tokensets", "ethereum tornado-cash", "ethereum uniswap", "ethereum uniswap-v2", "ethereum uniswap-v3", "ethereum unit", "ethereum value", "ethereum vesper", "ethereum xsigma", "ethereum xtoken", "ethereum yam", "ethereum yaxis", "ethereum yearn", "ethereum zlot", "ethereum epns", "polygon aavegotchi", "polygon aave-v2", "polygon adamant", "polygon apeswap", "polygon augur", "polygon balancer-v2", "polygon barnbridge-smart-yield", "polygon beefy", "polygon cream", "polygon curve", "polygon dfyn", "polygon dinoswap", "polygon dodo", "polygon dodo", "polygon eleven-finance", "polygon harvest", "polygon iron", "polygon kyber-dmm", "polygon pickle", "polygon polywhale", "polygon pooltogether", "polygon quickswap", "polygon superfluid", "polygon sushiswap", "polygon sushiswap-bentobox", "polygon sushiswap-kashi", "polygon waultswap", "avalanche aave-v2", "avalanche abracadabra", "avalanche beefy", "avalanche benqi", "avalanche curve", "avalanche lydia", "avalanche pangolin", "avalanche penguin", "avalanche snowball", "avalanche stormswap", "avalanche teddy-cash", "avalanche traderjoe", "avalanche wonderland", "avalanche yieldyak", "arbitrum abracadabra", "arbitrum adamant", "arbitrum badger", "arbitrum balancer-v2", "arbitrum beefy", "arbitrum curve", "arbitrum dforce", "arbitrum dodo", "arbitrum dodo", "arbitrum pickle", "arbitrum sushiswap", "arbitrum sushiswap-bentobox", "arbitrum sushiswap-kashi", "arbitrum swapr", "arbitrum uniswap-v3", "arbitrum wepiggy", "fantom abracadabra", "fantom beefy", "fantom cream", "fantom curve", "fantom reaper", "fantom scream", "fantom spiritswap", "fantom spookyswap", "fantom sushiswap", "binance-smart-chain apeswap", "binance-smart-chain autofarm", "binance-smart-chain beefy", "binance-smart-chain belt", "binance-smart-chain bzx", "binance-smart-chain cream", "binance-smart-chain dodo", "binance-smart-chain eleven-finance", "binance-smart-chain ellipsis", "binance-smart-chain harvest", "binance-smart-chain impossible-finance", "binance-smart-chain 1inch", "binance-smart-chain pancakeswap", "binance-smart-chain popsicle", "binance-smart-chain sushiswap", "binance-smart-chain sushiswap-bentobox", "binance-smart-chain sushiswap-kashi", "binance-smart-chain venus", "binance-smart-chain waultswap", "optimism lyra", "optimism synthetix", "optimism uniswap-v3"];
-
-    return protocol_List;
 }
 
 /**BINANCEWITHDRAWFEE 
