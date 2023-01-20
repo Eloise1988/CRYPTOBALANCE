@@ -25,7 +25,6 @@ const expirationInSeconds_ = 600;
     CRYPTOLENDING                   Retrieve cryptocurrency lending/borrowing rates from dex echanges
     CRYPTOLENDINGREWARD             Retrieve reward apy lending/borrowing rates from AAVE & COMPOUND
     CRYPTODEXVOLUME                 Retrieve DEX volumes $
-    CRYPTODEXFEE                    Retrieve DEX transaction fees
     CRYPTOTVL                       Retrieve Total Value Locked in Defi projects
     CRYPTODEXPRICE                  Retrieve DEX (decentralized exchanges) cryptocurrency pair prices
     CRYPTOPRICE                     Retrieve cryptocurrency prices in USD from Coingecko
@@ -476,68 +475,6 @@ async function CRYPTODEXVOLUME(exchange_array) {
 }
 
 
-/**CRYPTODEXFEE
- * Returns DEXes' (decentralized exchanges) takers fee that compensates liquidity providers.The result is a ONE-dimensional array.
- *
- * List of DEXes
- * Uniswap Maker WBTC Compound Aave Curve Finance Synthetix Harvest Finance yearn.financeRenVM Balancer SushiSwap InstaDApp C.R.E.A.M. Finance Nexus Mutual dForce 
- * Flexa mStable dYdX Set Protocol DODO ForTube Bancor Loopring Lightning Network bZxMetronomeKyber DFI.money Gnosis xDai DeversiFi Erasure PieDAO DDEX Opyn Melon 
- * MCDEX Augur Robo-Advisor for Yield ACO Opium Network Connext 1
- *
- * By default, data gets transformed into a decimal number. 
- * For example:
- *
- * =CRYPTODEXFEE("MAKER")
- * =CRYPTODEXFEE(E39:E100)
- *
- * @param {DEX}                    the name of the DEX  ex:Maker or ticker:MKR or LIST of DEXes
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return the current takers' fee in decimal form,  on specified DEX
- **/
-async function CRYPTODEXFEE(exchange_array) {
-    Utilities.sleep(Math.random() * 100)
-
-    try {
-        if (exchange_array.length > 1) {
-            exchange_array = [].concat(exchange_array).join("%2C").replace("/", "");
-        }
-
-        id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, exchange_array + "dexfee"));
-
-        var cache = CacheService.getScriptCache();
-        var cached = cache.get(id_cache);
-        if (cached != null) {
-            result = cached.split(',');
-            return result.map(function(n) {
-                return n && ("" || Number(n))
-            });
-        }
-
-        url = "/DEXFEE2/" + exchange_array + "/" + KEYID;
-        full_url_options=url_header()
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-        var content = JSON.parse(res.getContentText());
-
-        var dict = [];
-        for (var i = 0; i < content.length; i++) {
-            if (Object.keys(content[i]).length != 0) {
-                dict.push(parseFloat(content[i]['FEE']));
-            } else {
-                dict.push("");
-            }
-        }
-
-        cache.put(id_cache, dict, expirationInSeconds_);
-
-        return dict;
-    } catch (err) {
-        return err;
-    }
-}
-
-
 /**CRYPTOLATESTPAIRS
  * Returns new tradable pairs by DEX and chain, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions. Premium Function. 
  *
@@ -557,12 +494,30 @@ async function CRYPTODEXFEE(exchange_array) {
  * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
 async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, exchange) {
+    const idCache = `${days}${volume}${liquidity}${tx_count}${chain}${exchange}cryptolatestpairs`;
+    const cache = CacheService.getScriptCache();
+    const cached = cache.get(idCache);
+    if (cached) return JSON.parse(cached);
     Utilities.sleep(Math.random() * 100)
+    try {
+        const url = `/PAIRSFILTER/${days}/${volume}/${liquidity}/${tx_count}/${chain}/${exchange}/${KEYID}`;
         
-    url = "/PAIRSFILTER/" + days + "/" + volume + "/" + liquidity + "/" + tx_count + "/" + chain + "/" + exchange + "/" + KEYID;
-    full_url_options=url_header();
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-}
+        const options = url_header();
+        res = await UrlFetchApp.fetch(options[0] + url, options[1]);
+        const parsedJSON = JSON.parse(res.getContentText());
+        const data = [['ID', 'Exchange', 'Price', '24h', 'Index Price','Basis','Spread','Expires','Open Interest','24h Volume']];
+        parsedJSON['Data'].forEach(token => {
+          data.push([token.ID, token.Exchange, token.Price, token['24h'], token['Index Price'], token.Basis, token.Spread, token.Expires, token['Open Interest'], token['24h Volume']]);
+        });
+        
+        cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
+        return data;
+        
+    } catch (err) {
+        return res.getContentText();
+    }
+}   
+    
 
 
 /**CRYPTOFUTURES
@@ -580,14 +535,29 @@ async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, excha
  * @return a table with all Id,	Exchange,	Price,	24h	Index Price,	Basis,	Spread,	Expiry,	Open Interest,	24h Volume	 for BTC and ETH futures
  **/
 async function CRYPTOFUTURES(ticker) {
+    const idCache = `${ticker}cryptofutures`;
+    const cache = CacheService.getScriptCache();
+    const cached = cache.get(idCache);
+    if (cached) return JSON.parse(cached);
     Utilities.sleep(Math.random() * 100)
-    ticker = ticker.toUpperCase();
-    
-    url = "/" + ticker + "FUTURES/" + KEYID;
-    full_url_options=url_header();
+    try {
+        const url = `/${ticker.toUpperCase()}FUTURES/${KEYID}`;
+        const options = url_header();
+        const res = await UrlFetchApp.fetch(options[0] + url, options[1]);
+        const parsedJSON = JSON.parse(res.getContentText());
+        const data = [['ID', 'Exchange', 'Price', '24h', 'Index Price','Basis','Spread','Expires','Open Interest','24h Volume']];
+        parsedJSON['Data'].forEach(token => {
+          data.push([token.ID, token.Exchange, token.Price, token['24h'], token['Index Price'], token.Basis, token.Spread, token.Expires, token['Open Interest'], token['24h Volume']]);
+        });
+        
+        cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
+        return data;
+        
+    } catch (err) {
+        return err;
+    }
+}   
 
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-}
   
 /**CRYPTOLP
  * Returns cryptocurrency lending rates on different lending plateforms into Google spreadsheets.The result is a ONE-dimensional array.
@@ -1326,44 +1296,32 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
  *
  * @return a dimensional array containing the list of all tokens by chain, contract, symbol and amount.
  **/
-async function CRYPTOTOKENLIST(address, chain) {
-  if (typeof chain === 'undefined') chain = "all";
-        chain = chain.toLowerCase();
-  id_cache = address +chain+ "cryptotokenlist"
-  Utilities.sleep(Math.random() * 100)
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(id_cache);
-  if (cached != null) {
-      result = JSON.parse(cached);
-      return result;
-  }
-
+  
+  async function CRYPTOTOKENLIST(address, chain = "all") {
+    chain = chain.toLowerCase();
+    const idCache = `${address}${chain}cryptotokenlist`;
+    const cache = CacheService.getScriptCache();
+    const cached = cache.get(idCache);
+    if (cached) return JSON.parse(cached);
+    Utilities.sleep(Math.random() * 100)
     try {
-        
-        url = "/CRYPTOLIST/" + address + "/" + chain + "/" + KEYID;
-        full_url_options=url_header();
+        const url = `/CRYPTOLIST/${address}/${chain}/${KEYID}`;
+        const options = url_header();
+        const res = await UrlFetchApp.fetch(options[0] + url, options[1]);
+        parsedJSON = JSON.parse(res.getContentText());
 
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        const data = [['CHAIN', 'CONTRACT', 'SYMBOL', 'PRICE', '$AMOUNT']];
+        parsedJSON.forEach(token => {
+            data.push([token.CHAIN, token.CONTRACT, token.SYMBOL, token.PRICE, token.$AMOUNT]);
+        });
 
-        var content = res.getContentText();
-        var parsedJSON = JSON.parse(content);
-
-        var data = []
-        data.push(["CHAIN", "CONTRACT", "SYMBOL","PRICE", "$AMOUNT"])
-        for (var i = 0; i < parsedJSON.length; i++) {
-            data.push([parsedJSON[i]["CHAIN"], parsedJSON[i]["CONTRACT"], parsedJSON[i]["SYMBOL"], parsedJSON[i]["PRICE"],parsedJSON[i]["$AMOUNT"]]);
-        };
-
-        try {
-            cache.put(id_cache, JSON.stringify(data), expirationInSeconds_);
-            return data;
-        } catch (err) {
-            return data;
-        }
+        cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
+        return data;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
+
 
 /**CRYPTOLENDINGREWARD
  * Returns cryptocurrency apy rewards rates on different lending plateforms (COMPOUND & AAVE) into Google spreadsheets.
