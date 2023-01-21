@@ -470,7 +470,7 @@ async function CRYPTODEXVOLUME(exchange_array) {
 
         return dict;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
@@ -575,43 +575,33 @@ async function CRYPTOFUTURES(ticker) {
  * @return the APR or TVL from specific liquidity pool
  **/
 async function CRYPTOLP(exchange, pair, type) {
-    id_cache = exchange + pair + type + "lp"
-    Utilities.sleep(Math.random() * 100)
+    var idCache = exchange + pair + type + "lp";
     var cache = CacheService.getScriptCache();
-    var cached = cache.get(id_cache);
-
-    if (cached != null) {
-        if (isNaN(cached)) {
-            return cached;
-        }
-        return Number(cached);
-    }
-
+    var cached = cache.get(idCache);
+    if (cached) return cached;
+    Utilities.sleep(Math.random() * 100);
     try {
-        pair = pair.toUpperCase();
-        pair = pair.replace("/", "").replace("-", "");
+        pair = pair.toUpperCase().replace(/[\/-]/g, "");
         exchange = exchange.toUpperCase();
         type = type.toUpperCase();
 
-        url = "/LPOOLS/" + exchange + "/" + pair + "/" + type + "/" + KEYID;
-        full_url_options=url_header();
-
-        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-
+        var url = `/LPOOLS/${exchange}/${pair}/${type}/${KEYID}`;
+        var options = url_header();
+        var res = await UrlFetchApp.fetch(options[0] + url, options[1]);
         var content = res.getContentText();
-        if (content != 'None') {
-            if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-                content = parseFloat(content);
-                cache.put(id_cache, content, expirationInSeconds_)
+        if (content !== 'None') {
+            if (!isNaN(content) && content.toString().indexOf('.') !== -1) {
+                var parsedContent = parseFloat(content);
+                cache.put(idCache, parsedContent, expirationInSeconds_);
+                return parsedContent;
             }
-
         }
-
         return content;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
+
 
 /**CRYPTO_ERC20HOLDERS
  * Returns a table of the 150 biggest holders by contract address or ticker into Google spreadsheets.
