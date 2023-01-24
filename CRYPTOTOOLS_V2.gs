@@ -31,10 +31,7 @@ const expirationInSeconds_ = 600;
     CRYPTOVOL30D                    Retrieve cryptocurrency 30D volatility against USD, ETH, BTC
     CRYPTOFUTURES                   Retrieve BTC, ETH Futures Prices, basis, volume, open interest
     CRYPTOLP                        Retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
-    CRYPTO_ERC20HOLDERS             Retrieve list of bigget holders by ERC20 contract address
-    CRYPTO_BEP20HOLDERS             Retrieve list of bigget holders by ERC20 contract address
-    CRYPTOTX_ERC20                  Retrieve list of all ETH & ERC20 Token transactions
-    CRYPTOTX_BEP20                  Retrieve list of all BNB & BEP20 Token transactions
+    CRYPTOTX                        Retrieve the historical transaction list on a range of addresses.
     CRYPTOPOOLPRICE                 Retrieve prices from decentralized Pool tokens
     CRYPTOFARMING                   Retrieve TVL, APR, APY from decentralized Pool / tokens
     CRYPTOGAS                       Retrieve average GWEI gas price (ETH)
@@ -49,7 +46,6 @@ const expirationInSeconds_ = 600;
     CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
     TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
     BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
-    CRYPTOTX                        Retrieve the historical transaction list on a range of addresses.
     CRYPTOSUMUSD                    Retrieve one's total $ amount on all chains or by ETH, BSC ... chain
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
@@ -500,22 +496,18 @@ async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, excha
     if (cached) return JSON.parse(cached);
     Utilities.sleep(Math.random() * 100)
     try {
-        const url = `/PAIRSFILTER/${days}/${volume}/${liquidity}/${tx_count}/${chain}/${exchange}/${KEYID}`;
+        url = `/PAIRSFILTER/${days}/${volume}/${liquidity}/${tx_count}/${chain}/${exchange}/${KEYID}`;
+
+       full_url_options=url_header();
         
-        const options = url_header();
-        res = await UrlFetchApp.fetch(options[0] + url, options[1]);
-        const parsedJSON = JSON.parse(res.getContentText());
-        const data = [['ID', 'Exchange', 'Price', '24h', 'Index Price','Basis','Spread','Expires','Open Interest','24h Volume']];
-        parsedJSON['Data'].forEach(token => {
-          data.push([token.ID, token.Exchange, token.Price, token['24h'], token['Index Price'], token.Basis, token.Spread, token.Expires, token['Open Interest'], token['24h Volume']]);
-        });
-        
-        cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
-        return data;
-        
-    } catch (err) {
-        return res.getContentText();
-    }
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var parsedJSON = JSON.parse(res.getContentText());
+        cache.put(id_cache, JSON.stringify(parsedJSON), expirationInSeconds_);
+
+        return parsedJSON;
+      } catch (err) {
+          return res.getContentText();
+      } 
 }   
     
 
@@ -600,109 +592,6 @@ async function CRYPTOLP(exchange, pair, type) {
     } catch (err) {
         return res.getContentText();
     }
-}
-
-
-/**CRYPTO_ERC20HOLDERS
- * Returns a table of the 150 biggest holders by contract address or ticker into Google spreadsheets.
- * By default, json data gets transformed into a a table 151x3. 
- * For example:
- *
- * =CRYPTO_ERC20HOLDERS("MKR")
- * =CRYPTO_ERC20HOLDERS("0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2")
- *
- * @param {ticker}       ticker or contract_address if ticker is not available
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return table with the top 150 holders of cryptocurrency
- **/
-async function CRYPTO_ERC20HOLDERS(ticker) {
-    Utilities.sleep(Math.random() * 100)
-
-    try {
-
-        url = "/ERC20HOLDERS/" + ticker + "/" + KEYID;
-
-        return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return CRYPTO_ERC20HOLDERS(ticker);
-    }
-}
-
-/**CRYPTO_BEP20HOLDERS
- * Returns a table of the 1000 biggest holders by contract address or ticker into Google spreadsheets.
- * By default, json data gets transformed into a a table 1000x3. 
- * For example:
- *
- * =CRYPTO_BEP20HOLDERS("CAKE")
- * =CRYPTO_BEP20HOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82")
- *
- * @param {ticker}                 ticker or contract_address if ticker is not available
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return table with the top 1000 holders of BEP20 cryptocurrency
- **/
-async function CRYPTO_BEP20HOLDERS(ticker) {
-    Utilities.sleep(1000)
-
-    url = "/BEP20HOLDERS/" + ticker + "/" + KEYID;
-    full_url_options=url_header();
-
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-}
-
-/**CRYPTOTX_ERC20
- * Returns a table with the list of transactions for an ERC20 wallet address into Google spreadsheets filtered by days old.
- * By default, json data gets transformed into a a table. 
- * For example:
- *
- * =CRYPTOTX_ERC20("0xf50d9b37e86ff69bc3d7a18bf3d5a04d5ef6cad1",10)
- *
- * @param {address}       the ERC20 address you want the list of transactions from
- * @param {nbdays}         optional number of days old, 30d by default
- * @param {parseOptions}   an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return table with all ETH + ERC20 Token transactions (date, to, from, value, ticker)
- **/
-async function CRYPTOTX_ERC20(address, nbdays) {
-    Utilities.sleep(Math.random() * 30)
-
-    if (typeof nbdays === 'undefined') nbdays = 10000;
-
-    url = "/TXERC20/" + address + "/" + nbdays + "/" + KEYID;
-    full_url_options=url_header();
-
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    
-}
-
-/**CRYPTOTX_BEP20
- * Returns a table with the list of transactions for an BEP20 wallet address (Binance Smart Chain) into Google spreadsheets filtered by days old.
- * By default, json data gets transformed into a a table. 
- * For example:
- *
- * =CRYPTOTX_BEP20("0x921112cb26e4bda59ee4d769a99ad70e88c00019",10)
- *
- * @param {address}       the BEP20 address you want the list of transactions from (Binance Smart Chain)
- * @param {nbdays}        optional number of days old, 30d by default
- * @param {parseOptions}  an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return table with all BNB + BEP20 Token transactions (date, to, from, value, ticker)
- **/
-async function CRYPTOTX_BEP20(address, nbdays) {
-    Utilities.sleep(Math.random() * 100)
-
-    if (typeof nbdays === 'undefined') nbdays = 30;
-
-    url = "/TXBEP20/" + address + "/" + nbdays + "/" + KEYID;
-    full_url_options=url_header();
-
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    
 }
 
 /**CRYPTOPOOLPRICE
