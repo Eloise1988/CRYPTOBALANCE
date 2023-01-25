@@ -714,7 +714,7 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
 
         return dict;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
@@ -814,7 +814,7 @@ async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
 
         return dict;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
@@ -876,7 +876,7 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
 
         return dict;
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
