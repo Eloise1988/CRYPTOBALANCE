@@ -9,10 +9,14 @@ const cryptotools_api_key = "";
 //Expiration time for caching values, by default caching data is 10min = 600sec. This value can be adapted to your needs.
 const expirationInSeconds_ = 600;
 
+//SECRET ID 
+// Change the secret variable to any word you wish, it used as a secret key to encrypt the identification of the spreadsheet's owner.
+const secret = "mysecret";
+
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.5
+  Version:      2.4.6
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -53,6 +57,7 @@ const expirationInSeconds_ = 600;
   ----------------------------------------------------------------------------------------------------------------------------
   Changelog:
   2.4.5   06/01/23 New erc chains available on cryptobalance + fixed formatting issue 
+  2.4.6   25/01/23 Creation of a secret key to encrypt the identification of the spreadsheet's owner
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -106,7 +111,13 @@ function ShowContactInfo() {
 }
 
 // Sheet Identification + API headers predefined
-const KEYID = SpreadsheetApp.getActiveSpreadsheet().getId();
+var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+var encryption = Utilities.computeHmacSha256Signature(spreadsheet.getOwner().toString(), secret);
+const KEYID = encryption.map(function(byte) {
+  return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+}).join('');
+
+
 function url_header(){
   
 
@@ -174,7 +185,7 @@ function url_header(){
  *  
  **/
 async function CRYPTOBALANCE(ticker, address) {
-    const sleepTime = Math.random() * 100;
+    var sleepTime = Math.random() * 100;
     Utilities.sleep(sleepTime);
     if (!Array.isArray(ticker)) ticker = [ticker];
     if (!Array.isArray(address)) address = [address];
@@ -182,20 +193,20 @@ async function CRYPTOBALANCE(ticker, address) {
     address = address.join("%2C");
     let data = [];
 
-    const id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker+address + 'balances'));
-    const cache = CacheService.getScriptCache();
-    const cached = cache.get(id_cache);
+    var id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, ticker+address + 'balances'));
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
     if (cached != null) return JSON.parse(cached);
 
     // Connexion to the API endpoints 
-    const url = "/BALANCES/" + ticker+ "/" + address + "/" + KEYID;
-    const full_url_options = url_header();
-    const res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
-    const content = res.getContentText();
-    const parsedJSON = JSON.parse(content);
+    var url = "/BALANCES/" + ticker+ "/" + address + "/" + KEYID;
+    var full_url_options = url_header();
+    var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+    var content = res.getContentText();
+    var parsedJSON = JSON.parse(content);
 
     data = parsedJSON.map(item => {
-      const quantity = item.QUANTITY;
+      var quantity = item.QUANTITY;
       return isNaN(parseFloat(quantity)) ? quantity : parseFloat(quantity);
     });
 
@@ -266,24 +277,24 @@ async function CRYPTOREWARDS(ticker, address) {
  * @return the current amount staked on a cryptocurrency 
  **/
 async function CRYPTOSTAKING(ticker, address) {
-    const id_cache = `${ticker.toUpperCase()}${address}staking`;
+    var id_cache = `${ticker.toUpperCase()}${address}staking`;
     Utilities.sleep(Math.random() * 100);
-    const cache = CacheService.getScriptCache();
-    const cached = cache.get(id_cache);
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(id_cache);
 
     if (cached) {
         return !isNaN(cached) ? Number(cached) : cached;
     }
 
     try {
-        const url = `/STAKING/${ticker.toUpperCase()}/${address}/${KEYID}`;
-        const full_url_options=url_header();
+        var url = `/STAKING/${ticker.toUpperCase()}/${address}/${KEYID}`;
+        var full_url_options=url_header();
 
-        const res = await UrlFetchApp.fetch(`${full_url_options[0]}${url}`, full_url_options[1]);
-        const content = res.getContentText();
+        var res = await UrlFetchApp.fetch(`${full_url_options[0]}${url}`, full_url_options[1]);
+        var content = res.getContentText();
 
         if (!isNaN(content) && content.toString().indexOf('.') != -1) {
-            const parsedContent = parseFloat(content);
+            var parsedContent = parseFloat(content);
             cache.put(id_cache, parsedContent, expirationInSeconds_);
             return parsedContent;
         }
@@ -490,9 +501,9 @@ async function CRYPTODEXVOLUME(exchange_array) {
  * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
  **/
 async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, exchange) {
-    const idCache = `${days}${volume}${liquidity}${tx_count}${chain}${exchange}cryptolatestpairs`;
-    const cache = CacheService.getScriptCache();
-    const cached = cache.get(idCache);
+    var idCache = `${days}${volume}${liquidity}${tx_count}${chain}${exchange}cryptolatestpairs`;
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(idCache);
     if (cached) return JSON.parse(cached);
     Utilities.sleep(Math.random() * 100)
     try {
@@ -527,17 +538,17 @@ async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, excha
  * @return a table with all Id,	Exchange,	Price,	24h	Index Price,	Basis,	Spread,	Expiry,	Open Interest,	24h Volume	 for BTC and ETH futures
  **/
 async function CRYPTOFUTURES(ticker) {
-    const idCache = `${ticker}cryptofutures`;
-    const cache = CacheService.getScriptCache();
-    const cached = cache.get(idCache);
+    var idCache = `${ticker}cryptofutures`;
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(idCache);
     if (cached) return JSON.parse(cached);
     Utilities.sleep(Math.random() * 100)
     try {
-        const url = `/${ticker.toUpperCase()}FUTURES/${KEYID}`;
-        const options = url_header();
-        const res = await UrlFetchApp.fetch(options[0] + url, options[1]);
-        const parsedJSON = JSON.parse(res.getContentText());
-        const data = [['ID', 'Exchange', 'Price', '24h', 'Index Price','Basis','Spread','Expires','Open Interest','24h Volume']];
+        var url = `/${ticker.toUpperCase()}FUTURES/${KEYID}`;
+        var options = url_header();
+        var res = await UrlFetchApp.fetch(options[0] + url, options[1]);
+        var parsedJSON = JSON.parse(res.getContentText());
+        var data = [['ID', 'Exchange', 'Price', '24h', 'Index Price','Basis','Spread','Expires','Open Interest','24h Volume']];
         parsedJSON['Data'].forEach(token => {
           data.push([token.ID, token.Exchange, token.Price, token['24h'], token['Index Price'], token.Basis, token.Spread, token.Expires, token['Open Interest'], token['24h Volume']]);
         });
@@ -1178,18 +1189,18 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
   
   async function CRYPTOTOKENLIST(address, chain = "all") {
     chain = chain.toLowerCase();
-    const idCache = `${address}${chain}cryptotokenlist`;
-    const cache = CacheService.getScriptCache();
-    const cached = cache.get(idCache);
+    var idCache = `${address}${chain}cryptotokenlist`;
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(idCache);
     if (cached) return JSON.parse(cached);
     Utilities.sleep(Math.random() * 100)
     try {
-        const url = `/CRYPTOLIST/${address}/${chain}/${KEYID}`;
-        const options = url_header();
-        const res = await UrlFetchApp.fetch(options[0] + url, options[1]);
+        var url = `/CRYPTOLIST/${address}/${chain}/${KEYID}`;
+        var options = url_header();
+        var res = await UrlFetchApp.fetch(options[0] + url, options[1]);
         parsedJSON = JSON.parse(res.getContentText());
 
-        const data = [['CHAIN', 'CONTRACT', 'SYMBOL', 'PRICE', '$AMOUNT']];
+        var data = [['CHAIN', 'CONTRACT', 'SYMBOL', 'PRICE', '$AMOUNT']];
         parsedJSON.forEach(token => {
             data.push([token.CHAIN, token.CONTRACT, token.SYMBOL, token.PRICE, token.$AMOUNT]);
         });
