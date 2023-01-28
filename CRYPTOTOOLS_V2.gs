@@ -1503,3 +1503,52 @@ async function BINANCEWITHDRAWFEE(ticker,network) {
           return content;
       }
 }
+/**CRYPTO_ERC20HOLDERS
+ * Returns a table of the 150 biggest holders by contract address or ticker into Google spreadsheets.
+ * By default, json data gets transformed into a a table 151x3. 
+ * For example:
+ *
+ * =CRYPTO_ERC20HOLDERS("MKR")
+ * =CRYPTO_ERC20HOLDERS("0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2")
+ *
+ * @param {ticker}       ticker or contract_address if ticker is not available
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return table with the top 150 holders of cryptocurrency
+ **/
+async function CRYPTO_ERC20HOLDERS(ticker) {
+    Utilities.sleep(Math.random() * 100)
+
+    try {
+
+        url = "/ERC20HOLDERS/" + ticker + "/" + KEYID;
+
+        return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+    } catch (err) {
+        return CRYPTO_ERC20HOLDERS(ticker);
+    }
+}
+
+/**CRYPTO_BEP20HOLDERS
+ * Returns a table of the 1000 biggest holders by contract address or ticker into Google spreadsheets.
+ * By default, json data gets transformed into a a table 1000x3. 
+ * For example:
+ *
+ * =CRYPTO_BEP20HOLDERS("CAKE")
+ * =CRYPTO_BEP20HOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82")
+ *
+ * @param {ticker}                 ticker or contract_address if ticker is not available
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return table with the top 1000 holders of BEP20 cryptocurrency
+ **/
+async function CRYPTO_BEP20HOLDERS(ticker) {
+    Utilities.sleep(1000)
+
+    url = "/BEP20HOLDERS/" + ticker + "/" + KEYID;
+    full_url_options=url_header();
+
+    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+}
