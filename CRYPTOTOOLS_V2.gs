@@ -16,7 +16,7 @@ const secret = "mysecret";
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.6
+  Version:      2.4.7
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -344,14 +344,12 @@ async function CRYPTOSUMUSD(address,chain) {
         var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
 
         var content = res.getContentText();
+        cache.put(id_cache, parseFloat(content), expirationInSeconds_)
         
-        if(Number(content) === content) {
-            cache.put(id_cache, content, expirationInSeconds_)
-        }
 
-        return content;
+        return parseFloat(content);
     } catch (err) {
-        return err;
+        return res.getContentText();
     }
 }
 
@@ -1508,7 +1506,7 @@ async function BINANCEWITHDRAWFEE(ticker,network) {
 
 
 /**CRYPTOHOLDERS
- * Returns a table with the biggest holders by contract addressinto Google spreadsheets.
+ * Returns a table with the biggest holders by contract address into Google spreadsheets.
  * For example:
  *
  * =CRYPTOHOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","bep")
