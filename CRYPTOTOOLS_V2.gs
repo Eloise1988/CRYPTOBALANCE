@@ -51,6 +51,7 @@ const secret = "mysecret";
     TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
     BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
     CRYPTOSUMUSD                    Retrieve one's total $ amount on all chains or by ETH, BSC ... chain
+    CRYPTOHOLDERS                   Retrieve the list of the main holders by contract address, by chain
   
   For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
 
@@ -58,6 +59,7 @@ const secret = "mysecret";
   Changelog:
   2.4.5   06/01/23 New erc chains available on cryptobalance + fixed formatting issue 
   2.4.6   25/01/23 Creation of a secret key to encrypt the identification of the spreadsheet's owner
+  2.4.7   30/01/23 New Function CRYPTOHOLDERS
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1503,52 +1505,42 @@ async function BINANCEWITHDRAWFEE(ticker,network) {
           return content;
       }
 }
-/**CRYPTO_ERC20HOLDERS
- * Returns a table of the 150 biggest holders by contract address or ticker into Google spreadsheets.
- * By default, json data gets transformed into a a table 151x3. 
+
+
+/**CRYPTOHOLDERS
+ * Returns a table with the biggest holders by contract addressinto Google spreadsheets.
  * For example:
  *
- * =CRYPTO_ERC20HOLDERS("MKR")
- * =CRYPTO_ERC20HOLDERS("0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2")
+ * =CRYPTOHOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82","bep")
  *
- * @param {ticker}       ticker or contract_address if ticker is not available
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @param {contract}         contract_address you want holders from
+ * @param {chain}            evm chain: erc or bep available
  * @customfunction
  *
- * @return table with the top 150 holders of cryptocurrency
+ * @return table with the top  holders 
  **/
-async function CRYPTO_ERC20HOLDERS(ticker) {
+async function CRYPTOHOLDERS(contract,chain) {
+    var idCache = `${contract}${chain}cryptoholders`;
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(idCache);
+    if (cached) return JSON.parse(cached);
     Utilities.sleep(Math.random() * 100)
-
     try {
+        url = `/HOLDERS/${contract}/${chain}/${KEYID}`;
 
-        url = "/ERC20HOLDERS/" + ticker + "/" + KEYID;
+       full_url_options=url_header();
+        
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+        var parsedJSON = JSON.parse(res.getContentText());
+        var data = [['0_RANK', '1_HOLDER', '2_QUANTITY']];
 
-        return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
-    } catch (err) {
-        return CRYPTO_ERC20HOLDERS(ticker);
-    }
-}
-
-/**CRYPTO_BEP20HOLDERS
- * Returns a table of the 1000 biggest holders by contract address or ticker into Google spreadsheets.
- * By default, json data gets transformed into a a table 1000x3. 
- * For example:
- *
- * =CRYPTO_BEP20HOLDERS("CAKE")
- * =CRYPTO_BEP20HOLDERS("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82")
- *
- * @param {ticker}                 ticker or contract_address if ticker is not available
- * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
- * @customfunction
- *
- * @return table with the top 1000 holders of BEP20 cryptocurrency
- **/
-async function CRYPTO_BEP20HOLDERS(ticker) {
-    Utilities.sleep(1000)
-
-    url = "/BEP20HOLDERS/" + ticker + "/" + KEYID;
-    full_url_options=url_header();
-
-    return ImportJSONAdvanced(full_url_options[0] + url, full_url_options[1], '', 'noInherit,noTruncate', includeXPath_, defaultTransform_);
+        parsedJSON['DATA'].forEach(token => {
+          data.push([token['0_RANK'], token['1_HOLDER'], token['2_QUANTITY']]);
+        });
+        
+        cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
+        return data;
+      } catch (err) {
+          return res.getContentText();
+      } 
 }
