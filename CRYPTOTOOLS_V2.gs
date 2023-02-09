@@ -1200,9 +1200,9 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
         var res = await UrlFetchApp.fetch(options[0] + url, options[1]);
         parsedJSON = JSON.parse(res.getContentText());
 
-        var data = [['CHAIN', 'CONTRACT', 'SYMBOL', 'PRICE', '$AMOUNT']];
+        var data = [['CHAIN', 'CONTRACT', 'SYMBOL', 'PRICE', 'AMOUNT ($)']];
         parsedJSON.forEach(token => {
-            data.push([token.CHAIN, token.CONTRACT, token.SYMBOL, token.PRICE, token.$AMOUNT]);
+            data.push([token.CHAIN, token.CONTRACT, token.SYMBOL, token.PRICE, token['AMOUNT ($)']]);
         });
 
         cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
