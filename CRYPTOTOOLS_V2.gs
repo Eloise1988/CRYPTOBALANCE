@@ -513,9 +513,15 @@ async function CRYPTOLATESTPAIRS(days, volume, liquidity, tx_count, chain, excha
         
         var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
         var parsedJSON = JSON.parse(res.getContentText());
-        cache.put(id_cache, JSON.stringify(parsedJSON), expirationInSeconds_);
 
-        return parsedJSON;
+        var data = [['CONTRACT ADDRESS', '1_SYMBOL','2_SYMBOL', 'PRICE($)', 'VOLUME($)','LIQUIDITY($)','TX COUNT','DAYS ACTIVE']];
+        parsedJSON['-'].forEach(token => {
+          data.push([token['CONTRACT ADDRESS'], token['1_SYMBOL'], token['2_SYMBOL'], token['PRICE($)'], token['VOLUME($)'], token['LIQUIDITY($)'], token['TX COUNT'], token['DAYS ACTIVE']]);
+        });
+        
+        cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
+
+        return data;
       } catch (err) {
           return res.getContentText();
       } 
