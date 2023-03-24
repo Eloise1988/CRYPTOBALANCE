@@ -16,7 +16,7 @@ const secret = "mysecret";
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.7
+  Version:      2.4.8
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -60,6 +60,7 @@ const secret = "mysecret";
   2.4.5   06/01/23 New erc chains available on cryptobalance + fixed formatting issue 
   2.4.6   25/01/23 Creation of a secret key to encrypt the identification of the spreadsheet's owner
   2.4.7   30/01/23 New Function CRYPTOHOLDERS
+  2.4.8   24/03/23 Fixed bug on auth for shared documents
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
