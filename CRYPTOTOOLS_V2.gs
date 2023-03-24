@@ -113,12 +113,16 @@ function ShowContactInfo() {
 }
 
 // Sheet Identification + API headers predefined
-var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-var encryption = Utilities.computeHmacSha256Signature(spreadsheet.getOwner().toString(), secret);
-const KEYID = encryption.map(function(byte) {
-  return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-}).join('');
-
+try {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var encryption = Utilities.computeHmacSha256Signature(spreadsheet.getOwner().toString(), secret);
+  var KEYID1 = encryption.map(function(byte) {
+    return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+  }).join('');
+  } catch (err) {
+    var KEYID1 = SpreadsheetApp.getActiveSpreadsheet().getId();
+  }
+const KEYID=KEYID1
 
 function url_header(){
   
