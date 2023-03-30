@@ -1,4 +1,5 @@
 Attribute VB_Name = "CryptoTools"
+Option Explicit
 
 Public Const CRYPTOTOOLS_API_KEY As String = "my_api_key"
 
@@ -11,6 +12,7 @@ Public Function CRYPTOPRICE(r As Variant) As Variant
     Dim http_options As Object
     Dim CallerRows As Long
     Dim Field As String
+    Dim k As Long
     
     ' Set default values
     Field = "PRICE"
@@ -18,7 +20,7 @@ Public Function CRYPTOPRICE(r As Variant) As Variant
     ' Set API endpoint and options
     private_path = "https://api.charmantadvisory.com"
     Set http_options = CreateObject("Scripting.Dictionary")
-    http_options("apikey") = "my_api_key"
+    http_options("apikey") = GetMyIPAddress()
     
     ' Check if custom API key is provided
     If CRYPTOTOOLS_API_KEY <> "my_api_key" Then
@@ -87,13 +89,14 @@ Public Function CRYPTOBALANCE(ticker As Variant, address As Variant) As Variant
     Dim http_options As Object
     Dim CallerRows As Long
     Dim Field As String
+    Dim k As Long
     
     Field = "QUANTITY"
     
     ' Set API endpoint and options
     private_path = "https://api.charmantadvisory.com"
     Set http_options = CreateObject("Scripting.Dictionary")
-    http_options("apikey") = "my_api_key"
+    http_options("apikey") = GetMyIPAddress()
     
     ' Check if custom API key is provided
     If CRYPTOTOOLS_API_KEY <> "my_api_key" Then
@@ -158,7 +161,62 @@ Public Function CRYPTOBALANCE(ticker As Variant, address As Variant) As Variant
     CRYPTOBALANCE = output
     
 End Function
-
+Public Function CRYPTOSUMUSD(address As Variant) As Variant
+    
+    ' Declare variables and objects
+    Dim URL As String
+    Dim request As Object
+    Dim private_path As String
+    Dim http_options As Object
+    Dim CallerRows As Long
+    
+    
+    ' Set API endpoint and options
+    private_path = "https://api.charmantadvisory.com"
+    Set http_options = CreateObject("Scripting.Dictionary")
+    http_options("apikey") = GetMyIPAddress()
+    
+    ' Check if custom API key is provided
+    If CRYPTOTOOLS_API_KEY <> "my_api_key" Then
+        private_path = "https://privateapi.charmantadvisory.com"
+        Set http_options = CreateObject("Scripting.Dictionary")
+        http_options.Add "headers", CreateObject("Scripting.Dictionary")
+        http_options("headers")("apikey") = CRYPTOTOOLS_API_KEY
+    End If
+    
+    
+    If TypeOf address Is Range Then
+        ' Set default values
+        CallerRows = address.Rows.Count
+        
+        
+        ' Construct API URL
+        URL = "/TOTALUSDBALANCE/" & address(1, 1).value
+       
+      
+    Else
+        ' Construct API URL
+        URL = "/TOTALUSDBALANCE/" & address
+        
+    End If
+    
+    URL = URL & "/ALL/" & http_options("apikey")
+    
+    ' Combine private path and API URL
+    URL = private_path & URL
+    
+    
+    ' Send API request
+    Set request = CreateObject("MSXML2.XMLHTTP")
+    request.Open "GET", URL, False
+    request.setRequestHeader "apikey", http_options("apikey")
+    request.send
+    
+    ' Return output array
+    CRYPTOSUMUSD = Val(request.responseText)
+    
+    
+End Function
 
 Function GetMyIPAddress() As String
     'Create a WinHttpRequest object using late binding
@@ -203,9 +261,3 @@ Function ConvertToAscii256(value As String) As String
     
     ConvertToAscii256 = ascii256Val
 End Function
-
-
-
-
-
-
