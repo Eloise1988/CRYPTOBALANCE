@@ -3,8 +3,18 @@ Option Explicit
 
 Public Const CRYPTOTOOLS_API_KEY As String = "my_api_key"
 
-Public Function CRYPTOPRICE(r As Variant) As Variant
-    
+Sub AddFunctionDescription()
+' Adds a description to cryptotools functions
+    Application.MacroOptions Macro:="CRYPTOPRICE", Description:="Returns cryptocurrency prices in USD"
+    Application.MacroOptions Macro:="CRYPTOBALANCE", Description:="Returns cryptocurrency wallet balances"
+    Application.MacroOptions Macro:="CRYPTONETWORTH", Description:="Returns a wallet's networth in USD"
+End Sub
+
+Public Function CRYPTOPRICE(ticker As Variant) As Variant
+Attribute CRYPTOPRICE.VB_Description = "Returns cryptocurrency prices in USD"
+Attribute CRYPTOPRICE.VB_ProcData.VB_Invoke_Func = " \n14"
+' Returns cryptocurrency prices in USD
+' ticker: The array of tickers you want prices from
     ' Declare variables and objects
     Dim URL As String
     Dim request As Object
@@ -30,19 +40,19 @@ Public Function CRYPTOPRICE(r As Variant) As Variant
         http_options("headers")("apikey") = CRYPTOTOOLS_API_KEY
     End If
     
-    If TypeOf r Is Range Then
+    If TypeOf ticker Is Range Then
         ' Set default values
-        CallerRows = r.Rows.Count
+        CallerRows = ticker.Rows.Count
         
         ' Construct API URL
-        URL = "/CRYPTOPRICE/" & r(1, 1).value
+        URL = "/CRYPTOPRICE/" & ticker(1, 1).value
         For k = 2 To CallerRows
-            URL = URL & "%2C" & r(k, 1).value
+            URL = URL & "%2C" & ticker(k, 1).value
         Next k
       
     Else
         ' Construct API URL
-        URL = "/CRYPTOPRICE/" & r
+        URL = "/CRYPTOPRICE/" & ticker
         
     End If
     
@@ -81,6 +91,11 @@ Public Function CRYPTOPRICE(r As Variant) As Variant
 End Function
 
 Public Function CRYPTOBALANCE(ticker As Variant, address As Variant) As Variant
+Attribute CRYPTOBALANCE.VB_Description = "Returns cryptocurrency wallet balances"
+Attribute CRYPTOBALANCE.VB_ProcData.VB_Invoke_Func = " \n14"
+' Returns cryptocurrency wallet balances
+' ticker: The array of tickers you want balances from
+' address: The array of wallet addresses you want balances from
     
     ' Declare variables and objects
     Dim URL As String
@@ -161,7 +176,11 @@ Public Function CRYPTOBALANCE(ticker As Variant, address As Variant) As Variant
     CRYPTOBALANCE = output
     
 End Function
-Public Function CRYPTOSUMUSD(address As Variant) As Variant
+Public Function CRYPTONETWORTH(address As Variant) As Variant
+Attribute CRYPTONETWORTH.VB_Description = "Returns a wallet's networth in USD"
+Attribute CRYPTONETWORTH.VB_ProcData.VB_Invoke_Func = " \n14"
+' Returns a wallet's networth in USD
+' address: The wallet addresse you want the networth sum from
     
     ' Declare variables and objects
     Dim URL As String
@@ -213,7 +232,7 @@ Public Function CRYPTOSUMUSD(address As Variant) As Variant
     request.send
     
     ' Return output array
-    CRYPTOSUMUSD = Val(request.responseText)
+    CRYPTONETWORTH = Val(request.responseText)
     
     
 End Function
