@@ -9,6 +9,7 @@ Sub AddFunctionDescription()
     Application.MacroOptions Macro:="CRYPTOBALANCE", Description:="Returns cryptocurrency wallet balances"
     Application.MacroOptions Macro:="CRYPTONETWORTH", Description:="Returns a wallet's networth in USD"
     Application.MacroOptions Macro:="CRYPTODEXPRICE", Description:="Returns a list of prices from specific decentralized exchanges"
+    Application.MacroOptions Macro:="CRYPTOVOLATILITY", Description:="Returns cryptocurrency 30 Day volatility against USD"
 End Sub
 Public Function CRYPTOPRICE(ticker As Variant) As Variant
 Attribute CRYPTOPRICE.VB_Description = "Returns cryptocurrency prices in USD"
@@ -333,7 +334,94 @@ Attribute CRYPTODEXPRICE.VB_ProcData.VB_Invoke_Func = " \n14"
     
 End Function
 
-
+Public Function CRYPTOVOLATILITY(token As Variant) As Variant
+Attribute CRYPTOVOLATILITY.VB_Description = "Returns cryptocurrency 30 Day volatility against USD"
+Attribute CRYPTOVOLATILITY.VB_ProcData.VB_Invoke_Func = " \n14"
+' Returns cryptocurrency 30 Day volatility against USD
+' token: The array of tokens you need the 30 day volatility from
+    
+    ' Declare variables and objects
+    Dim URL As String
+    Dim request As Object
+    Dim private_path As String
+    Dim http_options As Object
+    Dim CallerRows As Long
+    Dim Field As String
+    Dim Field1 As String
+    Dim k As Long
+    
+    Field = "VOLATILTY_30D"
+    Field1 = "30DVOL"
+    
+    ' Set API endpoint and options
+    private_path = "https://api.charmantadvisory.com"
+    Set http_options = CreateObject("Scripting.Dictionary")
+    http_options("apikey") = GetMyIPAddress()
+    
+    ' Check if custom API key is provided
+    If CRYPTOTOOLS_API_KEY <> "my_api_key" Then
+        private_path = "https://privateapi.charmantadvisory.com"
+        Set http_options = CreateObject("Scripting.Dictionary")
+        http_options.Add "headers", CreateObject("Scripting.Dictionary")
+        http_options("headers")("apikey") = CRYPTOTOOLS_API_KEY
+    End If
+    
+    
+    If TypeOf token Is Range Then
+        ' Set default values
+        CallerRows = token.Rows.Count
+        
+        
+        ' Construct API URL
+        URL = "/" & Field1 & "/" & token(1, 1).value
+        For k = 2 To CallerRows
+            URL = URL & "%2C" & token(k, 1).value
+        Next k
+        URL = URL & "/USD"
+        For k = 2 To CallerRows
+            URL = URL & "%2CUSD"
+        Next k
+        
+      
+    Else
+        ' Construct API URL
+        URL = "/" & Field1 & "/" & token & "/USD"
+        
+    End If
+    
+    URL = URL & "/" & http_options("apikey")
+    
+    ' Combine private path and API URL
+    URL = private_path & URL
+    
+    
+    ' Send API request
+    Set request = CreateObject("MSXML2.XMLHTTP")
+    request.Open "GET", URL, False
+    request.setRequestHeader "apikey", http_options("apikey")
+    request.send
+    
+    ' Parse JSON response
+    Dim json As Object
+    Set json = JsonConverter.ParseJson(request.responseText)
+    
+    ' Create output array
+    Dim output() As Variant
+    ReDim Preserve output(1 To json.Count, 0)
+    
+    ' Extract field value from each JSON object
+    Dim i As Long
+    For i = 1 To json.Count
+        If Not json(i).Exists(Field) Then
+            output(i, 0) = ""
+        End If
+        output(i, 0) = Val(json(i)(Field))
+    Next i
+    
+    ' Return output array
+    CRYPTOVOLATILITY = output
+    
+End Function
 Function GetMyIPAddress() As String
     'Create a WinHttpRequest object using late binding
     Dim http As Object
