@@ -16,7 +16,7 @@ const secret = "mysecret";
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.8
+  Version:      2.4.9
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -43,6 +43,7 @@ const secret = "mysecret";
     CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain/all chains)
     BINANCEWITHDRAWFEE              Retrieve the withdrawals fee from binance
     CRYPTOHIST                      Retrieve the historical OHLC data
+    CRYPTOTOOLSQUOTA                Retrieve the current amount of API calls used for the month
   
 
     PREMIUM FUNCTIONS
@@ -61,6 +62,7 @@ const secret = "mysecret";
   2.4.6   25/01/23 Creation of a secret key to encrypt the identification of the spreadsheet's owner
   2.4.7   30/01/23 New Function CRYPTOHOLDERS
   2.4.8   24/03/23 Fixed bug on auth for shared documents
+  2.4.9   12/04/23 New Function CRYPTOTOOLSQUOTA
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1549,6 +1551,33 @@ async function CRYPTOHOLDERS(contract,chain) {
         
         cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
         return data;
+      } catch (err) {
+          return res.getContentText();
+      } 
+}
+/**CRYPTOTOOLSQUOTA
+ * Returns the current amount of API calls used for the month, refreshes every 2h
+ * For example:
+ *
+ * =CRYPTOTOOLSQUOTA()
+ *
+ * @customfunction
+ *
+ * @return the number of calls made to Cryptotools during the month 
+ **/
+async function CRYPTOTOOLSQUOTA() {
+    var idCache = `${KEYID}CRYPTOTOOLSQUOTA`;
+    var cache = CacheService.getScriptCache();
+    var cached = cache.get(idCache);
+    if (cached) return cached;
+    Utilities.sleep(Math.random() * 100)
+    try {
+        url = `/QUOTA/${KEYID}`;
+        full_url_options=url_header();
+        var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
+  
+        cache.put(idCache, res.getContentText(), expirationInSeconds_);
+        return res.getContentText();
       } catch (err) {
           return res.getContentText();
       } 
