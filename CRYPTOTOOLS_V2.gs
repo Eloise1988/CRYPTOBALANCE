@@ -1448,7 +1448,7 @@ async function CRYPTOTX(addresses,network) {
       
       addresses = [].concat(addresses).join("%2C");
       id_cache = Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, addresses + network + 'transactiondata'));
-
+      Logger.log(KEYID)
       var cache = CacheService.getScriptCache();
       var cached = cache.get(id_cache);
       if (cached != null) {
@@ -1458,6 +1458,7 @@ async function CRYPTOTX(addresses,network) {
 
       // Connexion to the API endpoints 
       url = "/TXALL/" + addresses + "/"+ network + "/"+ KEYID;
+      
 
       
       full_url_options=url_header();
@@ -1567,12 +1568,17 @@ async function CRYPTOHOLDERS(contract,chain) {
  **/
 async function CRYPTOTOOLSQUOTA() {
     var idCache = `${KEYID}CRYPTOTOOLSQUOTA`;
+    
     var cache = CacheService.getScriptCache();
     var cached = cache.get(idCache);
     if (cached) return cached;
     Utilities.sleep(Math.random() * 100)
     try {
         url = `/QUOTA/${KEYID}`;
+        if (cryptotools_api_key != "") {
+          url = `/QUOTA/${cryptotools_api_key}`;
+        };
+        
         full_url_options=url_header();
         var res = await UrlFetchApp.fetch(full_url_options[0] + url, full_url_options[1]);
   
