@@ -16,7 +16,7 @@ const secret = "mysecret";
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.4.9
+  Version:      2.5.0
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -63,6 +63,7 @@ const secret = "mysecret";
   2.4.7   30/01/23 New Function CRYPTOHOLDERS
   2.4.8   24/03/23 Fixed bug on auth for shared documents
   2.4.9   12/04/23 New Function CRYPTOTOOLSQUOTA
+  2.5.0   15/04/23 FIXED BUG CRYPTOTOKENLIST
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -1213,9 +1214,9 @@ async function CRYPTOHOLDERCOUNT(token_array, network_array) {
         var res = await UrlFetchApp.fetch(options[0] + url, options[1]);
         parsedJSON = JSON.parse(res.getContentText());
 
-        var data = [['CHAIN', 'CONTRACT', 'SYMBOL', 'PRICE', 'AMOUNT ($)']];
+        var data = [['CHAIN', 'CONTRACT', 'SYMBOL', 'QUANTITY', 'PRICE', 'AMOUNT ($)']];
         parsedJSON.forEach(token => {
-            data.push([token.CHAIN, token.CONTRACT, token.SYMBOL, token.PRICE, token['AMOUNT ($)']]);
+            data.push([token.CHAIN, token.CONTRACT, token.SYMBOL, token.QTY, token.PRICE, token['AMOUNT ($)']]);
         });
 
         cache.put(idCache, JSON.stringify(data), expirationInSeconds_);
