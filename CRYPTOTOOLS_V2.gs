@@ -16,7 +16,7 @@ const secret = "mysecret";
 /*=======================================================================================================================*
   CryptoTools Google Sheet Feed by Eloise1988
   =======================================================================================================================*
-  Version:      2.5.0
+  Version:      2.5.1
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
   Copyright:    (c) 2022 by Eloise1988
   License:      MIT License
@@ -58,12 +58,7 @@ const secret = "mysecret";
 
   ----------------------------------------------------------------------------------------------------------------------------
   Changelog:
-  2.4.5   06/01/23 New erc chains available on cryptobalance + fixed formatting issue 
-  2.4.6   25/01/23 Creation of a secret key to encrypt the identification of the spreadsheet's owner
-  2.4.7   30/01/23 New Function CRYPTOHOLDERS
-  2.4.8   24/03/23 Fixed bug on auth for shared documents
-  2.4.9   12/04/23 New Function CRYPTOTOOLSQUOTA
-  2.5.0   15/04/23 FIXED BUG CRYPTOTOKENLIST
+  2.5.1   12/25 DNS changed
   *========================================================================================================================*/
 
 /*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
@@ -101,7 +96,7 @@ function ShowPremium() {
     var ui = SpreadsheetApp.getUi()
     ui.alert("Premium users",
         'For users needing faster, higher limits and customization: a private server is available but only accessible through api-key identification\n\
-             Telegram Chat: https://t.me/TheCryptoCurious \n\ API Documentation: https://api.cryptotools.one/openapi',
+             Telegram Chat: https://t.me/TheCryptoCurious \n\ API Documentation: https://api.charmantadvisory.com/openapi',
         ui.ButtonSet.OK)
 }
 
@@ -112,7 +107,7 @@ function ShowContactInfo() {
          Medium: https://eloise88.medium.com/\n\
          Patreon: https://www.patreon.com/cryptotools\n\
          Github: https://github.com/Eloise1988\n\
-         API Doc: https://api.cryptotools.one/openapi',
+         API Doc: https://api.charmantadvisory.com/openapi',
         ui.ButtonSet.OK)
 }
 
@@ -131,7 +126,7 @@ const KEYID=KEYID1
 function url_header(){
   
 
-  private_path = "https://api.cryptotools.one";
+  private_path = "https://api.charmantadvisory.com";
   http_options = {
       'headers': {
           'apikey': KEYID
@@ -139,7 +134,7 @@ function url_header(){
   };
 
   if (cryptotools_api_key != "") {
-      private_path = "https://privateapi.cryptotools.one";
+      private_path = "https://privateapi.charmantadvisory.com";
       http_options = {
           'headers': {
               'apikey': cryptotools_api_key
