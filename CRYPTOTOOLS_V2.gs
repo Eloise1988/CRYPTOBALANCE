@@ -25,7 +25,7 @@ const secret = "mysecret";
 
     CRYPTOBALANCE                   Retrieve blockchain balances
     CRYPTOSTAKING                   Retrieve cryptocurrency staking amounts
-    CRYPTOREWARSD                   Retrieve cryptocurrency reward amounts from staking
+    CRYPTOREWARDS                   Retrieve cryptocurrency reward amounts from staking
     CRYPTOLENDING                   Retrieve cryptocurrency lending/borrowing rates from dex echanges
     CRYPTOLENDINGREWARD             Retrieve reward apy lending/borrowing rates from AAVE & COMPOUND
     CRYPTODEXVOLUME                 Retrieve DEX volumes $
