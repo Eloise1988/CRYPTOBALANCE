@@ -14,54 +14,54 @@ const expirationInSeconds_ = 600;
 const secret = "mysecret";
 
 /*=======================================================================================================================*
-  CryptoTools Google Sheet Feed by Eloise1988
+  CryptoTools Google Sheets Feed by Eloise1988
   =======================================================================================================================*
   Version:      2.5.1
   Project Page: https://github.com/Eloise1988/CRYPTOBALANCE
-  Copyright:    (c) 2022 by Eloise1988
+  Copyright:    (c) 2025 by Eloise1988
   License:      MIT License
   ------------------------------------------------------------------------------------------------------------------------
-  A library for importing blockchain data endpoints into Google spreadsheets. Functions include:
+  A library for importing blockchain data endpoints into Google Sheets. Functions include:
 
     CRYPTOBALANCE                   Retrieve blockchain balances
     CRYPTOSTAKING                   Retrieve cryptocurrency staking amounts
     CRYPTOREWARDS                   Retrieve cryptocurrency reward amounts from staking
-    CRYPTOLENDING                   Retrieve cryptocurrency lending/borrowing rates from dex echanges
-    CRYPTOLENDINGREWARD             Retrieve reward apy lending/borrowing rates from AAVE & COMPOUND
-    CRYPTODEXVOLUME                 Retrieve DEX volumes $
-    CRYPTOTVL                       Retrieve Total Value Locked in Defi projects
-    CRYPTODEXPRICE                  Retrieve DEX (decentralized exchanges) cryptocurrency pair prices
-    CRYPTOPRICE                     Retrieve cryptocurrency prices in USD from Coingecko
-    CRYPTOVOL30D                    Retrieve cryptocurrency 30D volatility against USD, ETH, BTC
-    CRYPTOFUTURES                   Retrieve BTC, ETH Futures Prices, basis, volume, open interest
-    CRYPTOLP                        Retrieve data from Liquidity Pools, APR, APY, TVL from DEX 
-    CRYPTOTX                        Retrieve the historical transaction list on a range of addresses.
-    CRYPTOPOOLPRICE                 Retrieve prices from decentralized Pool tokens
-    CRYPTOFARMING                   Retrieve TVL, APR, APY from decentralized Pool / tokens
-    CRYPTOGAS                       Retrieve average GWEI gas price (ETH)
-    CRYPTOHOLDERCOUNT               Retrieve the number of holders on a list of erc20, bep20, matic tokens.
-    CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain/all chains)
-    BINANCEWITHDRAWFEE              Retrieve the withdrawals fee from binance
-    CRYPTOHIST                      Retrieve the historical OHLC data
-    CRYPTOTOOLSQUOTA                Retrieve the current amount of API calls used for the month
-  
+    CRYPTOLENDING                   Retrieve cryptocurrency lending/borrowing rates from DEX exchanges
+    CRYPTOLENDINGREWARD             Retrieve reward APY lending/borrowing rates from AAVE & COMPOUND
+    CRYPTODEXVOLUME                 Retrieve DEX trading volumes in USD
+    CRYPTOTVL                       Retrieve Total Value Locked (TVL) in DeFi projects
+    CRYPTODEXPRICE                  Retrieve DEX (decentralized exchange) cryptocurrency pair prices
+    CRYPTOPRICE                     Retrieve cryptocurrency prices in USD from CoinGecko
+    CRYPTOVOL30D                    Retrieve 30-day cryptocurrency volatility against USD, ETH, and BTC
+    CRYPTOFUTURES                   Retrieve BTC and ETH futures prices, basis, volume, and open interest
+    CRYPTOLP                        Retrieve liquidity pool data: APR, APY, and TVL from DEXs
+    CRYPTOTX                        Retrieve historical transaction lists for a range of addresses
+    CRYPTOPOOLPRICE                 Retrieve prices from decentralized pool tokens
+    CRYPTOFARMING                   Retrieve TVL, APR, and APY from decentralized pools and tokens
+    CRYPTOGAS                       Retrieve the average ETH gas price (GWEI)
+    CRYPTOHOLDERCOUNT               Retrieve the number of holders for ERC20, BEP20, and MATIC tokens
+    CRYPTOTOKENLIST                 Retrieve the list of all tokens by address (per chain or all chains)
+    BINANCEWITHDRAWFEE              Retrieve withdrawal fees from Binance
+    CRYPTOHIST                      Retrieve historical OHLC data
+    CRYPTOTOOLSQUOTA                Retrieve the current number of API calls used for the month
 
     PREMIUM FUNCTIONS
-    CRYPTOLATESTPAIRS               Retrieve all new pairs by chain & DEX
-    CRYPTOSUPPLY                    Retrieve the max supply on a list of erc20, bep20, matic, avax, movr, ftm tokens.
-    TOPNFT                          Retrieve the TOP 5 NFT by USD value (ethereum chain) 
-    BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses) 
-    CRYPTOSUMUSD                    Retrieve one's total $ amount on all chains or by ETH, BSC ... chain
-    CRYPTOHOLDERS                   Retrieve the list of the main holders by contract address, by chain
-  
-  For bug reports see https://github.com/Eloise1988/CRYPTOBALANCE/issues
+    CRYPTOLATESTPAIRS               Retrieve newly created trading pairs by chain and DEX
+    CRYPTOSUPPLY                    Retrieve the max supply for ERC20, BEP20, MATIC, AVAX, MOVR, and FTM tokens
+    TOPNFT                          Retrieve the top 5 NFTs by USD value (Ethereum chain)
+    BTCBALANCE_UNCONFIRMED          Retrieve the unconfirmed BTC balance (up to 5 addresses)
+    CRYPTOSUMUSD                    Retrieve total USD holdings across all chains or by specific chain (ETH, BSC, etc.)
+    CRYPTOHOLDERS                   Retrieve the list of major token holders by contract address and chain
 
-  ----------------------------------------------------------------------------------------------------------------------------
+  For bug reports, see:
+  https://github.com/Eloise1988/CRYPTOBALANCE/issues
+
+  ------------------------------------------------------------------------------------------------------------------------
   Changelog:
-  2.5.1   12/25 DNS changed
+  2.5.1   12/25   DNS changed
   *========================================================================================================================*/
 
-/*-------------------------------------------- GOOGLE SHEET FORMULA USERINTERFACE -------------------------------- */
+/*-------------------------------------------- GOOGLE SHEET FORMULA USER INTERFACE ---------------------------------------*/
 
 function onOpen() {
     var ui = SpreadsheetApp.getUi();
