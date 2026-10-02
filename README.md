@@ -5,6 +5,27 @@
 ###### [API Documentation](https://api.cryptotools.one/openapi)
 ###### [Discord](https://discord.gg/dxaQ4tkX)
 
+## UPDATE YOUR SCRIPT (October 2026)
+
+If your sheet shows **#N/A**, **Error**, or *"Exception: Request failed ... returned code 404"*, your Apps Script copy is probably out of date. Updating takes one minute and your formulas stay exactly the same:
+
+1. Open your Google Sheet and go to **Extensions → Apps Script**.
+2. Select all the old code and delete it.
+3. Open [CRYPTOTOOLS_V2.gs](https://github.com/Eloise1988/CRYPTOBALANCE/blob/master/CRYPTOTOOLS_V2.gs), click **Copy raw file**, and paste it into the Apps Script editor.
+4. Click **Save** (disk icon), then reload your Sheet.
+
+**What changed**
+- **Blank cells stay blank.** A formula dragged down over empty rows now returns an empty cell instead of an error (the server also does this for older copies of the script).
+- **ERC20 balances work again** (Etherscan retired its old API; the server now uses its new one).
+- **BEP20 (BSC) and Polygon tokens, ATOM, LUNA and ALGO balances** are restored with new data sources, and tokens added by contract address (for example `"b"+"0x..."`) resolve their decimals again.
+- Old copies of the script that call `/BALANCE/` without a user ID now return the balance instead of an error.
+
+**Known issues (being worked on)**
+- `DOT` (Polkadot) balances are temporarily unavailable.
+- DEX prices for `UNI` and `CAKE`, and DEX volumes for `UNI`, `SUSHI`, `CRV` and `BAL`, are unavailable while their data feeds are rebuilt (the free service they used was shut down).
+
+Questions? Contact **ac@charmantadvisory.com**. See [CHANGELOG.md](CHANGELOG.md) for the full history.
+
 ## FUNCTIONS
 |  [Cryptobalance](#cryptobalance) 	|  [Prices on DEX](#cryptocurrency-prices-on-dex) 	|  [Staking](#cryptostaking) 	|  [Rewards](#cryptorewards) 	
 |  [Lending](#cryptolending) 	|  [Farming](#crypto-farming) 	|  [Dollar Valuation by address](#dollar-valuation-by-address) |  [DEX 24h Volumes](#dex-volumes) 	|  [DEX TVL](#dex-tvl)  |  [DEX fees](#dex-fees)  |  [Pool Price](#pool-price) 	|  [Number of Holders per contract](#cryptoholdercount)  |  [List of Holders](#crypto_holder) 	|  [New Tradeable Pairs](#new-tradable-pairs)  |  [Volatility](#volatility) 	 	
