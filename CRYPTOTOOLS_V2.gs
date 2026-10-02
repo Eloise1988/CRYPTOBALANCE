@@ -146,6 +146,16 @@ function url_header(){
 }
 
 
+/**
+ * Blank-argument guard: an empty argument (for example a formula dragged down over empty rows) cannot produce a
+ * result, so the custom function returns "" without calling the API. Handles ranges (2D arrays) too.
+ */
+function isBlankArg_(v) {
+  if (v === null || v === undefined) return true;
+  if (Array.isArray(v)) return v.length === 0 || v.every(isBlankArg_);
+  return String(v).trim() === "";
+}
+
 /**CRYPTOBALANCE
  * Returns cryptocurrency balances into Google spreadsheets.
  * For example:
@@ -190,6 +200,7 @@ function url_header(){
  *  
  **/
 async function CRYPTOBALANCE(ticker, address) {
+    if (isBlankArg_(ticker) || isBlankArg_(address)) return "";  // blank argument: nothing to look up, no API call
     var sleepTime = Math.random() * 100;
     Utilities.sleep(sleepTime);
     if (!Array.isArray(ticker)) ticker = [ticker];
@@ -239,6 +250,7 @@ async function CRYPTOBALANCE(ticker, address) {
  * @return the current cryptocurrency rewards from PoS
  **/
 async function CRYPTOREWARDS(ticker, address) {
+    if (isBlankArg_(ticker) || isBlankArg_(address)) return "";  // blank argument: nothing to look up, no API call
     let id_cache = `${ticker}${address}rewards`;
     Utilities.sleep(Math.random() * 100);
     let cache = CacheService.getScriptCache();
@@ -282,6 +294,7 @@ async function CRYPTOREWARDS(ticker, address) {
  * @return the current amount staked on a cryptocurrency 
  **/
 async function CRYPTOSTAKING(ticker, address) {
+    if (isBlankArg_(ticker) || isBlankArg_(address)) return "";  // blank argument: nothing to look up, no API call
     var id_cache = `${ticker.toUpperCase()}${address}staking`;
     Utilities.sleep(Math.random() * 100);
     var cache = CacheService.getScriptCache();
@@ -442,6 +455,7 @@ async function CRYPTOTVL(exchange_array) {
  * @return the 24h DEX Volume in decimal form,  on specified DEX
  **/
 async function CRYPTODEXVOLUME(exchange_array) {
+    if (isBlankArg_(exchange_array)) return "";  // blank argument: nothing to look up, no API call
     Utilities.sleep(Math.random() * 100)
 
     try {
@@ -795,6 +809,7 @@ async function CRYPTOFARMING(exchange_array, ticker_array, data_type) {
  * @return the current price rate of your cryptocurrency pair,  on specified DEX
  **/
 async function CRYPTODEXPRICE(token1_array, token2_array, exchange_array) {
+    if (isBlankArg_(token1_array) || isBlankArg_(token2_array) || isBlankArg_(exchange_array)) return "";  // blank argument: nothing to look up, no API call
     Utilities.sleep(Math.random() * 100)
 
     try {
@@ -918,6 +933,7 @@ async function CRYPTOLENDING(exchange_array, ticker_array, side_array) {
  * @return the current price rate of your cryptocurrency in $
  **/
 async function CRYPTOPRICE(token1_array) {
+    if (isBlankArg_(token1_array)) return "";  // blank argument: nothing to look up, no API call
     Utilities.sleep(Math.random() * 100)
 
     try {
@@ -976,6 +992,7 @@ async function CRYPTOPRICE(token1_array) {
  * @returns the current 30d volatility of your cryptocurrency in $, ETH, BTC
  **/
 async function CRYPTOVOL30D(token1_array, token2_array) {
+    if (isBlankArg_(token1_array) || isBlankArg_(token2_array)) return "";  // blank argument: nothing to look up, no API call
     Utilities.sleep(Math.random() * 100)
 
     try {
