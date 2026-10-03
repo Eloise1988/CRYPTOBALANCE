@@ -20,9 +20,16 @@ If your sheet shows **#N/A**, **Error**, or *"Exception: Request failed ... retu
 - **BEP20 (BSC) and Polygon tokens, ATOM, LUNA and ALGO balances** are restored with new data sources, and tokens added by contract address (for example `"b"+"0x..."`) resolve their decimals again.
 - Old copies of the script that call `/BALANCE/` without a user ID now return the balance instead of an error.
 
+**Also restored (server side, no script update needed)**
+- `DOT` (Polkadot) balances, read directly from the Polkadot network.
+- `VET` and `VTHO` (VeChain) balances.
+- **DEX volumes** (`CRYPTODEXVOLUME`): real 24h figures are back for about 50 exchanges (UNI, CAKE, SUSHI, CRV, BAL, RAY, ORCA, JOE ...).
+- **DEX prices** (`CRYPTODEXPRICE`): live prices for the main tokens on UNI, SUSHI, CAKE, QUICK, MATIC, JOE, PNG, BOO, FTM, TRI, WANNA, ARB, CELO, MOVR and BABY. Old cached prices that had gone badly out of date were removed, so a pair that is not available now returns a blank instead of a wrong number.
+
 **Known issues (being worked on)**
-- `DOT` (Polkadot) balances are temporarily unavailable.
-- DEX prices for `UNI` and `CAKE`, and DEX volumes for `UNI`, `SUSHI`, `CRV` and `BAL`, are unavailable while their data feeds are rebuilt (the free service they used was shut down).
+- DEX prices cover the main tokens of each exchange (wrapped native token, USDC/USDT/DAI, WETH/WBTC and the exchange's own token, plus popular tokens on Uniswap/PancakeSwap). Other pairs return a blank.
+- A few exchanges have no live source yet and still show 0 for volume.
+- `NANO`, `XEM`, `RVN`, `EOS`, `BCH`, `BTG`, `HNT` balances may be unavailable (their public explorers are offline).
 
 Questions? Contact **ac@charmantadvisory.com**. See [CHANGELOG.md](CHANGELOG.md) for the full history.
 
